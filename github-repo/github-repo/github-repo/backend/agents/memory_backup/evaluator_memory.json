@@ -1,0 +1,117 @@
+{
+  "agent_id": "EvaluatorAgent",
+  "last_updated": "2025-06-12T04:00:11.556354",
+  "performance_summaries": [
+    {
+      "period": "2024-12-05 to 2024-12-12",
+      "total_trades": 8,
+      "win_rate": 0.75,
+      "total_profit": 425.5,
+      "avg_profit_per_trade": 53.19,
+      "max_drawdown": 85.0,
+      "sharpe_ratio": 1.85
+    }
+  ],
+  "weekly_reports": [
+    {
+      "report_id": "week_20241212",
+      "period": {
+        "start_date": "2024-12-05T00:00:00.000Z",
+        "end_date": "2024-12-12T23:59:59.000Z",
+        "days": 7
+      },
+      "performance_metrics": {
+        "total_profit": 425.5,
+        "win_rate": 0.75,
+        "total_trades": 8,
+        "profit_factor": 2.1,
+        "max_drawdown": 85.0
+      },
+      "trade_summary": {
+        "total_trades": 8,
+        "winning_trades": 6,
+        "losing_trades": 2,
+        "strategies_used": [
+          "SPY_0DTE_Put_Selling",
+          "SPY_1DTE_Put_Selling"
+        ]
+      },
+      "anomalies": [],
+      "improvement_suggestions": [
+        {
+          "category": "strategy",
+          "priority": "medium",
+          "suggestion": "Consider taking profits earlier on winning trades",
+          "rationale": "Average holding period could be optimized",
+          "implementation": "Set profit targets at 50% of premium received"
+        }
+      ],
+      "risk_assessment": {
+        "drawdown_risk": "low",
+        "strategy_risk": "low",
+        "volatility_risk": "low",
+        "overall_risk": "low"
+      },
+      "next_week_recommendations": [
+        "Continue current trading approach with increased monitoring",
+        "Maintain disciplined approach to 0DTE option selling",
+        "Continue monitoring VIX levels for optimal entry timing"
+      ]
+    }
+  ],
+  "risk_alerts": [],
+  "anomaly_detections": [],
+  "improvement_suggestions": [
+    {
+      "category": "profit_optimization",
+      "priority": "medium",
+      "suggestion": "Review profit-taking strategies",
+      "rationale": "Profit factor 2.1 above target 1.5",
+      "implementation": "Consider taking profits earlier on winning trades"
+    }
+  ],
+  "metrics_history": {
+    "total_profit": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 425.5
+      }
+    ],
+    "win_rate": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 0.75
+      }
+    ],
+    "sharpe_ratio": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 1.85
+      }
+    ],
+    "max_drawdown": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 85.0
+      }
+    ],
+    "avg_trade_duration": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 4.5
+      }
+    ],
+    "volatility": [
+      {
+        "timestamp": "2024-12-12T12:50:00.000Z",
+        "value": 0.12
+      }
+    ]
+  },
+  "benchmarks": {
+    "spy_return": 0.008,
+    "risk_free_rate": 0.05,
+    "target_win_rate": 0.7,
+    "target_profit_factor": 1.5
+  }
+}

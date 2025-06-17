@@ -1,0 +1,21 @@
+{
+  "name": "landing-page-complete",
+  "description": "Completed landing page implementation with exact UI match, guest chat functionality, and sign-out redirect",
+  "timestamp": "2025-06-14T21:31:10",
+  "files_changed": [
+    "frontend/src/pages/Landing.tsx",
+    "frontend/src/hooks/useAuth.ts",
+    "frontend/src/App.tsx",
+    "backend/api/main.py"
+  ],
+  "key_features": [
+    "Landing page matches original app UI exactly (without sidebar)",
+    "Sign-in/Sign-up buttons in top-right corner",
+    "Message input enabled for guest users",
+    "Guest chat endpoint for unauthenticated users",
+    "Sign out redirects to /landing",
+    "Same FNTX logo and styling as main app",
+    "EnhancedMessage and EnhancedMessageInput components used"
+  ],
+  "checkpoint_file": "landing-page-complete-20250614-213110.tar.gz"
+}

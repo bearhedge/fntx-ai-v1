@@ -1,0 +1,21 @@
+{
+  "checkpoint_name": "base-application-v1",
+  "timestamp": "2025-06-15T01:23:38",
+  "description": "Base application v1 with fixed authentication pages",
+  "version": "1.0.0",
+  "changes": [
+    "Fixed FNTX logo positioning on SignIn and SignUp pages",
+    "Added consistent top spacing (pt-20) from page top to logo",
+    "Added bottom padding (pb-10) to prevent form cutoff",
+    "Enabled vertical scrolling (overflow-y-auto) for better UX",
+    "Removed absolute positioning for better layout control",
+    "Ensured responsive behavior across screen sizes"
+  ],
+  "files_modified": [
+    "frontend/src/pages/SignIn.tsx",
+    "frontend/src/pages/SignUp.tsx"
+  ],
+  "archive_name": "base-application-v1-20250615-012338.tar.gz",
+  "archive_size": "939674 bytes",
+  "notes": "This checkpoint captures the application state after fixing the authentication page UI issues, specifically the logo positioning and form cutoff problems."
+}

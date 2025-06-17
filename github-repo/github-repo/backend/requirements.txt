@@ -1,0 +1,13 @@
+openai
+fastapi
+uvicorn
+requests
+ib-insync
+python-dotenv
+numpy
+pandas
+websockets
+PyJWT
+python-multipart
+bcrypt
+google-generativeai

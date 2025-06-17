@@ -1,0 +1,50 @@
+{
+  "orchestrator_id": "FNTXOrchestrator",
+  "last_updated": "2025-06-12T03:04:10.400388",
+  "completed_trades": [],
+  "failed_trades": [
+    {
+      "trade_id": "FNTX_20250612_021510",
+      "timestamp": "2025-06-12T02:15:10.789934",
+      "error": "Tactical execution failed"
+    },
+    {
+      "trade_id": "FNTX_20250612_030055",
+      "timestamp": "2025-06-12T03:00:55.998695",
+      "error": "Tactical execution failed"
+    },
+    {
+      "trade_id": "FNTX_20250612_030410",
+      "timestamp": "2025-06-12T03:04:10.400373",
+      "error": "Tactical execution failed"
+    }
+  ],
+  "performance_stats": {
+    "total_orchestrations": 3,
+    "successful_trades": 0,
+    "failed_trades": 3,
+    "avg_execution_time": 0.0636904239654541
+  },
+  "agent_performance": {
+    "environment_watcher": {
+      "success_rate": 1.0,
+      "avg_time": 5.0
+    },
+    "strategic_planner": {
+      "success_rate": 1.0,
+      "avg_time": 10.0
+    },
+    "reward_model": {
+      "success_rate": 1.0,
+      "avg_time": 3.0
+    },
+    "executor": {
+      "success_rate": 1.0,
+      "avg_time": 15.0
+    },
+    "evaluator": {
+      "success_rate": 1.0,
+      "avg_time": 8.0
+    }
+  }
+}
