@@ -61,6 +61,33 @@ class AuthDatabase:
                 ON users(google_id)
             """)
             
+            # Create chat_sessions table
+            cursor.execute("""
+                CREATE TABLE IF NOT EXISTS chat_sessions (
+                    id TEXT PRIMARY KEY,
+                    user_id TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    preview TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    is_active INTEGER DEFAULT 0,
+                    metadata TEXT,
+                    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+                )
+            """)
+            
+            # Create index on user_id for faster lookups
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_chat_sessions_user_id 
+                ON chat_sessions(user_id)
+            """)
+            
+            # Create index on updated_at for sorting
+            cursor.execute("""
+                CREATE INDEX IF NOT EXISTS idx_chat_sessions_updated_at 
+                ON chat_sessions(updated_at)
+            """)
+            
             conn.commit()
             logger.info(f"Initialized auth database at {self.db_path}")
     
@@ -322,6 +349,187 @@ class AuthDatabase:
         """Close database connection (for cleanup)"""
         # SQLite connections are closed in context manager
         pass
+    
+    # Chat session management methods
+    def create_chat_session(self, user_id: str, title: str, preview: str = "") -> dict:
+        """
+        Create a new chat session for a user
+        
+        Args:
+            user_id: User ID
+            title: Chat session title
+            preview: Preview text (optional)
+            
+        Returns:
+            Created chat session as dict
+        """
+        import uuid
+        from datetime import datetime
+        
+        chat_id = str(uuid.uuid4())
+        now = datetime.utcnow().isoformat()
+        
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Set all other chats to inactive
+            cursor.execute("""
+                UPDATE chat_sessions 
+                SET is_active = 0 
+                WHERE user_id = ?
+            """, (user_id,))
+            
+            # Create new active chat
+            cursor.execute("""
+                INSERT INTO chat_sessions (
+                    id, user_id, title, preview, created_at, 
+                    updated_at, is_active, metadata
+                ) VALUES (?, ?, ?, ?, ?, ?, 1, ?)
+            """, (
+                chat_id, user_id, title, preview, now, now, 
+                json.dumps({})
+            ))
+            
+            conn.commit()
+            
+            return {
+                'id': chat_id,
+                'user_id': user_id,
+                'title': title,
+                'preview': preview,
+                'created_at': now,
+                'updated_at': now,
+                'is_active': True
+            }
+    
+    def get_user_chat_sessions(self, user_id: str, limit: int = 50) -> List[dict]:
+        """
+        Get chat sessions for a user
+        
+        Args:
+            user_id: User ID
+            limit: Maximum number of sessions to return
+            
+        Returns:
+            List of chat session dicts
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                SELECT * FROM chat_sessions 
+                WHERE user_id = ? 
+                ORDER BY updated_at DESC 
+                LIMIT ?
+            """, (user_id, limit))
+            
+            sessions = []
+            for row in cursor.fetchall():
+                sessions.append({
+                    'id': row['id'],
+                    'user_id': row['user_id'],
+                    'title': row['title'],
+                    'preview': row['preview'],
+                    'created_at': row['created_at'],
+                    'updated_at': row['updated_at'],
+                    'is_active': bool(row['is_active'])
+                })
+            
+            return sessions
+    
+    def update_chat_session(self, chat_id: str, title: str = None, preview: str = None) -> bool:
+        """
+        Update a chat session
+        
+        Args:
+            chat_id: Chat session ID
+            title: New title (optional)
+            preview: New preview (optional)
+            
+        Returns:
+            True if updated, False if not found
+        """
+        from datetime import datetime
+        
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Build update query dynamically
+            updates = []
+            params = []
+            
+            if title is not None:
+                updates.append("title = ?")
+                params.append(title)
+            
+            if preview is not None:
+                updates.append("preview = ?")
+                params.append(preview)
+            
+            updates.append("updated_at = ?")
+            params.append(datetime.utcnow().isoformat())
+            
+            params.append(chat_id)
+            
+            cursor.execute(f"""
+                UPDATE chat_sessions 
+                SET {', '.join(updates)}
+                WHERE id = ?
+            """, params)
+            
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def set_active_chat_session(self, user_id: str, chat_id: str) -> bool:
+        """
+        Set a chat session as active for a user
+        
+        Args:
+            user_id: User ID
+            chat_id: Chat session ID to activate
+            
+        Returns:
+            True if successful, False otherwise
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            
+            # Deactivate all user's chats
+            cursor.execute("""
+                UPDATE chat_sessions 
+                SET is_active = 0 
+                WHERE user_id = ?
+            """, (user_id,))
+            
+            # Activate the specified chat
+            cursor.execute("""
+                UPDATE chat_sessions 
+                SET is_active = 1 
+                WHERE id = ? AND user_id = ?
+            """, (chat_id, user_id))
+            
+            conn.commit()
+            return cursor.rowcount > 0
+    
+    def delete_chat_session(self, chat_id: str, user_id: str) -> bool:
+        """
+        Delete a chat session
+        
+        Args:
+            chat_id: Chat session ID
+            user_id: User ID (for security)
+            
+        Returns:
+            True if deleted, False if not found
+        """
+        with self._get_connection() as conn:
+            cursor = conn.cursor()
+            cursor.execute("""
+                DELETE FROM chat_sessions 
+                WHERE id = ? AND user_id = ?
+            """, (chat_id, user_id))
+            
+            conn.commit()
+            return cursor.rowcount > 0
 
 # Singleton instance
 _auth_db_instance = None

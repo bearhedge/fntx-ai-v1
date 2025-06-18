@@ -8,6 +8,13 @@ export default defineConfig(({ mode }) => ({
   server: {
     host: "0.0.0.0",
     port: 8080,
+    allowedHosts: [
+      "localhost",
+      "fntx.ai",
+      "www.fntx.ai",
+      "35.194.231.94",
+      ".fntx.ai"
+    ],
     proxy: {
       '/api': {
         target: 'http://35.194.231.94:8002',

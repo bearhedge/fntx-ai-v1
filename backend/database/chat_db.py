@@ -9,9 +9,10 @@ from pathlib import Path
 import uuid
 
 class ChatMessage:
-    def __init__(self, id: str, user_id: str, message: str, response: str, timestamp: datetime):
+    def __init__(self, id: str, user_id: str, session_id: str, message: str, response: str, timestamp: datetime):
         self.id = id
         self.user_id = user_id
+        self.session_id = session_id
         self.message = message
         self.response = response
         self.timestamp = timestamp
@@ -20,6 +21,7 @@ class ChatMessage:
         return {
             'id': self.id,
             'user_id': self.user_id,
+            'session_id': self.session_id,
             'message': self.message,
             'response': self.response,
             'timestamp': self.timestamp.isoformat()
@@ -30,6 +32,7 @@ class ChatMessage:
         return cls(
             id=data['id'],
             user_id=data['user_id'],
+            session_id=data.get('session_id', 'default'),
             message=data['message'],
             response=data['response'],
             timestamp=datetime.fromisoformat(data['timestamp'])
@@ -62,11 +65,12 @@ class ChatDB:
         with open(self.db_path, 'w') as f:
             json.dump(data, f, indent=2)
     
-    def add_message(self, user_id: str, message: str, response: str) -> ChatMessage:
+    def add_message(self, user_id: str, session_id: str, message: str, response: str) -> ChatMessage:
         """Add a new chat message"""
         chat_msg = ChatMessage(
             id=str(uuid.uuid4()),
             user_id=user_id,
+            session_id=session_id,
             message=message,
             response=response,
             timestamp=datetime.utcnow()
@@ -93,6 +97,16 @@ class ChatDB:
         
         messages = db[user_id][-limit:]
         return [ChatMessage.from_dict(msg) for msg in messages]
+    
+    def get_session_history(self, user_id: str, session_id: str, limit: int = 50) -> List[ChatMessage]:
+        """Get chat history for a specific session"""
+        db = self._load_db()
+        if user_id not in db:
+            return []
+        
+        # Filter messages by session_id
+        session_messages = [msg for msg in db[user_id] if msg.get('session_id') == session_id]
+        return [ChatMessage.from_dict(msg) for msg in session_messages[-limit:]]
     
     def clear_user_history(self, user_id: str):
         """Clear chat history for a user"""

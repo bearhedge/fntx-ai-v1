@@ -12,37 +12,40 @@ import { AutomationModal } from './Automation/AutomationModal';
 import { DataAnalysisModal } from './DataAnalysis/DataAnalysisModal';
 import { SettingsModal } from './Settings/SettingsModal';
 import { useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 interface Chat {
-  id: number;
+  id: string;
   title: string;
   preview: string;
   date: string;
   icon: string;
   active: boolean;
+  is_active?: boolean;
 }
 interface SidebarProps {
-  onChatChange?: (chatId: number) => void;
+  onChatChange?: (chatId: string) => void;
 }
-const initialChats: Chat[] = [{
-  id: 1,
-  title: 'Daily Trading Day',
-  preview: 'Based on your feedback, I\'ve co...',
-  date: '17:28',
+// Demo chats for guest users
+const demoChats: Chat[] = [{
+  id: 'demo-1',
+  title: 'Welcome to FNTX.ai',
+  preview: 'Learn about AI-powered trading...',
+  date: 'Now',
   icon: '🧠',
   active: true
 }, {
-  id: 2,
-  title: 'Daily Trading Day',
-  preview: 'You don\'t have enough credits to...',
-  date: '4/23',
+  id: 'demo-2',
+  title: 'SPY Options Example',
+  preview: 'See how to trade SPY options...',
+  date: 'Demo',
   icon: '🧠',
   active: false
 }, {
-  id: 3,
-  title: 'Daily Trading Day',
-  preview: 'Let me create a comprehensive...',
-  date: 'Yesterday',
+  id: 'demo-3',
+  title: 'Market Analysis Demo',
+  preview: 'Explore AI market insights...',
+  date: 'Demo',
   icon: '🧠',
   active: false
 }];
@@ -62,7 +65,8 @@ export const Sidebar = ({
   const [showDataAnalysis, setShowDataAnalysis] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [settingsInitialSection, setSettingsInitialSection] = useState('settings');
-  const [chats, setChats] = useState<Chat[]>(initialChats);
+  const [chats, setChats] = useState<Chat[]>([]);
+  const [isLoadingChats, setIsLoadingChats] = useState(false);
   
   const toggleCollapse = () => {
     setIsCollapsed(!isCollapsed);
@@ -78,39 +82,121 @@ export const Sidebar = ({
   const openSearch = () => {
     setIsSearchOpen(true);
   };
-  const handleNewDay = () => {
-    const today = new Date();
-    const timeString = today.toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: false
-    });
-
-    // Set all existing chats to inactive
-    const updatedChats = chats.map(chat => ({
-      ...chat,
-      active: false
-    }));
-
-    // Create new chat with today's date
-    const newChat: Chat = {
-      id: Date.now(),
-      // Simple ID generation
-      title: `Daily Trading Day`,
-      preview: 'New conversation started...',
-      date: timeString,
-      icon: '🧠',
-      active: true
-    };
-
-    // Add new chat at the beginning
-    const newChats = [newChat, ...updatedChats];
-    setChats(newChats);
-
-    // Notify parent of active chat change
-    onChatChange?.(newChat.id);
+  
+  // Fetch chat sessions from backend
+  const fetchChatSessions = async () => {
+    if (!user) {
+      // Show demo chats for guest users
+      setChats(demoChats);
+      return;
+    }
+    
+    setIsLoadingChats(true);
+    try {
+      const token = Cookies.get('fntx_token');
+      if (!token) {
+        setChats(demoChats);
+        return;
+      }
+      
+      const response = await fetch('http://localhost:8002/api/chat/sessions', {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        const sessions = data.sessions.map((session: any) => ({
+          id: session.id,
+          title: session.title,
+          preview: session.preview || 'New conversation...',
+          date: session.date,
+          icon: '🧠',
+          active: session.is_active || false
+        }));
+        
+        // If no sessions exist, create a default one
+        if (sessions.length === 0) {
+          await createNewChat();
+        } else {
+          setChats(sessions);
+        }
+      } else {
+        // Fall back to demo chats on error
+        setChats(demoChats);
+      }
+    } catch (error) {
+      console.error('Failed to fetch chat sessions:', error);
+      setChats(demoChats);
+    } finally {
+      setIsLoadingChats(false);
+    }
   };
-  const handleChatClick = (chatId: number) => {
+  
+  // Create a new chat session
+  const createNewChat = async () => {
+    if (!user) {
+      // For guests, just add a local demo chat
+      const newChat: Chat = {
+        id: `demo-${Date.now()}`,
+        title: 'New Chat',
+        preview: 'Start a conversation...',
+        date: 'Now',
+        icon: '🧠',
+        active: true
+      };
+      setChats([newChat, ...chats.map(c => ({ ...c, active: false }))]);
+      onChatChange?.(newChat.id);
+      return;
+    }
+    
+    try {
+      const token = Cookies.get('fntx_token');
+      if (!token) return;
+      
+      const response = await fetch('http://localhost:8002/api/chat/sessions', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          title: 'Daily Trading Day',
+          preview: 'New conversation started...'
+        })
+      });
+      
+      if (response.ok) {
+        const data = await response.json();
+        const newChat: Chat = {
+          id: data.session.id,
+          title: data.session.title,
+          preview: data.session.preview,
+          date: 'Now',
+          icon: '🧠',
+          active: true
+        };
+        
+        // Update existing chats to be inactive
+        const updatedChats = chats.map(chat => ({ ...chat, active: false }));
+        setChats([newChat, ...updatedChats]);
+        onChatChange?.(newChat.id);
+      }
+    } catch (error) {
+      console.error('Failed to create chat session:', error);
+    }
+  };
+  
+  // Load chat sessions when component mounts or user changes
+  useEffect(() => {
+    fetchChatSessions();
+  }, [user]);
+  const handleNewDay = async () => {
+    await createNewChat();
+  };
+  const handleChatClick = async (chatId: string) => {
+    // Update local state immediately
     setChats(chats.map(chat => ({
       ...chat,
       active: chat.id === chatId
@@ -118,6 +204,23 @@ export const Sidebar = ({
 
     // Notify parent of active chat change
     onChatChange?.(chatId);
+    
+    // Update backend if authenticated
+    if (user && !chatId.startsWith('demo-')) {
+      try {
+        const token = Cookies.get('fntx_token');
+        if (token) {
+          await fetch(`http://localhost:8002/api/chat/sessions/${chatId}/activate`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`
+            }
+          });
+        }
+      } catch (error) {
+        console.error('Failed to activate chat session:', error);
+      }
+    }
   };
   const handleKnowledgeClick = () => {
     // Knowledge functionality to be implemented
@@ -341,7 +444,18 @@ export const Sidebar = ({
           {/* Previous chats list */}
           <div className="flex-1 overflow-y-auto">
             <div className="p-4 space-y-2">
-              {chats.map(chat => <button key={chat.id} onClick={() => handleChatClick(chat.id)} className={`w-full flex items-start space-x-3 p-3 rounded-lg text-left transition-colors ${chat.active ? 'bg-gray-200 border border-gray-400' : 'hover:bg-gray-200'}`}>
+              {chats.length === 0 && !isLoadingChats && !user && (
+              <div className="p-4 text-center">
+                <p className="text-sm text-gray-500 mb-3">Sign in to save your chat history</p>
+                <button
+                  onClick={() => navigate('/landing')}
+                  className="text-sm text-blue-600 hover:text-blue-800"
+                >
+                  Sign in →
+                </button>
+              </div>
+            )}
+            {chats.map(chat => <button key={chat.id} onClick={() => handleChatClick(chat.id)} className={`w-full flex items-start space-x-3 p-3 rounded-lg text-left transition-colors ${chat.active ? 'bg-gray-200 border border-gray-400' : 'hover:bg-gray-200'}`}>
                   <div className="w-8 h-8 rounded-full text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 bg-neutral-300">
                     🧠
                   </div>
@@ -375,8 +489,8 @@ export const Sidebar = ({
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{user?.name || 'Jimmy Hou'}</p>
-                      <p className="text-xs text-gray-600 truncate">{user?.email || 'info@bearhedge.com'}</p>
+                      <p className="text-sm font-medium text-gray-900">{user?.name || 'Guest User'}</p>
+                      <p className="text-xs text-gray-600 truncate">{user?.email || 'Sign in to save your chats'}</p>
                     </div>
                     <ChevronUp className="w-4 h-4 text-gray-400" />
                   </button>

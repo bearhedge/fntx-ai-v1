@@ -15,12 +15,12 @@ interface ChatContextState {
 }
 
 export const AppLayout = ({ children }: AppLayoutProps) => {
-  const [activeChatId, setActiveChatId] = useState<number>(1);
-  const [chatContextStates, setChatContextStates] = useState<Record<number, ChatContextState>>({});
+  const [activeChatId, setActiveChatId] = useState<string>('default');
+  const [chatContextStates, setChatContextStates] = useState<Record<string, ChatContextState>>({});
   const [activeTradeId, setActiveTradeId] = useState<string | null>(null);
   
   // Get current chat context or initialize with defaults
-  const getCurrentChatContext = useCallback((chatId: number): ChatContextState => {
+  const getCurrentChatContext = useCallback((chatId: string): ChatContextState => {
     return chatContextStates[chatId] || {
       showContextPanel: false,
       isContextPanelExpanded: false,
@@ -31,7 +31,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   const currentChatContext = getCurrentChatContext(activeChatId);
 
   // Update specific chat context
-  const updateChatContext = useCallback((chatId: number, updates: Partial<ChatContextState>) => {
+  const updateChatContext = useCallback((chatId: string, updates: Partial<ChatContextState>) => {
     setChatContextStates(prev => ({
       ...prev,
       [chatId]: {
@@ -57,7 +57,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     setIsContextPanelExpanded(!currentChatContext.isContextPanelExpanded);
   }, [currentChatContext.isContextPanelExpanded, setIsContextPanelExpanded]);
 
-  const handleChatChange = useCallback((chatId: number) => {
+  const handleChatChange = useCallback((chatId: string) => {
     setActiveChatId(chatId);
   }, []);
 

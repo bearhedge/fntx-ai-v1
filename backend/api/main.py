@@ -41,7 +41,20 @@ app = FastAPI(
 # CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173", "http://localhost:8080", "http://localhost:8081"],  # React dev servers
+    allow_origins=[
+        "http://localhost:3000", 
+        "http://localhost:5173", 
+        "http://localhost:8080", 
+        "http://localhost:8081",
+        "http://localhost:8082",
+        "http://fntx.ai:8080",
+        "http://fntx.ai:8081", 
+        "http://fntx.ai:8082",
+        "http://fntx.ai",
+        "https://fntx.ai",
+        "http://35.194.231.94:8080",
+        "http://35.194.231.94:8081"
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -797,6 +810,7 @@ class ChatRequest(BaseModel):
     messages: List[Dict[str, str]] = []
     context: Optional[str] = None  # Add context field for guest users
     user_id: Optional[str] = None  # Add user_id for authenticated users
+    session_id: Optional[str] = None  # Add session_id for chat organization
 
 @app.post("/api/orchestrator/chat")
 async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Optional[str] = Header(None)):
@@ -856,11 +870,25 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             # Save chat history for authenticated users
             if not is_guest and user_id:
                 chat_db = get_chat_db()
+                session_id = request.session_id or 'default'
+                
+                # Save message to chat database
                 chat_db.add_message(
                     user_id=user_id,
+                    session_id=session_id,
                     message=request.message,
                     response=response_text
                 )
+                
+                # Update chat session preview in auth database
+                if session_id != 'default':
+                    auth_db = get_auth_db()
+                    # Get first 100 chars of response for preview
+                    preview = response_text[:100] + '...' if len(response_text) > 100 else response_text
+                    auth_db.update_chat_session(
+                        chat_id=session_id,
+                        preview=preview
+                    )
             
             return {
                 "response": response_text,
@@ -1484,6 +1512,204 @@ async def get_chat_history(authorization: Optional[str] = Header(None)):
         raise
     except Exception as e:
         logger.error(f"Failed to get chat history: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+# Chat session management endpoints
+class CreateChatSessionRequest(BaseModel):
+    title: str = "New Chat"
+    preview: str = ""
+
+class UpdateChatSessionRequest(BaseModel):
+    title: Optional[str] = None
+    preview: Optional[str] = None
+
+@app.get("/api/chat/sessions")
+async def get_chat_sessions(authorization: Optional[str] = Header(None)):
+    """Get all chat sessions for authenticated user"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Get user's chat sessions
+        auth_db = get_auth_db()
+        sessions = auth_db.get_user_chat_sessions(user_id)
+        
+        # Format dates for frontend
+        for session in sessions:
+            # Convert ISO date to relative time
+            created_at = datetime.fromisoformat(session['created_at'])
+            now = datetime.utcnow()
+            diff = now - created_at
+            
+            if diff.days == 0:
+                if diff.seconds < 3600:
+                    session['date'] = f"{diff.seconds // 60}m ago"
+                else:
+                    session['date'] = created_at.strftime("%H:%M")
+            elif diff.days == 1:
+                session['date'] = "Yesterday"
+            elif diff.days < 7:
+                session['date'] = f"{diff.days}d ago"
+            else:
+                session['date'] = created_at.strftime("%m/%d")
+        
+        return {"sessions": sessions}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get chat sessions: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/chat/sessions")
+async def create_chat_session(
+    request: CreateChatSessionRequest,
+    authorization: Optional[str] = Header(None)
+):
+    """Create a new chat session for authenticated user"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Create new chat session
+        auth_db = get_auth_db()
+        session = auth_db.create_chat_session(
+            user_id=user_id,
+            title=request.title,
+            preview=request.preview
+        )
+        
+        return {"session": session}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to create chat session: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/api/chat/sessions/{session_id}")
+async def update_chat_session(
+    session_id: str,
+    request: UpdateChatSessionRequest,
+    authorization: Optional[str] = Header(None)
+):
+    """Update a chat session"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Update chat session
+        auth_db = get_auth_db()
+        success = auth_db.update_chat_session(
+            chat_id=session_id,
+            title=request.title,
+            preview=request.preview
+        )
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Chat session not found")
+        
+        return {"success": True}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to update chat session: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.put("/api/chat/sessions/{session_id}/activate")
+async def activate_chat_session(
+    session_id: str,
+    authorization: Optional[str] = Header(None)
+):
+    """Set a chat session as active"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Activate chat session
+        auth_db = get_auth_db()
+        success = auth_db.set_active_chat_session(user_id, session_id)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Chat session not found")
+        
+        return {"success": True}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to activate chat session: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.delete("/api/chat/sessions/{session_id}")
+async def delete_chat_session(
+    session_id: str,
+    authorization: Optional[str] = Header(None)
+):
+    """Delete a chat session"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Delete chat session
+        auth_db = get_auth_db()
+        success = auth_db.delete_chat_session(session_id, user_id)
+        
+        if not success:
+            raise HTTPException(status_code=404, detail="Chat session not found")
+        
+        return {"success": True}
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to delete chat session: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/spy-options/straddles")

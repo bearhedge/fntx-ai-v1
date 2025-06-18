@@ -10,9 +10,10 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { OrchestratorClient, TradeJourney } from '@/lib/orchestrator-client';
+import { useAuth } from '@/hooks/useAuth';
 
 interface OrchestratedChatBotProps {
-  chatId?: number;
+  chatId?: string;
   onShowContextPanel?: (show: boolean) => void;
   onToggleContextPanel?: () => void;
   showContextPanel?: boolean;
@@ -32,16 +33,16 @@ interface OrchestrationMessage extends Message {
   spyPrice?: number;
 }
 
-const initialMessage: OrchestrationMessage = {
+const getInitialMessage = (userName?: string): OrchestrationMessage => ({
   id: '1',
-  content: 'Hello Jimmy Hou\nWhat can I do for you?',
+  content: `Hello ${userName || 'there'}\nWhat can I do for you?`,
   sender: 'ai' as const,
   timestamp: new Date(),
   type: 'text' as const
-};
+});
 
 export const OrchestratedChatBot = ({
-  chatId = 1,
+  chatId = 'default',
   onShowContextPanel,
   onToggleContextPanel,
   showContextPanel = false,
@@ -49,8 +50,9 @@ export const OrchestratedChatBot = ({
   onActivateChange
 }: OrchestratedChatBotProps) => {
   const orchestratorClient = new OrchestratorClient();
+  const { user } = useAuth();
   
-  const getStoredMessages = (id: number): OrchestrationMessage[] => {
+  const getStoredMessages = (id: string): OrchestrationMessage[] => {
     try {
       const stored = localStorage.getItem(`chat_messages_${id}`);
       if (stored) {
@@ -60,9 +62,10 @@ export const OrchestratedChatBot = ({
           timestamp: new Date(msg.timestamp)
         }));
       }
+      const initialMessage = getInitialMessage(user?.name);
       return [{ ...initialMessage, timestamp: new Date(initialMessage.timestamp) }];
     } catch {
-      return [initialMessage];
+      return [getInitialMessage(user?.name)];
     }
   };
 
@@ -205,12 +208,25 @@ export const OrchestratedChatBot = ({
       content: msg.content
     }));
     
-    const res = await fetch(`/api/chat`, {
+    // Use orchestrator chat endpoint for authenticated users
+    const endpoint = user ? '/api/orchestrator/chat' : '/api/chat';
+    const headers: HeadersInit = { 'Content-Type': 'application/json' };
+    
+    // Add auth header if user is authenticated
+    if (user) {
+      const token = await import('js-cookie').then(m => m.default.get('fntx_token'));
+      if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+      }
+    }
+    
+    const res = await fetch(`http://localhost:8002${endpoint}`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers,
       body: JSON.stringify({ 
         message,
-        messages: formattedMessages 
+        messages: formattedMessages,
+        session_id: chatId !== 'default' && !chatId.startsWith('demo-') ? chatId : undefined
       }),
     });
     
@@ -532,7 +548,7 @@ export const OrchestratedChatBot = ({
               </div>
               
               <div className="text-left">
-                <h1 className="text-4xl font-medium text-gray-800 mb-4">Hello Jimmy Hou</h1>
+                <h1 className="text-4xl font-medium text-gray-800 mb-4">Hello {user?.name || 'there'}</h1>
                 <p className="text-xl text-gray-500 mb-8">
                   What can I do for you?
                 </p>
