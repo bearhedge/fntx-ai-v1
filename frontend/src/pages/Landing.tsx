@@ -5,9 +5,11 @@ import { EnhancedMessageInput } from '@/components/Chat/EnhancedMessageInput';
 import { Button } from '@/components/ui/button';
 import { Message } from '@/types/trading';
 import { Target, Settings, Monitor, Bot } from 'lucide-react';
+import { useAuth } from '@/contexts/AuthContext';
 
 const Landing = () => {
   const navigate = useNavigate();
+  const { user, isAuthenticated } = useAuth();
   const [messages, setMessages] = useState<Message[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -21,6 +23,14 @@ const Landing = () => {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Redirect authenticated users to their personal page
+  useEffect(() => {
+    if (isAuthenticated && user?.email) {
+      const username = user.email.split('@')[0].toLowerCase();
+      navigate(`/${username}`);
+    }
+  }, [isAuthenticated, user, navigate]);
 
   const handleSendMessage = async (content: string) => {
     const userMessage: Message = {

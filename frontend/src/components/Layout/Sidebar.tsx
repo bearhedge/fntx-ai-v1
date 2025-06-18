@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { MessageSquare, Plus, User, ChevronUp, Settings, Home, Mail, LogOut, PanelLeftClose, PanelLeftOpen, Search, Lock, Unlock, Bell, Zap, ScrollText } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from '@/contexts/AuthContext';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Command, CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList } from "@/components/ui/command";
@@ -53,7 +53,12 @@ export const Sidebar = ({
   onChatChange
 }: SidebarProps) => {
   const navigate = useNavigate();
-  const { user, signOut } = useAuth();
+  const { user, signOut: authSignOut } = useAuth();
+  
+  const signOut = async () => {
+    await authSignOut();
+    navigate('/');
+  };
   const [isCollapsed, setIsCollapsed] = useState(false);
   const [isDocked, setIsDocked] = useState(true);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -119,12 +124,14 @@ export const Sidebar = ({
         // Set the user's chat sessions (empty array if none exist)
         setChats(sessions);
       } else {
-        // Fall back to demo chats on error
-        setChats(demoChats);
+        // For authenticated users, show empty list on error
+        console.error('Failed to fetch chat sessions, status:', response.status);
+        setChats([]);
       }
     } catch (error) {
       console.error('Failed to fetch chat sessions:', error);
-      setChats(demoChats);
+      // For authenticated users, show empty list on error
+      setChats([]);
     } finally {
       setIsLoadingChats(false);
     }
@@ -444,11 +451,17 @@ export const Sidebar = ({
               <div className="p-4 text-center">
                 <p className="text-sm text-gray-500 mb-3">Sign in to save your chat history</p>
                 <button
-                  onClick={() => navigate('/landing')}
+                  onClick={() => navigate('/')}
                   className="text-sm text-blue-600 hover:text-blue-800"
                 >
                   Sign in →
                 </button>
+              </div>
+            )}
+            {chats.length === 0 && !isLoadingChats && user && (
+              <div className="p-4 text-center">
+                <p className="text-sm text-gray-500 mb-3">No chats yet</p>
+                <p className="text-xs text-gray-400">Start a conversation to begin</p>
               </div>
             )}
             {chats.map(chat => <button key={chat.id} onClick={() => handleChatClick(chat.id)} className={`w-full flex items-start space-x-3 p-3 rounded-lg text-left transition-colors ${chat.active ? 'bg-gray-200 border border-gray-400' : 'hover:bg-gray-200'}`}>
@@ -485,7 +498,7 @@ export const Sidebar = ({
                       </AvatarFallback>
                     </Avatar>
                     <div className="flex-1 min-w-0">
-                      <p className="text-sm font-medium text-gray-900">{user?.name || 'Guest User'}</p>
+                      <p className="text-xs font-medium text-gray-900 truncate">{user?.name || 'Guest User'}</p>
                       <p className="text-xs text-gray-600 truncate">{user?.email || 'Sign in to save your chats'}</p>
                     </div>
                     <ChevronUp className="w-4 h-4 text-gray-400" />

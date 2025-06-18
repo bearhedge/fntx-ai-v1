@@ -79,7 +79,13 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ className 
         // Store the token and navigate
         if (data.token) {
           await login(data.token);
-          navigate('/');
+          // Navigate to user's personal page
+          if (data.user?.email) {
+            const username = data.user.email.split('@')[0].toLowerCase();
+            navigate(`/${username}`);
+          } else {
+            navigate('/');
+          }
         } else {
           throw new Error('No token received');
         }
