@@ -220,7 +220,8 @@ export const OrchestratedChatBot = ({
       }
     }
     
-    const res = await fetch(`http://localhost:8003${endpoint}`, {
+    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
+    const res = await fetch(`${apiUrl}${endpoint}`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ 
@@ -273,7 +274,8 @@ export const OrchestratedChatBot = ({
         });
 
         // Fetch current SPY price for reference
-        fetch(`http://localhost:8003/api/market/insights`)
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
+        fetch(`${apiUrl}/api/market/insights`)
           .then(response => response.json())
           .then(data => {
             setSpyPrice(data.spy_price || 0);
@@ -484,7 +486,8 @@ export const OrchestratedChatBot = ({
       setIsProcessing(true);
       
       // Execute the trade
-      const response = await fetch(`http://localhost:8003/api/trade/manual-execute/${analysis.trade_id}`, {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
+      const response = await fetch(`${apiUrl}/api/trade/manual-execute/${analysis.trade_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
