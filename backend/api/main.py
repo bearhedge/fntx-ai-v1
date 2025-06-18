@@ -10,7 +10,7 @@ import asyncio
 import logging
 from datetime import datetime
 from typing import Dict, List, Optional, Any
-from fastapi import FastAPI, HTTPException, BackgroundTasks
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Header
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
@@ -19,6 +19,7 @@ from dotenv import load_dotenv
 from backend.agents.orchestrator import FNTXOrchestrator
 from backend.services.ibkr_singleton_service import ibkr_singleton
 from backend.database.auth_db import get_auth_db
+from backend.database.chat_db import get_chat_db
 from backend.auth.jwt_utils import get_jwt_manager
 from backend.models.user import User
 
@@ -795,15 +796,33 @@ class ChatRequest(BaseModel):
     message: str
     messages: List[Dict[str, str]] = []
     context: Optional[str] = None  # Add context field for guest users
+    user_id: Optional[str] = None  # Add user_id for authenticated users
 
 @app.post("/api/orchestrator/chat")
-async def orchestrator_chat_endpoint(request: ChatRequest):
+async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Optional[str] = Header(None)):
     """Handle orchestrated chat messages - works for both authenticated and guest users"""
     try:
         logger.info(f"Received orchestrator chat message: {request.message}")
         
-        # Check if this is a guest user
-        is_guest = request.context == "guest"
+        # Check authentication
+        user_id = None
+        is_guest = True
+        
+        if authorization and authorization.startswith("Bearer "):
+            try:
+                token = authorization.split(" ")[1]
+                jwt_manager = get_jwt_manager()
+                payload = jwt_manager.decode_token(token)
+                user_id = payload.get("user_id")
+                is_guest = False
+                logger.info(f"Authenticated user: {user_id}")
+            except Exception as e:
+                logger.warning(f"Token validation failed: {e}")
+        
+        # Override with context if explicitly set to guest
+        if request.context == "guest":
+            is_guest = True
+            user_id = None
         
         # Use model router for LLM responses
         from backend.llm import ModelRouter
@@ -834,10 +853,20 @@ async def orchestrator_chat_endpoint(request: ChatRequest):
                 f"{system_context}\n\nUser: {request.message}"
             )
             
+            # Save chat history for authenticated users
+            if not is_guest and user_id:
+                chat_db = get_chat_db()
+                chat_db.add_message(
+                    user_id=user_id,
+                    message=request.message,
+                    response=response_text
+                )
+            
             return {
                 "response": response_text,
                 "timestamp": datetime.now().isoformat(),
-                "is_guest": is_guest
+                "is_guest": is_guest,
+                "user_id": user_id
             }
             
         except Exception as e:
@@ -1425,6 +1454,37 @@ async def logout():
     # For JWT-based auth, logout is handled client-side
     # This endpoint exists for consistency and future enhancements
     return {"success": True, "message": "Logged out successfully"}
+
+@app.get("/api/chat/history")
+async def get_chat_history(authorization: Optional[str] = Header(None)):
+    """Get chat history for authenticated user"""
+    try:
+        # Check authentication
+        if not authorization or not authorization.startswith("Bearer "):
+            raise HTTPException(status_code=401, detail="Not authenticated")
+        
+        token = authorization.split(" ")[1]
+        jwt_manager = get_jwt_manager()
+        payload = jwt_manager.decode_token(token)
+        user_id = payload.get("user_id")
+        
+        if not user_id:
+            raise HTTPException(status_code=401, detail="Invalid token")
+        
+        # Get chat history
+        chat_db = get_chat_db()
+        history = chat_db.get_user_history(user_id, limit=50)
+        
+        return {
+            "history": [msg.to_dict() for msg in history],
+            "user_id": user_id
+        }
+        
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Failed to get chat history: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/api/spy-options/straddles")
 async def get_spy_straddles(num_strikes: int = 10):
