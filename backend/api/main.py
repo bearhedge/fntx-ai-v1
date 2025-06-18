@@ -870,7 +870,19 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             # Save chat history for authenticated users
             if not is_guest and user_id:
                 chat_db = get_chat_db()
-                session_id = request.session_id or 'default'
+                session_id = request.session_id
+                
+                # If no session_id provided, create a new chat session
+                if not session_id:
+                    auth_db = get_auth_db()
+                    # Create a new chat session with a meaningful title
+                    title = f"Chat {datetime.now().strftime('%b %d, %Y')}"
+                    session_data = auth_db.create_chat_session(
+                        user_id=user_id,
+                        title=title,
+                        preview="New conversation started..."
+                    )
+                    session_id = session_data['id']
                 
                 # Save message to chat database
                 chat_db.add_message(
@@ -881,21 +893,26 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
                 )
                 
                 # Update chat session preview in auth database
-                if session_id != 'default':
-                    auth_db = get_auth_db()
-                    # Get first 100 chars of response for preview
-                    preview = response_text[:100] + '...' if len(response_text) > 100 else response_text
-                    auth_db.update_chat_session(
-                        chat_id=session_id,
-                        preview=preview
-                    )
+                auth_db = get_auth_db()
+                # Get first 100 chars of response for preview
+                preview = response_text[:100] + '...' if len(response_text) > 100 else response_text
+                auth_db.update_chat_session(
+                    chat_id=session_id,
+                    preview=preview
+                )
             
-            return {
+            response_data = {
                 "response": response_text,
                 "timestamp": datetime.now().isoformat(),
                 "is_guest": is_guest,
                 "user_id": user_id
             }
+            
+            # Include session_id for authenticated users
+            if not is_guest and user_id and session_id:
+                response_data["session_id"] = session_id
+                
+            return response_data
             
         except Exception as e:
             logger.error(f"Gemini API error: {e}")

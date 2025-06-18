@@ -220,7 +220,7 @@ export const OrchestratedChatBot = ({
       }
     }
     
-    const res = await fetch(`http://localhost:8002${endpoint}`, {
+    const res = await fetch(`http://localhost:8003${endpoint}`, {
       method: 'POST',
       headers,
       body: JSON.stringify({ 
@@ -273,7 +273,7 @@ export const OrchestratedChatBot = ({
         });
 
         // Fetch current SPY price for reference
-        fetch(`http://localhost:8002/api/market/insights`)
+        fetch(`http://localhost:8003/api/market/insights`)
           .then(response => response.json())
           .then(data => {
             setSpyPrice(data.spy_price || 0);
@@ -484,7 +484,7 @@ export const OrchestratedChatBot = ({
       setIsProcessing(true);
       
       // Execute the trade
-      const response = await fetch(`http://localhost:8002/api/trade/manual-execute/${analysis.trade_id}`, {
+      const response = await fetch(`http://localhost:8003/api/trade/manual-execute/${analysis.trade_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

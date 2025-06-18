@@ -99,7 +99,7 @@ export const Sidebar = ({
         return;
       }
       
-      const response = await fetch('http://localhost:8002/api/chat/sessions', {
+      const response = await fetch('http://localhost:8003/api/chat/sessions', {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -116,12 +116,8 @@ export const Sidebar = ({
           active: session.is_active || false
         }));
         
-        // If no sessions exist, create a default one
-        if (sessions.length === 0) {
-          await createNewChat();
-        } else {
-          setChats(sessions);
-        }
+        // Set the user's chat sessions (empty array if none exist)
+        setChats(sessions);
       } else {
         // Fall back to demo chats on error
         setChats(demoChats);
@@ -155,7 +151,7 @@ export const Sidebar = ({
       const token = Cookies.get('fntx_token');
       if (!token) return;
       
-      const response = await fetch('http://localhost:8002/api/chat/sessions', {
+      const response = await fetch('http://localhost:8003/api/chat/sessions', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -210,7 +206,7 @@ export const Sidebar = ({
       try {
         const token = Cookies.get('fntx_token');
         if (token) {
-          await fetch(`http://localhost:8002/api/chat/sessions/${chatId}/activate`, {
+          await fetch(`http://localhost:8003/api/chat/sessions/${chatId}/activate`, {
             method: 'PUT',
             headers: {
               'Authorization': `Bearer ${token}`
