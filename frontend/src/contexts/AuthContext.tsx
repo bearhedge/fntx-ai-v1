@@ -134,8 +134,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
 
       // Store JWT token and user data in cookies (7 days expiry)
-      Cookies.set('fntx_token', token, { expires: 7, secure: true, sameSite: 'strict' });
-      Cookies.set('fntx_user', JSON.stringify(userData), { expires: 7 });
+      const isHTTPS = window.location.protocol === 'https:';
+      Cookies.set('fntx_token', token, { expires: 7, secure: isHTTPS, sameSite: 'lax' });
+      Cookies.set('fntx_user', JSON.stringify(userData), { expires: 7, secure: isHTTPS, sameSite: 'lax' });
       
       setUser(userData);
 
