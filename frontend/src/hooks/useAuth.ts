@@ -34,7 +34,7 @@ export function useAuth() {
     setUser(null);
     localStorage.removeItem('fntx_user');
     // Navigate to landing page
-    window.location.href = '/landing';
+    window.location.href = '/';
   };
 
   return {

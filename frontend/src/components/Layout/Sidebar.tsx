@@ -90,10 +90,8 @@ export const Sidebar = ({
   
   // Fetch chat sessions from backend
   const fetchChatSessions = async () => {
-    console.log('fetchChatSessions called, user:', user);
     if (!user) {
       // Show demo chats for guest users
-      console.log('No user, showing demo chats');
       setChats(demoChats);
       return;
     }
@@ -101,9 +99,7 @@ export const Sidebar = ({
     setIsLoadingChats(true);
     try {
       const token = Cookies.get('fntx_token');
-      console.log('Token check:', token ? 'Token exists' : 'No token');
       if (!token) {
-        console.log('No token, showing demo chats');
         setChats(demoChats);
         return;
       }
@@ -117,7 +113,6 @@ export const Sidebar = ({
       
       if (response.ok) {
         const data = await response.json();
-        console.log('API response:', data);
         const sessions = data.sessions.map((session: any) => ({
           id: session.id,
           title: session.title,
@@ -127,7 +122,6 @@ export const Sidebar = ({
           active: session.is_active || false
         }));
         
-        console.log('Setting chat sessions:', sessions);
         // Set the user's chat sessions (empty array if none exist)
         setChats(sessions);
       } else {
@@ -203,8 +197,22 @@ export const Sidebar = ({
   useEffect(() => {
     fetchChatSessions();
   }, [user]);
+
+  // Listen for refresh events
+  useEffect(() => {
+    const handleRefresh = () => {
+      fetchChatSessions();
+    };
+
+    window.addEventListener('refreshChatSessions', handleRefresh);
+    return () => {
+      window.removeEventListener('refreshChatSessions', handleRefresh);
+    };
+  }, []);
   const handleNewDay = async () => {
     await createNewChat();
+    // Refresh chat sessions after creating new chat
+    await fetchChatSessions();
   };
   const handleChatClick = async (chatId: string) => {
     // Update local state immediately

@@ -61,6 +61,11 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     setActiveChatId(chatId);
   }, []);
 
+  const refreshSidebar = useCallback(() => {
+    // Force sidebar to re-fetch chat sessions
+    window.dispatchEvent(new CustomEvent('refreshChatSessions'));
+  }, []);
+
   return (
     <div className="h-screen bg-white flex w-full overflow-hidden">
       <Sidebar onChatChange={handleChatChange} />
@@ -75,6 +80,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
               showContextPanel={currentChatContext.showContextPanel} 
               isContextPanelExpanded={currentChatContext.isContextPanelExpanded} 
               onActivateChange={setIsActive}
+              onNewChatCreated={refreshSidebar}
             />
           </main>
         </div>

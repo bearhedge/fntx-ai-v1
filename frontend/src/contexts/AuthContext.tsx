@@ -162,7 +162,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
     
     // Redirect to landing page
-    window.location.href = '/landing';
+    window.location.href = '/';
   };
 
   const value: AuthContextType = {
