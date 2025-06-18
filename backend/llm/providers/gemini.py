@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 class GeminiProvider(BaseProvider):
     """Provider for Google Gemini API"""
     
-    def __init__(self, api_key: Optional[str] = None, model_name: str = 'gemini-1.5-flash'):
+    def __init__(self, api_key: Optional[str] = None, model_name: str = 'gemini-2.0-flash-exp'):
         self.api_key = api_key or os.getenv('GEMINI_API_KEY')
         self.model_name = model_name
         self.model = None

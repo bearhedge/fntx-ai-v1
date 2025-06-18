@@ -16,6 +16,7 @@ interface AuthContextType {
   isLoading: boolean;
   login: (credential: string) => Promise<void>;
   logout: () => void;
+  signOut?: () => void; // Alias for logout
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -46,7 +47,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         
         if (token) {
           // Verify token with backend
-          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
           const response = await fetch(`${apiUrl}/api/auth/verify`, {
             method: 'POST',
             headers: {
@@ -93,7 +94,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         token = credential;
         
         // Verify the token with backend to get user data
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
         const verifyResponse = await fetch(`${apiUrl}/api/auth/verify`, {
           method: 'POST',
           headers: {
@@ -114,7 +115,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         userData = verifyData.user;
       } else {
         // This is a Google OAuth credential
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
         const response = await fetch(`${apiUrl}/api/auth/google`, {
           method: 'POST',
           headers: {
@@ -153,11 +154,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     // Notify backend
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
       await fetch(`${apiUrl}/api/auth/logout`, { method: 'POST' });
     } catch (error) {
       console.warn('Backend logout notification failed:', error);
     }
+    
+    // Redirect to landing page
+    window.location.href = '/landing';
   };
 
   const value: AuthContextType = {
@@ -166,6 +170,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     isLoading,
     login,
     logout,
+    signOut: logout, // Alias for compatibility
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

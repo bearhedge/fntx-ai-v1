@@ -25,16 +25,9 @@ from .reward_model import RewardModelAgent
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/Users/jimmyhou/CascadeProjects/fntx-ai-v10/logs/orchestrator.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger('Orchestrator')
+# Configure logging with dynamic path
+from backend.utils.logging import get_agent_logger
+logger = get_agent_logger('Orchestrator')
 
 class TradePhase(Enum):
     """Trade execution phases"""

@@ -2,9 +2,9 @@
 
 ## Overview
 
-FNTX.ai is an AI-driven autonomous options trading system that executes daily SPY options selling strategies. It serves as a personal "digital ATM" that actively generates returns through intelligent, automated trading strategies.
+FNTX.ai is an AI-driven autonomous options trading system that executes daily SPY options selling strategies. The system provides automated trading functionality through intelligent decision-making algorithms.
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Prerequisites
 - Node.js (v18 or later)
@@ -38,7 +38,7 @@ FNTX.ai is an AI-driven autonomous options trading system that executes daily SP
    - Main Interface: http://localhost:8080
    - API Documentation: http://localhost:8000/docs
 
-## 🏗 Architecture
+## Architecture
 
 ### Core Components
 - **Frontend**: React + TypeScript interface with real-time chat
@@ -54,7 +54,7 @@ FNTX.ai is an AI-driven autonomous options trading system that executes daily SP
 - **Trading**: Interactive Brokers API
 - **Real-time**: WebSocket connections
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 fntx-ai-v10/
@@ -72,7 +72,7 @@ fntx-ai-v10/
 └── logs/                  # Application logs (auto-generated)
 ```
 
-## 🔧 Configuration
+## Configuration
 
 ### Environment Variables (.env)
 
@@ -90,7 +90,7 @@ DATABASE_URL=sqlite:///fntx.db
 LOG_LEVEL=INFO
 ```
 
-## 🤖 AI Trading Features
+## AI Trading Features
 
 ### Autonomous Execution
 - Daily SPY options selling strategies
@@ -110,7 +110,7 @@ LOG_LEVEL=INFO
 - Audit trail for compliance
 - Transparent decision logging
 
-## 🛠 Development
+## Development
 
 ### Available Scripts
 
@@ -149,7 +149,7 @@ python -m pytest agents/tests/
 npm run test:integration
 ```
 
-## 📊 Monitoring & Analytics
+## Monitoring & Analytics
 
 ### Performance Metrics
 - **DPI**: Distributions to Paid-In Capital
@@ -170,7 +170,7 @@ npm run monitor
 curl http://localhost:8000/health
 ```
 
-## 🔐 Security & Compliance
+## Security & Compliance
 
 ### Security Features
 - API key management and secure storage
@@ -184,10 +184,10 @@ curl http://localhost:8000/health
 - Risk disclosure documentation
 - KYC/AML integration ready
 
-## 🚀 Deployment
+## Deployment
 
 ### Local Development
-Perfect for testing and development with paper trading.
+Suitable for testing and development with paper trading.
 
 ### Production Deployment
 1. Use Docker containers for scalability
@@ -196,7 +196,7 @@ Perfect for testing and development with paper trading.
 4. Implement monitoring and alerting
 5. Set up CI/CD pipeline
 
-## 📈 Trading Strategy
+## Trading Strategy
 
 ### SPY Options Focus
 - **Primary Asset**: SPY (S&P 500 ETF) options
@@ -210,7 +210,7 @@ Perfect for testing and development with paper trading.
 - Position size optimization
 - Real-time risk monitoring
 
-## 🤝 Contributing
+## Contributing
 
 1. Fork the repository
 2. Create a feature branch
@@ -218,11 +218,11 @@ Perfect for testing and development with paper trading.
 4. Add tests for new functionality
 5. Submit a pull request
 
-## 📝 License
+## License
 
 This project is proprietary software. All rights reserved.
 
-## 🆘 Support
+## Support
 
 For technical support or questions:
 - Check the documentation in `/docs`
@@ -231,4 +231,4 @@ For technical support or questions:
 
 ---
 
-**⚠️ Risk Warning**: Options trading involves substantial risk and is not suitable for all investors. Past performance does not guarantee future results. This software is for educational and development purposes.
+**Risk Warning**: Options trading involves substantial risk and is not suitable for all investors. Past performance does not guarantee future results. This software is for educational and development purposes.

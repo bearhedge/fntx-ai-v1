@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # FNTX.ai Development Environment Startup Script
-echo "🚀 Starting FNTX.ai Development Environment..."
+echo "Starting FNTX.ai Development Environment..."
 
 # Colors for output
 GREEN='\033[0;32m'
@@ -11,7 +11,7 @@ NC='\033[0m' # No Color
 
 # Get the project root directory (parent of scripts)
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-echo "📁 Project root: $PROJECT_ROOT"
+echo "Project root: $PROJECT_ROOT"
 
 # Function to check if port is in use
 check_port() {
@@ -41,12 +41,12 @@ echo -e "${GREEN}Starting Backend Services...${NC}"
 
 # Orchestrator API Backend (Port 8002) - Main API for agent coordination
 echo -e "${BLUE}Starting Orchestrator API Backend on port 8002...${NC}"
-cd "$PROJECT_ROOT" && PYTHONPATH="$PROJECT_ROOT" python3 -m uvicorn backend.api.main:app --host 0.0.0.0 --port 8002 --reload > logs/api_server.log 2>&1 &
+cd "$PROJECT_ROOT" && source venv/bin/activate && PYTHONPATH="$PROJECT_ROOT" python3 -m uvicorn backend.api.main:app --host 0.0.0.0 --port 8002 --reload > logs/api_server.log 2>&1 &
 API_PID=$!
 
 # Start EnvironmentWatcher Agent
 echo -e "${BLUE}Starting EnvironmentWatcher Agent...${NC}"
-cd "$PROJECT_ROOT" && PYTHONPATH="$PROJECT_ROOT" python3 -m backend.agents.environment_watcher > logs/environment_watcher.log 2>&1 &
+cd "$PROJECT_ROOT" && source venv/bin/activate && PYTHONPATH="$PROJECT_ROOT" python3 -m backend.agents.environment_watcher > logs/environment_watcher.log 2>&1 &
 ENV_PID=$!
 
 # Wait a moment for backends to start
@@ -68,11 +68,11 @@ sleep 5
 
 # Check service health
 echo -e "${GREEN}Service Status:${NC}"
-curl -s http://localhost:8002/health > /dev/null && echo -e "✅ Orchestrator API: ${GREEN}Running${NC}" || echo -e "❌ Orchestrator API: ${YELLOW}Failed${NC}"
-curl -s http://localhost:8080 > /dev/null && echo -e "✅ Frontend: ${GREEN}Running${NC}" || echo -e "❌ Frontend: ${YELLOW}Failed${NC}"
-ps -p $ENV_PID > /dev/null && echo -e "✅ EnvironmentWatcher: ${GREEN}Running${NC}" || echo -e "❌ EnvironmentWatcher: ${YELLOW}Failed${NC}"
+curl -s http://localhost:8002/health > /dev/null && echo -e "✓ Orchestrator API: ${GREEN}Running${NC}" || echo -e "✗ Orchestrator API: ${YELLOW}Failed${NC}"
+curl -s http://localhost:8080 > /dev/null && echo -e "✓ Frontend: ${GREEN}Running${NC}" || echo -e "✗ Frontend: ${YELLOW}Failed${NC}"
+ps -p $ENV_PID > /dev/null && echo -e "✓ EnvironmentWatcher: ${GREEN}Running${NC}" || echo -e "✗ EnvironmentWatcher: ${YELLOW}Failed${NC}"
 
-echo -e "\n${GREEN}🎉 FNTX.ai Development Environment Ready!${NC}"
+echo -e "\n${GREEN}FNTX.ai Development Environment Ready!${NC}"
 echo -e "Frontend: ${BLUE}http://localhost:8080${NC}"
 echo -e "Orchestrator API: ${BLUE}http://localhost:8002${NC}"
 

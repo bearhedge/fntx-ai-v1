@@ -16,16 +16,9 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/Users/jimmyhou/CascadeProjects/fntx-ai-v10/logs/reward_model.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger('RewardModelAgent')
+# Configure logging with dynamic path
+from backend.utils.logging import get_agent_logger
+logger = get_agent_logger('RewardModelAgent')
 
 class RewardModelAgent:
     """

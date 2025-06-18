@@ -25,16 +25,10 @@ from backend.models.user import User
 # Load environment variables
 load_dotenv()
 
-# Configure logging
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler('/Users/jimmyhou/CascadeProjects/fntx-ai-v10/logs/api_server.log'),
-        logging.StreamHandler()
-    ]
-)
-logger = logging.getLogger('APIServer')
+# Configure logging with dynamic path
+from backend.utils.logging import get_api_logger
+from backend.utils.config import config
+logger = get_api_logger()
 
 # FastAPI app
 app = FastAPI(
@@ -98,9 +92,9 @@ async def startup_event():
     # Connect to IBKR using singleton
     connected = ibkr_singleton._ensure_connected()
     if connected:
-        logger.info("✅ IBKR connection established")
+        logger.info("IBKR connection established")
     else:
-        logger.warning("⚠️ IBKR connection failed - will retry on first request")
+        logger.warning("Warning: IBKR connection failed - will retry on first request")
     
     # Start background monitoring
     orchestrator.start_background_monitoring()
@@ -191,18 +185,18 @@ async def run_orchestration(trade_id: str, user_request: str):
         await manager.send_trade_message({
             "type": "orchestration_start",
             "trade_id": trade_id,
-            "message": "🚀 FNTX's Computer: Initializing trading orchestration...",
+            "message": "FNTX's Computer: Initializing trading orchestration...",
             "timestamp": datetime.now().isoformat(),
             "step": "initialization"
         }, trade_id)
         
         # Send step-by-step updates during orchestration
         steps = [
-            "🧠 Strategic Planner: Analyzing market conditions...",
-            "📊 Environment Watcher: Collecting real-time data...", 
-            "🎯 Reward Model: Calculating risk-reward ratios...",
-            "⚡ Executor: Preparing trade execution...",
-            "🔍 Evaluator: Validating strategy parameters..."
+            "Strategic Planner: Analyzing market conditions...",
+            "Environment Watcher: Collecting real-time data...", 
+            "Reward Model: Calculating risk-reward ratios...",
+            "Executor: Preparing trade execution...",
+            "Evaluator: Validating strategy parameters..."
         ]
         
         for i, step_message in enumerate(steps):
@@ -234,7 +228,7 @@ async def run_orchestration(trade_id: str, user_request: str):
             await manager.send_trade_message({
                 "type": "orchestration_complete",
                 "trade_id": trade_id,
-                "message": "✅ FNTX's Computer: Trade orchestration completed successfully!",
+                "message": "FNTX's Computer: Trade orchestration completed successfully!",
                 "timestamp": datetime.now().isoformat(),
                 "result": result,
                 "progress": 1.0
@@ -244,7 +238,7 @@ async def run_orchestration(trade_id: str, user_request: str):
             await manager.send_trade_message({
                 "type": "orchestration_failed",
                 "trade_id": trade_id,
-                "message": "❌ FNTX's Computer: Trade orchestration failed",
+                "message": "FNTX's Computer: Trade orchestration failed",
                 "timestamp": datetime.now().isoformat(),
                 "error": result.get("errors", []),
                 "progress": 1.0
@@ -273,7 +267,7 @@ async def get_trade_journey(trade_id: str):
     """Get the journey details for a specific trade"""
     try:
         # Load journey from file
-        journey_file = "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/trade_journey.json"
+        journey_file = config.get_memory_path("trade_journey.json")
         
         if os.path.exists(journey_file):
             with open(journey_file, 'r') as f:
@@ -309,7 +303,7 @@ async def get_trade_journey(trade_id: str):
 async def get_current_journey():
     """Get the current/latest trade journey"""
     try:
-        journey_file = "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/trade_journey.json"
+        journey_file = config.get_memory_path("trade_journey.json")
         
         if os.path.exists(journey_file):
             with open(journey_file, 'r') as f:
@@ -326,7 +320,7 @@ async def get_current_journey():
 async def get_orchestrator_stats():
     """Get orchestrator performance statistics"""
     try:
-        memory_file = "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/orchestrator_memory.json"
+        memory_file = config.get_memory_path("orchestrator_memory.json")
         
         if os.path.exists(memory_file):
             with open(memory_file, 'r') as f:
@@ -364,7 +358,7 @@ async def get_orchestrator_stats():
 async def get_recent_trades():
     """Get recent trade orchestrations"""
     try:
-        memory_file = "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/orchestrator_memory.json"
+        memory_file = config.get_memory_path("orchestrator_memory.json")
         
         recent_trades = []
         
@@ -423,10 +417,10 @@ async def get_agent_memory(agent_name: str):
     """Get memory for a specific agent"""
     try:
         agent_memory_files = {
-            "executor": "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/executor_memory.json",
-            "reward_model": "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/reward_model_memory.json",
-            "evaluator": "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/evaluator_memory.json",
-            "environment_watcher": "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/environment_watcher_memory.json"
+            "executor": config.get_memory_path("executor_memory.json"),
+            "reward_model": config.get_memory_path("reward_model_memory.json"),
+            "evaluator": config.get_memory_path("evaluator_memory.json"),
+            "environment_watcher": config.get_memory_path("environment_watcher_memory.json")
         }
         
         memory_file = agent_memory_files.get(agent_name)
@@ -448,7 +442,7 @@ async def get_agent_memory(agent_name: str):
 async def get_shared_context():
     """Get the shared context used by all agents"""
     try:
-        context_file = "/Users/jimmyhou/CascadeProjects/fntx-ai-v10/agents/memory/shared_context.json"
+        context_file = config.get_memory_path("shared_context.json")
         
         if os.path.exists(context_file):
             with open(context_file, 'r') as f:
@@ -948,7 +942,7 @@ async def simple_chat_response(message: str):
     elif any(word in message_lower for word in ['help', 'what can you do']):
         response = "I'm your autonomous SPY options trading agent. I can:\n\n• Execute SPY options selling strategies\n• Analyze market conditions and volatility\n• Manage risk and position sizing\n• Provide real-time trade execution\n\nTry asking: 'sell SPY put options' or 'what's the best strategy today?'"
     elif any(word in message_lower for word in ['status', 'how are you']):
-        response = "I'm online and ready! All 5 of my AI agents are operational:\n• Strategic Planner ✅\n• Executor ✅\n• Evaluator ✅\n• Environment Watcher ✅\n• Reward Model ✅\n\nReady to trade when you are!"
+        response = "System operational. All 5 AI agents are active:\n• Strategic Planner: Active\n• Executor: Active\n• Evaluator: Active\n• Environment Watcher: Active\n• Reward Model: Active\n\nReady to process trading requests."
     elif len(message.strip()) <= 2:  # Very short messages like "q"
         response = f"I see you typed '{message}'. Is there something specific you'd like help with? I can assist with SPY options trading or just have a regular conversation!"
     else:
@@ -1070,7 +1064,7 @@ async def websocket_fntx_computer(websocket: WebSocket):
         await manager.send_personal_message({
             "type": "fntx_computer_init",
             "timestamp": datetime.now().isoformat(),
-            "system_status": "🖥️ FNTX's Computer Online",
+            "system_status": "FNTX's Computer Online",
             "agents_status": {
                 "strategic_planner": "standby",
                 "executor": "standby", 

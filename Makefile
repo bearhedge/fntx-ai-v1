@@ -3,7 +3,7 @@
 .PHONY: help start stop test clean install build dev
 
 help:
-	@echo "🚀 FNTX.ai Development Commands"
+	@echo "FNTX.ai Development Commands"
 	@echo "================================"
 	@echo "start     - Start development environment"
 	@echo "stop      - Stop all services"
@@ -14,39 +14,39 @@ help:
 	@echo "dev       - Start in development mode"
 
 start:
-	@echo "🚀 Starting FNTX.ai development environment..."
+	@echo "Starting FNTX.ai development environment..."
 	./scripts/start-dev.sh
 
 stop:
-	@echo "🛑 Stopping FNTX.ai development environment..."
+	@echo "Stopping FNTX.ai development environment..."
 	./scripts/stop-dev.sh
 
 dev: start
 
 test:
-	@echo "🧪 Running tests..."
+	@echo "Running tests..."
 	python3 -m pytest tests/ -v
 
 clean:
-	@echo "🧹 Cleaning up..."
+	@echo "Cleaning up..."
 	rm -rf logs/*.log logs/*.pid
 	rm -rf backend/__pycache__ backend/*/__pycache__
 	rm -rf frontend/dist frontend/node_modules/.cache
 
 install:
-	@echo "📦 Installing dependencies..."
+	@echo "Installing dependencies..."
 	pip3 install -r backend/requirements.txt
 	cd frontend && npm install
 
 build:
-	@echo "🏗️ Building frontend..."
+	@echo "Building frontend..."
 	cd frontend && npm run build
 
 # Development shortcuts
 api:
-	@echo "🔧 Starting API server only..."
+	@echo "Starting API server only..."
 	PYTHONPATH=. python3 -m uvicorn backend.api.main:app --host 0.0.0.0 --port 8002 --reload
 
 frontend:
-	@echo "🎨 Starting frontend only..."
+	@echo "Starting frontend only..."
 	cd frontend && npm run dev

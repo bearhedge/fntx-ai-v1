@@ -53,9 +53,9 @@ def setup_logger(
 
 def get_agent_logger(agent_name: str) -> logging.Logger:
     """Get a logger for an agent with standard configuration"""
-    log_file = f"logs/{agent_name.lower()}.log"
+    log_file = config.get_log_path(f"{agent_name.lower()}.log")
     return setup_logger(agent_name, log_file)
 
 def get_api_logger() -> logging.Logger:
     """Get a logger for the API server"""
-    return setup_logger("APIServer", "logs/api_server.log")
+    return setup_logger("APIServer", config.get_log_path("api_server.log"))

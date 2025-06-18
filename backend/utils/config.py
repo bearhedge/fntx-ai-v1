@@ -11,8 +11,29 @@ from dotenv import load_dotenv
 # Load environment variables
 load_dotenv()
 
+def get_project_root() -> str:
+    """
+    Get the project root directory dynamically.
+    Looks for backend directory to determine project root.
+    """
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Go up from backend/utils to find project root
+    while current_dir != "/" and current_dir:
+        # Check if this directory contains 'backend' folder
+        if os.path.exists(os.path.join(current_dir, "backend")) and \
+           os.path.exists(os.path.join(current_dir, "backend", "agents")):
+            return current_dir
+        current_dir = os.path.dirname(current_dir)
+    
+    # Fallback to current working directory
+    return os.getcwd()
+
 class Config:
     """Application configuration"""
+    
+    # Project root directory
+    PROJECT_ROOT: str = get_project_root()
     
     # API Configuration
     API_HOST: str = os.getenv("API_HOST", "0.0.0.0")
@@ -46,13 +67,19 @@ class Config:
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
     LOG_FORMAT: str = os.getenv("LOG_FORMAT", "%(asctime)s - %(name)s - %(levelname)s - %(message)s")
     
-    # Memory Paths
-    MEMORY_BASE_PATH: str = os.getenv("MEMORY_BASE_PATH", "backend/agents/memory")
+    # Dynamic Paths
+    LOGS_DIR: str = os.path.join(PROJECT_ROOT, "logs")
+    MEMORY_BASE_PATH: str = os.getenv("MEMORY_BASE_PATH", os.path.join(PROJECT_ROOT, "backend", "agents", "memory"))
     
     @classmethod
     def get_memory_path(cls, filename: str) -> str:
         """Get full path for memory file"""
         return os.path.join(cls.MEMORY_BASE_PATH, filename)
+    
+    @classmethod
+    def get_log_path(cls, filename: str) -> str:
+        """Get full path for log file"""
+        return os.path.join(cls.LOGS_DIR, filename)
 
 # Global config instance
 config = Config()

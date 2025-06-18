@@ -1,10 +1,10 @@
 {
   "agent_id": "EnvironmentWatcherAgent",
-  "last_updated": "2025-06-17T23:05:41.373335",
+  "last_updated": "2025-06-18T11:39:22.488127",
   "current_market_regime": "illiquid_conditions",
   "market_conditions": {
-    "spy_price": 600.97,
-    "vix_level": 15.0,
+    "spy_price": 0,
+    "vix_level": 0,
     "volume_profile": "normal",
     "trend_direction": "bullish",
     "support_levels": [
@@ -17,7 +17,7 @@
       452.5,
       455.0
     ],
-    "last_updated": "2025-06-17T23:05:41.371585"
+    "last_updated": "2025-06-18T11:39:22.487255"
   },
   "regime_history": [
     {
@@ -127,22 +127,20 @@
   "market_alerts": [],
   "economic_calendar": [],
   "regime_indicators": {
-    "vix_regime": "normal_volatility",
+    "vix_regime": "low_volatility",
     "trend_regime": "neutral",
     "volume_regime": "low_volume",
-    "liquidity_regime": "good",
-    "volatility_regime": "normal",
+    "liquidity_regime": "excellent",
+    "volatility_regime": "very_low",
     "overall_regime": "illiquid_conditions"
   },
   "trading_recommendations": {
-    "timestamp": "2025-06-17T23:05:41.371842",
+    "timestamp": "2025-06-18T11:39:22.487345",
     "overall_signal": "neutral",
     "strategy_preference": "conservative",
     "position_sizing": "normal",
-    "timing_preference": "wait_for_open",
-    "specific_actions": [
-      "Wait for market open for better liquidity"
-    ],
+    "timing_preference": "patient",
+    "specific_actions": [],
     "risk_adjustments": []
   }
 }

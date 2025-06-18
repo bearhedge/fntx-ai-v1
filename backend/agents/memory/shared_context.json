@@ -1,8 +1,8 @@
 {
-  "last_updated": "2025-06-17T23:05:41.372859",
+  "last_updated": "2025-06-18T11:39:22.487595",
   "market_regime": "illiquid_conditions",
-  "vix_level": 15.0,
-  "spy_price": 600.97,
+  "vix_level": 0,
+  "spy_price": 0,
   "trading_session": "2024-12-12",
   "new_trade_instructions": [],
   "planner_recommendations": {
@@ -18,18 +18,16 @@
     "take_profit_multiplier": 0.5
   },
   "trading_recommendations": {
-    "timestamp": "2025-06-17T23:05:41.371842",
+    "timestamp": "2025-06-18T11:39:22.487345",
     "overall_signal": "neutral",
     "strategy_preference": "conservative",
     "position_sizing": "normal",
-    "timing_preference": "wait_for_open",
-    "specific_actions": [
-      "Wait for market open for better liquidity"
-    ],
+    "timing_preference": "patient",
+    "specific_actions": [],
     "risk_adjustments": []
   },
   "regime_changes": [],
-  "market_hours": false,
+  "market_hours": true,
   "environment_alert_level": "low",
   "strategy_recommendation": {
     "strategy": {
