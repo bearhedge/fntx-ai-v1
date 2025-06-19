@@ -66,9 +66,13 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
     window.dispatchEvent(new CustomEvent('refreshChatSessions'));
   }, []);
 
+  const handleChatIdChanged = useCallback((newChatId: string) => {
+    setActiveChatId(newChatId);
+  }, []);
+
   return (
     <div className="h-screen bg-white flex w-full overflow-hidden">
-      <Sidebar onChatChange={handleChatChange} />
+      <Sidebar onChatChange={handleChatChange} activeChatId={activeChatId} />
       <div className="flex-1 flex min-w-0">
         {/* Main chat area */}
         <div className={`flex-1 ${currentChatContext.isContextPanelExpanded ? 'max-w-[60%]' : 'w-full'} transition-all duration-300 min-w-0`}>
@@ -81,6 +85,7 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
               isContextPanelExpanded={currentChatContext.isContextPanelExpanded} 
               onActivateChange={setIsActive}
               onNewChatCreated={refreshSidebar}
+              onChatIdChanged={handleChatIdChanged}
             />
           </main>
         </div>

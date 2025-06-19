@@ -25,6 +25,7 @@ interface Chat {
 }
 interface SidebarProps {
   onChatChange?: (chatId: string) => void;
+  activeChatId?: string;
 }
 // Demo chats for guest users
 const demoChats: Chat[] = [{
@@ -50,7 +51,8 @@ const demoChats: Chat[] = [{
   active: false
 }];
 export const Sidebar = ({
-  onChatChange
+  onChatChange,
+  activeChatId
 }: SidebarProps) => {
   const navigate = useNavigate();
   const { user, signOut: authSignOut } = useAuth();
@@ -119,7 +121,7 @@ export const Sidebar = ({
           preview: session.preview || 'New conversation...',
           date: session.date,
           icon: '🧠',
-          active: session.is_active || false
+          active: session.id === activeChatId
         }));
         
         // Set the user's chat sessions (empty array if none exist)
@@ -197,6 +199,16 @@ export const Sidebar = ({
   useEffect(() => {
     fetchChatSessions();
   }, [user]);
+
+  // Update active states when activeChatId changes
+  useEffect(() => {
+    if (activeChatId) {
+      setChats(prevChats => prevChats.map(chat => ({
+        ...chat,
+        active: chat.id === activeChatId
+      })));
+    }
+  }, [activeChatId]);
 
   // Listen for refresh events
   useEffect(() => {

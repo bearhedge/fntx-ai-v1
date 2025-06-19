@@ -826,8 +826,8 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             try:
                 token = authorization.split(" ")[1]
                 jwt_manager = get_jwt_manager()
-                payload = jwt_manager.decode_token(token)
-                user_id = payload.get("user_id")
+                payload = jwt_manager.verify_token(token)
+                user_id = payload.get("sub") if payload else None
                 is_guest = False
                 logger.info(f"Authenticated user: {user_id}")
             except Exception as e:
@@ -1510,8 +1510,8 @@ async def get_chat_history(authorization: Optional[str] = Header(None)):
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -1550,8 +1550,8 @@ async def get_chat_sessions(authorization: Optional[str] = Header(None)):
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -1600,8 +1600,8 @@ async def create_chat_session(
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -1636,8 +1636,8 @@ async def update_chat_session(
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -1674,8 +1674,8 @@ async def activate_chat_session(
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")
@@ -1708,8 +1708,8 @@ async def delete_chat_session(
         
         token = authorization.split(" ")[1]
         jwt_manager = get_jwt_manager()
-        payload = jwt_manager.decode_token(token)
-        user_id = payload.get("user_id")
+        payload = jwt_manager.verify_token(token)
+        user_id = payload.get("sub") if payload else None
         
         if not user_id:
             raise HTTPException(status_code=401, detail="Invalid token")

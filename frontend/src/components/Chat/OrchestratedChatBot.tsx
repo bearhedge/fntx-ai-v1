@@ -20,6 +20,7 @@ interface OrchestratedChatBotProps {
   isContextPanelExpanded?: boolean;
   onActivateChange?: (isActive: boolean) => void;
   onNewChatCreated?: () => void;
+  onChatIdChanged?: (newChatId: string) => void;
 }
 
 // Enhanced message type for orchestration and manual trading
@@ -49,7 +50,8 @@ export const OrchestratedChatBot = ({
   showContextPanel = false,
   isContextPanelExpanded = false,
   onActivateChange,
-  onNewChatCreated
+  onNewChatCreated,
+  onChatIdChanged
 }: OrchestratedChatBotProps) => {
   const orchestratorClient = new OrchestratorClient();
   const { user } = useAuth();
@@ -239,9 +241,12 @@ export const OrchestratedChatBot = ({
     
     const data = await res.json();
     
-    // If a new session was created, refresh the sidebar
+    // If a new session was created, update chat ID and refresh the sidebar
     if (data.session_id && onNewChatCreated) {
       onNewChatCreated();
+      if (onChatIdChanged) {
+        onChatIdChanged(data.session_id);
+      }
     }
     
     return data.response;
