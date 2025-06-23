@@ -62,7 +62,8 @@ export const AppLayout = ({ children }: AppLayoutProps) => {
   }, []);
 
   const refreshSidebar = useCallback(() => {
-    // Force sidebar to re-fetch chat sessions
+    // Force sidebar to re-fetch chat sessions immediately
+    console.log('AppLayout: Dispatching refreshChatSessions event');
     window.dispatchEvent(new CustomEvent('refreshChatSessions'));
   }, []);
 

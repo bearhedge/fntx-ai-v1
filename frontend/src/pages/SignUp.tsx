@@ -71,8 +71,8 @@ const SignUp = () => {
     setIsLoading(true);
 
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
-      const response = await fetch(`${apiUrl}/api/auth/signup`, {
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/auth/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -96,8 +96,13 @@ const SignUp = () => {
       // Use the login method from AuthContext to handle the token and user data
       await login(data.token);
       
-      // Navigate to main app
-      navigate('/');
+      // Navigate to user's personal page using username
+      if (data.user?.username) {
+        navigate(`/${data.user.username}`);
+      } else {
+        // Fallback to root if no username
+        navigate('/');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred during sign up');
     } finally {

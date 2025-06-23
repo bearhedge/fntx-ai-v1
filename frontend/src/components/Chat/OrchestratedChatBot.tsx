@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { EnhancedMessage } from './EnhancedMessage';
 import { EnhancedMessageInput } from './EnhancedMessageInput';
 import { TradeStepper } from '../Trading/TradeStepper';
@@ -55,9 +55,15 @@ export const OrchestratedChatBot = ({
 }: OrchestratedChatBotProps) => {
   const orchestratorClient = new OrchestratorClient();
   const { user } = useAuth();
+  const [isNewSessionTransition, setIsNewSessionTransition] = useState(false);
   
   const getStoredMessages = (id: string): OrchestrationMessage[] => {
     try {
+      // For 'default' chat, always return fresh welcome message
+      if (id === 'default') {
+        return [getInitialMessage(user?.name)];
+      }
+      
       const stored = localStorage.getItem(`chat_messages_${id}`);
       if (stored) {
         const parsedMessages = JSON.parse(stored);
@@ -165,13 +171,27 @@ export const OrchestratedChatBot = ({
 
   // Update messages when chatId changes
   useEffect(() => {
+    // Skip loading messages if this is a new session transition
+    if (isNewSessionTransition) {
+      setIsNewSessionTransition(false);
+      return;
+    }
+    
+    // Clear any stale localStorage for default chat
+    if (chatId === 'default') {
+      localStorage.removeItem('chat_messages_default');
+    }
+    
     const chatMessages = getStoredMessages(chatId);
     setMessages(chatMessages);
-  }, [chatId]);
+  }, [chatId, isNewSessionTransition]);
 
-  // Store messages in localStorage whenever they change
+  // Store messages in localStorage whenever they change (except for 'default' chat)
   useEffect(() => {
-    localStorage.setItem(`chat_messages_${chatId}`, JSON.stringify(messages));
+    // Don't store messages for the default chat to keep it clean
+    if (chatId !== 'default') {
+      localStorage.setItem(`chat_messages_${chatId}`, JSON.stringify(messages));
+    }
   }, [messages, chatId]);
 
   const scrollToBottom = () => {
@@ -205,15 +225,17 @@ export const OrchestratedChatBot = ({
     return newMessage.id;
   };
 
-  async function sendMessageToBackend(message: string) {
+  const sendMessageToBackend = useCallback(async (message: string, currentMessages?: OrchestrationMessage[]) => {
+    // Use provided messages or fall back to state
+    const messagesToUse = currentMessages || messages;
     // Convert messages to format expected by backend
-    const formattedMessages = messages.slice(-5).map(msg => ({
+    const formattedMessages = messagesToUse.slice(-5).map(msg => ({
       role: msg.sender === 'user' ? 'user' : 'assistant',
       content: msg.content
     }));
     
     // Use orchestrator chat endpoint for authenticated users
-    const endpoint = user ? '/api/orchestrator/chat' : '/api/chat';
+    const endpoint = user ? '/orchestrator/chat' : '/chat';
     const headers: HeadersInit = { 'Content-Type': 'application/json' };
     
     // Add auth header if user is authenticated
@@ -224,7 +246,7 @@ export const OrchestratedChatBot = ({
       }
     }
     
-    const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
+    const apiUrl = import.meta.env.VITE_API_URL || '/api';
     const res = await fetch(`${apiUrl}${endpoint}`, {
       method: 'POST',
       headers,
@@ -242,17 +264,40 @@ export const OrchestratedChatBot = ({
     const data = await res.json();
     
     // If a new session was created, update chat ID and refresh the sidebar
-    if (data.session_id && onNewChatCreated) {
-      onNewChatCreated();
+    if (data.session_id && data.session_id !== chatId) {
+      console.log('New session created:', data.session_id);
+      
+      // Store current messages under the new session ID immediately
+      // This ensures messages are available when the chatId changes
+      const currentMessages = messagesToUse;
+      if (currentMessages.length > 0) {
+        localStorage.setItem(`chat_messages_${data.session_id}`, JSON.stringify(currentMessages));
+      }
+      
+      // Mark this as a new session transition to prevent reloading messages
+      setIsNewSessionTransition(true);
+      
+      // Update the chat ID
       if (onChatIdChanged) {
         onChatIdChanged(data.session_id);
+      }
+      
+      // Refresh sidebar immediately without delay
+      if (onNewChatCreated) {
+        // Dispatch event immediately to refresh sidebar
+        window.dispatchEvent(new CustomEvent('refreshChatSessions'));
+        // Also call the callback
+        onNewChatCreated();
       }
     }
     
     return data.response;
-  }
+  }, [chatId, messages, onChatIdChanged, onNewChatCreated, user, setIsNewSessionTransition]);
 
   const handleSendMessage = async (content: string) => {
+    // Check if this is the first real message (after the welcome message)
+    const isFirstMessage = messages.length === 1 && messages[0].sender === 'ai';
+    
     const userMessage: OrchestrationMessage = {
       id: Date.now().toString(),
       content,
@@ -261,7 +306,8 @@ export const OrchestratedChatBot = ({
       type: 'text'
     };
 
-    const newMessages = [...messages, userMessage];
+    // If this is the first message, replace the welcome message
+    const newMessages = isFirstMessage ? [userMessage] : [...messages, userMessage];
     setMessages(newMessages);
 
     // Show context panel for ALL messages
@@ -287,8 +333,8 @@ export const OrchestratedChatBot = ({
         });
 
         // Fetch current SPY price for reference
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-        fetch(`${apiUrl}/api/market/insights`)
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        fetch(`${apiUrl}/market/insights`)
           .then(response => response.json())
           .then(data => {
             setSpyPrice(data.spy_price || 0);
@@ -455,7 +501,7 @@ export const OrchestratedChatBot = ({
 
     // Route to regular chat API for all other messages
     try {
-      const aiReply = await sendMessageToBackend(content);
+      const aiReply = await sendMessageToBackend(content, newMessages);
       const aiResponse: OrchestrationMessage = {
         id: (Date.now() + 1).toString(),
         content: aiReply,
@@ -499,8 +545,8 @@ export const OrchestratedChatBot = ({
       setIsProcessing(true);
       
       // Execute the trade
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-      const response = await fetch(`${apiUrl}/api/trade/manual-execute/${analysis.trade_id}`, {
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/trade/manual-execute/${analysis.trade_id}`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -549,8 +595,8 @@ export const OrchestratedChatBot = ({
       {/* Main chat area with fixed height and scroll */}
       <div className="flex-1 flex flex-col max-w-4xl mx-auto w-full min-h-0">
         <div className="flex-1 overflow-y-auto p-4 pb-4">
-          {messages.length === 1 ? (
-            // Welcome state
+          {messages.length === 1 && messages[0].sender === 'ai' && chatId === 'default' ? (
+            // Welcome state - only show for default chat with single AI message
             <div className="h-full flex flex-col justify-center">
               <div className="flex justify-start mb-4">
                 <svg width="100" height="54" viewBox="0 0 640 347" fill="none" xmlns="http://www.w3.org/2000/svg">

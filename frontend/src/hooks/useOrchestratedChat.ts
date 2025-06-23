@@ -104,8 +104,8 @@ export const useOrchestratedChat = () => {
 
       } else {
         // Regular chat message - send to your existing chat API
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
-        const response = await fetch(`${apiUrl}/api/chat`, {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/chat`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

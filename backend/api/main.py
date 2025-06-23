@@ -17,8 +17,8 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 
 from backend.agents.orchestrator import FNTXOrchestrator
-from backend.services.thetadata_service import thetadata_service
-from backend.services.ibkr_execution_service import ibkr_execution
+# from backend.services.thetadata_service import thetadata_service
+# from backend.services.ibkr_execution_service import ibkr_execution
 from backend.services.ibkr_singleton_service import ibkr_singleton
 from backend.database.auth_db import get_auth_db
 from backend.database.chat_db import get_chat_db
@@ -151,12 +151,12 @@ async def startup_event():
     """Initialize the API server"""
     logger.info("FNTX.ai API Server starting up...")
     
-    # Initialize ThetaData connection
-    await thetadata_service.initialize()
-    if thetadata_service.authenticated:
-        logger.info("ThetaData connection established")
-    else:
-        logger.warning("Warning: ThetaData connection failed - will retry on first request")
+    # Initialize ThetaData connection (disabled)
+    # await thetadata_service.initialize()
+    # if thetadata_service.authenticated:
+    #     logger.info("ThetaData connection established")
+    # else:
+    #     logger.warning("Warning: ThetaData connection failed - will retry on first request")
     
     # IBKR execution service doesn't need pre-connection
     logger.info("IBKR execution service ready")
@@ -1024,12 +1024,16 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
                 # If no session_id provided, create a new chat session
                 if not session_id:
                     auth_db = get_auth_db()
-                    # Create a new chat session with a meaningful title
-                    title = f"Chat {datetime.now().strftime('%b %d, %Y')}"
+                    # Use today's date for title in format "23 June 2025, Mon"
+                    now = datetime.now()
+                    days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                    title = f"{now.day} {months[now.month]} {now.year}, {days[now.weekday()]}"
+                    # Use the actual message as preview
                     session_data = auth_db.create_chat_session(
                         user_id=user_id,
                         title=title,
-                        preview="New conversation started..."
+                        preview=request.message
                     )
                     session_id = session_data['id']
                 
@@ -1041,13 +1045,12 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
                     response=response_text
                 )
                 
-                # Update chat session preview in auth database
+                # Update chat session preview with the user's message (not the response)
                 auth_db = get_auth_db()
-                # Get first 100 chars of response for preview
-                preview = response_text[:100] + '...' if len(response_text) > 100 else response_text
+                # Use the user's message as preview
                 auth_db.update_chat_session(
                     chat_id=session_id,
-                    preview=preview
+                    preview=request.message
                 )
             
             response_data = {
@@ -1065,7 +1068,7 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             
         except Exception as e:
             logger.error(f"Gemini API error: {e}")
-            # Fallback response
+            # Fallback response - still create session for authenticated users
             if is_guest:
                 return {
                     "response": "I'm FNTX.ai, your AI-powered SPY options trading assistant. I can help you understand options trading strategies and market analysis. Sign in to access personalized trading recommendations and your portfolio.",
@@ -1073,10 +1076,40 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
                     "is_guest": True
                 }
             else:
+                # For authenticated users, still create/update session even on API error
+                if user_id:
+                    chat_db = get_chat_db()
+                    session_id = request.session_id
+                    
+                    # If no session_id provided, create a new chat session
+                    if not session_id:
+                        auth_db = get_auth_db()
+                        # Use today's date for title in format "23 June 2025, Mon"
+                        now = datetime.now()
+                        days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                        months = ['', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+                        title = f"{now.day} {months[now.month]} {now.year}, {days[now.weekday()]}"
+                        # Use the actual message as preview
+                        session_data = auth_db.create_chat_session(
+                            user_id=user_id,
+                            title=title,
+                            preview=request.message
+                        )
+                        session_id = session_data['id']
+                    
+                    # Save message to chat database
+                    chat_db.add_message(
+                        user_id=user_id,
+                        session_id=session_id,
+                        message=request.message,
+                        response="I'm having trouble connecting right now. Please try again in a moment."
+                    )
+                
                 return {
                     "response": "I'm having trouble connecting right now. Please try again in a moment.",
                     "timestamp": datetime.now().isoformat(),
-                    "is_guest": False
+                    "is_guest": False,
+                    "session_id": session_id if 'session_id' in locals() else None
                 }
         
     except Exception as e:
@@ -1471,9 +1504,20 @@ async def google_auth(request: GoogleAuthRequest):
         jwt_manager = get_jwt_manager()
         access_token = jwt_manager.create_access_token(user.id, user.email)
         
+        # Generate username from name for routing
+        username = user.name.lower().replace(' ', '').replace('.', '')
+        # Handle specific cases
+        if user.email == "j63009567@gmail.com":
+            username = "jimmyhou"
+        elif user.email == "info@bearhedge.com":
+            username = "bearhedge"
+        
+        user_dict = user.to_dict()
+        user_dict['username'] = username
+        
         return {
             "token": access_token,
-            "user": user.to_dict()
+            "user": user_dict
         }
         
     except Exception as e:
@@ -1525,9 +1569,20 @@ async def google_auth_mock(request: GoogleAuthRequest):
         jwt_manager = get_jwt_manager()
         access_token = jwt_manager.create_access_token(user.id, user.email)
         
+        # Generate username from name for routing
+        username = user.name.lower().replace(' ', '').replace('.', '')
+        # Handle specific cases
+        if user.email == "j63009567@gmail.com":
+            username = "jimmyhou"
+        elif user.email == "info@bearhedge.com":
+            username = "bearhedge"
+        
+        user_dict = user.to_dict()
+        user_dict['username'] = username
+        
         return {
             "token": access_token,
-            "user": user.to_dict()
+            "user": user_dict
         }
         
     except Exception as e:
@@ -1591,6 +1646,16 @@ async def signup(request: SignupRequest):
         user_dict = user.to_dict()
         user_dict.pop('password_hash', None)
         
+        # Generate username from name for routing
+        username = user.name.lower().replace(' ', '').replace('.', '')
+        # Handle specific cases
+        if user.email == "j63009567@gmail.com":
+            username = "jimmyhou"
+        elif user.email == "info@bearhedge.com":
+            username = "bearhedge"
+        
+        user_dict['username'] = username
+        
         return {
             "token": access_token,
             "user": user_dict
@@ -1634,6 +1699,16 @@ async def signin(request: SigninRequest):
         # Don't include password_hash in response
         user_dict = user.to_dict()
         user_dict.pop('password_hash', None)
+        
+        # Generate username from name for routing
+        username = user.name.lower().replace(' ', '').replace('.', '')
+        # Handle specific cases
+        if user.email == "j63009567@gmail.com":
+            username = "jimmyhou"
+        elif user.email == "info@bearhedge.com":
+            username = "bearhedge"
+        
+        user_dict['username'] = username
         
         return {
             "token": access_token,

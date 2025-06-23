@@ -47,8 +47,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         
         if (token) {
           // Verify token with backend
-          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-          const response = await fetch(`${apiUrl}/api/auth/verify`, {
+          const apiUrl = import.meta.env.VITE_API_URL || '/api';
+          const response = await fetch(`${apiUrl}/auth/verify`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -94,8 +94,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         token = credential;
         
         // Verify the token with backend to get user data
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-        const verifyResponse = await fetch(`${apiUrl}/api/auth/verify`, {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const verifyResponse = await fetch(`${apiUrl}/auth/verify`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -115,8 +115,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         userData = verifyData.user;
       } else {
         // This is a Google OAuth credential
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-        const response = await fetch(`${apiUrl}/api/auth/google`, {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/auth/google`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -155,14 +155,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     
     // Notify backend
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-      await fetch(`${apiUrl}/api/auth/logout`, { method: 'POST' });
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      await fetch(`${apiUrl}/auth/logout`, { method: 'POST' });
     } catch (error) {
       console.warn('Backend logout notification failed:', error);
     }
     
-    // Redirect to landing page
-    window.location.href = '/';
+    // Force redirect to landing page
+    window.location.replace('/');
   };
 
   const value: AuthContextType = {

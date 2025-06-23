@@ -26,9 +26,8 @@ const Landing = () => {
 
   // Redirect authenticated users to their personal page
   useEffect(() => {
-    if (isAuthenticated && user?.email) {
-      const username = user.email.split('@')[0].toLowerCase();
-      navigate(`/${username}`);
+    if (isAuthenticated && user?.username) {
+      navigate(`/${user.username}`);
     }
   }, [isAuthenticated, user, navigate]);
 

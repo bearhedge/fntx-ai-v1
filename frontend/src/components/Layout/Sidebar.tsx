@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { MessageSquare, Plus, User, ChevronUp, Settings, Home, Mail, LogOut, PanelLeftClose, PanelLeftOpen, Search, Lock, Unlock, Bell, Zap, ScrollText } from 'lucide-react';
+import { MessageSquare, Plus, User, ChevronUp, Settings, Home, Mail, LogOut, PanelLeftClose, PanelLeftOpen, Search, Lock, Unlock, Bell, Zap, ScrollText, Trash2 } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -31,21 +31,21 @@ interface SidebarProps {
 const demoChats: Chat[] = [{
   id: 'demo-1',
   title: 'Welcome to FNTX.ai',
-  preview: 'Learn about AI-powered trading...',
+  preview: 'How can I help you trade SPY options today?',
   date: 'Now',
   icon: '🧠',
   active: true
 }, {
   id: 'demo-2',
   title: 'SPY Options Example',
-  preview: 'See how to trade SPY options...',
+  preview: 'Show me SPY put options',
   date: 'Demo',
   icon: '🧠',
   active: false
 }, {
   id: 'demo-3',
   title: 'Market Analysis Demo',
-  preview: 'Explore AI market insights...',
+  preview: 'What is the best SPY strategy today?',
   date: 'Demo',
   icon: '🧠',
   active: false
@@ -91,11 +91,17 @@ export const Sidebar = ({
   };
   
   // Fetch chat sessions from backend
-  const fetchChatSessions = async () => {
+  const fetchChatSessions = async (immediate = false) => {
     if (!user) {
       // Show demo chats for guest users
       setChats(demoChats);
       return;
+    }
+    
+    // No delay when immediate is requested
+    // Small delay only for non-immediate requests to avoid too many API calls
+    if (!immediate) {
+      await new Promise(resolve => setTimeout(resolve, 100));
     }
     
     setIsLoadingChats(true);
@@ -106,8 +112,8 @@ export const Sidebar = ({
         return;
       }
       
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-      const response = await fetch(`${apiUrl}/api/chat/sessions`, {
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/chat/sessions`, {
         headers: {
           'Authorization': `Bearer ${token}`
         }
@@ -115,6 +121,7 @@ export const Sidebar = ({
       
       if (response.ok) {
         const data = await response.json();
+        console.log('Chat sessions received:', data.sessions);
         const sessions = data.sessions.map((session: any) => ({
           id: session.id,
           title: session.title,
@@ -125,6 +132,7 @@ export const Sidebar = ({
         }));
         
         // Set the user's chat sessions (empty array if none exist)
+        console.log('Setting chats to:', sessions);
         setChats(sessions);
       } else {
         // For authenticated users, show empty list on error
@@ -161,16 +169,21 @@ export const Sidebar = ({
       const token = Cookies.get('fntx_token');
       if (!token) return;
       
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-      const response = await fetch(`${apiUrl}/api/chat/sessions`, {
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
+      const response = await fetch(`${apiUrl}/chat/sessions`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          title: 'Daily Trading Day',
-          preview: 'New conversation started...'
+          title: (() => {
+            const now = new Date();
+            const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}, ${days[now.getDay()]}`;
+          })(),
+          preview: 'New conversation...'
         })
       });
       
@@ -197,7 +210,7 @@ export const Sidebar = ({
   
   // Load chat sessions when component mounts or user changes
   useEffect(() => {
-    fetchChatSessions();
+    fetchChatSessions(true); // Immediate fetch on mount
   }, [user]);
 
   // Update active states when activeChatId changes
@@ -213,18 +226,18 @@ export const Sidebar = ({
   // Listen for refresh events
   useEffect(() => {
     const handleRefresh = () => {
-      fetchChatSessions();
+      console.log('Sidebar: refreshChatSessions event received');
+      fetchChatSessions(true); // Use immediate refresh
     };
 
     window.addEventListener('refreshChatSessions', handleRefresh);
     return () => {
       window.removeEventListener('refreshChatSessions', handleRefresh);
     };
-  }, []);
-  const handleNewDay = async () => {
-    await createNewChat();
-    // Refresh chat sessions after creating new chat
-    await fetchChatSessions();
+  }, [user]); // Re-subscribe when user changes
+  const handleNewDay = () => {
+    // Navigate to default chat to show welcome screen with buttons
+    onChatChange?.('default');
   };
   const handleChatClick = async (chatId: string) => {
     // Update local state immediately
@@ -241,8 +254,8 @@ export const Sidebar = ({
       try {
         const token = Cookies.get('fntx_token');
         if (token) {
-          const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8003';
-          await fetch(`${apiUrl}/api/chat/sessions/${chatId}/activate`, {
+          const apiUrl = import.meta.env.VITE_API_URL || '/api';
+          await fetch(`${apiUrl}/chat/sessions/${chatId}/activate`, {
             method: 'PUT',
             headers: {
               'Authorization': `Bearer ${token}`
@@ -254,6 +267,45 @@ export const Sidebar = ({
       }
     }
   };
+
+  const handleDeleteChat = async (chatId: string, e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent chat from being selected
+    
+    if (chatId.startsWith('demo-')) {
+      // Don't allow deleting demo chats
+      return;
+    }
+
+    if (!user) return;
+
+    try {
+      const token = Cookies.get('fntx_token');
+      if (token) {
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
+        const response = await fetch(`${apiUrl}/chat/sessions/${chatId}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        if (response.ok) {
+          // Remove chat from local state
+          const newChats = chats.filter(chat => chat.id !== chatId);
+          setChats(newChats);
+          
+          // If this was the active chat, or if all chats are deleted, 
+          // set to 'default' to show welcome screen
+          if (activeChatId === chatId || newChats.length === 0) {
+            onChatChange?.('default');
+          }
+        }
+      }
+    } catch (error) {
+      console.error('Failed to delete chat:', error);
+    }
+  };
+
   const handleKnowledgeClick = () => {
     // Knowledge functionality to be implemented
   };
@@ -493,22 +545,35 @@ export const Sidebar = ({
                 <p className="text-xs text-gray-400">Start a conversation to begin</p>
               </div>
             )}
-            {chats.map(chat => <button key={chat.id} onClick={() => handleChatClick(chat.id)} className={`w-full flex items-start space-x-3 p-3 rounded-lg text-left transition-colors ${chat.active ? 'bg-gray-200 border border-gray-400' : 'hover:bg-gray-200'}`}>
+            {chats.map(chat => (
+              <div key={chat.id} className={`group w-full flex items-start space-x-3 p-3 rounded-lg text-left transition-colors ${chat.active ? 'bg-gray-200 border border-gray-400' : 'hover:bg-gray-200'}`}>
+                <button onClick={() => handleChatClick(chat.id)} className="flex items-start space-x-3 flex-1 min-w-0">
                   <div className="w-8 h-8 rounded-full text-white text-xs flex items-center justify-center flex-shrink-0 mt-0.5 bg-neutral-300">
                     🧠
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-gray-800 truncate font-light text-sm">
+                  <div className="flex-1 min-w-0 text-left">
+                    <p className="text-gray-800 truncate font-light text-sm text-left">
                       {chat.title}
                     </p>
-                    <p className="text-xs text-gray-600 mt-1 truncate font-light">
+                    <p className="text-xs text-gray-600 mt-1 truncate font-light text-left">
                       {chat.preview}
                     </p>
                   </div>
                   <div className="text-xs text-gray-500 flex-shrink-0 mt-0.5">
                     {chat.date}
                   </div>
-                </button>)}
+                </button>
+                {!chat.id.startsWith('demo-') && user && (
+                  <button 
+                    onClick={(e) => handleDeleteChat(chat.id, e)}
+                    className="opacity-0 group-hover:opacity-100 p-1 rounded hover:bg-red-100 transition-all duration-200 flex-shrink-0"
+                    title="Delete chat"
+                  >
+                    <Trash2 className="w-4 h-4 text-gray-400 hover:text-red-600" />
+                  </button>
+                )}
+              </div>
+            ))}
             </div>
           </div>
 

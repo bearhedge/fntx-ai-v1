@@ -2,6 +2,7 @@
 Authentication database module for FNTX.ai
 Handles user storage and retrieval using SQLite
 """
+import os
 import sqlite3
 from pathlib import Path
 from typing import Optional, List
@@ -17,13 +18,30 @@ logger = logging.getLogger(__name__)
 class AuthDatabase:
     """Manages user authentication data in SQLite"""
     
-    def __init__(self, db_path: str = "fntx_auth.db"):
+    def __init__(self, db_path: str = None):
         """
         Initialize authentication database
         
         Args:
-            db_path: Path to SQLite database file
+            db_path: Path to SQLite database file. If None, uses default path in project root.
         """
+        if db_path is None:
+            # Use project root directory for database file
+            try:
+                from backend.utils.config import config
+                db_path = os.path.join(config.PROJECT_ROOT, "fntx_auth.db")
+            except ImportError:
+                # Fallback: find project root by looking for backend directory
+                current_dir = os.path.dirname(os.path.abspath(__file__))
+                while current_dir != "/" and current_dir:
+                    if os.path.exists(os.path.join(current_dir, "backend")):
+                        db_path = os.path.join(current_dir, "fntx_auth.db")
+                        break
+                    current_dir = os.path.dirname(current_dir)
+                else:
+                    # Last resort: use current working directory
+                    db_path = os.path.join(os.getcwd(), "fntx_auth.db")
+        
         self.db_path = Path(db_path)
         self._init_database()
     

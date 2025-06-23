@@ -59,10 +59,10 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ className 
       setError('');
       
       try {
-        const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+        const apiUrl = import.meta.env.VITE_API_URL || '/api';
         
         // Send the credential to our backend
-        const res = await fetch(`${apiUrl}/api/auth/google`, {
+        const res = await fetch(`${apiUrl}/auth/google`, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -79,11 +79,11 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ className 
         // Store the token and navigate
         if (data.token) {
           await login(data.token);
-          // Navigate to user's personal page
-          if (data.user?.email) {
-            const username = data.user.email.split('@')[0].toLowerCase();
-            navigate(`/${username}`);
+          // Navigate to user's personal page using username
+          if (data.user?.username) {
+            navigate(`/${data.user.username}`);
           } else {
+            // Fallback to root if no username
             navigate('/');
           }
         } else {
@@ -113,10 +113,10 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ className 
     setError('');
     
     try {
-      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8002';
+      const apiUrl = import.meta.env.VITE_API_URL || '/api';
       
       // Use demo token
-      const response = await fetch(`${apiUrl}/api/auth/google`, {
+      const response = await fetch(`${apiUrl}/auth/google`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -132,7 +132,13 @@ export const GoogleLoginButton: React.FC<GoogleLoginButtonProps> = ({ className 
 
       if (data.token) {
         await login(data.token);
-        navigate('/');
+        // Navigate to user's personal page using username
+        if (data.user?.username) {
+          navigate(`/${data.user.username}`);
+        } else {
+          // Fallback to root if no username
+          navigate('/');
+        }
       } else {
         throw new Error('No token received');
       }

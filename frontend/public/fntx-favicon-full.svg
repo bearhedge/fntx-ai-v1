@@ -1,0 +1,16 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- FN on top -->
+  <g transform="translate(2, 2)">
+    <!-- F -->
+    <path d="M0 0H10V4H4V7H10V11H4V15H0V0Z" fill="#02001E"/>
+    <!-- N -->
+    <path d="M14 0H18L24 10V0H28V15H24L18 5V15H14V0Z" fill="#02001E"/>
+  </g>
+  <!-- TX on bottom -->
+  <g transform="translate(2, 17)">
+    <!-- T -->
+    <path d="M4 0H14V4H11V15H7V4H4V0Z" fill="#02001E"/>
+    <!-- X -->
+    <path d="M17 0L20 5L23 0H27L22 7.5L27 15H23L20 10L17 15H13L18 7.5L13 0H17Z" fill="#02001E"/>
+  </g>
+</svg>

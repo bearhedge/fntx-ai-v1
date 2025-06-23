@@ -69,7 +69,7 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
-      const response = await fetch(`http://localhost:8002/api/spy-options/chain?option_type=${optionType}`, {
+      const response = await fetch(`/api/spy-options/chain?option_type=${optionType}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

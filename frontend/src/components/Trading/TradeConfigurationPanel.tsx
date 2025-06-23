@@ -136,7 +136,7 @@ export const TradeConfigurationPanel: React.FC<TradeConfigurationPanelProps> = (
     setError(null);
 
     try {
-      const response = await fetch(`http://localhost:8002/api/trade/manual-configure`, {
+      const response = await fetch(`/api/trade/manual-configure`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
