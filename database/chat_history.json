@@ -219,6 +219,14 @@
       "message": "today's date",
       "response": "Today is 2025-06-24. The SPY price is $606.00. How can I help you with your SPY options trading today?",
       "timestamp": "2025-06-24T18:03:05.509434"
+    },
+    {
+      "id": "8a954184-0573-4d46-8591-8d0372ff2aaf",
+      "user_id": "488ced2a-e328-4cf8-9795-d8e144461317",
+      "session_id": "83766b9b-14ed-4bb0-9842-88933c219fb3",
+      "message": "what's 2+2?",
+      "response": "I'm having trouble connecting right now. Please try again in a moment.",
+      "timestamp": "2025-06-25T13:21:58.009263"
     }
   ],
   "49d14f67-f0cc-4ba7-8474-9f9c98a3e330": [

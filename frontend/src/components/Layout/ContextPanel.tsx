@@ -3,7 +3,7 @@ import { ChevronLeft, ChevronRight, Monitor, Minimize2, Brain, ChevronDown, Chev
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { FNTXComputer } from '../FNTX/FNTXComputer';
+import { FNTXComputer } from '../FNTX/FNTXComputerClean';
 import { RealTimeProgress } from '../FNTX/RealTimeProgress';
 interface ContextPanelProps {
   isOpen?: boolean;

@@ -9,7 +9,7 @@ interface ComputationStep {
   indent?: number;
 }
 
-export const FNTXComputerClean: React.FC = () => {
+export const FNTXComputer: React.FC = () => {
   const { isConnected, messages, lastMessage, error } = useFNTXComputer();
   const [computationSteps, setComputationSteps] = useState<ComputationStep[]>([]);
   const [currentTime, setCurrentTime] = useState<string>('');

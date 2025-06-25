@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-25T09:21:53.442877",
+  "last_updated": "2025-06-25T14:13:18.617047",
   "market_regime": "illiquid_conditions",
   "vix_level": 0,
   "spy_price": 0,
@@ -18,7 +18,7 @@
     "take_profit_multiplier": 0.5
   },
   "trading_recommendations": {
-    "timestamp": "2025-06-25T09:21:53.442513",
+    "timestamp": "2025-06-25T14:13:18.616455",
     "overall_signal": "neutral",
     "strategy_preference": "conservative",
     "position_sizing": "normal",
