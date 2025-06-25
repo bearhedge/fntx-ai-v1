@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { Button } from '@/components/ui/button';
+import { Brain, Activity, ChevronDown } from 'lucide-react';
+import { 
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { useFNTXComputer } from '@/hooks/useWebSocket';
+import { toast } from 'sonner';
 
 interface ComputationStep {
   timestamp: string;
@@ -13,6 +22,7 @@ export const FNTXComputer: React.FC = () => {
   const { isConnected, messages, lastMessage, error } = useFNTXComputer();
   const [computationSteps, setComputationSteps] = useState<ComputationStep[]>([]);
   const [currentTime, setCurrentTime] = useState<string>('');
+  const [isRunning, setIsRunning] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -25,6 +35,58 @@ export const FNTXComputer: React.FC = () => {
     }, 1000);
     return () => clearInterval(interval);
   }, []);
+
+  const runFeatureEngineering = async () => {
+    try {
+      setIsRunning(true);
+      setComputationSteps([]); // Clear previous steps
+      
+      const response = await fetch('/api/ml/feature-engineering', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        toast.success('Feature engineering pipeline started!');
+      } else {
+        toast.error('Failed to start feature engineering');
+      }
+    } catch (error) {
+      console.error('Error starting feature engineering:', error);
+      toast.error('Error connecting to server');
+    } finally {
+      setIsRunning(false);
+    }
+  };
+
+  const runModelTraining = async () => {
+    try {
+      setIsRunning(true);
+      setComputationSteps([]); // Clear previous steps
+      
+      const response = await fetch('/api/ml/train-models', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        toast.success('Model training pipeline started!');
+      } else {
+        toast.error('Failed to start model training');
+      }
+    } catch (error) {
+      console.error('Error starting model training:', error);
+      toast.error('Error connecting to server');
+    } finally {
+      setIsRunning(false);
+    }
+  };
 
   useEffect(() => {
     if (lastMessage) {
@@ -107,9 +169,44 @@ export const FNTXComputer: React.FC = () => {
       <CardHeader className="pb-4">
         <div className="flex items-center justify-between">
           <CardTitle className="text-sm font-normal">FNTX Computer</CardTitle>
-          <span className="text-xs text-muted-foreground font-mono">
-            {currentTime}
-          </span>
+          <div className="flex items-center gap-2">
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  disabled={isRunning || !isConnected}
+                  className="text-xs"
+                >
+                  {isRunning ? (
+                    <>
+                      <Activity className="h-3 w-3 mr-1 animate-pulse" />
+                      Running...
+                    </>
+                  ) : (
+                    <>
+                      <Brain className="h-3 w-3 mr-1" />
+                      Run Computations
+                      <ChevronDown className="h-3 w-3 ml-1" />
+                    </>
+                  )}
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuItem onClick={runFeatureEngineering}>
+                  <Brain className="h-3 w-3 mr-2" />
+                  Feature Engineering
+                </DropdownMenuItem>
+                <DropdownMenuItem onClick={runModelTraining}>
+                  <Activity className="h-3 w-3 mr-2" />
+                  Model Training
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <span className="text-xs text-muted-foreground font-mono">
+              {currentTime}
+            </span>
+          </div>
         </div>
       </CardHeader>
       <CardContent className="p-0">

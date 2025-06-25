@@ -27,6 +27,10 @@ from backend.models.user import User
 from backend.api.theta_options_endpoint import router as theta_options_router
 import time
 
+# ML imports
+from backend.ml.spy_feature_engine import SPY0DTEFeatureEngine
+from backend.ml.model_trainer import SPY0DTEModelTrainer
+
 # Trading request model
 class SimpleOrderRequest(BaseModel):
     symbol: str
@@ -1417,6 +1421,114 @@ async def websocket_fntx_computer(websocket: WebSocket):
     except Exception as e:
         logger.error(f"FNTX Computer WebSocket error: {e}")
         manager.disconnect(websocket)
+
+# Feature Engineering Endpoint
+@app.post("/api/ml/feature-engineering")
+async def run_feature_engineering(background_tasks: BackgroundTasks):
+    """Trigger SPY 0DTE feature engineering pipeline"""
+    try:
+        logger.info("Starting feature engineering pipeline...")
+        
+        # Create feature engine with WebSocket manager
+        feature_engine = SPY0DTEFeatureEngine(websocket_manager=manager)
+        
+        # Run feature extraction in background
+        async def run_extraction():
+            try:
+                # Use last 7 days as example
+                end_date = datetime.now().strftime("%Y-%m-%d")
+                start_date = (datetime.now() - timedelta(days=7)).strftime("%Y-%m-%d")
+                
+                await manager.broadcast({
+                    "type": "computation_step",
+                    "message": "🚀 Feature Engineering Pipeline Starting",
+                    "timestamp": datetime.now().isoformat()
+                })
+                
+                # Run feature extraction
+                features_df = await feature_engine.extract_features(start_date, end_date)
+                
+                await manager.broadcast({
+                    "type": "computation_step", 
+                    "message": f"✅ Feature Engineering Complete: {len(features_df):,} records processed",
+                    "timestamp": datetime.now().isoformat()
+                })
+                
+                logger.info(f"Feature engineering completed: {features_df.shape}")
+                
+            except Exception as e:
+                logger.error(f"Feature engineering failed: {e}")
+                await manager.broadcast({
+                    "type": "computation_step",
+                    "message": f"❌ Feature Engineering Failed: {str(e)}",
+                    "timestamp": datetime.now().isoformat()
+                })
+        
+        # Add to background tasks
+        background_tasks.add_task(run_extraction)
+        
+        return {
+            "status": "started",
+            "message": "Feature engineering pipeline initiated",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to start feature engineering: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/ml/train-models")
+async def run_model_training(background_tasks: BackgroundTasks):
+    """Trigger SPY 0DTE model training pipeline"""
+    try:
+        logger.info("Starting model training pipeline...")
+        
+        # Create model trainer with WebSocket manager
+        model_trainer = SPY0DTEModelTrainer(websocket_manager=manager)
+        
+        # Run training in background
+        async def run_training():
+            try:
+                await manager.broadcast({
+                    "type": "computation_step",
+                    "message": "🤖 AI Model Training Starting",
+                    "timestamp": datetime.now().isoformat()
+                })
+                
+                # Run model training
+                await model_trainer.train_models()
+                
+                # Run backtesting
+                await model_trainer.backtest_strategy()
+                
+                await manager.broadcast({
+                    "type": "computation_step",
+                    "message": "✅ Model Training & Backtesting Complete",
+                    "timestamp": datetime.now().isoformat()
+                })
+                
+                logger.info("Model training completed successfully")
+                
+            except Exception as e:
+                logger.error(f"Model training failed: {e}")
+                await manager.broadcast({
+                    "type": "computation_step",
+                    "message": f"❌ Model Training Failed: {str(e)}",
+                    "timestamp": datetime.now().isoformat()
+                })
+        
+        # Add to background tasks
+        background_tasks.add_task(run_training)
+        
+        return {
+            "status": "started",
+            "message": "Model training pipeline initiated",
+            "timestamp": datetime.now().isoformat()
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to start model training: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
 
 # Authentication endpoints
 class AuthVerifyRequest(BaseModel):
