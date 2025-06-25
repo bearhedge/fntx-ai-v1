@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { TrendingUp, TrendingDown, Activity, Target, AlertTriangle } from 'lucide-react';
+import { Activity, AlertTriangle } from 'lucide-react';
 
 interface OptionsContract {
   symbol: string;
@@ -15,7 +14,7 @@ interface OptionsContract {
   last: number;
   volume: number;
   open_interest: number;
-  implied_volatility: number;
+  implied_volatility: number | null;
   delta?: number;
   gamma?: number;
   theta?: number;
@@ -29,7 +28,7 @@ interface OptionsChainData {
   contracts: OptionsContract[];
   ai_insights: {
     market_regime: string;
-    vix_level: number;
+    vix_level: number | null;
     trading_signal: string;
     strategy_preference: string;
     position_sizing: string;
@@ -40,6 +39,8 @@ interface OptionsChainData {
   };
   market_regime: string;
   timestamp: string;
+  data_timestamp?: string | null;
+  data_note?: string | null;
 }
 
 interface SPYOptionsTableProps {
@@ -69,7 +70,7 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
       const controller = new AbortController();
       const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
       
-      const response = await fetch(`/api/spy-options/chain?option_type=${optionType}`, {
+      const response = await fetch(`/api/options/spy-atm?num_strikes=5`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -125,7 +126,8 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
     return price > 0 ? `$${price.toFixed(2)}` : '-';
   };
 
-  const formatPercentage = (value: number) => {
+  const formatPercentage = (value: number | null | undefined) => {
+    if (value === null || value === undefined) return 'N/A';
     return `${(value * 100).toFixed(1)}%`;
   };
 
@@ -153,48 +155,11 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
     );
   };
 
-  if (loading) {
-    return (
-      <Card className={className}>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Activity className="w-5 h-5 animate-spin" />
-            Loading SPY Options Chain...
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="flex items-center justify-center h-32">
-            <div className="text-sm text-gray-500">Fetching live data from IBKR...</div>
-          </div>
-        </CardContent>
-      </Card>
-    );
+  if (loading || error || !optionsData) {
+    return null; // Don't show any UI when loading, error, or no data
   }
 
-  if (error) {
-    return (
-      <Card className={className}>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2 text-red-600">
-            <AlertTriangle className="w-5 h-5" />
-            Error Loading Options
-          </CardTitle>
-        </CardHeader>
-        <CardContent>
-          <div className="text-sm text-red-600 mb-4">{error}</div>
-          <Button onClick={fetchOptionsChain} variant="outline">
-            Retry
-          </Button>
-        </CardContent>
-      </Card>
-    );
-  }
-
-  if (!optionsData) {
-    return null;
-  }
-
-  const { contracts, ai_insights, spy_price, expiration_date, market_regime } = optionsData;
+  const { contracts, ai_insights, spy_price, expiration_date, market_regime, data_timestamp, data_note } = optionsData;
 
   // Filter contracts by type
   const filteredContracts = contracts.filter(contract => {
@@ -212,83 +177,29 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
   });
 
   return (
-    <Card className={className}>
-      <CardHeader>
-        <CardTitle className="flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <Target className="w-5 h-5" />
-            SPY Options Chain - {expiration_date}
-          </div>
-          <Button onClick={fetchOptionsChain} variant="outline" size="sm">
-            Refresh
-          </Button>
-        </CardTitle>
-        
-        {/* Market Summary */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-gray-50 rounded-lg">
-          <div className="text-center">
-            <div className="text-2xl font-bold text-blue-600">${spy_price.toFixed(2)}</div>
-            <div className="text-sm text-gray-600">SPY Price</div>
-          </div>
-          <div className="text-center">
-            <div className="text-2xl font-bold text-purple-600">{ai_insights.vix_level.toFixed(1)}</div>
-            <div className="text-sm text-gray-600">VIX Level</div>
-          </div>
-          <div className="text-center">
-            {getMarketRegimeBadge(market_regime)}
-            <div className="text-sm text-gray-600 mt-1">Market Regime</div>
-          </div>
-          <div className="text-center">
-            <Badge variant={ai_insights.trading_signal === 'bullish' ? 'default' : 'secondary'}>
-              {ai_insights.trading_signal.toUpperCase()}
-            </Badge>
-            <div className="text-sm text-gray-600 mt-1">AI Signal</div>
-          </div>
+    <div className={`${className} p-4 bg-white rounded-lg border`}>
+      <div className="flex items-center justify-between mb-2">
+        <div className="font-mono text-sm font-bold">
+          SPY Options Chain | {expiration_date} | SPY: ${spy_price.toFixed(2)} | {ai_insights.vix_level ? `VIX: ${ai_insights.vix_level.toFixed(1)}` : 'VIX: N/A'}
         </div>
+        <Button onClick={fetchOptionsChain} variant="ghost" size="sm" className="h-6 px-2 text-xs">
+          Refresh
+        </Button>
+      </div>
 
-        {/* AI Insights */}
-        {ai_insights.specific_actions.length > 0 && (
-          <div className="p-3 bg-blue-50 rounded-lg">
-            <div className="text-sm font-medium text-blue-800 mb-2">AI Recommendations:</div>
-            <ul className="text-sm text-blue-700 space-y-1">
-              {ai_insights.specific_actions.map((action, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <span className="text-blue-500">•</span>
-                  {action}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-
-        {/* Risk Warnings */}
-        {ai_insights.risk_warnings.length > 0 && (
-          <div className="p-3 bg-yellow-50 rounded-lg">
-            <div className="text-sm font-medium text-yellow-800 mb-2">Risk Warnings:</div>
-            <ul className="text-sm text-yellow-700 space-y-1">
-              {ai_insights.risk_warnings.map((warning, index) => (
-                <li key={index} className="flex items-start gap-2">
-                  <AlertTriangle className="w-4 h-4 mt-0.5 text-yellow-600" />
-                  {warning}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </CardHeader>
-
-      <CardContent>
-        <div className="overflow-x-auto">
-          <Table>
+      <div className="overflow-x-auto">
+        <Table className="font-mono text-sm">
             <TableHeader>
-              <TableRow>
-                <TableHead>Type</TableHead>
-                <TableHead>Strike</TableHead>
-                <TableHead>Premium</TableHead>
-                <TableHead>Bid/Ask</TableHead>
-                <TableHead>Volume</TableHead>
-                <TableHead>AI Score</TableHead>
-                <TableHead>Action</TableHead>
+              <TableRow className="bg-gray-100">
+                <TableHead className="text-center font-bold">Type</TableHead>
+                <TableHead className="text-center font-bold">Strike</TableHead>
+                <TableHead className="text-center font-bold">Bid</TableHead>
+                <TableHead className="text-center font-bold">Ask</TableHead>
+                <TableHead className="text-center font-bold">Last</TableHead>
+                <TableHead className="text-center font-bold">Vol</TableHead>
+                <TableHead className="text-center font-bold">OI</TableHead>
+                <TableHead className="text-center font-bold">IV</TableHead>
+                <TableHead className="text-center font-bold">Score</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -298,75 +209,26 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
                   className={selectedContract?.symbol === contract.symbol ? 'bg-blue-50' : 'hover:bg-gray-50 cursor-pointer'}
                   onClick={() => handleContractClick(contract)}
                 >
-                  <TableCell>
-                    <div className="flex items-center gap-2">
-                      {contract.option_type === 'P' ? (
-                        <TrendingDown className="w-4 h-4 text-red-500" />
-                      ) : (
-                        <TrendingUp className="w-4 h-4 text-green-500" />
-                      )}
-                      <span className="font-medium">
-                        {contract.option_type === 'P' ? 'PUT' : 'CALL'}
-                      </span>
-                    </div>
+                  <TableCell className="text-center">
+                    <span className={`font-bold ${contract.option_type === 'P' ? 'text-red-600' : 'text-green-600'}`}>
+                      {contract.option_type === 'P' ? 'PUT' : 'CALL'}
+                    </span>
                   </TableCell>
                   
-                  <TableCell>
-                    <div className="font-mono text-sm">
-                      ${contract.strike.toFixed(0)}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      {contract.option_type === 'P' 
-                        ? `${((spy_price - contract.strike) / spy_price * 100).toFixed(1)}% OTM`
-                        : `${((contract.strike - spy_price) / spy_price * 100).toFixed(1)}% OTM`
-                      }
-                    </div>
+                  <TableCell className="text-center font-bold">
+                    {contract.strike.toFixed(0)}
                   </TableCell>
                   
-                  <TableCell>
-                    <div className="font-medium">
-                      {formatPrice(contract.last)}
-                    </div>
-                    {contract.implied_volatility > 0 && (
-                      <div className="text-xs text-gray-500">
-                        IV: {formatPercentage(contract.implied_volatility)}
-                      </div>
-                    )}
-                  </TableCell>
-                  
-                  <TableCell>
-                    <div className="text-sm">
-                      {formatPrice(contract.bid)} / {formatPrice(contract.ask)}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      Spread: {formatPrice(contract.ask - contract.bid)}
-                    </div>
-                  </TableCell>
-                  
-                  <TableCell>
-                    <div className="text-sm">
-                      {contract.volume.toLocaleString()}
-                    </div>
-                    <div className="text-xs text-gray-500">
-                      OI: {contract.open_interest.toLocaleString()}
-                    </div>
-                  </TableCell>
-                  
-                  <TableCell>
-                    {getAIScoreBadge(contract.ai_score)}
-                  </TableCell>
-                  
-                  <TableCell>
-                    <Button 
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleContractClick(contract);
-                      }}
-                      size="sm"
-                      variant={selectedContract?.symbol === contract.symbol ? "default" : "outline"}
-                    >
-                      {selectedContract?.symbol === contract.symbol ? "Selected" : "Select"}
-                    </Button>
+                  <TableCell className="text-center">{contract.bid.toFixed(2)}</TableCell>
+                  <TableCell className="text-center">{contract.ask.toFixed(2)}</TableCell>
+                  <TableCell className="text-center">{contract.last.toFixed(2)}</TableCell>
+                  <TableCell className="text-center">{contract.volume}</TableCell>
+                  <TableCell className="text-center">{contract.open_interest}</TableCell>
+                  <TableCell className="text-center">{formatPercentage(contract.implied_volatility)}</TableCell>
+                  <TableCell className="text-center">
+                    <span className={`font-bold ${contract.ai_score >= 8 ? 'text-green-600' : 'text-gray-600'}`}>
+                      {contract.ai_score?.toFixed(1) || '-'}
+                    </span>
                   </TableCell>
                 </TableRow>
               ))}
@@ -379,7 +241,12 @@ export const SPYOptionsTable: React.FC<SPYOptionsTableProps> = ({
             No options contracts found for the selected criteria.
           </div>
         )}
-      </CardContent>
-    </Card>
+
+        {data_note && (
+          <div className="mt-2 text-xs text-gray-500 font-mono">
+            {data_note} {data_timestamp && `(${data_timestamp})`}
+          </div>
+        )}
+    </div>
   );
 };

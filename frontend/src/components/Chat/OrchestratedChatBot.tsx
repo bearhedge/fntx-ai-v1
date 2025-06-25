@@ -324,9 +324,9 @@ export const OrchestratedChatBot = ({
         if (lowerContent.includes('put')) optionType = 'put';
         if (lowerContent.includes('call')) optionType = 'call';
 
-        // Add manual trading message with options table
+        // Add manual trading message with options table (no loading text)
         const manualMessageId = addMessage({
-          content: `🎯 **SPY Options Discovery**\n\nSearching for ${optionType === 'both' ? 'PUT and CALL' : optionType.toUpperCase()} options...\n\nSelect a contract below to configure your manual trade with full AI analysis.`,
+          content: '', // Empty content - let the table show the data
           sender: 'ai',
           isManualTrading: true,
           showOptionsTable: true,

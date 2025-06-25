@@ -13,9 +13,17 @@ from typing import Dict, List, Optional, Any, Union
 from concurrent.futures import ThreadPoolExecutor
 import os
 import nest_asyncio
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 # Allow nested event loops for IBKR compatibility
-nest_asyncio.apply()
+try:
+    nest_asyncio.apply()
+except ValueError:
+    # Already patched or using uvloop
+    pass
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)
@@ -273,7 +281,13 @@ class IBKRUnifiedService:
                                     "ask": float(ticker.ask) if ticker.ask else float(ticker.bid) * 1.1,
                                     "last": float(ticker.last) if ticker.last else float(ticker.bid),
                                     "volume": int(ticker.volume) if ticker.volume else 0,
-                                    "open_interest": 0  # Not available in real-time
+                                    "open_interest": 0,  # Not available in real-time
+                                    # Add Greeks - CRITICAL for 0DTE
+                                    "delta": float(ticker.modelGreeks.delta) if ticker.modelGreeks else None,
+                                    "gamma": float(ticker.modelGreeks.gamma) if ticker.modelGreeks else None,
+                                    "theta": float(ticker.modelGreeks.theta) if ticker.modelGreeks else None,
+                                    "vega": float(ticker.modelGreeks.vega) if ticker.modelGreeks else None,
+                                    "impliedVol": float(ticker.modelGreeks.impliedVol) if ticker.modelGreeks else None
                                 })
                             else:
                                 # Estimate prices if no market data

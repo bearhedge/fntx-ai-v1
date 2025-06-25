@@ -14,7 +14,11 @@ from ib_insync import IB, Stock, Option, Contract, util
 import nest_asyncio
 
 # Apply nest_asyncio to handle event loop issues
-nest_asyncio.apply()
+try:
+    nest_asyncio.apply()
+except ValueError:
+    # Already patched or using uvloop
+    pass
 
 # Configure logging
 logging.basicConfig(level=logging.INFO)

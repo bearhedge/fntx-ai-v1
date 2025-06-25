@@ -123,12 +123,16 @@ export const useWebSocket = (url: string, enabled: boolean = true) => {
 
 // Specialized hook for FNTX Computer WebSocket
 export const useFNTXComputer = () => {
-  const wsUrl = `ws://localhost:8002/ws/fntx-computer`;
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsHost = window.location.hostname;
+  const wsUrl = `${wsProtocol}//${wsHost}/ws/fntx-computer`;
   return useWebSocket(wsUrl, true);
 };
 
 // Specialized hook for trade updates WebSocket
 export const useTradeUpdates = (tradeId: string | null) => {
-  const wsUrl = tradeId ? `ws://localhost:8002/ws/agent-updates/${tradeId}` : '';
+  const wsProtocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
+  const wsHost = window.location.hostname;
+  const wsUrl = tradeId ? `${wsProtocol}//${wsHost}/ws/agent-updates/${tradeId}` : '';
   return useWebSocket(wsUrl, !!tradeId);
 };

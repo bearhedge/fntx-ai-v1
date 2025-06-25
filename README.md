@@ -10,6 +10,13 @@ FNTX.ai is an AI-driven autonomous options trading system that executes daily SP
 - Node.js (v18 or later)
 - Python 3.8+
 - Interactive Brokers Gateway (for live trading)
+- VNC Viewer (for accessing IB Gateway desktop)
+
+### VNC Trading Desktop Access
+Connect to the trading desktop to manage IB Gateway:
+- **Address**: `35.194.231.94:5901`
+- **Password**: `fntx2024`
+- [Detailed VNC Setup Guide](docs/VNC_TRADING_SETUP.md)
 
 ### Installation
 

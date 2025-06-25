@@ -11,3 +11,5 @@ PyJWT
 python-multipart
 bcrypt
 google-generativeai
+nest-asyncio
+thetadata

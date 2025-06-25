@@ -13,15 +13,16 @@ export default defineConfig(({ mode }) => ({
       "fntx.ai",
       "www.fntx.ai",
       "35.194.231.94",
+      "35.185.152.111",
       ".fntx.ai"
     ],
     proxy: {
       '/api': {
-        target: 'http://35.194.231.94:8002',
+        target: 'http://localhost:8002',
         changeOrigin: true,
       },
       '/ws': {
-        target: 'ws://35.194.231.94:8002',
+        target: 'ws://localhost:8002',
         ws: true,
       },
     },
