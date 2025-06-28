@@ -40,13 +40,49 @@ export const WithdrawalTab: React.FC<WithdrawalTabProps> = ({
   const weeklyProfit = 2000;
   const weeklyReturn = 0.2;
   const recommendedAmount = 1200;
-  const handleWithdrawal = () => {
+  const handleWithdrawal = async () => {
     const amount = amountType === 'recommended' ? recommendedAmount : parseFloat(withdrawalAmount);
-    console.log('Processing withdrawal:', {
-      amount,
-      destinationId: selectedDestination
-    });
-    setActiveView('history');
+    
+    try {
+      const selectedDest = sampleDestinations.find(d => d.id === selectedDestination);
+      const response = await fetch('/api/portfolio/withdrawals', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount,
+          destination_type: selectedDest?.type.toUpperCase() || 'BANK',
+          destination_details: selectedDest?.details || '',
+          description: `Withdrawal to ${selectedDest?.name}`
+        })
+      });
+      
+      if (response.ok) {
+        const result = await response.json();
+        console.log('Withdrawal created:', result);
+        
+        // Refresh the withdrawal history
+        const newWithdrawal: WithdrawalRecord = {
+          id: result.movement_id,
+          date: new Date().toISOString().split('T')[0],
+          amount,
+          destination: selectedDest?.name || 'Unknown',
+          status: 'Pending',
+          estimatedSettlement: result.estimated_settlement
+        };
+        
+        // Add to history (parent component should refresh)
+        withdrawalHistory.unshift(newWithdrawal);
+        setActiveView('history');
+      } else {
+        const error = await response.json();
+        alert(`Withdrawal failed: ${error.detail}`);
+      }
+    } catch (error) {
+      console.error('Error processing withdrawal:', error);
+      alert('Failed to process withdrawal');
+    }
   };
   if (activeView === 'history') {
     return <div className="px-1">

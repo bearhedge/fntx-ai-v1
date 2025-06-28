@@ -19,7 +19,7 @@ DB_CONFIG = {
 
 # Download configuration
 DOWNLOAD_CONFIG = {
-    'start_date': '20210101',  # 4 years of data
+    'start_date': '20170101',  # 8 years of data (2017-2024)
     'end_date': datetime.now().strftime('%Y%m%d'),
     'interval_ms': 60000,  # 1-minute bars
     'batch_size_days': 30,  # Download 1 month at a time
@@ -36,6 +36,10 @@ SPY_CONFIG = {
     
     # Approximate ATM prices by year for intelligent strike selection
     'atm_estimates': {
+        2017: 250,
+        2018: 280,
+        2019: 320,
+        2020: 350,
         2021: 420,
         2022: 450,
         2023: 400,
@@ -46,12 +50,12 @@ SPY_CONFIG = {
 
 # Data types available by subscription level
 DATA_TYPES = {
-    'value': ['ohlc', 'oi'],  # Available now
-    'standard': ['ohlc', 'oi', 'greeks', 'iv'],  # Available July 18+
+    'value': ['ohlc', 'oi'],  # Previous subscription
+    'standard': ['ohlc', 'oi', 'greeks', 'iv', 'trade', 'quote'],  # Current subscription
 }
 
-# Current subscription level
-SUBSCRIPTION_LEVEL = 'value'  # Change to 'standard' on July 18
+# Current subscription level - UPGRADED TO STANDARD!
+SUBSCRIPTION_LEVEL = 'standard'  # Account upgraded to Standard with 8 years access
 
 # Logging configuration
 LOGGING_CONFIG = {

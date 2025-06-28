@@ -1,4 +1,4 @@
-# FNTX.ai Database Package
+# FNTX AI Database Package
 """
-Database utilities and connections for FNTX.ai
+Database utilities and connections for FNTX AI
 """

@@ -23,7 +23,7 @@ class LLMContextAdapter:
         # Build system context
         system_lines = [
             f"You are {context.get('identity', {}).get('agent_id', 'FNTX Agent')}, "
-            f"a {context.get('identity', {}).get('agent_type', 'trading')} agent for FNTX.ai.",
+            f"a {context.get('identity', {}).get('agent_type', 'trading')} agent for FNTX AI.",
             f"Provider: {context.get('identity', {}).get('model_provider', provider_type)}",
             "",
             "System Context:",

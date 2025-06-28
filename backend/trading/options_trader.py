@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import logging
 from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
-from trade_logger import TradeLogger, TradeRecord
+# from trade_logger import TradeLogger, TradeRecord  # Comment out for now
 
 @dataclass
 class TradeResult:

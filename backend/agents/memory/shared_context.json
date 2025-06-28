@@ -1,5 +1,5 @@
 {
-  "last_updated": "2025-06-25T14:46:03.681318",
+  "last_updated": "2025-06-28T17:46:31.943872",
   "market_regime": "illiquid_conditions",
   "vix_level": 0,
   "spy_price": 0,
@@ -18,16 +18,18 @@
     "take_profit_multiplier": 0.5
   },
   "trading_recommendations": {
-    "timestamp": "2025-06-25T14:46:03.680884",
+    "timestamp": "2025-06-28T17:46:31.942578",
     "overall_signal": "neutral",
     "strategy_preference": "conservative",
     "position_sizing": "normal",
-    "timing_preference": "patient",
-    "specific_actions": [],
+    "timing_preference": "wait_for_open",
+    "specific_actions": [
+      "Wait for market open for better liquidity"
+    ],
     "risk_adjustments": []
   },
   "regime_changes": [],
-  "market_hours": true,
+  "market_hours": false,
   "environment_alert_level": "low",
   "strategy_recommendation": {
     "strategy": {

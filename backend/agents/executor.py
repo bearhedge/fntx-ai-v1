@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai ExecutorAgent - Autonomous Options Trading Execution
+FNTX AI ExecutorAgent - Autonomous Options Trading Execution
 Handles paper trading with IBKR integration and MCP memory management
 """
 
@@ -154,7 +154,7 @@ class ExecutorAgent:
             quantity = int(instruction.get("quantity", 1))
             limit_price = float(instruction.get("limit_price", 0))
             
-            # Calculate stop-loss and take-profit based on FNTX.ai rules
+            # Calculate stop-loss and take-profit based on FNTX AI rules
             stop_loss_price = None
             take_profit_price = None
             

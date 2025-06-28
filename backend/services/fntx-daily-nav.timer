@@ -1,0 +1,19 @@
+[Unit]
+Description=Run FNTX Daily NAV Import at 10 PM EST
+Requires=fntx-daily-nav.service
+
+[Timer]
+# Run daily at 10 PM EST (3 AM UTC during standard time, 2 AM UTC during daylight saving)
+OnCalendar=daily
+OnCalendar=*-*-* 03:00:00
+# Also handle daylight saving time
+OnCalendar=*-*-* 02:00:00
+
+# Run immediately if the system was down during the scheduled time
+Persistent=true
+
+# Random delay to avoid exact time execution
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

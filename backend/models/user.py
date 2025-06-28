@@ -1,5 +1,5 @@
 """
-User model for FNTX.ai authentication
+User model for FNTX AI authentication
 """
 from datetime import datetime
 from typing import Optional

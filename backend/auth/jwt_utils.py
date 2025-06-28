@@ -1,5 +1,5 @@
 """
-JWT token utilities for FNTX.ai authentication
+JWT token utilities for FNTX AI authentication
 """
 import jwt
 import os

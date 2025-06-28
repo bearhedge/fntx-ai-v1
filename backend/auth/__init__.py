@@ -1,4 +1,4 @@
-# FNTX.ai Authentication Package
+# FNTX AI Authentication Package
 """
-Authentication utilities for FNTX.ai
+Authentication utilities for FNTX AI
 """

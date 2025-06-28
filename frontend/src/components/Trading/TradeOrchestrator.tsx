@@ -267,7 +267,7 @@ export const TradeOrchestrator: React.FC = () => {
         <CardHeader>
           <CardTitle className="flex items-center gap-2">
             <Bot className="w-5 h-5" />
-            FNTX.ai Trade Orchestrator
+            FNTX AI Trade Orchestrator
           </CardTitle>
           <p className="text-sm text-muted-foreground">
             Enter your trading request and watch the AI agents collaborate to execute your strategy

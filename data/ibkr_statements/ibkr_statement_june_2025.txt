@@ -1,0 +1,509 @@
+                                                                                                                                                                                  Activity Statement
+                                                                                                                                                                                   June 12, 2025 - June 27, 2025
+
+                                                                                                                                                                                                             Help
+
+
+
+                                                    Interactive Brokers Hong Kong Limited, Suite 1512, Two Pacific Place, 88 Queensway, Admiralty, Hong Kong
+
+
+
+
+Account Information
+Name                                          BEAR HEDGE FINTEX LIMITED
+Account                                       U19860056
+                                              King's Rd 75
+                                              SUP Tower, RM 1104
+Address of Account Holder(s)                  North Point, 999077
+                                              Hong Kong Special Administrative Region of China
+Account Type                                  Institution Master
+Customer Type                                 Corporate
+Account Capabilities                          Margin
+Base Currency                                 HKD
+
+
+
+
+Net Asset Value
+                                                    June 11, 2025                             June 27, 2025
+                                                              Total                Long                    Short         Total         Change                Change in NAV                                   Total
+
+Cash                                                      10,482.80           83,659.41               -2,626.68     81,032.72        70,549.92               Starting Value                            10,482.80
+
+Interest Accruals                                              0.00                 0.00                   -8.24        -8.24             -8.24                Mark-to-Market                              706.21
+
+ Total                                                    10,482.80           83,659.41               -2,634.93     81,024.48        70,541.68                 Deposits & Withdrawals                  69,945.00
+                                                                                                                                                               Change in Interest Accruals                   -8.24
+Time Weighted Rate of Return                                                                                                             0.74%                 Commissions                                 -101.29
+                                                                                                                                                               Other FX Translations                          0.00
+                                                                                                                                                             Ending Value                              81,024.48
+
+
+
+
+Mark-to-Market Performance Summary
+                                              Quantity                                Price                                                     Mark-to-Market P/L
+Symbol                                Prior              Current           Prior                 Current            Position      Transaction         Commissions                Other             Total     Code
+Equity and Index Options
+SPY 20JUN25 590 P                               0                     0                --                     --       0.00            78.50                 -11.39               0.00             67.11
+SPY 23JUN25 592 P                               0                     0                --                     --       0.00           149.15                 -11.86               0.00            137.29
+SPY 23JUN25 600 C                               0                     0                --                     --       0.00          -157.00                 -15.14               0.00           -172.14
+SPY 24JUN25 603 P                               0                     0                --                     --       0.00           306.15                  -6.84               0.00            299.31
+SPY 24JUN25 608 C                               0                     0                --                     --       0.00          -219.80                 -15.93               0.00           -235.73
+SPY 25JUN25 605 P                               0                     0                --                     --       0.00           211.95                  -6.84               0.00            205.11
+SPY 25JUN25 609 C                               0                     0                --                     --       0.00           117.75                  -6.84               0.00            110.91
+
+
+
+Generated: 2025-06-27, 22:27:41 EDT                                                                                                                                                                        Page: 1
+Mark-to-Market Performance Summary
+                                                     Quantity                                      Price                                                                   Mark-to-Market P/L
+Symbol                                     Prior                Current                Prior                Current                             Position     Transaction          Commissions                    Other                   Total     Code
+SPY 26JUN25 608 P                                      0                    0                      --                      --                      0.00            78.50                      -8.17               0.00                   70.33
+SPY 26JUN25 615 C                                      0                    0                      --                      --                      0.00            15.70                    -11.47                0.00                    4.23
+SPY 27JUN25 610 P                                      0                   -1                      --                      --                      0.00          125.60                       -6.84               0.00                  118.76
+ Total Equity and Index Options                                                                                                                    0.00          706.50                 -101.29                   0.00                  605.21
+Forex
+HKD                                         13,714.41               83,659.41                  1.0000                 1.0000                       0.00             0.00                      0.00                0.00                    0.00
+USD                                             -411.71               -334.61                  7.8493                 7.8500                       -0.29            0.00                      0.00                0.00                   -0.29
+ Total Forex                                                                                                                                       -0.29            0.00                      0.00                0.00                   -0.29
+ Total (All Assets)                                                                                                                                -0.29         706.50                 -101.29                   0.00                  604.92
+
+
+
+
+Realized & Unrealized Performance Summary
+                                                                                       Realized                                                                            Unrealized
+Symbol                             Cost Adj.          S/T Profit          S/T Loss       L/T Profit        L/T Loss               Total         S/T Profit   S/T Loss          L/T Profit             L/T Loss         Total             Total     Code
+Equity and Index Options
+SPY 20JUN25 590 P                        0.00               67.11               0.00           0.00           0.00               67.11               0.00        0.00               0.00                 0.00           0.00             67.11
+SPY 23JUN25 592 P                        0.00              137.29               0.00           0.00           0.00              137.29               0.00        0.00               0.00                 0.00           0.00        137.29
+SPY 23JUN25 600 C                        0.00                0.00          -172.14             0.00           0.00              -172.14              0.00        0.00               0.00                 0.00           0.00        -172.14
+SPY 24JUN25 603 P                        0.00              299.31               0.00           0.00           0.00              299.31               0.00        0.00               0.00                 0.00           0.00        299.31
+SPY 24JUN25 608 C                        0.00                0.00          -235.73             0.00           0.00              -235.73              0.00        0.00               0.00                 0.00           0.00        -235.73
+SPY 25JUN25 605 P                        0.00              205.11               0.00           0.00           0.00              205.11               0.00        0.00               0.00                 0.00           0.00        205.11
+SPY 25JUN25 609 C                        0.00              110.91               0.00           0.00           0.00              110.91               0.00        0.00               0.00                 0.00           0.00        110.91
+SPY 26JUN25 608 P                        0.00               70.33               0.00           0.00           0.00               70.33               0.00        0.00               0.00                 0.00           0.00             70.33
+SPY 26JUN25 615 C                        0.00                4.23               0.00           0.00           0.00                4.23               0.00        0.00               0.00                 0.00           0.00              4.23
+SPY 27JUN25 610 P                        0.00                0.00               0.00           0.00           0.00                0.00            118.76         0.00               0.00                 0.00      118.76           118.76
+ Total Equity and Index                  0.00              894.30          -407.87             0.00           0.00              486.44            118.76         0.00               0.00                 0.00      118.76           605.20
+Options
+Forex
+USD                                      0.00                0.00           -13.39             0.00           0.00               -13.39              0.00      -23.42               0.00                 0.00       -23.42              -36.81
+ Total Forex                             0.00                0.00           -13.39             0.00           0.00               -13.39              0.00      -23.42               0.00                 0.00       -23.42              -36.81
+ Total (All Assets)                      0.00              894.30          -421.26             0.00           0.00              473.04            118.76       -23.42               0.00                 0.00          95.35        568.39
+
+
+
+
+Month & Year to Date Performance Summary
+                                                                                                                      Mark-to-Market                                Realized S/T                                         Realized L/T
+Symbol                                      Description                                                       MTD                         YTD                MTD                        YTD                      MTD                      YTD
+Stocks
+ARM                                         ARM HOLDINGS PLC-ADR                                                        0.00              -394,095.40                   0.00                -310,386.68                   0.00                      0.00
+SPY                                         SPDR S&P 500 ETF TRUST                                                      0.00                -2,414.44                   0.00                  -5,970.44                   0.00                      0.00
+ Total Stocks                                                                                                           0.00              -396,509.84                   0.00                -316,357.12                   0.00                      0.00
+Equity and Index Options
+ARM 250131P00155000                         ARM 31JAN25 155 P                                                           0.00                -5,765.53                   0.00                  -5,786.61                   0.00                      0.00
+ARM 250131C00157500                         ARM 31JAN25 157.5 C                                                         0.00                -6,454.43                   0.00                  -6,453.61                   0.00                      0.00
+ARM 250131C00175000                         ARM 31JAN25 175 C                                                           0.00                9,878.46                    0.00                  9,878.89                    0.00                      0.00
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                                                                                               Page: 2
+Month & Year to Date Performance Summary
+                                                                        Mark-to-Market                         Realized S/T                         Realized L/T
+Symbol                                      Description           MTD                    YTD             MTD                  YTD             MTD                  YTD
+ARM 250207C00160000                         ARM 07FEB25 160 C             0.00            -46,014.09             0.00          -46,011.58            0.00                   0.00
+ARM 250207P00160000                         ARM 07FEB25 160 P             0.00             25,688.79             0.00           25,695.73            0.00                   0.00
+ARM 250207P00170000                         ARM 07FEB25 170 P             0.00              3,168.64             0.00                 0.00           0.00                   0.00
+ARM 250207P00172500                         ARM 07FEB25 172.5 P           0.00             17,855.67             0.00           17,855.67            0.00                   0.00
+ARM 250207C00175000                         ARM 07FEB25 175 C             0.00              5,007.33             0.00            5,007.37            0.00                   0.00
+ARM 250207C00177500                         ARM 07FEB25 177.5 C           0.00                 -276.55           0.00               -276.55          0.00                   0.00
+ARM 250207C00180000                         ARM 07FEB25 180 C             0.00            -14,982.71             0.00          -14,982.71            0.00                   0.00
+ARM 250207P00180000                         ARM 07FEB25 180 P             0.00             79,659.12             0.00               -719.93          0.00                   0.00
+ARM 250207C00187500                         ARM 07FEB25 187.5 C           0.00              4,974.96             0.00            4,974.97            0.00                   0.00
+ARM 250207C00195000                         ARM 07FEB25 195 C             0.00             18,288.08             0.00           18,287.92            0.00                   0.00
+ARM 250214C00162500                         ARM 14FEB25 162.5 C           0.00              7,126.35             0.00            7,129.17            0.00                   0.00
+ARM 250214C00167500                         ARM 14FEB25 167.5 C           0.00              5,599.78             0.00            5,598.26            0.00                   0.00
+ARM 250221C00165000                         ARM 21FEB25 165 C             0.00              9,412.79             0.00            9,403.80            0.00                   0.00
+ARM 250228C00147000                         ARM 28FEB25 147 C             0.00              4,644.73             0.00            4,644.70            0.00                   0.00
+ARM 250314C00121000                         ARM 14MAR25 121 C             0.00              2,153.67             0.00            2,153.30            0.00                   0.00
+ARM 250321C00130000                         ARM 21MAR25 130 C             0.00              2,319.88             0.00            2,320.78            0.00                   0.00
+ARM 250328C00135000                         ARM 28MAR25 135 C             0.00                 905.37            0.00               905.93           0.00                   0.00
+SPY 250103C00592000                         SPY 03JAN25 592 C             0.00                 -123.68           0.00               -123.68          0.00                   0.00
+SPY 250106C00601000                         SPY 06JAN25 601 C             0.00                  19.12            0.00                19.12           0.00                   0.00
+SPY 250107C00595000                         SPY 07JAN25 595 C             0.00                 234.38            0.00               234.44           0.00                   0.00
+SPY 250110C00585000                         SPY 10JAN25 585 C             0.00                 133.47            0.00               133.45           0.00                   0.00
+SPY 250110C00595000                         SPY 10JAN25 595 C             0.00                 436.89            0.00               436.83           0.00                   0.00
+SPY 250113C00582000                         SPY 13JAN25 582 C             0.00                 164.59            0.00               164.60           0.00                   0.00
+SPY 250114C00583000                         SPY 14JAN25 583 C             0.00                 240.98            0.00                 0.00           0.00                   0.00
+SPY 250115P00590000                         SPY 15JAN25 590 P             0.00                 257.54            0.00               257.54           0.00                   0.00
+SPY 250115C00594000                         SPY 15JAN25 594 C             0.00                 125.18            0.00               125.18           0.00                   0.00
+SPY 250117P00585000                         SPY 17JAN25 585 P             0.00              1,899.53             0.00            1,899.41            0.00                   0.00
+SPY 250117P00595000                         SPY 17JAN25 595 P             0.00              3,911.63             0.00            3,911.63            0.00                   0.00
+SPY 250117C00596000                         SPY 17JAN25 596 C             0.00             -6,719.06             0.00           -6,719.45            0.00                   0.00
+SPY 250117P00598000                         SPY 17JAN25 598 P             0.00             -1,766.76             0.00           -1,766.76            0.00                   0.00
+SPY 250117C00599000                         SPY 17JAN25 599 C             0.00              1,081.39             0.00            1,081.39            0.00                   0.00
+SPY 250121P00600000                         SPY 21JAN25 600 P             0.00              1,606.59             0.00            1,607.30            0.00                   0.00
+SPY 250121C00604000                         SPY 21JAN25 604 C             0.00                 516.71            0.00               516.94           0.00                   0.00
+SPY 250122P00606000                         SPY 22JAN25 606 P             0.00              1,266.26             0.00            1,266.42            0.00                   0.00
+SPY 250122C00609000                         SPY 22JAN25 609 C             0.00                 451.28            0.00               451.33           0.00                   0.00
+SPY 250123P00607000                         SPY 23JAN25 607 P             0.00              1,525.95             0.00            1,525.95            0.00                   0.00
+SPY 250123C00609000                         SPY 23JAN25 609 C             0.00             -2,411.46             0.00           -2,411.46            0.00                   0.00
+SPY 250124P00605000                         SPY 24JAN25 605 P             0.00                  47.75            0.00                47.76           0.00                   0.00
+SPY 250124P00608000                         SPY 24JAN25 608 P             0.00                 -399.46           0.00               -399.46          0.00                   0.00
+SPY 250124C00609000                         SPY 24JAN25 609 C             0.00                  68.85            0.00                68.86           0.00                   0.00
+SPY 250124P00609000                         SPY 24JAN25 609 P             0.00             -4,660.40             0.00           -4,660.40            0.00                   0.00
+SPY 250124C00611000                         SPY 24JAN25 611 C             0.00                 170.58            0.00               170.58           0.00                   0.00
+SPY 250124C00612000                         SPY 24JAN25 612 C             0.00                 876.32            0.00               876.32           0.00                   0.00
+SPY 250620P00590000                         SPY 20JUN25 590 P            67.11                  67.11           67.11                67.11           0.00                   0.00
+SPY 250623P00592000                         SPY 23JUN25 592 P           137.29                 137.29          137.29               137.29           0.00                   0.00
+
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                       Page: 3
+Month & Year to Date Performance Summary
+                                                                      Mark-to-Market                            Realized S/T                          Realized L/T
+Symbol                                      Description         MTD                    YTD               MTD                   YTD              MTD                  YTD
+SPY 250623C00600000                         SPY 23JUN25 600 C         -172.14                -172.14           -172.14               -172.14           0.00                   0.00
+SPY 250624P00603000                         SPY 24JUN25 603 P         299.31                  299.31           299.31                299.31            0.00                   0.00
+SPY 250624C00608000                         SPY 24JUN25 608 C         -235.73                -235.73           -235.73               -235.73           0.00                   0.00
+SPY 250625P00605000                         SPY 25JUN25 605 P         205.11                  205.11           205.11                205.11            0.00                   0.00
+SPY 250625C00609000                         SPY 25JUN25 609 C         110.91                  110.91           110.91                110.91            0.00                   0.00
+SPY 250626P00608000                         SPY 26JUN25 608 P          70.33                   70.33            70.33                  70.33           0.00                   0.00
+SPY 250626C00615000                         SPY 26JUN25 615 C           4.23                    4.23             4.23                   4.23           0.00                   0.00
+SPY 250627P00610000                         SPY 27JUN25 610 P         118.76                  118.76             0.00                   0.00           0.00                   0.00
+VIX 250416C00050000                         VIX 16APR25 50 C            0.00                  250.79             0.00                251.73            0.00                   0.00
+VIXW 250423C00050000                        VIXW 23APR25 50 C           0.00                  843.99             0.00                843.79            0.00                   0.00
+XPEV 250425C00020000                        XPEV 25APR25 20 C           0.00             -2,284.63               0.00             -2,284.68            0.00                   0.00
+XPEV 250425P00020000                        XPEV 25APR25 20 P           0.00              2,389.23               0.00              2,389.28            0.00                   0.00
+XPEV 250718C00025000                        XPEV 18JUL25 25 C           0.00            -12,993.08               0.00            -13,058.31            0.00                   0.00
+ Total Equity and Index Options                                       605.21            110,955.98             486.44            26,967.56             0.00                   0.00
+ Total (All Assets)                                                   605.21           -285,553.86             486.44           -289,389.56            0.00                   0.00
+
+
+
+
+Cash Report
+                                                                                                 Total                         Month to Date                          Year to Date
+Base Currency Summary
+Cash Detail
+Starting Cash                                                                                10,482.80
+ Commissions                                                                                   -101.29                                -101.29                            -3,085.44
+ Deposits                                                                                    69,945.00                            69,945.00                            369,945.00
+ Withdrawals                                                                                      0.00                                  0.00                           -70,090.25
+ Broker Interest Paid and Received                                                                0.00                                 -50.45                            -7,672.07
+ Trades (Sales)                                                                               1,256.00                               1,256.00                        1,992,253.53
+ Trades (Purchase)                                                                             -549.50                                -549.50                        -1,820,069.66
+ Other Fees                                                                                       0.00                                -296.03                            -1,714.59
+ Cash FX Translation Gain/Loss                                                                   -0.29
+Ending Cash                                                                                  81,032.72
+Ending Settled Cash                                                                          80,907.12
+HKD
+Cash Detail
+Starting Cash                                                                                13,714.41
+ Commissions                                                                                      0.00                                  0.00                                 -5.69
+ Deposits                                                                                    69,945.00                            69,945.00                            369,945.00
+ Withdrawals                                                                                      0.00                                  0.00                           -70,090.25
+ Broker Interest Paid and Received                                                                0.00                                  0.00                               242.40
+ Trades (Purchase)                                                                                0.00                                  0.00                          -304,693.47
+ Other Fees                                                                                       0.00                                -296.03                            -1,714.59
+Ending Cash                                                                                  83,659.41
+Ending Settled Cash                                                                          83,659.41
+USD
+
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                         Page: 4
+Cash Report
+                                                                                                                 Total                              Month to Date                           Year to Date
+Cash Detail
+Starting Cash                                                                                                 -411.71
+ Commissions                                                                                                   -12.90                                      -12.90                                 -395.44
+ Broker Interest Paid and Received                                                                               0.00                                       -6.43                               -1,017.86
+ Trades (Sales)                                                                                                160.00                                     160.00                               256,039.34
+ Trades (Purchase)                                                                                             -70.00                                      -70.00                           -194,581.00
+Ending Cash                                                                                                   -334.61
+Ending Settled Cash                                                                                           -350.61
+
+
+
+
+Open Positions
+Symbol                                               Quantity    Mult           Cost Price              Cost Basis           Close Price                      Value        Unrealized P/L           Code
+Equity and Index Options
+USD
+SPY 27JUN25 610 P                                          -1    100           0.1512926                    -15.13                0.0000                        0.00                15.13
+ Total                                                                                                      -15.13                                              0.00                15.13
+
+ Total in HKD                                                                                             -118.76                                               0.00               118.76
+
+
+
+
+Forex Balances
+Description                                                       Quantity     Cost Price         Cost Basis in HKD       Close Price                   Value in HKD   Unrealized P/L in HKD        Code
+Forex
+HKD
+HKD                                                             83,659.41         0.0000                 -83,659.41           1.0000                       83,659.41                   0.00
+USD                                                               -334.61    7.78001736                    2,603.27           7.8500                       -2,626.68                  -23.42
+ Total                                                                                                   -81,056.14                                        81,032.72                  -23.42
+
+
+
+
+Trades
+Symbol                                 Date/Time                Quantity     T. Price        C. Price      Proceeds      Comm/Fee          Basis      Realized P/L                 MTM P/L          Code
+Equity and Index Options
+USD
+                                       2025-06-20,
+SPY 20JUN25 590 P                                                       -1   0.1000           0.0000          10.00          -1.45          -8.55             0.00                    10.00            O
+                                       12:57:04
+                                       2025-06-20,
+SPY 20JUN25 590 P                                                       1    0.0000           0.0000           0.00           0.00          8.55              8.55                     0.00         C;Ep
+                                       16:20:00
+ Total SPY 20JUN25 590 P                                                0                                     10.00          -1.45          0.00              8.55                    10.00
+                                       2025-06-23,
+SPY 23JUN25 600 C                                                       -1   0.0900           0.1500           9.00          -0.87          -8.13             0.00                     -6.00           O
+                                       13:25:15
+                                       2025-06-23,
+SPY 23JUN25 600 C                                                       1    0.2900           0.1500          -29.00         -1.06          8.13            -21.93                    -14.00           C
+                                       13:29:01
+ Total SPY 23JUN25 600 C                                                0                                     -20.00         -1.93          0.00            -21.93                    -20.00
+                                       2025-06-23,
+SPY 23JUN25 592 P                                                       -1   0.1900           0.0000          19.00          -1.51         -17.49             0.00                    19.00            O
+                                       13:21:41
+
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                                                Page: 5
+Trades
+                                       2025-06-23,
+SPY 23JUN25 592 P                                    1    0.0000   0.0000     0.00     0.00     17.49     17.49     0.00     C;Ep
+                                       16:20:00
+ Total SPY 23JUN25 592 P                             0                       19.00     -1.51     0.00     17.49    19.00
+                                       2025-06-24,
+SPY 24JUN25 608 C                                    -1   0.1300   0.0000    13.00     -1.16    -11.84     0.00    13.00        O
+                                       11:01:23
+                                       2025-06-24,
+SPY 24JUN25 608 C                                    1    0.4100   0.0000   -41.00     -0.87    11.84    -30.03   -41.00        C
+                                       12:44:09
+ Total SPY 24JUN25 608 C                             0                      -28.00     -2.03     0.00    -30.03   -28.00
+                                       2025-06-24,
+SPY 24JUN25 603 P                                    -1   0.3900   0.0000    39.00     -0.87    -38.13     0.00    39.00        O
+                                       11:00:47
+                                       2025-06-24,
+SPY 24JUN25 603 P                                    1    0.0000   0.0000     0.00     0.00     38.13     38.13     0.00     C;Ep
+                                       16:20:00
+ Total SPY 24JUN25 603 P                             0                       39.00     -0.87     0.00     38.13    39.00
+                                       2025-06-25,
+SPY 25JUN25 609 C                                    -1   0.1500   0.0000    15.00     -0.87    -14.13     0.00    15.00        O
+                                       12:32:07
+                                       2025-06-25,
+SPY 25JUN25 609 C                                    1    0.0000   0.0000     0.00     0.00     14.13     14.13     0.00     C;Ep
+                                       16:20:00
+ Total SPY 25JUN25 609 C                             0                       15.00     -0.87     0.00     14.13    15.00
+                                       2025-06-25,
+SPY 25JUN25 605 P                                    -1   0.2700   0.0000    27.00     -0.87    -26.13     0.00    27.00        O
+                                       12:31:41
+                                       2025-06-25,
+SPY 25JUN25 605 P                                    1    0.0000   0.0000     0.00     0.00     26.13     26.13     0.00     C;Ep
+                                       16:20:00
+ Total SPY 25JUN25 605 P                             0                       27.00     -0.87     0.00     26.13    27.00
+                                       2025-06-26,
+SPY 26JUN25 615 C                                    -1   0.0200   0.0000     2.00     -1.46     -0.54     0.00     2.00        O
+                                       13:14:53
+                                       2025-06-26,
+SPY 26JUN25 615 C                                    1    0.0000   0.0000     0.00     0.00      0.54      0.54     0.00     C;Ep
+                                       16:20:00
+ Total SPY 26JUN25 615 C                             0                        2.00     -1.46     0.00      0.54     2.00
+                                       2025-06-26,
+SPY 26JUN25 608 P                                    -1   0.1000   0.0000    10.00     -1.04     -8.96     0.00    10.00        O
+                                       13:08:26
+                                       2025-06-26,
+SPY 26JUN25 608 P                                    1    0.0000   0.0000     0.00     0.00      8.96      8.96     0.00     C;Ep
+                                       16:20:00
+ Total SPY 26JUN25 608 P                             0                       10.00     -1.04     0.00      8.96    10.00
+                                       2025-06-27,
+SPY 27JUN25 610 P                                    -1   0.1600   0.0000    16.00     -0.87    -15.13     0.00    16.00        O
+                                       09:57:07
+ Total SPY 27JUN25 610 P                             -1                      16.00     -0.87    -15.13     0.00    16.00
+ Total                                                                       90.00    -12.90    -15.13    61.97    90.00
+ Total in HKD                                                               706.50   -101.29   -118.77   486.44   706.50
+
+
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                         Page: 6
+Interest Accruals                                                                                               Deposits & Withdrawals
+Base Currency Summary                                                                                           Date              Description                                                    Amount
+Starting Accrual Balance                                                                        0.00            HKD
+    Interest Accrued                                                                            -8.24           2025-06-12        Electronic Fund Transfer                                     69,945.00
+    Accrual Reversal                                                                            0.00             Total                                                                         69,945.00
+    FX Translation                                                                              0.00
+Ending Accrual Balance                                                                          -8.24
+USD
+Starting Accrual Balance                                                                        0.00
+    Interest Accrued                                                                            -1.05
+    Accrual Reversal                                                                            0.00
+Ending Accrual Balance                                                                          -1.05
+Ending Accrual Balance in HKD                                                                   -8.24
+
+
+
+
+Financial Instrument Information
+Symbol                                 Description                   Conid         Underlying   Listing Exch      Multiplier     Expiry            Delivery Month   Type              Strike      Code
+Equity and Index Options
+SPY 250620P00590000                    SPY 20JUN25 590 P             632040007     SPY          CBOE              100            2025-06-20        2025-06          P                 590
+SPY 250623C00600000                    SPY 23JUN25 600 C             790196205     SPY          CBOE              100            2025-06-23        2025-06          C                 600
+SPY 250623P00592000                    SPY 23JUN25 592 P             790794984     SPY          CBOE              100            2025-06-23        2025-06          P                 592
+SPY 250624C00608000                    SPY 24JUN25 608 C             790918146     SPY          CBOE              100            2025-06-24        2025-06          C                 608
+SPY 250624P00603000                    SPY 24JUN25 603 P             790919373     SPY          CBOE              100            2025-06-24        2025-06          P                 603
+SPY 250625C00609000                    SPY 25JUN25 609 C             791248217     SPY          CBOE              100            2025-06-25        2025-06          C                 609
+SPY 250625P00605000                    SPY 25JUN25 605 P             790921479     SPY          CBOE              100            2025-06-25        2025-06          P                 605
+SPY 250626C00615000                    SPY 26JUN25 615 C             791253886     SPY          CBOE              100            2025-06-26        2025-06          C                 615
+SPY 250626P00608000                    SPY 26JUN25 608 P             791560169     SPY          CBOE              100            2025-06-26        2025-06          P                 608
+SPY 250627P00610000                    SPY 27JUN25 610 P             783045162     SPY          CBOE              100            2025-06-27        2025-06          P                 610
+
+
+
+
+Codes
+Code                     Meaning                                                                          Code (Cont.)         Meaning (Cont.)
+A                        Assignment                                                                       LT                   Long Term P/L
+ADR                      ADR Fee Accrual                                                                  Lo                   Direct Loan
+AEx                      Automatic exercise for dividend-related recommendation.                          M                    Entered manually by IB
+AFx                      AutoFX conversion resulting from trading                                         MEx                  Manual exercise for dividend-related recommendation.
+Adj                      Adjustment                                                                       ML                   Maximize Losses tax basis election
+Al                       Allocation                                                                       MLG                  Maximize Long Term Gain tax basis election
+Aw                       Away Trade                                                                       MLL                  Maximize Long Term Loss tax basis election
+B                        Automatic Buy-in                                                                 MSG                  Maximize Short Term Gain tax basis election
+Bo                       Direct Borrow                                                                    MSL                  Maximize Short Term Loss tax basis election
+C                        Closing Trade                                                                    O                    Opening Trade
+CD                       Cash Delivery                                                                    Off                  Yes and No contracts offset to $1.00 cash settlement
+CP                       Complex Position                                                                 P                    Partial Execution
+Ca                       Cancelled                                                                        PE                   Perpetual Investment
+Co                       Corrected Trade                                                                  PI                   Price Improvement
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                                               Page: 7
+    Codes
+Code                         Meaning                                                                                           Code (Cont.)             Meaning (Cont.)
+                             Part or all of this transaction was a Crossing executed as dual agent by IB for two IB
+Cx                                                                                                                             PTA                      Post Trade Allocation
+                             customers
+DT                           Discounted Trade                                                                                  Po                       Interest or Dividend Accrual Posting
+                                                                                                                                                        Part or all of this transaction was executed by the Exchange as a Crossing by IB against an
+De                           Delivery or Conversion Action                                                                     Pr                       IB affiliate and is therefore classified as a Principal and not an agency trade
+ETF                          ETF Creation/Redemption                                                                           R                        Dividend Reinvestment
+Ep                           Resulted from an Expired Position                                                                 RED                      Redemption to Investor
+Ex                           Exercise                                                                                          RI                       Recurring Investment
+                                                                                                                                                        IB acted as agent for the fractional share portion of this trade, which was executed by an IB
+FP                           The fractional portion of this trade was executed against IB or an affiliate.                     RP                       affiliate as riskless principal.
+                             The fractional portion of this trade was executed against IB or an affiliate. IB acted as agent RPA                        IB acted as agent for both the fractional share portion and the whole share portion of this
+FPA                          for the whole share portion of this trade.                                                                                 trade; the fractional share portion was executed by an IB Affiliate as riskless principal.
+G                            Trade in Guaranteed Account Segment                                                               Rb                       Rebill
+GEA                          Exercise or Assignment resulting from offsetting positions                                        Re                       Interest or Dividend Accrual Reversal
+HC                           Highest Cost tax basis election                                                                   Ri                       Reimbursement
+HFI                          Investment Transferred to Hedge Fund                                                              S0                       Contract settled to zero value
+HFR                          Redemption from Hedge Fund                                                                        S1                       Contract settled to $1.00
+                                                                                                                                                        Trade is subject to IBKR Lite Surcharge Fee if volume of such trades exceeds 10% of the
+I                            Internal Transfer                                                                                 SF                       total monthly Lite trade volume
+IA                           The transaction was executed against IB or an affiliate                                           SI                       This order was solicited by Interactive Brokers
+                             A portion of the order was executed against IB or an affiliate; IB acted as agent on a
+IM                                                                                                                             SL                       Specific Lot tax basis election
+                             portion.
+INV                          Investment Transfer from Investor                                                                 SO                       This order was marked as solicited by your Introducing Broker
+                             This transaction was executed as part of an IPO in which IB was a member of the selling                                    Customer designated this trade for shortened settlement and so is subject to execution at
+IPO                                                                                                                            SS
+                             group and is classified as a Principal trade.                                                                              prices above the prevailing market
+L                            Ordered by IB (Margin Violation)                                                                  ST                       Short Term P/L
+LD                           Adjusted by Loss Disallowed from Wash Sale                                                        T                        Transfer
+LF                           Liquidation of fractional position by IB                                                          Un                       Unvested shares from stock grant
+LI                           Last In, First Out (LIFO) tax basis election                                                      XCH                      Mutual Fund Exchange Transaction
+
+
+
+
+    Notes/Legal Notes
+Notes
+        1.      Stock exchange transactions generally settle on the trade date plus one business or two business days (T+1 or T+2). Options, futures and US open-end mutual fund transactions also settle on trade date plus one
+                business day. Some exchanges and other transaction types may have longer or shorter settlement periods. Ending settled cash reflects the cash that has actually settled.
+        2.      Initial and maintenance margin requirements are available within the Account Window of the Trader Workstation or the Margin Report available in Account Management.
+        3.      Quantities preceded by a "-" sign indicate sell transactions. Other transactions are purchases.
+        4.      IB acts as agent in executing the fractional share portion of your order. In certain circumstances, IB routes the fractional portion of your order to an affiliate, which may execute the fractional portion of the order as
+                principal. In such circumstances, this is indicated by the codes associated with the trade. If an IB affiliate acts as principal in executing any fractional share portion of your order, the order will be executed at the price
+                displayed for the opposite side of the NBBO from your order (the offer if you are buying and the bid if you are selling) at the time of execution. If an IB affiliate is acting as riskless principal in connection with filling the
+                fractional share portion of your order, the affiliate will execute the fractional share portion of your order at the price it receives for the execution of the whole share.
+        5.      In case of partial executions, commissions are charged on the total quantity executed on the original order. The commission is displayed on the first partial execution only.
+        6.      Trade execution times are displayed in United States Eastern Time.
+        7.      Borrow Fee Rate represents the cost to borrow stock expressed in percent per annum. It is applied to the collateral value on the stock borrow contract and is separate from any interest earned on credit cash balances.
+                Similarly, Loan Fee Rate represents the benefit to lend stock. A positive rate indicates a cost to the borrower/benefit to the lender and a negative rate indicates a benefit to the borrower/cost to the lender. In general, the
+                fee rates for hard-to-borrow stocks are higher than for normal availability stocks.
+        8.      Interest Rate on Customer Collateral represents the interest paid on the collateral posted to the customer's account and received from lending stock. A positive rate indicates a benefit to the lender.
+        9.      The closing prices on this Activity Statement are indicative and may come from third-party sources. Interactive Brokers does not warrant the accuracy of the prices provided by third-party sources. Due to time zone
+                differences, certain non-US mutual funds may deliver closing prices after the Activity Statement has been produced and the closing prices for such funds will reflect the previous day's price.
+       10.      All Market Data and Research services are provided through Global Financial Information Services (GmbH).
+
+
+
+    Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                                                                                            Page: 8
+Notes/Legal Notes
+   11.      Market data is provided by Global Financial Information Services (GmbH). Your local broker collects amounts owed for fees and tax for such data on behalf of Global Financial Information Services (GmbH). Note, you are
+            responsible for any applicable taxes relating to the provision of these services.
+   12.      RUS denotes Ruble balances that have been restricted by Russian authorities.
+Mutual Fund Notes
+    1.      All purchase and sales of mutual funds are calculated against the published NAV (Net Asset Value) of the underlying fund and is displayed on this confirmation as the "C. Price" (Closing Price). Due to any fees charged
+            by a fund and/or any share rounding, the net price you pay may vary from the published NAV and is shown on this confirmation as the "T. Price" (Trade Price).
+Fixed Income Notes
+    1.      Call features for bonds or preferred stocks may affect the yield. For zero coupon, compound interest and multiplier securities, there are no periodic payments and securities may be callable below maturity value without
+            notice to holder unless registered. For asset-backed securities, the actual yield may vary depending on the speed at which the underlying note is pre-paid. For additional information regarding bond yield, please contact
+            the IB Help Desk at: ibkr.com/help. If this debt security is unrated by a nationally recognized statistical rating organization, it may pose a high risk of default. You should consult an independent advisor to determine
+            whether unrated bonds are appropriate for your portfolio in light of your goals and your financial circumstances. Fees charged by bond trading centers are included in the cost of bond transactions.
+Legal Notes
+    1.      Please promptly report any inaccuracy or discrepancy in this statement, or in your account. Contact the IB Customer Service Department in writing using the form available on the IB website. You may also contact IB by
+            phone, but if you report an error by phone, you should re-confirm such oral communication in writing in order to protect your rights.
+
+            Interactive Brokers Singapore Pte. Ltd., www.interactivebrokers.com.sg, +65 6923 5600 (S.G.)
+
+            Interactive Brokers Hong Kong Ltd, www.interactivebrokers.com.hk, +852 2156 7907 (H.K.)
+
+            Interactive Brokers LLC, www.interactivebrokers.com, 877-442-2757 (U.S.)
+
+            Interactive Brokers (UK) (Ltd), www.interactivebrokers.co.uk, 00800-42-276537 (Intl)
+
+            Interactive Brokers Canada Inc., www.interactivebrokers.ca, 877-745-4222 (Can.)
+
+    2.      Interactive Brokers Hong Kong Ltd is located at Suite 1512, Two Pacific Place, 88 Queensway, Admiralty, Hong Kong.
+    3.      Unless otherwise noted, Interactive Brokers acted as agent in the execution of the above transactions. For those exchanges where IB is not a direct clearing member or custodian, IB may use one of the following clearing
+            agents or sub-custodians: Interactive Brokers LLC and Interactive Brokers (U.K.) Limited.
+    4.      IB acts as agent or riskless principal in foreign currency exchange transactions. Such transactions are executed against an IB affiliate or a third party, which acts as principal in such transactions and may have a long or
+            short position and may have profited or lost in connection with the transaction. Foreign currency exchange transactions executed by Customer through IB are not regulated or overseen by the SFC.
+    5.      IB accepts liquidity rebates or other order flow payments from Alternative Trading Systems, market makers and exchanges for certain orders in stocks. IB receives payment for some option orders pursuant to exchange-
+            mandated marketing fee programs or other arrangements. The source and nature of any compensation received by IB in connection with any transaction is available upon written request of the customer. For further
+            information, check the IB website and the Order Routing and Payment for Order Flow Disclosure provided when you opened your account and annually or visit ibkr.com/help.
+    6.      For security futures trades, if not already indicated on this statement, information about the time of any transaction, the identity of the counterparty to the transaction, and whether IB is acting as agent or principal, as
+            agent for the counterparty, as agent for both parties to the contract, or as principal, and if acting as principal, whether the transaction was a block transaction or an exchange for physicals transaction, will be available
+            upon written request of the customer.
+    7.      Customer is requested to promptly advise Interactive Brokers of any material change in Customer's investment objectives.
+    8.      For trades executed on the ASX market, the ASX 24 market and the Cboe Australia market, this confirmation is issued subject to: (i) the Applicable Laws, the directions, decisions and requirements of the relevant market
+            operator, the operating rules of the relevant market, the clearing rules and where relevant, the relevant settlement rules, (ii) the customs and usages of the relevant financial market, and (iii) the correction of errors and
+            omissions. Trades in Cash Market Products (as that term is defined in the relevant ASIC market integrity rules) on ASX market and Cboe Australia are cleared by BNP Paribas, ARBN 149 440 291, AFSL 402467, who is
+            a participant of ASX Clear Pty Ltd and ASX Settlement Pty Ltd. Trades in Derivative Products on ASX and all products on ASX 24 are cleared by Interactive Brokers Australia (“IBA”) as a participant of ASX Clear Pty Ltd
+            and ASX Clear (Futures) Pty Ltd. If your transaction was a crossing transaction, IBA may have either acted on behalf of (i) both the buyer and seller of this transaction, or (ii) on behalf of the buyer or seller on one side of
+            the transaction and acted as Principal on the other side. Under the Corporations Act 2001, where IBA enters into an exchange traded derivative on a customer's behalf, IBA is regarded as having issued the derivative to
+            the customer.
+    9.      For All Options Trades Executed on the Stock Exchange of Hong Kong ("SEHK"): (a) Options can involve a high degree of risk and may not be suitable for every investor. Investors should ensure they understand those
+            risks before participating in the options market. (b) All options contracts executed on the SEHK were executed by Interactive Brokers Hong Kong Limited. (c) In the event of a default committed by Interactive Brokers
+            resulting in the client suffering any pecuniary loss, the client shall have a right to claim under the Investor Compensation Fund established under the Hong Kong Securities and Futures Ordinance, subject to the terms of
+            the Investor Compensation Fund from time to time. (d) All Exchange Traded Options Business made for or on behalf of a client shall be subject to the relevant provisions of the constitution, Rules of The Stock Exchange
+            of Hong Kong Limited ("SEHK Rules"), regulations, the Articles, customs and usages of SEHK, the Options Trading Rules, the Clearing Rules of SEOCH, the CCASS Rules and the laws of Hong Kong, which shall be
+            binding on both Interactive Brokers and the client.
+
+
+
+
+Activity Statement - June 12, 2025 - June 27, 2025                                                                                                                                                                                      Page: 9
+

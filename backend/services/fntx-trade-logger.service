@@ -1,0 +1,26 @@
+[Unit]
+Description=FNTX 24/7 IBKR Trade Logger Service
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=info
+WorkingDirectory=/home/info/fntx-ai-v1/backend
+ExecStart=/usr/bin/python3 /home/info/fntx-ai-v1/backend/services/trade_logger_service.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/info/fntx-ai-v1/backend/trade_logger.log
+StandardError=append:/home/info/fntx-ai-v1/backend/trade_logger_error.log
+
+# Environment
+Environment="IBKR_HOST=127.0.0.1"
+Environment="IBKR_PORT=4001"
+Environment="DB_HOST=localhost"
+Environment="DB_PORT=5432"
+Environment="DB_NAME=fntx_trading"
+Environment="DB_USER=info"
+Environment="DB_PASSWORD="
+Environment="PYTHONPATH=/home/info/fntx-ai-v1"
+
+[Install]
+WantedBy=multi-user.target

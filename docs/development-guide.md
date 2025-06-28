@@ -1,4 +1,4 @@
-# FNTX.ai Local Development Guide
+# FNTX AI Local Development Guide
 
 ## 🚀 Quick Start
 

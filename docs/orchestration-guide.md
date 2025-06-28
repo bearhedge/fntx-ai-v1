@@ -1,8 +1,8 @@
-# FNTX.ai Agent Orchestration System
+# FNTX AI Agent Orchestration System
 
 ## 🚀 Overview
 
-The FNTX.ai Orchestration System coordinates 5 specialized AI agents to execute autonomous SPY options trading with full transparency and user control. Each trade journey is tracked step-by-step with real-time updates, risk assessments, and agent rationale.
+The FNTX AI Orchestration System coordinates 5 specialized AI agents to execute autonomous SPY options trading with full transparency and user control. Each trade journey is tracked step-by-step with real-time updates, risk assessments, and agent rationale.
 
 ## 🤖 Agent Architecture
 

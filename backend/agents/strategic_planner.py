@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai StrategicPlannerAgent - Strategy Formulation and Planning
+FNTX AI StrategicPlannerAgent - Strategy Formulation and Planning
 Generates optimal trading strategies based on market conditions and user preferences
 """
 

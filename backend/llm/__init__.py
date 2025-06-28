@@ -1,5 +1,5 @@
 """
-FNTX.ai LLM Module - Unified interface for all language model interactions
+FNTX AI LLM Module - Unified interface for all language model interactions
 """
 
 from .model_router import ModelRouter

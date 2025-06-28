@@ -1,5 +1,5 @@
 """
-Model Context Protocol (MCP) implementation for FNTX.ai
+Model Context Protocol (MCP) implementation for FNTX AI
 Provides persistent memory, context management, and cross-agent communication.
 """
 

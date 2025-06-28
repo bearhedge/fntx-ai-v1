@@ -1,5 +1,5 @@
 """
-Password hashing utilities for FNTX.ai authentication
+Password hashing utilities for FNTX AI authentication
 """
 import bcrypt
 import re

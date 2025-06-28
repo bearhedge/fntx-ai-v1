@@ -1,6 +1,6 @@
 # MCP Integration Migration Guide
 
-This guide explains how to migrate existing FNTX.ai agents to use the new Model Context Protocol (MCP) memory system.
+This guide explains how to migrate existing FNTX AI agents to use the new Model Context Protocol (MCP) memory system.
 
 ## Overview
 

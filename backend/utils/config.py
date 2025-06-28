@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai Configuration Management
+FNTX AI Configuration Management
 Centralized configuration for all backend services and agents.
 """
 

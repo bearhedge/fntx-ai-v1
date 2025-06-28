@@ -1,8 +1,8 @@
-# FNTX.ai - Autonomous Options Trading Agent
+# FNTX AI
 
 ## Overview
 
-FNTX.ai is an AI-driven autonomous options trading system that executes daily SPY options selling strategies. The system provides automated trading functionality through intelligent decision-making algorithms.
+FNTX AI is an AI-driven autonomous options trading system that executes options strategies. 
 
 ## Quick Start
 

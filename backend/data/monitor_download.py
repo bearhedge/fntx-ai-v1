@@ -1,76 +1,123 @@
 #!/usr/bin/env python3
 """
-Monitor ThetaTerminal download progress
+Monitor ThetaData Download Progress
+Real-time monitoring of Greeks, IV, and historical data downloads
 """
-import psycopg2
-import time
 import sys
-import os
+import time
+import psycopg2
 from datetime import datetime
+import os
 
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from config.theta_config import DB_CONFIG
+sys.path.append('/home/info/fntx-ai-v1')
+from backend.config.theta_config import DB_CONFIG
 
-def monitor_progress():
+def monitor_downloads():
     """Monitor download progress in real-time"""
-    conn = psycopg2.connect(**DB_CONFIG)
     
-    print("ThetaTerminal Download Monitor")
-    print("=" * 60)
+    print("📊 ThetaData Download Monitor")
+    print("=" * 50)
+    print("🔄 Refreshing every 30 seconds...")
+    print("Press Ctrl+C to stop monitoring")
+    print()
     
     while True:
-        cursor = conn.cursor()
-        
-        # Get overall statistics
-        cursor.execute("""
-            SELECT 
-                COUNT(*) as total_records,
-                COUNT(DISTINCT contract_id) as unique_contracts,
-                MIN(datetime) as earliest_data,
-                MAX(datetime) as latest_data,
-                pg_size_pretty(pg_database_size('options_data')) as db_size
-            FROM theta.options_ohlc
-        """)
-        
-        stats = cursor.fetchone()
-        
-        # Get recent download status
-        cursor.execute("""
-            SELECT symbol, start_date, end_date, status, records_downloaded
-            FROM theta.download_status
-            WHERE status IN ('in_progress', 'completed')
-            ORDER BY start_date DESC
-            LIMIT 5
-        """)
-        
-        recent = cursor.fetchall()
-        
-        # Clear screen and display
-        os.system('clear' if os.name == 'posix' else 'cls')
-        
-        print(f"Last Updated: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
-        print("=" * 60)
-        print(f"Total Records: {stats[0]:,}")
-        print(f"Unique Contracts: {stats[1]:,}")
-        print(f"Date Range: {stats[2]} to {stats[3]}")
-        print(f"Database Size: {stats[4]}")
-        print()
-        print("Recent Downloads:")
-        print("-" * 60)
-        print(f"{'Symbol':<6} {'Start Date':<12} {'End Date':<12} {'Status':<12} {'Records':<10}")
-        print("-" * 60)
-        
-        for row in recent:
-            print(f"{row[0]:<6} {row[1]} {row[2]} {row[3]:<12} {row[4] or 0:>10,}")
-        
-        print()
-        print("Press Ctrl+C to exit")
-        
-        cursor.close()
-        time.sleep(10)  # Update every 10 seconds
+        try:
+            conn = psycopg2.connect(**DB_CONFIG)
+            cursor = conn.cursor()
+            
+            # Clear screen (works on most terminals)
+            os.system('clear' if os.name == 'posix' else 'cls')
+            
+            print(f"📊 ThetaData Download Status - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+            print("=" * 80)
+            
+            # Overall summary by data type
+            cursor.execute("""
+                SELECT data_type,
+                       COUNT(*) as total_batches,
+                       SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed,
+                       SUM(CASE WHEN status = 'in_progress' THEN 1 ELSE 0 END) as in_progress,
+                       SUM(CASE WHEN status = 'failed' THEN 1 ELSE 0 END) as failed,
+                       SUM(COALESCE(records_downloaded, 0)) as total_records
+                FROM theta.download_status
+                WHERE symbol = 'SPY'
+                GROUP BY data_type
+                ORDER BY data_type
+            """)
+            
+            print("📈 Summary by Data Type:")
+            print("Type     | Batches | Done | Progress | Failed | Records")
+            print("-" * 60)
+            
+            for row in cursor.fetchall():
+                data_type, total, completed, in_progress, failed, records = row
+                print(f"{data_type:8} | {total:7} | {completed:4} | {in_progress:8} | {failed:6} | {records:,}")
+            
+            print()
+            
+            # Recent activity
+            cursor.execute("""
+                SELECT data_type, status, start_date, end_date, 
+                       records_downloaded, started_at, completed_at
+                FROM theta.download_status
+                WHERE symbol = 'SPY' 
+                AND (status = 'in_progress' OR completed_at > NOW() - INTERVAL '1 hour')
+                ORDER BY started_at DESC
+                LIMIT 10
+            """)
+            
+            print("🔄 Recent Activity (Last Hour + In Progress):")
+            print("Type     | Status     | Period         | Records   | Started")
+            print("-" * 70)
+            
+            recent_results = cursor.fetchall()
+            if recent_results:
+                for row in recent_results:
+                    data_type, status, start_date, end_date, records, started_at, completed_at = row
+                    records_str = f"{records:,}" if records else "0"
+                    started_str = started_at.strftime('%H:%M') if started_at else "N/A"
+                    print(f"{data_type:8} | {status:10} | {start_date}-{end_date} | {records_str:8} | {started_str}")
+            else:
+                print("No recent activity")
+            
+            print()
+            
+            # Progress by year
+            cursor.execute("""
+                SELECT EXTRACT(YEAR FROM start_date) as year,
+                       data_type,
+                       COUNT(*) as batches,
+                       SUM(CASE WHEN status = 'completed' THEN 1 ELSE 0 END) as completed,
+                       SUM(COALESCE(records_downloaded, 0)) as records
+                FROM theta.download_status
+                WHERE symbol = 'SPY'
+                GROUP BY EXTRACT(YEAR FROM start_date), data_type
+                ORDER BY year DESC, data_type
+            """)
+            
+            print("📅 Progress by Year:")
+            print("Year | Type     | Batches | Done | Records")
+            print("-" * 45)
+            
+            for row in cursor.fetchall():
+                year, data_type, batches, completed, records = row
+                year_int = int(year) if year else 0
+                print(f"{year_int} | {data_type:8} | {batches:7} | {completed:4} | {records:,}")
+            
+            cursor.close()
+            conn.close()
+            
+            print()
+            print("🔄 Auto-refreshing in 30 seconds... (Ctrl+C to stop)")
+            time.sleep(30)
+            
+        except KeyboardInterrupt:
+            print("\n👋 Monitoring stopped by user")
+            break
+        except Exception as e:
+            print(f"❌ Monitor error: {e}")
+            time.sleep(30)
 
 if __name__ == "__main__":
-    try:
-        monitor_progress()
-    except KeyboardInterrupt:
-        print("\nMonitoring stopped.")
+    monitor_downloads()

@@ -30,7 +30,7 @@ interface SidebarProps {
 // Demo chats for guest users
 const demoChats: Chat[] = [{
   id: 'demo-1',
-  title: 'Welcome to FNTX.ai',
+  title: 'Welcome to FNTX AI',
   preview: 'How can I help you trade SPY options today?',
   date: 'Now',
   icon: '🧠',

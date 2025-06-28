@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai Agent Orchestrator - Coordinates all 5 agents for end-to-end trade execution
+FNTX AI Agent Orchestrator - Coordinates all 5 agents for end-to-end trade execution
 Manages the complete trade lifecycle from user intent to execution and evaluation
 """
 

@@ -1,7 +1,7 @@
 # Gemini-Only Cloud LLM Migration Summary
 
 ## Overview
-This document summarizes the refactoring of FNTX.ai to enforce a Gemini-only cloud LLM policy, removing all references to Claude/Anthropic APIs and creating a clean model abstraction layer.
+This document summarizes the refactoring of FNTX AI to enforce a Gemini-only cloud LLM policy, removing all references to Claude/Anthropic APIs and creating a clean model abstraction layer.
 
 ## Key Changes Made
 
@@ -105,4 +105,4 @@ To add DeepSeek or other local models:
 3. Monitor usage and costs through Google Cloud Console
 
 ## Conclusion
-The FNTX.ai codebase now has a clean, extensible LLM abstraction layer with Gemini as the primary cloud provider. All Claude/Anthropic references have been removed from the implementation, and the system can easily support additional providers through the model router pattern.
+The FNTX AI codebase now has a clean, extensible LLM abstraction layer with Gemini as the primary cloud provider. All Claude/Anthropic references have been removed from the implementation, and the system can easily support additional providers through the model router pattern.

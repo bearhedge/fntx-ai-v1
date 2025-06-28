@@ -1,4 +1,4 @@
-# Google OAuth Setup Guide for FNTX.ai
+# Google OAuth Setup Guide for FNTX AI
 
 ## Current Implementation
 The application currently uses a mock Google OAuth implementation for development that allows you to test the Google login flow without setting up actual Google OAuth credentials.

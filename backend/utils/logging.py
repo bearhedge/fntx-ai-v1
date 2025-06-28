@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai Logging Configuration
+FNTX AI Logging Configuration
 Centralized logging setup for all backend services and agents.
 """
 

@@ -61,3 +61,13 @@ fntx.db
 
 # Process files
 *.pid
+runtime/
+
+# Claude-specific
+.claude/
+download_checkpoint.json
+
+# Tools
+tools/*/node_modules/
+tools/*/data/
+tools/*/checkpoints/

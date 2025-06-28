@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai RewardModelAgent - Reinforcement Learning from Human Feedback (RLHF)
+FNTX AI RewardModelAgent - Reinforcement Learning from Human Feedback (RLHF)
 Learns user preferences and generates reward signals for strategy optimization
 """
 

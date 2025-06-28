@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
-ThetaTerminal Historical Data Downloader
-Downloads 4 years of SPY options data with intelligent resumption
+Enhanced ThetaTerminal Historical Data Downloader
+Downloads 8 years of SPY options data with Greeks and IV (Standard subscription)
 """
 import os
 import sys
@@ -25,18 +25,24 @@ logging.basicConfig(**LOGGING_CONFIG)
 logger = logging.getLogger(__name__)
 
 
-class ThetaDownloader:
-    """Downloads historical options data from ThetaTerminal"""
+class EnhancedThetaDownloader:
+    """Downloads historical options data with Greeks and IV from ThetaTerminal"""
     
     def __init__(self):
         self.conn = self._connect_db()
         self.session = requests.Session()
         self.stats = {
             'contracts_processed': 0,
-            'records_downloaded': 0,
+            'ohlc_records': 0,
+            'greeks_records': 0,
+            'iv_records': 0,
             'errors': 0,
             'start_time': datetime.now()
         }
+        
+        # Available data types based on subscription level
+        self.available_data_types = DATA_TYPES[SUBSCRIPTION_LEVEL]
+        logger.info(f"Subscription: {SUBSCRIPTION_LEVEL}, Available: {self.available_data_types}")
     
     def _connect_db(self):
         """Connect to PostgreSQL database"""
@@ -148,7 +154,7 @@ class ThetaDownloader:
                 if "No data" in response.text:
                     return 0  # No data for this contract
                 else:
-                    logger.error(f"API error {response.status_code}: {response.text}")
+                    logger.error(f"OHLC API error {response.status_code}: {response.text}")
                     return -1
             
             data = response.json()
@@ -203,30 +209,222 @@ class ThetaDownloader:
             return len(records)
             
         except requests.RequestException as e:
-            logger.error(f"Request failed for {expiration} {strike}{option_type}: {e}")
+            logger.error(f"OHLC request failed for {expiration} {strike}{option_type}: {e}")
             return -1
         except Exception as e:
-            logger.error(f"Error processing {expiration} {strike}{option_type}: {e}")
+            logger.error(f"OHLC error processing {expiration} {strike}{option_type}: {e}")
             self.conn.rollback()
             return -1
+    
+    def download_greeks_data(self, expiration: str, strike: int, option_type: str,
+                           start_date: str, end_date: str) -> int:
+        """Download Greeks data for a single contract (Standard subscription)"""
+        if 'greeks' not in self.available_data_types:
+            return 0
+            
+        url = f"{THETA_HTTP_API}/v2/hist/option/greeks"
+        params = {
+            'root': SPY_CONFIG['symbol'],
+            'exp': expiration,
+            'strike': strike * 1000,  # Strike in thousandths
+            'right': option_type,
+            'start_date': start_date,
+            'end_date': end_date,
+            'ivl': DOWNLOAD_CONFIG['interval_ms']
+        }
+        
+        try:
+            response = self.session.get(url, params=params, timeout=30)
+            
+            if response.status_code != 200:
+                if "No data" in response.text:
+                    return 0
+                else:
+                    logger.error(f"Greeks API error {response.status_code}: {response.text}")
+                    return -1
+            
+            data = response.json()
+            if not data.get('response'):
+                return 0
+            
+            # Get contract ID
+            cursor = self.conn.cursor()
+            cursor.execute("""
+                SELECT theta.get_or_create_contract(%s, %s, %s, %s)
+            """, (SPY_CONFIG['symbol'], 
+                  datetime.strptime(expiration, "%Y%m%d").date(), 
+                  strike, 
+                  option_type))
+            
+            contract_id = cursor.fetchone()[0]
+            
+            # Prepare Greeks data for bulk insert
+            records = []
+            for row in data['response']:
+                # Format: [ms_of_day, delta, gamma, theta, vega, rho, date]
+                date_str = str(row[6])
+                date_obj = datetime.strptime(date_str, "%Y%m%d")
+                
+                # Convert ms_of_day to full timestamp
+                ms_of_day = row[0]
+                timestamp = date_obj + timedelta(milliseconds=ms_of_day)
+                
+                records.append((
+                    contract_id,
+                    timestamp,
+                    row[1],  # delta
+                    row[2],  # gamma
+                    row[3],  # theta
+                    row[4],  # vega
+                    row[5]   # rho
+                ))
+            
+            # Bulk insert
+            if records:
+                execute_batch(cursor, """
+                    INSERT INTO theta.options_greeks 
+                    (contract_id, datetime, delta, gamma, theta, vega, rho)
+                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    ON CONFLICT (contract_id, datetime) DO NOTHING
+                """, records, page_size=1000)
+                
+                self.conn.commit()
+            
+            cursor.close()
+            return len(records)
+            
+        except requests.RequestException as e:
+            logger.error(f"Greeks request failed for {expiration} {strike}{option_type}: {e}")
+            return -1
+        except Exception as e:
+            logger.error(f"Greeks error processing {expiration} {strike}{option_type}: {e}")
+            self.conn.rollback()
+            return -1
+    
+    def download_iv_data(self, expiration: str, strike: int, option_type: str,
+                        start_date: str, end_date: str) -> int:
+        """Download Implied Volatility data for a single contract"""
+        if 'iv' not in self.available_data_types:
+            return 0
+            
+        url = f"{THETA_HTTP_API}/v2/hist/option/iv"
+        params = {
+            'root': SPY_CONFIG['symbol'],
+            'exp': expiration,
+            'strike': strike * 1000,
+            'right': option_type,
+            'start_date': start_date,
+            'end_date': end_date,
+            'ivl': DOWNLOAD_CONFIG['interval_ms']
+        }
+        
+        try:
+            response = self.session.get(url, params=params, timeout=30)
+            
+            if response.status_code != 200:
+                if "No data" in response.text:
+                    return 0
+                else:
+                    logger.error(f"IV API error {response.status_code}: {response.text}")
+                    return -1
+            
+            data = response.json()
+            if not data.get('response'):
+                return 0
+            
+            # Get contract ID
+            cursor = self.conn.cursor()
+            cursor.execute("""
+                SELECT theta.get_or_create_contract(%s, %s, %s, %s)
+            """, (SPY_CONFIG['symbol'], 
+                  datetime.strptime(expiration, "%Y%m%d").date(), 
+                  strike, 
+                  option_type))
+            
+            contract_id = cursor.fetchone()[0]
+            
+            # Prepare IV data for bulk insert
+            records = []
+            for row in data['response']:
+                # Format: [ms_of_day, implied_volatility, date]
+                date_str = str(row[2])
+                date_obj = datetime.strptime(date_str, "%Y%m%d")
+                
+                # Convert ms_of_day to full timestamp
+                ms_of_day = row[0]
+                timestamp = date_obj + timedelta(milliseconds=ms_of_day)
+                
+                records.append((
+                    contract_id,
+                    timestamp,
+                    row[1]   # implied_volatility
+                ))
+            
+            # Bulk insert
+            if records:
+                execute_batch(cursor, """
+                    INSERT INTO theta.options_iv 
+                    (contract_id, datetime, implied_volatility)
+                    VALUES (%s, %s, %s)
+                    ON CONFLICT (contract_id, datetime) DO NOTHING
+                """, records, page_size=1000)
+                
+                self.conn.commit()
+            
+            cursor.close()
+            return len(records)
+            
+        except requests.RequestException as e:
+            logger.error(f"IV request failed for {expiration} {strike}{option_type}: {e}")
+            return -1
+        except Exception as e:
+            logger.error(f"IV error processing {expiration} {strike}{option_type}: {e}")
+            self.conn.rollback()
+            return -1
+    
+    def download_contract_data(self, expiration: str, strike: int, option_type: str,
+                             start_date: str, end_date: str) -> Dict[str, int]:
+        """Download all available data types for a single contract"""
+        results = {}
+        
+        # Download OHLC data (always available)
+        results['ohlc'] = self.download_ohlc_data(expiration, strike, option_type, start_date, end_date)
+        
+        # Download Greeks if available
+        if 'greeks' in self.available_data_types:
+            results['greeks'] = self.download_greeks_data(expiration, strike, option_type, start_date, end_date)
+        
+        # Download IV if available
+        if 'iv' in self.available_data_types:
+            results['iv'] = self.download_iv_data(expiration, strike, option_type, start_date, end_date)
+        
+        return results
     
     def download_date_range(self, start_date: str, end_date: str):
         """Download all options data for a date range"""
         logger.info(f"Downloading SPY options from {start_date} to {end_date}")
         
-        # Check if already downloaded
-        if self.check_download_status(SPY_CONFIG['symbol'], start_date, end_date, 'ohlc'):
-            logger.info(f"Data for {start_date} to {end_date} already downloaded")
+        # Check what data types we need to download
+        data_types_to_download = []
+        for data_type in self.available_data_types:
+            if not self.check_download_status(SPY_CONFIG['symbol'], start_date, end_date, data_type):
+                data_types_to_download.append(data_type)
+        
+        if not data_types_to_download:
+            logger.info(f"All data for {start_date} to {end_date} already downloaded")
             return
         
-        # Mark as in progress
-        self.mark_download_status(SPY_CONFIG['symbol'], start_date, end_date, 'ohlc', 'in_progress')
+        logger.info(f"Downloading data types: {data_types_to_download}")
+        
+        # Mark all data types as in progress
+        for data_type in data_types_to_download:
+            self.mark_download_status(SPY_CONFIG['symbol'], start_date, end_date, data_type, 'in_progress')
         
         # Get all expirations in range
         expirations = self.get_spy_expirations(start_date, end_date)
         logger.info(f"Found {len(expirations)} expiration dates")
         
-        total_records = 0
+        totals = {data_type: 0 for data_type in data_types_to_download}
         
         # Process each expiration
         for exp_idx, expiration in enumerate(tqdm(expirations, desc="Expirations")):
@@ -237,18 +435,35 @@ class ThetaDownloader:
                     # Rate limiting
                     time.sleep(DOWNLOAD_CONFIG['rate_limit_delay'])
                     
-                    # Download with retries
+                    # Download all data types with retries
                     for attempt in range(DOWNLOAD_CONFIG['max_retries']):
-                        records = self.download_ohlc_data(
-                            expiration, strike, option_type, start_date, end_date
-                        )
+                        try:
+                            results = self.download_contract_data(
+                                expiration, strike, option_type, start_date, end_date
+                            )
+                            
+                            # Check if all downloads succeeded
+                            all_success = True
+                            for data_type, records in results.items():
+                                if records < 0:
+                                    all_success = False
+                                    break
+                                totals[data_type] = totals.get(data_type, 0) + records
+                            
+                            if all_success:
+                                self.stats['contracts_processed'] += 1
+                                self.stats['ohlc_records'] += results.get('ohlc', 0)
+                                self.stats['greeks_records'] += results.get('greeks', 0)
+                                self.stats['iv_records'] += results.get('iv', 0)
+                                break
+                            else:
+                                if attempt < DOWNLOAD_CONFIG['max_retries'] - 1:
+                                    time.sleep(DOWNLOAD_CONFIG['retry_delay'])
+                                else:
+                                    self.stats['errors'] += 1
                         
-                        if records >= 0:
-                            total_records += records
-                            self.stats['contracts_processed'] += 1
-                            self.stats['records_downloaded'] += records
-                            break
-                        else:
+                        except Exception as e:
+                            logger.error(f"Contract download error: {e}")
                             if attempt < DOWNLOAD_CONFIG['max_retries'] - 1:
                                 time.sleep(DOWNLOAD_CONFIG['retry_delay'])
                             else:
@@ -256,14 +471,18 @@ class ThetaDownloader:
             
             # Log progress
             if (exp_idx + 1) % 10 == 0:
-                logger.info(f"Progress: {exp_idx + 1}/{len(expirations)} expirations, "
-                          f"{total_records:,} records downloaded")
+                logger.info(f"Progress: {exp_idx + 1}/{len(expirations)} expirations")
+                for data_type, count in totals.items():
+                    logger.info(f"  {data_type}: {count:,} records")
         
-        # Mark as completed
-        self.mark_download_status(SPY_CONFIG['symbol'], start_date, end_date, 'ohlc', 
-                                'completed', total_records)
+        # Mark all data types as completed
+        for data_type in data_types_to_download:
+            self.mark_download_status(SPY_CONFIG['symbol'], start_date, end_date, data_type, 
+                                    'completed', totals.get(data_type, 0))
         
-        logger.info(f"Completed {start_date} to {end_date}: {total_records:,} records")
+        logger.info(f"Completed {start_date} to {end_date}")
+        for data_type, count in totals.items():
+            logger.info(f"  {data_type}: {count:,} records")
     
     def download_all_data(self):
         """Download all historical data in batches"""
@@ -271,6 +490,7 @@ class ThetaDownloader:
         end = datetime.strptime(DOWNLOAD_CONFIG['end_date'], "%Y%m%d")
         
         logger.info(f"Starting full download from {start.date()} to {end.date()}")
+        logger.info(f"Data types: {self.available_data_types}")
         
         # Process in monthly batches
         current = start
@@ -284,8 +504,10 @@ class ThetaDownloader:
                 self.download_date_range(batch_start_str, batch_end_str)
             except Exception as e:
                 logger.error(f"Batch {batch_start_str} to {batch_end_str} failed: {e}")
-                self.mark_download_status(SPY_CONFIG['symbol'], batch_start_str, 
-                                        batch_end_str, 'ohlc', 'failed', error=str(e))
+                # Mark all data types as failed for this batch
+                for data_type in self.available_data_types:
+                    self.mark_download_status(SPY_CONFIG['symbol'], batch_start_str, 
+                                            batch_end_str, data_type, 'failed', error=str(e))
             
             current = batch_end + timedelta(days=1)
         
@@ -296,7 +518,9 @@ class ThetaDownloader:
         ==================
         Duration: {duration}
         Contracts processed: {self.stats['contracts_processed']:,}
-        Records downloaded: {self.stats['records_downloaded']:,}
+        OHLC records: {self.stats['ohlc_records']:,}
+        Greeks records: {self.stats['greeks_records']:,}
+        IV records: {self.stats['iv_records']:,}
         Errors: {self.stats['errors']:,}
         """)
     
@@ -309,15 +533,17 @@ class ThetaDownloader:
 
 def main():
     """Main entry point"""
-    logger.info("ThetaTerminal Data Downloader Starting...")
+    logger.info("Enhanced ThetaTerminal Data Downloader Starting...")
+    logger.info(f"Subscription Level: {SUBSCRIPTION_LEVEL}")
+    logger.info(f"Available Data Types: {DATA_TYPES[SUBSCRIPTION_LEVEL]}")
     
-    downloader = ThetaDownloader()
+    downloader = EnhancedThetaDownloader()
     
     try:
         # For testing, download just one week
         # downloader.download_date_range('20240601', '20240607')
         
-        # For production, download all data
+        # For production, download all 8 years of data
         downloader.download_all_data()
         
     except KeyboardInterrupt:

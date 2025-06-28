@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai EvaluatorAgent - Performance Monitoring and Analytics
+FNTX AI EvaluatorAgent - Performance Monitoring and Analytics
 Monitors all trade outcomes, generates weekly performance summaries, and provides insights
 """
 

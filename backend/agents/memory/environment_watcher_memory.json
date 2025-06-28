@@ -1,6 +1,6 @@
 {
   "agent_id": "EnvironmentWatcherAgent",
-  "last_updated": "2025-06-25T14:46:03.681885",
+  "last_updated": "2025-06-28T17:46:31.945849",
   "current_market_regime": "illiquid_conditions",
   "market_conditions": {
     "spy_price": 0,
@@ -17,7 +17,7 @@
       452.5,
       455.0
     ],
-    "last_updated": "2025-06-25T14:46:03.680690"
+    "last_updated": "2025-06-28T17:46:31.942414"
   },
   "regime_history": [
     {
@@ -135,12 +135,14 @@
     "overall_regime": "illiquid_conditions"
   },
   "trading_recommendations": {
-    "timestamp": "2025-06-25T14:46:03.680884",
+    "timestamp": "2025-06-28T17:46:31.942578",
     "overall_signal": "neutral",
     "strategy_preference": "conservative",
     "position_sizing": "normal",
-    "timing_preference": "patient",
-    "specific_actions": [],
+    "timing_preference": "wait_for_open",
+    "specific_actions": [
+      "Wait for market open for better liquidity"
+    ],
     "risk_adjustments": []
   }
 }

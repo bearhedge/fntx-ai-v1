@@ -1,9 +1,9 @@
-# FNTX.ai Development Makefile
+# FNTX AI Development Makefile
 
 .PHONY: help start stop test clean install build dev setup-trading start-trading stop-trading docker-up docker-down
 
 help:
-	@echo "FNTX.ai Development Commands"
+	@echo "FNTX AI Development Commands"
 	@echo "================================"
 	@echo "start     - Start development environment"
 	@echo "stop      - Stop all services"
@@ -14,11 +14,11 @@ help:
 	@echo "dev       - Start in development mode"
 
 start:
-	@echo "Starting FNTX.ai development environment..."
+	@echo "Starting FNTX AI development environment..."
 	./scripts/start-dev.sh
 
 stop:
-	@echo "Stopping FNTX.ai development environment..."
+	@echo "Stopping FNTX AI development environment..."
 	./scripts/stop-dev.sh
 
 dev: start

@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai API Server - REST endpoints for orchestrator and agent communication
+FNTX AI API Server - REST endpoints for orchestrator and agent communication
 Provides HTTP API for the React frontend to interact with the agent orchestrator
 """
 
@@ -17,19 +17,21 @@ from pydantic import BaseModel
 from dotenv import load_dotenv
 
 from backend.agents.orchestrator import FNTXOrchestrator
-# from backend.services.thetadata_service import thetadata_service
-# from backend.services.ibkr_execution_service import ibkr_execution
-from backend.services.ibkr_singleton_service import ibkr_singleton
+from backend.services.ibkr_unified_service import ibkr_unified_service as ibkr_singleton
 from backend.database.auth_db import get_auth_db
 from backend.database.chat_db import get_chat_db
 from backend.auth.jwt_utils import get_jwt_manager
 from backend.models.user import User
-from backend.api.theta_options_endpoint import router as theta_options_router
+from backend.api.theta_options_endpoint_improved import router as theta_options_router
+from backend.api.trade_import_api import router as trade_import_router
+from backend.api.alm_api import router as alm_router
+from backend.api.portfolio_api import router as portfolio_router
 import time
 
 # ML imports
 from backend.ml.spy_feature_engine import SPY0DTEFeatureEngine
 from backend.ml.model_trainer import SPY0DTEModelTrainer
+from backend.services.ibkr_trade_logger import IBKRTradeLogger
 
 # Trading request model
 class SimpleOrderRequest(BaseModel):
@@ -86,7 +88,7 @@ logger = get_api_logger()
 
 # FastAPI app
 app = FastAPI(
-    title="FNTX.ai Trading API",
+    title="FNTX AI Trading API",
     description="REST API for autonomous SPY options trading with multi-agent AI",
     version="1.0.0"
 )
@@ -153,18 +155,14 @@ active_trades: Dict[str, Dict[str, Any]] = {}
 
 # Include routers
 app.include_router(theta_options_router)
+app.include_router(trade_import_router)
+app.include_router(alm_router)
+app.include_router(portfolio_router)
 
 @app.on_event("startup")
 async def startup_event():
     """Initialize the API server"""
-    logger.info("FNTX.ai API Server starting up...")
-    
-    # Initialize ThetaData connection (disabled)
-    # await thetadata_service.initialize()
-    # if thetadata_service.authenticated:
-    #     logger.info("ThetaData connection established")
-    # else:
-    #     logger.warning("Warning: ThetaData connection failed - will retry on first request")
+    logger.info("FNTX AI API Server starting up...")
     
     # IBKR execution service doesn't need pre-connection
     logger.info("IBKR execution service ready")
@@ -172,13 +170,24 @@ async def startup_event():
     # Start background monitoring
     orchestrator.start_background_monitoring()
     
+    
     logger.info("API Server ready to accept requests")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    """Cleanup on server shutdown"""
+    logger.info("FNTX AI API Server shutting down...")
+    
+    # Stop trade logger if running
+    if hasattr(app.state, 'trade_logger'):
+        app.state.trade_logger.stop()
+        logger.info("IBKR Trade Logger stopped")
 
 @app.get("/")
 async def root():
     """Health check endpoint"""
     return {
-        "service": "FNTX.ai Trading API",
+        "service": "FNTX AI Trading API",
         "status": "healthy",
         "timestamp": datetime.now().isoformat(),
         "version": "1.0.0"
@@ -659,95 +668,6 @@ async def place_simple_order(order: SimpleOrderRequest):
         logger.error(f"Error placing order: {e}")
         raise HTTPException(status_code=500, detail=f"Order failed: {str(e)}")
 
-# Commented out - using theta_options_endpoint instead
-# @app.get("/api/spy-options/chain", response_model=OptionsChainResponse)
-# async def get_spy_options_chain(date: Optional[str] = None, option_type: str = "both", max_strikes: int = 20):
-#     """Get SPY options chain with LIVE ThetaData - NO MOCK DATA"""
-#     try:
-#         logger.info(f"Fetching LIVE SPY options chain: date={date}, type={option_type}")
-#         
-#         # Initialize ThetaData service if needed
-#         if not thetadata_service.authenticated:
-#             await thetadata_service.initialize()
-#         
-#         # Get real ThetaData options data
-#         options_list = await thetadata_service.get_spy_options_chain(expiration=date, max_strikes=max_strikes)
-#         
-#         if not options_list:
-#             raise Exception("No options data available - check ThetaData connection")
-#         
-#         # Get SPY price from ThetaData service
-#         spy_data = await thetadata_service.get_spy_price()
-#         spy_price = spy_data.get('price', 0)
-        
-#         # Filter and limit contracts
-#         if max_strikes and len(options_list) > max_strikes:
-#             options_list = options_list[:max_strikes]
-#         
-#         # Convert to OptionsContract objects
-#         contract_objects = []
-#         for c in options_list:
-#             # Handle potential NaN or infinity values
-#             def safe_float(value, default=0.0):
-#                 if value is None or (isinstance(value, float) and (value != value or abs(value) == float('inf'))):
-#                     return default
-#                 return float(value)
-#             
-#             contract_objects.append(OptionsContract(
-#                 symbol=c["contract_symbol"],
-#                 strike=safe_float(c["strike"]),
-#                 expiration=c["expiration"],
-#                 option_type=c["right"],
-#                 bid=safe_float(c["bid"]),
-#                 ask=safe_float(c["ask"]),
-#                 last=safe_float(c["last"]),
-#                 volume=int(safe_float(c.get("volume", 0))),
-#                 open_interest=int(safe_float(c.get("open_interest", 0))),
-#                 implied_volatility=safe_float(c.get("implied_volatility", 0.20), 0.20),
-#                 delta=safe_float(c.get("delta")),
-#                 gamma=safe_float(c.get("gamma")),
-#                 theta=safe_float(c.get("theta")),
-#                 vega=safe_float(c.get("vega")),
-#                 ai_score=safe_float(c.get("ai_score", 5.0), 5.0)
-#             ))
-#         
-#         # Generate AI insights based on current data
-#         market_regime = {
-#             "regime": "favorable_for_selling" if spy_data.get('price', 0) > 600 else "neutral",
-#             "vix_estimate": 15.0,
-#             "confidence": 0.7 if spy_price > 0 else 0.4
-#         }
-#         
-#         ai_insights = {
-#             "market_regime": market_regime.get("regime", "unknown"),
-#             "vix_level": market_regime.get("vix_estimate", 20),
-#             "trading_signal": "favorable_for_selling" if market_regime.get("regime") == "favorable_for_selling" else "neutral",
-#             "strategy_preference": "PUT selling" if market_regime.get("regime") == "favorable_for_selling" else "Conservative",
-#             "position_sizing": "Normal" if spy_price > 0 else "Reduced",
-#             "specific_actions": [
-#                 "SPY PUT selling recommended" if market_regime.get("regime") == "favorable_for_selling" else "Monitor market conditions",
-#                 "Focus on high-probability trades",
-#                 "Consider time decay advantages"
-#             ],
-#             "confidence_level": market_regime.get("confidence", 0.5),
-#             "recommended_strikes": [int(spy_price * 0.95), int(spy_price * 0.97), int(spy_price * 1.03), int(spy_price * 1.05)] if spy_price > 0 else [],
-#             "risk_warnings": ["Market volatility present"] if market_regime.get("vix_estimate", 20) > 20 else []
-#         }
-#         
-#         logger.info(f"Successfully fetched {len(contract_objects)} live options contracts")
-#         
-#         return OptionsChainResponse(
-#             spy_price=spy_price,
-#             expiration_date=options_list[0]["expiration"] if options_list else "unknown",
-#             contracts=contract_objects,
-#             ai_insights=ai_insights,
-#             market_regime=market_regime.get("regime", "unknown"),
-#             timestamp=datetime.now().isoformat()
-#         )
-#         
-#     except Exception as e:
-#         logger.error(f"Failed to get LIVE SPY options chain: {e}")
-#         raise HTTPException(status_code=500, detail=f"Live data error: {str(e)}")
 
 
 @app.post("/api/trade/manual-configure", response_model=ManualTradeResponse)
@@ -1001,10 +921,10 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             
             # Build conversation context
             system_context = """
-            You are FNTX.ai, an AI-powered SPY options trading assistant with live ThetaTerminal data access.
+            You are FNTX AI, an AI-powered SPY options trading assistant with live ThetaTerminal data access.
             
             For guest users, you should:
-            - Explain what FNTX.ai is and its capabilities
+            - Explain what FNTX AI is and its capabilities
             - Show SPY options data when requested in a pandas DataFrame style format
             - Discuss SPY options trading strategies
             - Note that personalized recommendations require authentication
@@ -1138,7 +1058,7 @@ async def orchestrator_chat_endpoint(request: ChatRequest, authorization: Option
             # Fallback response - still create session for authenticated users
             if is_guest:
                 return {
-                    "response": "I'm FNTX.ai, your AI-powered SPY options trading assistant. I can help you understand options trading strategies and market analysis. Sign in to access personalized trading recommendations and your portfolio.",
+                    "response": "I'm FNTX AI, your AI-powered SPY options trading assistant. I can help you understand options trading strategies and market analysis. Sign in to access personalized trading recommendations and your portfolio.",
                     "timestamp": datetime.now().isoformat(),
                     "is_guest": True
                 }
@@ -2376,6 +2296,304 @@ async def websocket_options_stream(websocket: WebSocket, symbol: str):
     except Exception as e:
         logger.error(f"Options WebSocket error for {symbol}: {e}")
         streaming_manager.disconnect(websocket, f"{symbol}_options")
+
+# Automated Trade Logging Endpoints
+
+@app.get("/api/trades/history")
+async def get_trade_history(
+    status: Optional[str] = None,
+    limit: int = 100,
+    offset: int = 0
+):
+    """Get automated trade history from IBKR"""
+    try:
+        from backend.database.trade_db import get_trade_db_connection
+        from psycopg2.extras import RealDictCursor
+        
+        with get_trade_db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                # Build query based on filters
+                query = """
+                SELECT 
+                    trade_id,
+                    symbol,
+                    strike_price,
+                    option_type,
+                    expiration,
+                    quantity,
+                    entry_time,
+                    entry_price,
+                    entry_commission,
+                    exit_time,
+                    exit_price,
+                    exit_commission,
+                    exit_reason,
+                    realized_pnl,
+                    status,
+                    stop_loss_price,
+                    take_profit_price,
+                    market_snapshot
+                FROM trading.trades
+                """
+                
+                conditions = []
+                params = []
+                
+                if status:
+                    conditions.append("status = %s")
+                    params.append(status)
+                
+                if conditions:
+                    query += " WHERE " + " AND ".join(conditions)
+                
+                query += " ORDER BY entry_time DESC LIMIT %s OFFSET %s"
+                params.extend([limit, offset])
+                
+                cur.execute(query, params)
+                trades = cur.fetchall()
+                
+                # Convert decimal and date types for JSON serialization
+                for trade in trades:
+                    for key, value in trade.items():
+                        if hasattr(value, 'isoformat'):
+                            trade[key] = value.isoformat()
+                        elif hasattr(value, '__float__'):
+                            trade[key] = float(value)
+                
+                return {
+                    "trades": trades,
+                    "count": len(trades),
+                    "offset": offset,
+                    "limit": limit
+                }
+                
+    except Exception as e:
+        logger.error(f"Failed to fetch trade history: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/trades/performance")
+async def get_performance_metrics():
+    """Get overall trading performance metrics"""
+    try:
+        from backend.database.trade_db import get_trade_db_connection
+        from psycopg2.extras import RealDictCursor
+        
+        with get_trade_db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                # Get performance metrics from view
+                cur.execute("SELECT * FROM trading.performance_metrics")
+                metrics = cur.fetchone()
+                
+                # Get daily P&L chart data
+                cur.execute("""
+                    SELECT 
+                        DATE(entry_time) as date,
+                        SUM(CASE WHEN status = 'closed' THEN realized_pnl ELSE 0 END) as daily_pnl,
+                        COUNT(*) as trades_count
+                    FROM trading.trades
+                    WHERE entry_time >= CURRENT_DATE - INTERVAL '30 days'
+                    GROUP BY DATE(entry_time)
+                    ORDER BY date DESC
+                """)
+                daily_pnl = cur.fetchall()
+                
+                # Convert types
+                if metrics:
+                    for key, value in metrics.items():
+                        if hasattr(value, '__float__'):
+                            metrics[key] = float(value)
+                
+                for record in daily_pnl:
+                    record['date'] = record['date'].isoformat()
+                    if hasattr(record['daily_pnl'], '__float__'):
+                        record['daily_pnl'] = float(record['daily_pnl'])
+                
+                return {
+                    "metrics": metrics,
+                    "daily_pnl": daily_pnl,
+                    "timestamp": datetime.now().isoformat()
+                }
+                
+    except Exception as e:
+        logger.error(f"Failed to fetch performance metrics: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/api/trades/import-ibkr")
+async def import_ibkr_trades():
+    """Import historical trades from IBKR"""
+    try:
+        from backend.database.trade_db import get_trade_db_connection
+        from datetime import datetime, timedelta
+        
+        # Connect to IBKR using singleton
+        if not ibkr_singleton._connected:
+            connected = ibkr_singleton._ensure_connected()
+            if not connected:
+                raise HTTPException(status_code=503, detail="Failed to connect to IBKR")
+                
+        # Get fills
+        fills = ibkr_singleton.ib.fills()
+        logger.info(f"Found {len(fills)} fills from IBKR")
+        
+        # Import to database
+        with get_trade_db_connection() as conn:
+            cursor = conn.cursor()
+            imported = 0
+            
+            for fill in fills:
+                try:
+                    contract = fill.contract
+                    execution = fill.execution
+                    commission_report = fill.commissionReport
+                    
+                    # Only process SPY options
+                    if contract.symbol != 'SPY' or contract.secType != 'OPT':
+                        continue
+                        
+                    # For selling options: SLD = opening, BOT = closing
+                    is_opening = execution.side == 'SLD'
+                    
+                    cursor.execute("""
+                        INSERT INTO trading.trades (
+                            ibkr_order_id,
+                            ibkr_exec_id,
+                            symbol,
+                            strike_price,
+                            option_type,
+                            expiration,
+                            quantity,
+                            entry_time,
+                            entry_price,
+                            entry_commission,
+                            status,
+                            stop_loss_price,
+                            take_profit_price,
+                            account_id,
+                            market_snapshot
+                        ) VALUES (
+                            %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s
+                        )
+                        ON CONFLICT (ibkr_exec_id) DO NOTHING
+                        RETURNING trade_id
+                    """, (
+                        execution.orderId,
+                        execution.execId,
+                        'SPY',
+                        float(contract.strike),
+                        'PUT' if contract.right == 'P' else 'CALL',
+                        datetime.strptime(contract.lastTradeDateOrContractMonth, '%Y%m%d').date(),
+                        abs(execution.shares),
+                        execution.time,
+                        execution.avgPrice,
+                        commission_report.commission if commission_report else 0.65,
+                        'open' if is_opening else 'closed',
+                        execution.avgPrice * 3 if is_opening else None,  # 3x stop loss
+                        execution.avgPrice * 0.5 if is_opening else None,  # 50% take profit
+                        execution.acctNumber,
+                        '{"source": "ibkr_import"}'
+                    ))
+                    
+                    if cursor.fetchone():
+                        imported += 1
+                        
+                except Exception as e:
+                    logger.error(f"Error importing fill: {e}")
+                    continue
+                    
+            conn.commit()
+            
+        return {
+            "success": True,
+            "fills_found": len(fills),
+            "trades_imported": imported
+        }
+        
+    except Exception as e:
+        logger.error(f"Failed to import IBKR trades: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/api/trades/active")
+async def get_active_trades():
+    """Get currently active/open trades"""
+    try:
+        from backend.database.trade_db import get_trade_db_connection
+        from psycopg2.extras import RealDictCursor
+        
+        with get_trade_db_connection() as conn:
+            with conn.cursor(cursor_factory=RealDictCursor) as cur:
+                cur.execute("""
+                    SELECT 
+                        trade_id,
+                        symbol,
+                        strike_price,
+                        option_type,
+                        expiration,
+                        quantity,
+                        entry_time,
+                        entry_price,
+                        stop_loss_price,
+                        take_profit_price,
+                        market_snapshot,
+                        EXTRACT(EPOCH FROM (CURRENT_TIMESTAMP - entry_time)) as seconds_active
+                    FROM trading.trades
+                    WHERE status = 'open'
+                    ORDER BY entry_time DESC
+                """)
+                active_trades = cur.fetchall()
+                
+                # Convert types and calculate unrealized P&L
+                for trade in active_trades:
+                    for key, value in trade.items():
+                        if hasattr(value, 'isoformat'):
+                            trade[key] = value.isoformat()
+                        elif hasattr(value, '__float__'):
+                            trade[key] = float(value)
+                    
+                    # Calculate time active
+                    if trade.get('seconds_active'):
+                        trade['time_active'] = f"{int(trade['seconds_active'] // 3600)}h {int((trade['seconds_active'] % 3600) // 60)}m"
+                
+                return {
+                    "active_trades": active_trades,
+                    "count": len(active_trades),
+                    "timestamp": datetime.now().isoformat()
+                }
+                
+    except Exception as e:
+        logger.error(f"Failed to fetch active trades: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.websocket("/ws/trades")
+async def websocket_trades(websocket: WebSocket):
+    """WebSocket endpoint for real-time trade updates"""
+    await manager.connect(websocket)
+    logger.info("Client connected to trades WebSocket")
+    
+    try:
+        # Send initial connection message
+        await websocket.send_json({
+            "type": "connection_established",
+            "stream": "trades",
+            "timestamp": datetime.now().isoformat(),
+            "message": "Connected to automated trade updates stream"
+        })
+        
+        # Keep connection alive and wait for trade updates
+        # Trade updates are broadcast by the IBKR Trade Logger service
+        while True:
+            # Heartbeat to keep connection alive
+            await asyncio.sleep(30)
+            await websocket.send_json({
+                "type": "heartbeat",
+                "timestamp": datetime.now().isoformat()
+            })
+            
+    except WebSocketDisconnect:
+        manager.disconnect(websocket)
+        logger.info("Client disconnected from trades WebSocket")
+    except Exception as e:
+        logger.error(f"Trades WebSocket error: {e}")
+        manager.disconnect(websocket)
 
 # Service Health and Status Endpoints
 

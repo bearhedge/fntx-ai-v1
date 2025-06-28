@@ -13,7 +13,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({ isOpen, onClose }) => {
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center text-xl font-semibold">
-            Welcome to FNTX.ai
+            Welcome to FNTX AI
           </DialogTitle>
         </DialogHeader>
         

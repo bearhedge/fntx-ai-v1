@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai Unified IBKR Service
+FNTX AI Unified IBKR Service
 Single, robust service for all IBKR connections with proper event loop handling
 """
 

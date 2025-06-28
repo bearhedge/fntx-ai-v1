@@ -1,5 +1,5 @@
 """
-Authentication database module for FNTX.ai
+Authentication database module for FNTX AI
 Handles user storage and retrieval using SQLite
 """
 import os

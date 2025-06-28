@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-FNTX.ai EnvironmentWatcherAgent - Market Monitoring and Regime Detection
+FNTX AI EnvironmentWatcherAgent - Market Monitoring and Regime Detection
 Monitors market conditions, volatility, and regime changes for optimal trading decisions
 """
 

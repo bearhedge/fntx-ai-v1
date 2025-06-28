@@ -1,4 +1,4 @@
-# Setting Up Google OAuth for FNTX.ai on Localhost
+# Setting Up Google OAuth for FNTX AI on Localhost
 
 ## Quick Setup Guide
 
@@ -14,14 +14,14 @@
 2. Click **Create Credentials > OAuth client ID**
 3. If prompted, configure the OAuth consent screen first:
    - User Type: External
-   - App name: FNTX.ai Development
+   - App name: FNTX AI Development
    - User support email: Your email
    - Developer contact: Your email
    - Add scopes: email, profile, openid
 
 4. For the OAuth client ID:
    - Application type: **Web application**
-   - Name: FNTX.ai Localhost
+   - Name: FNTX AI Localhost
    - Authorized JavaScript origins:
      ```
      http://localhost:8080
@@ -46,7 +46,7 @@
 1. Navigate to http://localhost:8081/signin
 2. Click "Sign in with Google"
 3. Select your Google account
-4. You should be logged into FNTX.ai
+4. You should be logged into FNTX AI
 
 ## Troubleshooting
 

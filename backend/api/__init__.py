@@ -1,4 +1,4 @@
-# FNTX.ai API Package
+# FNTX AI API Package
 """
-FastAPI application and route handlers for FNTX.ai trading system.
+FastAPI application and route handlers for FNTX AI trading system.
 """
