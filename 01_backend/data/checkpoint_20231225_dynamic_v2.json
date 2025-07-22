@@ -1,0 +1,33 @@
+{
+  "date": "2023-12-25",
+  "status": "failed",
+  "dynamic_strikes": {
+    "status": "pending",
+    "contracts": 0,
+    "strikes": [],
+    "last_strike": null,
+    "volume_filtered": 0
+  },
+  "stats": {
+    "total_contracts": 0,
+    "total_ohlc_bars": 0,
+    "total_greeks_bars": 0,
+    "total_iv_bars": 0,
+    "total_iv_nulls": 0,
+    "spy_open": null,
+    "atm_strike": null,
+    "atm_iv": null,
+    "strike_selection_method": "dynamic",
+    "strikes_per_side": null,
+    "volume_filtered_count": 0
+  },
+  "iv_stats": {
+    "total_points": 0,
+    "valid_ivs": 0,
+    "zero_ivs": 0,
+    "null_stored": 0
+  },
+  "errors": [
+    "No SPY price available"
+  ]
+}

@@ -1,0 +1,1204 @@
+Revisiting Ensemble Methods for Stock Trading and Crypto
+Trading Tasks at ACM ICAIF FinRL Contests 2023/2024
+Nikolaus Holzer, Keyi Wang∗
+
+Kairong Xiao
+
+Xiao-Yang Liu Yanglet†
+
+{nh2677,kw2914}@columbia.edu
+Columbia University
+New York, New York, USA
+
+kx2139@columbia.edu
+Business School, Columbia University
+New York, New York, USA
+
+xl2427@columbia.edu
+Columbia University
+New York, New York, USA
+
+arXiv:2501.10709v1 [cs.CE] 18 Jan 2025
+
+ABSTRACT
+Reinforcement learning has demonstrated great potential for performing financial tasks. However, it faces two major challenges:
+policy instability and sampling bottlenecks. In this paper, we revisit ensemble methods with massively parallel simulations on
+graphics processing units (GPUs), significantly enhancing the computational efficiency and robustness of trained models in volatile
+financial markets. Our approach leverages the parallel processing
+capability of GPUs to significantly improve the sampling speed
+for training ensemble models. The ensemble models combine the
+strengths of component agents to improve the robustness of financial decision-making strategies. We conduct experiments in both
+stock and cryptocurrency trading tasks to evaluate the effectiveness
+of our approach. Massively parallel simulation on a single GPU
+improves the sampling speed by up to 1, 746× using 2, 048 parallel
+environments compared to a single environment. The ensemble
+models have high cumulative returns and outperform some individual agents, reducing maximum drawdown by up to 4.17% and
+improving the Sharpe ratio by up to 0.21.
+This paper describes trading tasks at ACM ICAIF FinRL Contests
+in 2023 and 2024.
+
+KEYWORDS
+Financial reinforcement learning, ensemble methods, massively
+parallel simulation, stock trading, cryptocurrency trading
+ACM Reference Format:
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet. 2024.
+Revisiting Ensemble Methods for Stock Trading and Crypto Trading Tasks at
+ACM ICAIF FinRL Contests 2023/2024. In Proceedings of ACM International
+Conference on AI in Finance (ACM ICAIF ’24). ACM, New York, NY, USA,
+10 pages. https://doi.org/XXXXXXX.XXXXXXX
+
+1
+
+INTRODUCTION
+
+Advancements in reinforcement learning (RL) have led to significant
+breakthroughs across various domains, notably in finance, where
+decision-making is crucial [11]. Financial reinforcement learning
+∗ Both authors contributed equally to this research.
+† Correponding author.
+
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than the
+author(s) must be honored. Abstracting with credit is permitted. To copy otherwise, or
+republish, to post on servers or to redistribute to lists, requires prior specific permission
+and/or a fee. Request permissions from permissions@acm.org.
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+© 2024 Copyright held by the owner/author(s). Publication rights licensed to ACM.
+ACM ISBN 978-x-xxxx-xxxx-x/YY/MM. . . $15.00
+https://doi.org/XXXXXXX.XXXXXXX
+
+Figure 1: Performance deviation for different RL algorithms
+and a simple ensemble method.
+(FinRL) [21, 22] focuses on applying RL to perform financial tasks,
+such as algorithmic trading [35], portfolio management [9], and
+option pricing [31]. Given the high computational demands of these
+tasks and the highly dynamic financial markets, efficient and robust
+solutions are essential.
+However, two major challenges are encountered: policy instability and the sampling bottleneck. The challenge of policy instability
+significantly impacts agents’ performance and reliability in RL [4].
+Policy instability for many algorithms can come from value function
+approximation errors [7, 30]. The experiments in [13] show that the
+performance of RL policies is also sensitive to hyperparameters, unstable environments, and even random seeds. Sampling bottlenecks
+in RL pose significant challenges, especially for complex tasks, e.g.,
+training robots, which require a substantial volume of samples [29].
+As the complexity of the task increases, the number of samples
+needed to train a model increases, often extending the simulation
+phase for robots to several days or even weeks [29]. The inherent
+complexity and the dynamic nature of financial markets [19] further complicate the development of robust models with the added
+challenge of policy instability and the sampling bottleneck.
+An empirical study is conducted to show policy instability. In the
+stock trading task, we use Proximal Policy Optimization (PPO) [15],
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet
+
+Table 1: Strengths and weaknesses of different RL algorithms.
+Characteristics
+
+PPO
+
+SAC
+
+DDPG
+
+Sample Efficiency
+Stability in Training
+Computational Efficiency
+Estimation Accuracy
+
+×
+✓
+×
+✓
+
+✓
+✓
+×
+✓
+
+✓
+×
+✓
+×
+
+Soft Actor-Critic (SAC) [10], Deep Deterministic Policy Gradient
+(DDPG) [17], and an ensemble model that averages the action probabilities of three agents. The strengths and weaknesses of agents are
+shown in Table 1. We use daily open, high, low, close, and volume
+(OHLCV) data for 30 Dow Jones stocks over 2020-2023. The models
+are trained and tested 10 times, each time on a rolling-window
+basis with 30-day training and 5-day testing windows. Fig. 1 shows
+cumulative returns and their standard deviation from testing. Each
+type of agent has a high variance in cumulative returns. In contrast,
+the ensemble model only has a standard deviation of returns around
+half that of component agents, highlighting its effectiveness in mitigating policy instability. The results support the use of ensemble
+methods in FinRL to enhance model robustness, though component
+agent training may still face the sampling bottleneck.
+In this paper, we revisit ensemble methods with massively parallel simulation, which improves the computational efficiency and
+robustness of models trained for volatile financial markets. First, we
+develop vectorized environments for massively parallel simulation
+in stock and cryptocurrency trading tasks. 2, 048 parallel market
+environments are simulated on a single GPU, and the sampling
+speed is improved by up to 1, 746× compared with a single environment. Second, we implement ensemble methods by voting on
+agents’ actions or weighted averaging action probabilities. The ensemble models show high cumulative returns and outperform some
+individual agents, with a reduction of up to 4.17% in maximum
+drawdown and an improvement of up to 0.21 in the Sharpe ratio.
+ACM ICAIF FinRL Contest 2024: website1 and Github link2 .
+The remainder of this paper is organized as follows: Section
+2 reviews related works. Section 3 describes the trading problem
+and shows the effectiveness of our approach. Section 4 develops
+massively parallel simulations on GPUs. Section 5 describes the
+ensemble method in detail. Section 6 presents performance evaluations. We conclude in Section 7 and point out our future works.
+
+2 RELATED WORKS
+2.1 Financial Reinforcement Learning
+With complex and dynamic financial markets, deep reinforcement
+learning (DRL) becomes more suitable for high-dimensional state
+and action spaces [11]. DRL has been successfully applied to various
+financial tasks, such as algorithmic trading [35], portfolio management [9], and option pricing [31]. Emerging algorithms, such as
+Direct Preference Optimization (DPO) [28], which uses preferences
+between different outcomes as the primary feedback for learning,
+will also facilitate new applications of RL in finance.
+1 FinRL Contest: https://open-finance-lab.github.io/finrl-contest-2024.github.io/
+2 FinRL Contest: https://github.com/Open-Finance-Lab/FinRL_Contest_2024
+
+2.2
+
+Ensemble Learning
+
+Ensemble methods in machine learning combine the predictions of
+multiple algorithms to achieve better performance than the individual components [8]. Different ensemble methods, such as bagging [2] and boosting [5], have been developed, with many variants
+applied in various fields [8]. In RL, ensemble methods can enhance
+overall performance by combining selected actions or action probabilities from component RL algorithms [33]. Ensemble methods
+for RL are also applied in finance, such as stock trading [34] and
+cryptocurrency trading [14]. In FinRL, ensemble methods can effectively enhance policy stability and agent performance in complex
+financial markets.
+
+2.3
+
+Simulation Environments
+
+RL algorithms heavily rely on simulated environments for training.
+For example, robot training relies on simulations because obtaining
+samples from the real world is costly and difficult [36]. Financial
+tasks also require training and validation using historical data before deployment in real-world applications [11]. There are many
+frameworks for simulation environments in RL. OpenAI Gym [3]
+is among the most popular frameworks and collections of environments. ABIDES-gym integrates the ABIDES simulator into the Gym
+framework and has been successfully applied to financial tasks [1].
+Simulation environments leverage CPUs for data sampling, where
+the number of environments is limited to the number of CPU
+cores [23]. Isaac Gym is developed for robot learning, which allows
+both the physics simulation and policy updating to occur on the
+GPU, thereby speeding up the training by 100× to 1, 000× [23]. For
+financial applications, JAX-LOB presents a GPU-accelerated limit
+order book (LOB) simulator designed to enable parallel processing
+of thousands of books on GPUs [6].
+
+3 PROBLEM DESCRIPTION
+3.1 Problem Formulation for FinRL Tasks
+We implement stock and cryptocurrency trading tasks. Financial
+markets are characterized by non-stationary time-series data and
+low signal-to-noise ratios [11, 19]. In stock trading, the substantial
+noise in data complicates the extraction of alpha signals and the
+creation of smart beta indices [19]. Cryptocurrency trading faces
+greater volatility due to drastic price fluctuations and market sentiment shifts [14]. Cryptocurrency markets operate 24/7, demanding
+adaptable strategies in a continuous trading environment without
+traditional market open and close cycles. Developing robust and
+profitable trading strategies is crucial in these financial markets.
+• Stock trading task involves buying and selling 30 stocks of
+the Dow Jones index to maximize financial returns over a specified timeframe. The trader needs to utilize daily OHLCV data to
+predict price movements and make trading decisions.
+• Cryptocurrency trading task involves buying and selling Bitcoin (BTC) to maximize financial returns over a timeframe. The
+trader needs to utilize second-level LOB data to predict price
+movements and make trading decisions.
+The two tasks, involving sequential decision-making, can be
+formulated as Markov Decision Processes (MDPs) [19]:
+
+Revisiting Ensemble Methods for Stock Trading and Crypto Trading Tasks at ACM ICAIF FinRL Contests 2023/2024
+
+• State st = [𝑏𝑡 , pt, ht, ft ] ∈ R (𝐼 +2)𝐾+1 . The state at time 𝑡 represents the market conditions a trader might observe at time 𝑡.
+𝑏𝑡 ∈ R+ is the trader’s account balance at time 𝑡. pt ∈ R𝐾
++ is the
+price for each stock or cryptocurrency, where 𝐾 is the number
+of assets to trade. ht ∈ R𝐾
++ is the holding position for each asset.
+ft ∈ R𝐾𝐼 is the feature vector incorporating 𝐼 technical indicators for each asset. Technical indicators can be common market
+indicators, such as Moving Average Convergence Divergence
+(MACD), or derived using complex methodologies to increase
+the signal-to-noise ratio.
+• Action at ∈ R𝐾 . The action at time 𝑡 is the trading action for each
+stock or cryptocurrency, represented as changes in positions, i.e.,
+ht+1 = ht + at . Actions indicate changes in position rather than
+the position itself because limiting the range of position changes
+can reduce learning difficulty. An entry 𝑎𝑖𝑡 > 0, 𝑖 = 1, . . . , 𝐾
+indicates buying 𝑎𝑖𝑡 shares of asset 𝑖 at time 𝑡 in anticipation of
+price increases; 𝑎𝑖𝑡 < 0 indicates selling 𝑎𝑖𝑡 shares of asset 𝑖 in
+anticipation of price declines; 𝑎𝑖𝑡 = 0 indicates maintaining the
+current position.
+• Reward function 𝑅(st, at, st+1 ). The reward, as an incentive
+signal, motivates the trading agent to execute action at at state st .
+While complex rewards can be carefully designed using various
+financial metrics such as the Sharpe ratio and Profit and Loss
+(PnL) [11], we opt for a simpler reward calculation. The massive
+sampling approach will ensure robust learning even with a simple
+reward calculation. The reward is the change in total asset values,
+i.e., 𝑅(st, at, st+1 ) = 𝑣𝑡 +1 −𝑣𝑡 , where 𝑣𝑡 +1 and 𝑣𝑡 are the total asset
+values at time 𝑡 and 𝑡 + 1, respectively. We have 𝑣𝑡 = 𝑏𝑡 + pt𝑇 ht .
+• Policy 𝜋 (·|s) is a probability distribution over actions at state s.
+The policy assesses the current market conditions and determines
+the likelihood of each possible trading action.
+
+3.2
+
+Training Process
+
+The training process can be divided into two phases: simulation
+and learning, following the standard Producer-Consumer model:
+• Simulation phase, acting as the "Producer," implements data
+sampling by executing the actions within the environment, resulting in new states and rewards.
+• Replay buffer serves as a reservoir to store samples from the
+simulation phase, allowing the learning phase to access these
+samples.
+• Learning phase, acting as the "Consumer," retrieves samples
+from the replay buffer to update the policy.
+In the trading task, OHLCV or LOB datasets are transformed into
+market environments configured with realistic trading constraints,
+including transaction costs, slippage, turbulence threshold, and stoploss mechanisms. During the simulation phase, the agent, acting as a
+trader, decides and executes the trading actions based on the current
+state, resulting in new states and financial outcomes quantified as
+rewards. The data samples, including trading actions, market states,
+and rewards, are stored in the replay buffer as trading experiences.
+In the learning phase, the agent accesses the data and learns from a
+wide range of trading experiences to update its policy and enhance
+future decision-making.
+
+3.3
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Effectiveness and Burdens of Ensemble
+Methods
+
+3.3.1 Effectiveness and Costs of Ensemble Methods. Condorcet’s theorem for voting provides a theoretical foundation for using ensemble methods in decision-making [8]. In financial decisionmaking, consider an ensemble composed of 𝑛 independent traders
+deciding whether to buy or sell a stock, each with a probability
+𝑝 of making the correct decision. Let 𝑋 denote the total number
+of traders making the correct decision, 𝑋 ∼ 𝐵𝑖𝑛𝑜𝑚𝑖𝑎𝑙 (𝑛, 𝑝), and
+E(𝑋 ) = 𝑛𝑝 and Var(𝑋 ) = 𝑛𝑝 (1 − 𝑝). Using the Central Limit Theorem (CLT),
+!
+!
+𝑛 − 𝑛𝑝
+
+𝑛( 12 − 𝑝)
+𝑛
+2
+= P 𝑍 > √︁
+.
+𝑃 =P 𝑋 >
+= P 𝑍 > √︁
+2
+𝑛𝑝 (1 − 𝑝)
+𝑛𝑝 (1 − 𝑝)
+(1)
+𝑛 ( 12 −𝑝 )
+
+If 𝑝 > 12 , as 𝑛 → ∞, √
+
+𝑛𝑝 (1−𝑝 )
+
+→ −∞. Since P(𝑍 > −∞) = 1,
+
+as 𝑛 → ∞, 𝑃 → 1. The probability that the ensemble makes the
+correct trading decision approaches 1 as the number of traders with
+𝑝 > 0.5 increases. In FinRL, deep neural networks used for the
+agent’s policy architecture typically have accuracies above 0.5 [8],
+making ensemble methods appealing.
+However, ensemble methods in FinRL still need to address agent
+diversity and extensive sampling requirements. The diversity of
+component agents is essential for risk mitigation by leveraging various trading strategies. Achieving high diversity requires training
+multiple agents across environments that simulate different market
+scenarios. The data-intensive nature of policy networks requires
+extensive sampling for effective training. Due to the sampling bottleneck, the ensemble’s training time increases, making it costly
+and difficult to adapt quickly to volatile financial markets.
+3.3.2 Challenge of Extensive Sampling. The goal is to learn a
+policy 𝜋𝜃 with parameter 𝜃 that maximizes the expected return:
+∫
+𝐽 (𝜃 ) =
+
+𝑃 (𝜏 |𝜋)𝑅(𝜏) = E𝜏∼𝜋𝜃 [𝑅(𝜏)],
+
+(2)
+
+𝜏
+
+where 𝜏 is a trajectory, 𝑅(𝜏) is the (discounted) cumulative return
+along the trajectory 𝜏. The gradient of 𝐽 (𝜃 ) with respect to 𝜃 is [27]:
+
+∇𝐽 (𝜃 ) = E𝜏∼𝜋𝜃
+
+"𝑇
+∑︁
+
+#
+𝑅(𝜏)∇𝜃 log 𝜋𝜃 (𝑎𝑡 |𝑠𝑡 ) .
+
+(3)
+
+𝑡 =1
+
+In our FinRL tasks, a trajectory 𝜏 is a sequence of trading actions
+and states observed over a period. Financial outcomes are quantified as rewards along 𝜏 to compute 𝑅(𝜏). The trading strategy is
+governed by 𝜋𝜃 to maximize 𝐽 (𝜃 ). When dealing with complex and
+noisy financial datasets, achieving a low-variance gradient estimation ∇𝐽 (𝜃 ) is crucial for stable and reliable policy updates, reducing
+the risk of suboptimal trading strategies. Due to the sensitivity of
+financial rewards to small changes in actions, extensive sampling
+is necessary to reduce variance in gradient estimation ∇𝐽 (𝜃 ).
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet
+
+Figure 2: Producer-Consumer model for RL.
+
+4 MASSIVELY PARALLEL SIMULATION
+4.1 Simulation Phase for Gradient Estimate
+To estimate ∇𝐽 (𝜃 ) in (3), we can use the Monte Carlo method [25]:
+𝑁
+
+∇𝐽 (𝜃 ) =
+
+𝑇
+
+1 ∑︁ ∑︁
+(𝑖 ) (𝑖 )
+𝑅(𝜏 (𝑖 ) ) ∇𝜃 log 𝜋𝜃 (𝑎𝑡 |𝑠𝑡 ),
+𝑁 𝑖=1 𝑡 =1
+
+(4)
+
+Where 𝑁 trajectories are used. The Law of Large Numbers guarantees that as the sample size 𝑁 increases, the estimation of ∇𝐽 (𝜃 )
+will converge to its expected value. According to CLT, increasing
+𝑁 leads to a reduction in the variance of the estimate.
+
+4.2
+
+• step: (𝑠𝑡 , 𝑎𝑡 ) → 𝑠𝑡 +1 , takes action 𝑎𝑡 and updates 𝑠𝑡 to 𝑠𝑡 +1 . It
+executes the trade in the market, resulting in a new market state.
+• reward: (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) → 𝑟𝑡 , computes the reward. As defined in
+Section 3.1, the reward measures the financial performance of
+the trading action taken in the current market.
+
+Massively Parallel Market Environments
+
+4.2.1 Parallelsim of Simulation Phase. As shown in (4), a large
+number 𝑁 of trajectories sampled during the simulation phase
+is required to reduce the variance of ∇𝐽 (𝜃 ). In (4), each 𝑖 in the
+outer sum from 1 to 𝑁 corresponds to a separate trajectory 𝜏 (𝑖 ) ,
+which can be considered as a complete and independent simulation
+of the policy 𝜋𝜃 in the environment. Therefore, each trajectory
+𝜏 (𝑖 ) can be simulated in parallel, allowing for a high degree of
+parallelism. In addition, the degree of parallelism scales with the
+processing capability of computational resources, which is crucial
+for implementing massively parallel simulations.
+In FinRL, parallel simulation involves executing the trading strategy in multiple market scenarios simultaneously. The parallelism
+accelerates the simulation phase, allowing for more rapid updates
+and iterations of the policy 𝜋𝜃 . Therefore, the trading strategy governed by 𝜋𝜃 can be quickly updated and adapted to changing market
+conditions.
+4.2.2 Vectorized Market Environments. We develop vectorized market environments for massively parallel simulation.
+Parallel sub-environments. As shown in Fig. 2, a vectorized environment (VecEnv) manages parallel sub-environments (SubEnv).
+Each SubEnv simulates different market scenarios using diverse
+OHLCV or LOB datasets, maintaining its own balances, prices,
+holding positions, technical factors, and market constraints. As
+the demand for data sampling grows, more SubEnvs can be added,
+enhancing parallelism and computational efficiency.
+Building environments. We perform consistent operations
+across all SubEnvs for data sampling:
+• reset: 𝑠𝑡 → 𝑠 0 , resets the environment to its initial state. It resets
+to the initial market conditions, with all variables, such as asset
+prices and balances, set to their starting values.
+
+4.3
+
+Mapping onto GPUs
+
+4.3.1 Parallel Simulations on GPUs. Modern GPUs have high
+parallel processing capabilities, making them well-suited for massively parallel simulation across many GPU cores. The vmap function of PyTorch vectorizes the step and reward functions, enabling
+them to operate simultaneously in thousands of parallel SubEnvs.
+An operation on multiple data points from SubEnvs will be efficiently dispatched across available GPU cores. In FinRL, for example,
+when calculating the financial performance of trading actions in all
+SubEnvs, the reward function, vectorized by vmap, executes computations on (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) from all SubEnvs. This computation will
+be dispatched to available GPU cores, with each core responsible
+for calculating its assigned data.
+4.3.2 Storing Data Samples in GPU Tensors. The data samples
+are organized into tensors and stored in GPU memory. The tensors
+for states, actions, and rewards have the shape 𝑇 × 𝑁 × 𝐷:
+• T is the number of steps in a trajectory.
+• N is the number of parallel SubEnvs in a VecEnv.
+• D is the dimension as specified in Section 3.1.
+Therefore, we have tensors for states (s ∈ R𝐷𝑠 ), actions (a ∈ R𝐷𝑎 ),
+and rewards (𝑟 ∈ R𝐷𝑟 ) like the following:
+ s11
+ 1
+s
+ 2
+.
+ ..
+
+s1
+𝑇
+
+s21
+s22
+..
+.
+s𝑇2
+
+···
+···
+..
+.
+···
+
+s1𝑁   a11
+ 
+s2𝑁   a12
+..  ,  ..
+.   .
+𝑁
+s𝑇  a𝑇1
+
+a21
+a22
+..
+.
+a𝑇2
+
+···
+···
+..
+.
+···
+
+a1𝑁  𝑟 11
+ 
+a2𝑁  𝑟 21
+..  ,  ..
+.   .
+𝑁
+a𝑇  𝑟𝑇1
+
+𝑟 12
+𝑟 22
+..
+.
+𝑟𝑇2
+
+···
+···
+..
+.
+···
+
+𝑟 1𝑁 
+
+𝑟 2𝑁 
+.. 
+. 
+𝑁
+𝑟𝑇 
+
+A trajectory sampled from the 𝑖th environment is (s𝑖0, a𝑖1, s𝑖1, a𝑖2, . . . ,
+s𝑇𝑖 ), where s𝑖0 is the initial state. The cumulative return along this
+Í
+(𝑖 )
+trajectory is 𝑅(𝜏 (𝑖 ) ) = 𝑇𝑡=1 𝛾 𝑡 𝑟𝑡 , where 𝛾 is the discount factor.
+Storing data samples in tensors in GPU memory avoids the costly
+CPU-GPU communication. Fig. 2 (a) shows a traditional training
+process with both the CPU and GPU. The simulation phase, managed by the "Producer," performs data sampling on the CPU. The
+data samples are stored in a replay buffer on the CPU. The learning
+phase, managed by the "Consumer" and typically run on GPUs,
+
+Revisiting Ensemble Methods for Stock Trading and Crypto Trading Tasks at ACM ICAIF FinRL Contests 2023/2024
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Figure 3: Ensemble methods.
+fetches the data on the CPU for policy updating. PCIe allows for
+communication between the CPU and GPU but has limited bandwidth, making frequent large data transfers a significant bottleneck.
+This problem can be solved by storing and processing data samples
+in tensors on the GPU. As shown in Fig. 2 (b), the end-to-end GPUaccelerated agent training framework [23] is used, where both the
+simulation and learning phases are conducted on the GPU. It avoids
+the bandwidth limitations of PCIe, thereby reducing the latency of
+GPU-CPU communication and addressing the sampling bottleneck.
+
+5 ENSEMBLE LEARNING
+5.1 Agent Diversity
+Using KL divergence in objective functions. To enforce diversity among the component agents, we introduce a Kullback-Leibler
+(KL) divergence term into the agent’s training loss function. The
+KL divergence measures how one probability distribution diverges
+from another [26]. In the ensemble, the KL divergence term penalizes similarities in policies between different agents, encouraging
+them to adopt various trading strategies. The new training loss
+function for a component agent is as follows:
+𝐿new (𝜃𝑖 ) = 𝐿original (𝜃𝑖 ) − 𝜆
+
+∑︁
+
+KL(𝜋𝜃 𝑗 ||𝜋𝜃𝑖 ),
+
+(5)
+
+𝑗≠𝑖
+
+where 𝜃𝑖 are the policy parameters for agent 𝑖, 𝐿(𝜃𝑖 ) is the training
+loss, KL(𝜋𝜃 𝑗 ||𝜋𝜃𝑖 ) is the KL divergence between agent 𝑖’s and agent
+𝑗’s policies, and 𝜆 is a regularization constant.
+Using various datasets. The financial datasets used for training
+component agents are varied. For each stock or cryptocurrency, a
+random percentage change ranging from −1% to 1% is generated and
+applied to its prices, which shifts the price scale while preserving
+the original price trends. Agents are also trained on different stocks
+from the test set for the stock trading task. It enables agents to learn
+various strategies for a broader range of stocks rather than reacting
+to a limited number of stocks.
+
+5.2
+
+Ensemble Methods for FinRL Tasks
+
+5.2.1 Stock Trading Task. As shown in Fig. 3 (a), the ensemble includes PPO, SAC, and DDPG agents, with their strengths
+shown in Table 1. The ensemble’s final trading action is determined
+by weighted averaging over the agents’ action probabilities. The
+process is as follows:
+
+• Traning. Agents are trained independently with a VecEnv on a
+30-day training rolling window, using massively parallel simulation in Section 4 and agent diversity methods in Section 5.1.
+• Validation. After training, agents are validated on a 5-day rolling
+window. Sharpe ratios are calculated to evaluate their ability to
+balance returns with associated risks.
+𝑟¯𝑝 − 𝑟 𝑓
+Sharpe Ratio =
+,
+(6)
+𝜎𝑝
+where 𝑟¯𝑝 is the portfolio return, 𝑟 𝑓 is a chosen risk-free rate, and
+𝜎𝑝 is the standard deviation of the portfolio return.
+• Weights calculation. Agents with very low Sharpe ratios are
+discarded. Weights for the remaining agents are calculated using
+a softmax function applied to their Sharpe ratios.
+• Trading. The ensemble acts based on a weighted average of
+agent action probabilities during a 5-day trading window.
+This rolling window approach ensures that the ensemble method
+remains adaptive to the continuously changing market.
+5.2.2 Cryptocurrency Trading Task. For cryptocurrency trading at a relatively high frequency, market movements can be modeled as discrete events, which require a discrete action space. As
+shown in Fig. 3 (b), DQN [24], Double DQN [12], and Dueling
+DQN [32] are used to handle this discrete action space. In addition,
+the dataset for a single cryptocurrency is relatively small. DQN and
+its variants, with fewer parameters and simpler architectures, can
+be trained faster to avoid overfitting. Moreover, trading at a high
+frequency requires fast responses, and DQN agents can offer lower
+latency in decision-making compared to more complex models.
+The ensemble model uses majority voting to combine the actions
+of component agents. Majority voting ensures the chosen action
+reflects consensus among agents, mitigating biases from any single
+agent’s actions [8]. The process is as follows:
+• Training. Each component agent is independently trained with
+a VecEnv, using the massively parallel simulation in Section 4
+and the agent diversity methods in Section 5.1.
+• Action ensemble and trading. During the trading phase, each
+agent processes the same market state and determines an action
+based on its policy. The majority action is selected as the final
+ensemble action.
+
+6 PERFORMANCE EVALUATIONS
+6.1 Experiement Settings
+All experiments were conducted using one NVIDIA A100 GPU.
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet
+
+Figure 4: Samples per second for the stock trading task and the cryptocurrency trading task. NVIDIA A100 GPU is used.
+Stock data: We use historical daily OHLCV data for all 30 stocks
+in the Dow Jones index from 01/01/2021 to 12/01/2023. OHLCV
+data is a rich source for learning financial market behaviors and
+trends. We use Moving Average Convergence Divergence (MACD),
+Bollinger Bands, Relative Strength Index (RSI), Commodity Channel
+Index (CCI), Directional Movement Index (DX), and Simple Moving
+Average (SMA) as technical indicators. These indicators enrich the
+data with more insights into market behaviors and trends.
+Cryptocurrency data: The dataset comprises second-level LOB
+data for BTC from 04/07/2021 11:32:42 to 04/19/2021 09:54:22. This
+dataset provides a detailed view of buying and selling activities in
+the BTC market, enabling analysis of market dynamics. Adaptations from 101 formulaic alphas [16] are calculated based on LOB
+data to extract insights into market behaviors, such as momentum,
+mean-reversion, and market anomalies. A recurrent neural network
+(RNN) further processes the 101 alphas into 8 technical indicators. It
+reduces the complexity of the input data and enhances the ability to
+predict market trends, thus improving generalization and avoiding
+overfitting.
+Agents for stock trading task. We use PPO, SAC, and DDPG
+agents. The policy network for each agent consists of a feed-forward
+network with two hidden layers, having 64 units and 32 units,
+respectively. We set a learning rate of 3 · 10 −4 and a batch size
+of 64. The agents are trained, validated, and tested on a rollingwindow basis with 30-day training, 5-day validation, and 5-day
+testing windows. There are no leaks of future information.
+Agents for cryptocurrency trading task. We use DQN, Double DQN, and Dueling DQN agents. The policy network for each
+agent consists of a feed-forward neural network with three 128-unit
+hidden layers. We set an exploration rate of 0.005, a learning rate
+of 2 · 10 −6 , and a batch size of 512. The RNN is trained on data
+from 04/07/2021 11:32:42 to 04/17/2021 00:38:02 without future information leaks. The agents are trained on the in-sample data from
+04/17 00:38:03 to 04/19 09:09:21 and tested on the out-of-sample
+data from 04/19 09:09:22 to 04/19 09:54:22.
+Performance metrics: We evaluate the performance using the
+following metrics:
+• Cumulative return is the total return generated by the trading
+strategy over a trading period.
+
+• Annual return is the geometric average amount of money
+earned by the agent each year over a given time period.
+• Annual volatility is the annualized standard deviation of daily
+returns.
+• Sharpe ratio measures the excess return per unit of volatility,
+as defined in (6).
+• Maximum drawdown measures the largest single drop in the
+portfolio value from peak to trough.
+• Return over maximum drawdown (RoMaD) is calculated as
+the cumulative return divided by the maximum drawdown.
+• Sortino ratio is calculated as the excess return divided by the
+downside deviation.
+• Calmar ratio is calculated as the annualized excess return divided by the maximum drawdown.
+• Omega ratio compares the probability of achieving returns
+above a threshold to the probability of falling below it.
+Cumulative and annual returns focus on the returns generated
+by a trading strategy. Annual volatility and maximum drawdown
+evaluate the risk associated with the trading strategy. The Sharpe
+ratio, RoMad, Sortino ratio, Calmar ratio, and Omega ratio evaluate
+risk-adjusted returns in different ways.
+Baselines: We use different market indexes and trading strategies as baselines:
+• DJIA: Dow Jones Industrial Average index for the stock market.
+• BTC price: We use the Bitcoin price from CoinBase.
+• Min-variance strategy for stock trading.
+• Fixed-time exit strategy for cryptocurrency trading, entering
+the market when the RNN prediction for the next 225 seconds
+exceeds a threshold and exiting the market after 225 seconds.
+
+6.2
+
+Sampling Speed
+
+We use a PPO agent to perform the stock trading task and a DQN
+agent to perform the cryptocurrency trading task. We vary the
+numbers of parallel environments from 1, 2, 4, . . ., and 2, 048. The
+sampling speed is measured in samples per second and plotted
+against training steps on the Y-axis.
+As shown in Fig. 4 (a), in the stock trading task, the simulation
+with 2, 048 parallel environments has an average sampling speed
+of 8, 813.81 samples per second. Compared to a single environment
+
+Revisiting Ensemble Methods for Stock Trading and Crypto Trading Tasks at ACM ICAIF FinRL Contests 2023/2024
+
+with 184.63 samples per second, the sampling speed is improved
+by 47.73×. In the cryptocurrency trading task, as shown in Fig.
+4 (b), the simulation with 2, 048 parallel environments achieves
+around 114, 885.98 samples per second versus 65.79 samples per
+second in a single environment. The sampling speed is improved
+by 1, 746×. This greater improvement in sampling speed compared
+to stock trading is due to the simpler environment and calculations
+for single-asset trading. The results show that massively parallel
+simulation greatly improves the sampling speed for FinRL tasks.
+For the stock trading task, we use daily open, high, low, close,
+and volume (OHLCV) data for the 30 stocks in the Dow Jones index,
+from January 1, 2020, to January 1, 2023. For the cryptocurrency
+trading task, we use the limit order book data with a frequency
+of seconds for Bitcoin, from April 7, 2021, at 11:32:42, to April 19,
+2021, at 09:54:22. Since we are not testing or validating we use data
+exclusively for simulation and sampling rate benchmarking.
+
+6.3
+
+Stock Trading Task
+
+We performed the stock trading task for 30 stocks in the Dow Jones
+index by using three ensemble models, and individual PPO, SAC,
+and DDPG agents. We demonstrate that ensemble agents trained
+in massively parallel environments can explore large spaces and
+find optimal strategies quickly.
+Ensemble methods. The first method (Ensemble 1) consists of
+1 PPO, 1 SAC, and 1 DDPG agents; the second method (Ensemble
+2) consists of 5 PPO, 5 SAC, and 5 DDPG agents; the third method
+(Ensemble 3) consists of 10 agents for each type. As in Section
+5.2.1, all three ensemble models use the weighted average approach
+to combine component agent action probabilities. All ensemble
+models and individual agents are trained, validated, and tested on
+a rolling-window basis with 30-day training, 5-day validation,
+and 5-day testing windows.
+Ensemble 1 consists of 1 PPO and 1 SAC agents, Ensemble 2
+consists of 5 PPO and 5 SAC agents, and Ensemble 3 consists of
+10 PPO and 10 SAC agents. The ensemble method is described in
+Section 5.2.1. The three ensemble models and individual PPO and
+SAC agents are trained, validated, and tested on a rolling-window
+basis, with 30-day training windows, 5-day validation windows,
+and 5-day testing windows.
+Results. As seen in Table 2, the PPO agent achieves the highest cumulative returns of 63.37%, Sharpe ratio of 1.55, and Sortino
+ratio of 2.44, showing an ability to maintain high returns with controlled volatility and downside risk. Although DDPG’s cumulative
+returns are comparable to PPO’s, its higher maximum drawdown of
+−13.15% signals a greater risk of large value drops, which is a concern for risk management. SAC has a lower maximum drawdown
+than DDPG but underperforms in other metrics. All individual
+agents significantly outperform two traditional baselines across
+all metrics. The ensemble models also maintain profitability and
+risk management advantages over the baselines. Ensemble 1 has
+a high cumulative return of 62.60%, and as shown in Fig. 5 (a), it
+shows superior performance from Sep 2022 to Oct 2023. Ensemble 1 also achieves the smallest maximum drawdown and a higher
+Sharpe ratio than SAC and DDPG. Ensemble 1 and 2 have high
+RoMaD and Calmar ratios, showing an ability to quickly recover
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+from peak-to-trough losses and a potential for steady growth in
+market adversities.
+DDPG’s cumulative returns are close to PPO’s, but it has a higher
+max drawdown at −13.15%, indicating a potential for significant
+value drops. SAC has a lower max drawdown than DDPG but underperforms in other metrics. All individual agents greatly outperform the mean-variance approach and DJIA in all metrics. The
+ensemble models effectively combine the strengths of component
+agents, maintaining profitability and risk management advantages.
+Ensemble 1 has a high cumulative return of 62.60%, close to the
+performance of PPO and DDPG. As shown in Fig. 5, Ensemble 1
+shows superior performance during steps 450 to 700. Additionally, Ensemble 1 and 2 minimize loss effectively during downturns,
+underscored by the high RoMaD and Calmar ratios.
+As seen in Table 2, the ensemble method has the highest cumulative return, Sharpe Ratio, and risk-adjusted returns. We weighted
+agent actions according to the Sharpe Ratio, which explains the
+comparatively high Sharpe Ratio and risk-adjusted returns compared to the other agents. The high cumulative returns indicate that
+the greater number of strategies cover a broader space of market
+conditions as opposed to the single agent configurations which
+seem to explore a less diverse space of the environment.
+
+6.4
+
+Cryptocurrency Trading Task
+
+The cryptocurrency trading task for Bitcoin (BTC) is performed
+using three ensemble models, and individual DQN, Double DQN,
+and Dueling DQN agents.
+Ensemble methods The first method (Ensemble 1) consists of
+1 DQN, 1 Double DQN, and 1 Dueling DQN agents; the second
+method (Ensemble 2) consists of 3 DQN, 3 Double DQN, and 3
+Dueling DQN agents; the third method (Ensemble 3) consists of 10
+agents for each type. As in Section 5.2.2, three ensemble models use
+a majority voting approach to aggregate the agents’ actions. All
+ensemble models and individual agents are trained on the in-sample
+data and tested on the out-of-sample data.
+We evaluate their performance using cumulative returns, Sharpe
+ratio, maximum drawdown, and return over maximum drawdown,
+which is defined in Section 6.3. In this task, we add a new metric:
+• Win/loss ratio is calculated by dividing the number of winning
+trades by the number of losing trades.
+Results. As seen in Table 3 and Fig. 5 (b), Double DQN and
+Dueling DQN agents have similar performance, with cumulative
+returns of 0.48%. This is lower than the BTC price baseline. Despite
+this, they achieve higher Sharpe ratios of 0.21 and lower maximum
+drawdowns of −0.98% than the fixed-time exit strategy and BTC
+price baseline, suggesting effective risk management. The three
+different ensemble models have similar performances, which may
+be due to the limited action space at each timestep, causing agents
+to output identical actions. Their cumulative returns are close to the
+BTC price baseline. Moreover, the ensemble models outperform all
+individual agents in all metrics, achieving the highest Sharpe ratio
+of 0.28 and the lowest maximum drawdown of −0.73%. They also
+have the highest win/loss ratio of 1.62. This shows that ensemble
+methods can mitigate the risks associated with the decision-making
+failures of single agents.
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet
+
+Table 2: Stock trading task performance. Models are trained, validated, and tested on a rolling window basis on OHLCV datasets
+for 30 Dow Jones stocks. Ensemble models use weighted averages on agent action probabilities.
+Model
+Cumulative Return
+Annual Return
+Annual Volatility
+Sharpe Ratio
+Sortino Ratio
+Max Drawdown
+RoMaD
+Calmar Ratio
+Omega Ratio
+
+Ensemble-1
+
+Ensemble-2
+
+Ensemble-3
+
+PPO
+
+SAC
+
+DDPG
+
+Min-Variance
+
+DJIA
+
+62.60%
+18.22%
+11.76%
+1.48
+2.34
+-8.98%
+6.97
+2.03
+1.31
+
+58.77%
+17.25%
+12.61%
+1.33
+2.14
+-11.27%
+5.22
+1.53
+1.28
+
+46.89%
+14.15%
+12.70%
+1.11
+1.74
+-12.27%
+3.82
+1.15
+1.23
+
+63.37%
+18.41 %
+11.35%
+1.55
+2.44
+-9.96%
+6.36
+1.85
+1.33
+
+50.62%
+15.14%
+11.67%
+1.27
+2.05
+-12.02%
+4.21
+1.26
+1.27
+
+63.19%
+18.36%
+11.93%
+1.47
+2.37
+-13.15%
+4.81
+1.40
+1.32
+
+13.9%%
+7.34%
+18.16%
+0.48
+0.73
+-14.9%
+1.10
+0.49
+1.09
+
+18.95%
+6.15%
+15.14%
+0.47
+0.67
+-21.94%
+0.86
+0.28
+1.08
+
+Table 3: Cryptocurrency trading task performance. The second-level LOB data for Bitcoin is split into out-of-sample data for
+training and in-sample data for testing. Ensemble models use majority voting on agent actions.
+Model
+Cumulative Return
+Sharpe Ratio
+Maximum Drawdown
+RoMaD
+Sortino Ratio
+Omega Ratio
+Win/Loss Ratio
+
+Ensemble-1
+
+Ensemble-2
+
+Ensemble-3
+
+DQN
+
+Double DQN
+
+Dueling DQN
+
+Fixed-Time Exit
+
+BTC Price
+
+0.66%
+0.28
+-0.73%
+0.90
+0.39
+1.08
+1.622
+
+0.66%
+0.28
+-0.73%
+0.90
+0.39
+1.08
+1.622
+
+0.66%
+0.28
+-0.73%
+0.90
+0.39
+1.08
+1.622
+
+0.34%
+0.15
+-0.93%
+0.37
+0.20
+1.04
+1.309
+
+0.48%
+0.21
+-0.98%
+0.49
+0.29
+1.05
+1.617
+
+0.48%
+0.21
+-0.98%
+0.49
+0.29
+1.05
+1.617
+
+-0.1%
+-0.03
+-1.00%
+0.10
+-0.04
+0.99
+0.5
+
+0.74%
+0.20
+-1.3%
+0.59
+0.28
+1.05
+-
+
+Figure 5: Cumulative returns of different strategies for the stock trading task and cryptocurrency trading task.
+We observe that individual agents and majority voting ensembles have near identical performances; in the restricted action space,
+agent policies may be converging indicating a greater risk of significant losses due to less diversified trading actions. Compared to the
+spot price and fixed-time exit, the ensemble consistently achieved
+a higher return over the maximum drawdown ratio, highlighting
+superior risk-adjusted returns. Due to a lack of diversity in agents,
+we observed near-identical results between ensembles and individual agents. Nonetheless, over a relatively short timespan of 30
+minutes, we observe that the vectorized agents can outperform
+other strategies.
+This was crucial in maintaining portfolio stability amid high market volatility. The ensemble generally showed a higher win rate and
+
+a lower loss rate than the individual agents, reflecting its enhanced
+decision-making accuracy and consistency. The comparative analysis between the ensemble model and individual trading agents
+underscores the ensemble’s superior capability in managing risks
+and capitalizing on market opportunities. While individual agents
+provide valuable insights and are crucial components of the ensemble, the aggregated approach of the ensemble offers a more robust
+and effective solution for trading in the volatile cryptocurrency
+markets.
+
+Revisiting Ensemble Methods for Stock Trading and Crypto Trading Tasks at ACM ICAIF FinRL Contests 2023/2024
+
+6.5
+
+Reflection of ACM ICAIF FinRL Contests
+2023/2024
+
+Dilemma: Along the journey of developping the FinRL framework
+[18–22] and organizing the ACM ICAIF FinRL Contests 2023/2024,
+we noticed a dilemma: 1). If the obtained FinRL trading agent is
+powerful, why model producers (or contest participants) do not
+trade on their own funds privately, instead releasing their methods (and codes, model weights, or other artifacts) to open-source
+community? 2). Any powerful trading agent may become obsolete
+inmediately after becoming publicly available.
+Plausible solution: Zero-knowledge proofs (ZKPs) provide a
+secure protocol between model producers and institutional funds.
+• A model producer validates the FinRL trading agent through
+backtesting or real-time paper trading and generates a proof-file
+via a ZKP-prover.
+• A model producer publishes a report or whitepaper (can be anonymous but with contact channels, say emails) that describes the
+backtesting process or real-time paper trading process (NOT revealing the method and the trained FinRL agent) and publishes
+the generated proof-file (probably uploads it to a blockchain).
+• An institutional fund downloads the proof-file and verifies the
+results in the report via a ZKP-verifier.
+• The institutional fund may contact the model producer and discuss about collaborations. 1). The institutional fund could hire
+the model producer; 2). The two parties could set up a decentralized autonomous organization (DAO) for a new trading strategy,
+using smart contracts...well, the legend begins!
+
+7
+
+CONCLUSION
+
+In this paper, we have revisited ensemble methods and combined
+them with massively parallel simulation to perform stock and cryptocurrency trading tasks. It enhances the efficiency and robustness
+of trained models in volatile financial markets. Massively parallel simulations on the GPU improve the sampling speed by up to
+1, 746× with 2, 048 parallel environments, compared with a single environment. Ensemble methods, combining the strengths of
+diverse agents to mitigate policy instability, and improve model
+performance. Results in stock and cryptocurrency trading tasks
+show that the ensemble models have high cumulative returns and
+outperform some individual agents, with a reduction of up to 4.17%
+in maximum drawdown and an improvement of up to 0.21 in the
+Sharpe ratio.
+In conclusion, integrating ensemble methods with massively parallel simulations on the GPU is a powerful approach to addressing
+the policy instability and sampling bottleneck in FinRL. With high
+stability, ensemble models can achieve high generalization capability. Future research can focus on optimizing these techniques
+and exploring a broader array of financial instruments and market
+conditions. Large-scale ensemble collections that benefit from accelerated sampling can combine various agents, leading to more
+generally capable models in FinRL.
+
+ACKNOWLEDGMENTS
+Nikolaus Holzer, Keyi Wang and Xiao-Yang Liu Yanglet acknowledge the support from Columbia’s SIRS and STAR Program, The
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+Tang Family Fund for Research Innovations in FinTech, Engineering, and Business Operations.
+Disclaimer: We are sharing views and codes for academic
+purposes under the MIT education license. Nothing herein
+is financial advice, and NOT a recommendation to trade real
+money. Please use common sense and always first consult a
+professional before trading or investing.
+
+REFERENCES
+[1] Selim Amrouni, Aymeric Moulin, Jared Vann, Svitlana Vyetrenko, Tucker Balch,
+and Manuela Veloso. 2022. ABIDES-gym: gym environments for multi-agent discrete event simulation and application to financial markets. In ACM International
+Conference on AI in Finance (ICAIF ’21). New York, NY, USA.
+[2] Leo Breiman. 1996. Bagging predictors. Machine Learning 24, 2 (1996), 123–140.
+[3] Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John Schulman, Jie Tang, and Wojciech Zaremba. 2016. OpenAI gym. arXiv preprint
+arXiv:1606.01540 (2016).
+[4] Stephanie CY Chan, Samuel Fishman, Anoop Korattikara, John Canny, and Sergio Guadarrama. 2020. Measuring the Reliability of Reinforcement Learning
+Algorithms. International Conference on Learning Representations (2020).
+[5] Yoav Freund and Robert E. Schapire. 1996. Experiments with a new boosting algorithm. In Proceedings of the Thirteenth International Conference on International
+Conference on Machine Learning (ICML’96). San Francisco, CA, USA, 148–156.
+[6] Sascha Yves Frey, Kang Li, Peer Nagy, Silvia Sapora, Christopher Lu, Stefan
+Zohren, Jakob Foerster, and Anisoara Calinescu. 2023. JAX-LOB: a GPUaccelerated limit order book simulator to unlock large scale reinforcement learning for trading. In ACM International Conference on AI in Finance (ICAIF ’23). New
+York, NY, USA, 583–591.
+[7] Scott Fujimoto, Herke van Hoof, and David Meger. 2018. Addressing function approximation error in actor-critic methods. In International Conference on Machine
+Learning.
+[8] M.A. Ganaie, Minghui Hu, A.K. Malik, M. Tanveer, and P.N. Suganthan. 2022.
+Ensemble deep learning: a review. Eng. Appl. Artif. Intell. 115, C (2022), 18 pages.
+[9] Jingyi Gu, Wenlu Du, A M Muntasir Rahman, and Guiling Wang. 2023. Margin
+trader: a reinforcement learning framework for portfolio management with
+margin and constraints. In ACM International Conference on AI in Finance (ICAIF
+’23). New York, NY, USA, 9 pages.
+[10] Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, and Sergey Levine. 2018. Soft
+actor-critic: off-policy maximum entropy deep reinforcement learning with a
+stochastic actor. In International Conference on Machine Learning, Vol. 80. PMLR,
+1861–1870.
+[11] Ben Hambly, Renyuan Xu, and Huining Yang. 2023. Recent advances in reinforcement learning in finance. Mathematical Finance 33, 3 (2023), 437–503.
+[12] Hado van Hasselt, Arthur Guez, and David Silver. 2016. Deep reinforcement
+learning with double Q-Learning. In AAAI Conference on Artificial Intelligence
+(AAAI’16). 2094–2100.
+[13] Peter Henderson, Riashat Islam, Philip Bachman, Joelle Pineau, Doina Precup,
+and David Meger. 2018. Deep reinforcement learning that matters. In AAAI
+Conference on Artificial Intelligence (AAAI’18). 8 pages.
+[14] Liu Jing and Yuncheol Kang. 2024. Automated cryptocurrency trading approach
+using ensemble deep reinforcement learning: Learn to understand candlesticks.
+Expert Syst. Appl. 237 (2024), 20 pages.
+[15] Schulman John, Wolski Filip, Dhariwal Prafulla, Radford Alec, and Klimov Oleg.
+2017. Proximal policy optimization algorithms. arXiv preprint arXiv:1707.06347
+(2017).
+[16] Zura Kakushadze. 2016. 101 formulaic alphas. arXiv preprint arXiv:1601.00991
+(2016).
+[17] Timothy P. Lillicrap, Jonathan J. Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez,
+Yuval Tassa, David Silver, and Daan Wierstra. 2016. Continuous control with deep
+reinforcement learning. In International Conference on Learning Representations,
+ICLR.
+[18] Xiao-Yang Liu, Ziyi Xia, Jingyang Rui, Jiechao Gao, Hongyang Yang, Ming Zhu,
+Christina Wang, Zhaoran Wang, and Jian Guo. 2022. FinRL-Meta: Market environments and benchmarks for data-driven financial reinforcement learning.
+Advances in Neural Information Processing Systems (NeurIPS) 35 (2022), 1835–1849.
+[19] Xiao-Yang Liu, Ziyi Xia, Hongyang Yang, Jiechao Gao, Daochen Zha, Ming Zhu,
+Christina Dan Wang, Zhaoran Wang, and Jian Guo. 2024. Dynamic datasets and
+market environments for financial reinforcement learning. Machine Learning Nature (2024).
+[20] Xiao-Yang Liu, Zhuoran Xiong, Shan Zhong, Hongyang Yang, and Anwar Walid.
+2018. Practical deep reinforcement learning approach for stock trading. NeurIPS
+Workshop on Challenges and Opportunities for AI in Financial Services (2018).
+[21] Xiao-Yang Liu, Hongyang Yang, Qian Chen, Runjia Zhang, Liuqing Yang, Bowen
+Xiao, and Christina Dan Wang. 2020. FinRL: a deep reinforcement learning
+
+ACM ICAIF ’24, Nov. 14–15, 2025, Brooklyn, NY
+
+library for automated stock trading in quantitative finance. Deep RL Workshop,
+NeurIPS (2020).
+[22] Xiao-Yang Liu, Hongyang Yang, Jiechao Gao, and Christina Dan Wang. 2022.
+FinRL: deep reinforcement learning framework to automate trading in quantitative finance. ACM International Conference on AI in Finance (2022).
+[23] Viktor Makoviychuk, Lukasz Wawrzyniak, Yunrong Guo, Michelle Lu, Kier Storey,
+Miles Macklin, David Hoeller, Nikita Rudin, Arthur Allshire, Ankur Handa, and
+Gavriel State. 2021. Isaac gym: high performance GPU based physics simulation
+for robot learning. In Proceedings of the Neural Information Processing Systems
+Track on Datasets and Benchmarks.
+[24] Volodymyr Mnih, Koray Kavukcuoglu, David Silver, et al. 2015. Human-level
+control through deep reinforcement learning. Nature 518 (2015), 529–533.
+[25] Shakir Mohamed, Mihaela Rosca, Michael Figurnov, and Andriy Mnih. 2020.
+Monte Carlo gradient estimation in machine learning. J. Mach. Learn. Res. 21, 1
+(2020), 62 pages.
+[26] Fernando Perez-Cruz. 2008. Kullback-Leibler divergence estimation of continuous
+distributions. In IEEE International Symposium on Information Theory. 1666–1670.
+[27] Jan Peters and J. Andrew Bagnell. 2010. Policy gradient methods. Springer US,
+Boston, MA, 774–776.
+[28] Rafael Rafailov, Archit Sharma, Eric Mitchell, Christopher D Manning, Stefano
+Ermon, and Chelsea Finn. 2023. Direct preference optimization: your language
+model is secretly a reward model. In Advances in Neural Information Processing
+Systems, Vol. 36. 53728–53741.
+
+Nikolaus Holzer, Keyi Wang, Kairong Xiao, and Xiao-Yang Liu Yanglet
+
+[29] Nikita Rudin, David Hoeller, Philipp Reist, and Marco Hutter. 2022. Learning to
+walk in minutes using massively parallel deep reinforcement learning. Proceedings
+of the 5th Conference on Robot Learning (2022), 91–100.
+[30] Richard S Sutton, David McAllester, Satinder Singh, and Yishay Mansour. 1999.
+Policy gradient methods for reinforcement learning with function approximation.
+In Advances in Neural Information Processing Systems, Vol. 12.
+[31] Edoardo Vittori, Michele Trapletti, and Marcello Restelli. 2021. Option hedging
+with risk averse reinforcement learning. In ACM International Conference on AI
+in Finance (ICAIF ’20). New York, NY, USA, 8 pages.
+[32] Ziyu Wang, Tom Schaul, Matteo Hessel, Hado Van Hasselt, Marc Lanctot, and
+Nando De Freitas. 2016. Dueling network architectures for deep reinforcement
+learning. In International Conference on International Conference on Machine
+Learning (ICML’16, Vol. 48). 1995–2003.
+[33] M. A. Wiering and H. van Hasselt. 2008. Ensemble algorithms in reinforcement
+learning. Trans. Sys. Man Cyber. Part B 38, 4 (2008), 930–936.
+[34] Hongyang Yang, Xiao-Yang Liu, Shan Zhong, and Anwar Walid. 2021. Deep
+reinforcement learning for automated stock trading: an ensemble strategy. In
+ACM International Conference on AI in Finance (ICAIF ’20). New York, NY, USA.
+[35] Zihao Zhang, Stefan Zohren, and Stephen Roberts. 2019. Deep reinforcement
+learning for trading. Journal of Financial Data Science (2019).
+[36] Wenshuai Zhao, Jorge Peña Queralta, and Tomi Westerlund. 2020. Sim-to-real
+transfer in deep reinforcement learning for robotics: a survey. In IEEE Symposium
+Series on Computational Intelligence (SSCI). 737–744.
+
+

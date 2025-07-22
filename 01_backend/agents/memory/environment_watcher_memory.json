@@ -1,0 +1,37 @@
+{
+  "agent_id": "EnvironmentWatcherAgent",
+  "last_updated": "2025-06-29T05:24:18.854641",
+  "current_market_regime": "illiquid_conditions",
+  "market_conditions": {
+    "spy_price": 0,
+    "vix_level": 0,
+    "volume_profile": "normal",
+    "trend_direction": "neutral",
+    "support_levels": [],
+    "resistance_levels": [],
+    "last_updated": "2025-06-29T05:24:18.853730"
+  },
+  "regime_history": [],
+  "volatility_alerts": [],
+  "market_alerts": [],
+  "economic_calendar": [],
+  "regime_indicators": {
+    "vix_regime": "low_volatility",
+    "trend_regime": "neutral",
+    "volume_regime": "low_volume",
+    "liquidity_regime": "excellent",
+    "volatility_regime": "very_low",
+    "overall_regime": "illiquid_conditions"
+  },
+  "trading_recommendations": {
+    "timestamp": "2025-06-29T05:24:18.853889",
+    "overall_signal": "neutral",
+    "strategy_preference": "conservative",
+    "position_sizing": "normal",
+    "timing_preference": "wait_for_open",
+    "specific_actions": [
+      "Wait for market open for better liquidity"
+    ],
+    "risk_adjustments": []
+  }
+}

@@ -1,0 +1,299 @@
+{
+  "year": 2025,
+  "month": 1,
+  "status": "complete",
+  "days": {
+    "2025-01-01": {
+      "status": "failed",
+      "error": [
+        "No SPY price available"
+      ]
+    },
+    "2025-01-02": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:26:06.616780",
+      "contracts": 42,
+      "ohlc_bars": 2761,
+      "greeks_bars": 3318,
+      "iv_bars": 3318,
+      "iv_nulls": 703,
+      "coverage": 84.27960927960928,
+      "iv_coverage": 78.81253767329717,
+      "atm_strike": 589,
+      "atm_iv": 0.25856399999999996
+    },
+    "2025-01-03": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:25:51.959146",
+      "contracts": 34,
+      "ohlc_bars": 2486,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 508,
+      "coverage": 93.74057315233786,
+      "iv_coverage": 81.08711839166047,
+      "atm_strike": 588,
+      "atm_iv": 0.21702
+    },
+    "2025-01-06": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:26:45.205749",
+      "contracts": 26,
+      "ohlc_bars": 1992,
+      "greeks_bars": 2054,
+      "iv_bars": 2054,
+      "iv_nulls": 256,
+      "coverage": 98.22485207100591,
+      "iv_coverage": 87.5365141187926,
+      "atm_strike": 596,
+      "atm_iv": 0.16605172413793104
+    },
+    "2025-01-07": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:27:27.615415",
+      "contracts": 38,
+      "ohlc_bars": 2345,
+      "greeks_bars": 3002,
+      "iv_bars": 3002,
+      "iv_nulls": 817,
+      "coverage": 79.11605937921728,
+      "iv_coverage": 72.78481012658227,
+      "atm_strike": 597,
+      "atm_iv": 0.22456521739130436
+    },
+    "2025-01-08": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:28:08.359218",
+      "contracts": 38,
+      "ohlc_bars": 2730,
+      "greeks_bars": 3002,
+      "iv_bars": 3002,
+      "iv_nulls": 461,
+      "coverage": 92.10526315789474,
+      "iv_coverage": 84.6435709526982,
+      "atm_strike": 589,
+      "atm_iv": 0.2264666666666667
+    },
+    "2025-01-09": {
+      "status": "failed",
+      "error": [
+        "No SPY price available"
+      ]
+    },
+    "2025-01-10": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:28:50.909425",
+      "contracts": 38,
+      "ohlc_bars": 2818,
+      "greeks_bars": 3002,
+      "iv_bars": 3002,
+      "iv_nulls": 648,
+      "coverage": 95.07422402159244,
+      "iv_coverage": 78.41439040639574,
+      "atm_strike": 586,
+      "atm_iv": 0.24159999999999995
+    },
+    "2025-01-13": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:29:26.540186",
+      "contracts": 38,
+      "ohlc_bars": 2606,
+      "greeks_bars": 3002,
+      "iv_bars": 3002,
+      "iv_nulls": 409,
+      "coverage": 87.92172739541161,
+      "iv_coverage": 86.37574950033311,
+      "atm_strike": 576,
+      "atm_iv": 0.24596896551724137
+    },
+    "2025-01-14": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:29:58.316403",
+      "contracts": 34,
+      "ohlc_bars": 2352,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 507,
+      "coverage": 88.68778280542986,
+      "iv_coverage": 81.12434847356664,
+      "atm_strike": 584,
+      "atm_iv": 0.2197357142857143
+    },
+    "2025-01-15": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:30:33.498261",
+      "contracts": 34,
+      "ohlc_bars": 2557,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 367,
+      "coverage": 96.41779788838612,
+      "iv_coverage": 86.33655994043187,
+      "atm_strike": 590,
+      "atm_iv": 0.21684444444444442
+    },
+    "2025-01-16": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:30:59.193981",
+      "contracts": 30,
+      "ohlc_bars": 2069,
+      "greeks_bars": 2370,
+      "iv_bars": 2370,
+      "iv_nulls": 416,
+      "coverage": 88.41880341880342,
+      "iv_coverage": 82.44725738396625,
+      "atm_strike": 594,
+      "atm_iv": 0.17384285714285716
+    },
+    "2025-01-17": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:31:35.353417",
+      "contracts": 30,
+      "ohlc_bars": 2261,
+      "greeks_bars": 2370,
+      "iv_bars": 2370,
+      "iv_nulls": 372,
+      "coverage": 96.62393162393163,
+      "iv_coverage": 84.30379746835443,
+      "atm_strike": 597,
+      "atm_iv": 0.17361333333333334
+    },
+    "2025-01-20": {
+      "status": "failed",
+      "error": [
+        "No SPY price available"
+      ]
+    },
+    "2025-01-21": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:31:54.533259",
+      "contracts": 26,
+      "ohlc_bars": 1948,
+      "greeks_bars": 2054,
+      "iv_bars": 2054,
+      "iv_nulls": 315,
+      "coverage": 96.05522682445759,
+      "iv_coverage": 84.66407010710807,
+      "atm_strike": 601,
+      "atm_iv": 0.15601428571428572
+    },
+    "2025-01-22": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:32:23.324573",
+      "contracts": 22,
+      "ohlc_bars": 1686,
+      "greeks_bars": 1738,
+      "iv_bars": 1738,
+      "iv_nulls": 227,
+      "coverage": 98.25174825174825,
+      "iv_coverage": 86.93901035673187,
+      "atm_strike": 606,
+      "atm_iv": 0.12922666666666666
+    },
+    "2025-01-23": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:32:43.466895",
+      "contracts": 22,
+      "ohlc_bars": 1660,
+      "greeks_bars": 1738,
+      "iv_bars": 1738,
+      "iv_nulls": 212,
+      "coverage": 96.73659673659674,
+      "iv_coverage": 87.80207134637514,
+      "atm_strike": 606,
+      "atm_iv": 0.13132857142857143
+    },
+    "2025-01-24": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:33:09.309250",
+      "contracts": 22,
+      "ohlc_bars": 1585,
+      "greeks_bars": 1738,
+      "iv_bars": 1738,
+      "iv_nulls": 324,
+      "coverage": 92.36596736596736,
+      "iv_coverage": 81.35788262370541,
+      "atm_strike": 610,
+      "atm_iv": 0.1253625
+    },
+    "2025-01-27": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:34:01.014215",
+      "contracts": 38,
+      "ohlc_bars": 2606,
+      "greeks_bars": 3002,
+      "iv_bars": 3002,
+      "iv_nulls": 337,
+      "coverage": 87.92172739541161,
+      "iv_coverage": 88.77415056628915,
+      "atm_strike": 595,
+      "atm_iv": 0.22926000000000002
+    },
+    "2025-01-28": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:34:18.877557",
+      "contracts": 34,
+      "ohlc_bars": 2455,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 468,
+      "coverage": 92.57164404223228,
+      "iv_coverage": 82.57632166790768,
+      "atm_strike": 601,
+      "atm_iv": 0.19774814814814817
+    },
+    "2025-01-29": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:36:00.030349",
+      "contracts": 57,
+      "ohlc_bars": 3607,
+      "greeks_bars": 4503,
+      "iv_bars": 4503,
+      "iv_nulls": 620,
+      "coverage": 81.12910481331535,
+      "iv_coverage": 86.23140128803021,
+      "atm_strike": 604,
+      "atm_iv": 0.36032666666666663
+    },
+    "2025-01-30": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:35:28.740936",
+      "contracts": 34,
+      "ohlc_bars": 2399,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 384,
+      "coverage": 90.46003016591251,
+      "iv_coverage": 85.7036485480268,
+      "atm_strike": 604,
+      "atm_iv": 0.20296206896551724
+    },
+    "2025-01-31": {
+      "status": "complete",
+      "end_time": "2025-07-01T13:36:45.397454",
+      "contracts": 34,
+      "ohlc_bars": 2427,
+      "greeks_bars": 2686,
+      "iv_bars": 2686,
+      "iv_nulls": 515,
+      "coverage": 91.51583710407239,
+      "iv_coverage": 80.8265078183172,
+      "atm_strike": 608,
+      "atm_iv": 0.2084692307692308
+    }
+  },
+  "stats": {
+    "total_days": 23,
+    "completed_days": 20,
+    "failed_days": 3,
+    "total_contracts": 671,
+    "total_ohlc_bars": 47350,
+    "total_greeks_bars": 53009,
+    "total_iv_bars": 53009,
+    "total_iv_nulls": 8866,
+    "average_coverage": 91.38092534466672,
+    "average_iv_coverage": 83.43708593792852
+  },
+  "start_time": "2025-07-01T13:24:40.677104",
+  "end_time": "2025-07-01T13:36:45.399742"
+}

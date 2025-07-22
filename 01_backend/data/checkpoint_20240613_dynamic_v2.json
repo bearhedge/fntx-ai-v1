@@ -1,0 +1,46 @@
+{
+  "date": "2024-06-13",
+  "status": "complete",
+  "dynamic_strikes": {
+    "status": "complete",
+    "contracts": 26,
+    "strikes": [
+      537,
+      538,
+      539,
+      540,
+      541,
+      542,
+      543,
+      544,
+      545,
+      546,
+      547,
+      548,
+      549
+    ],
+    "last_strike": 546,
+    "volume_filtered": 0
+  },
+  "stats": {
+    "total_contracts": 26,
+    "total_ohlc_bars": 1785,
+    "total_greeks_bars": 2054,
+    "total_iv_bars": 2054,
+    "total_iv_nulls": 407,
+    "spy_open": 543.1500244140625,
+    "atm_strike": 543,
+    "atm_iv": 0.16311379310344826,
+    "strike_selection_method": "dynamic",
+    "strikes_per_side": 6,
+    "volume_filtered_count": 0,
+    "coverage": 88.01775147928994
+  },
+  "iv_stats": {
+    "total_points": 2054,
+    "valid_ivs": 1647,
+    "zero_ivs": 407,
+    "null_stored": 407
+  },
+  "errors": []
+}

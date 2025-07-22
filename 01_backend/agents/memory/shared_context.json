@@ -1,0 +1,20 @@
+{
+  "market_regime": "illiquid_conditions",
+  "vix_level": 0,
+  "spy_price": 0,
+  "trading_recommendations": {
+    "timestamp": "2025-06-29T05:24:18.853889",
+    "overall_signal": "neutral",
+    "strategy_preference": "conservative",
+    "position_sizing": "normal",
+    "timing_preference": "wait_for_open",
+    "specific_actions": [
+      "Wait for market open for better liquidity"
+    ],
+    "risk_adjustments": []
+  },
+  "regime_changes": [],
+  "market_hours": false,
+  "environment_alert_level": "low",
+  "last_updated": "2025-06-29T05:24:18.854225"
+}

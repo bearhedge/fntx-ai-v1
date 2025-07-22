@@ -1,0 +1,31 @@
+# Core dependencies
+ray[default]>=2.5.0
+torch>=2.0.0
+stable-baselines3>=2.0.0
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Reinforcement Learning
+gymnasium>=0.28.0
+tensorboard>=2.13.0
+
+# Federated Learning
+syft>=0.8.0
+flower>=1.4.0
+
+# Message broker
+pulsar-client>=3.2.0
+
+# API framework
+fastapi>=0.100.0
+uvicorn>=0.23.0
+pydantic>=2.0.0
+
+# Storage
+redis>=4.5.0
+sqlalchemy>=2.0.0
+
+# Monitoring
+prometheus-client>=0.17.0
+opentelemetry-api>=1.18.0
+opentelemetry-sdk>=1.18.0

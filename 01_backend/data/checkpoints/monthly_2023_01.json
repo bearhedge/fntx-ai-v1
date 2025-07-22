@@ -1,0 +1,16 @@
+{
+  "year": 2023,
+  "month": 1,
+  "status": "initialized",
+  "days": {},
+  "stats": {
+    "total_days": 0,
+    "completed_days": 0,
+    "failed_days": 0,
+    "total_contracts": 0,
+    "total_ohlc_bars": 0,
+    "core_complete": 0,
+    "extended_complete": 0
+  },
+  "last_update": "2025-07-01T04:38:42.358026"
+}

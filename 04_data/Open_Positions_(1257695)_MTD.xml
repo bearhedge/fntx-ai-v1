@@ -1,0 +1,78 @@
+<FlexQueryResponse queryName="Open Positions (1257695) LBD" type="AF">
+<FlexStatements count="14">
+<FlexStatement accountId="U19860056" fromDate="20250701" toDate="20250701" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250701P00615000" description="SPY 01JUL25 615 P" conid="792202495" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="615" expiry="20250701" putCall="P" position="-1" positionValue="0" costBasisPrice="0.1649356" costBasisMoney="-16.49356" percentOfNAV="" fifoPnlUnrealized="16.49356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250702" toDate="20250702" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250702P00615000" description="SPY 02JUL25 615 P" conid="792866841" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="615" expiry="20250702" putCall="P" position="-1" positionValue="0" costBasisPrice="0.1013356" costBasisMoney="-10.13356" percentOfNAV="" fifoPnlUnrealized="10.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250703" toDate="20250703" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250703P00622000" description="SPY 03JUL25 622 P" conid="791795235" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="622" expiry="20250703" putCall="P" position="-1" positionValue="0" costBasisPrice="0.1461356" costBasisMoney="-14.61356" percentOfNAV="" fifoPnlUnrealized="14.61356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250704" toDate="20250704" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250707" toDate="20250707" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250707P00615000" description="SPY 07JUL25 615 P" conid="793842830" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="615" expiry="20250707" putCall="P" position="-1" positionValue="0" costBasisPrice="0.0913356" costBasisMoney="-9.13356" percentOfNAV="" fifoPnlUnrealized="9.13356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250707C00627000" description="SPY 07JUL25 627 C" conid="794389180" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="627" expiry="20250707" putCall="C" position="-1" positionValue="0" costBasisPrice="0.0013356" costBasisMoney="-0.13356" percentOfNAV="" fifoPnlUnrealized="0.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250708" toDate="20250708" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250708P00618000" description="SPY 08JUL25 618 P" conid="794669694" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="618" expiry="20250708" putCall="P" position="-1" positionValue="0" costBasisPrice="0.0555356" costBasisMoney="-5.55356" percentOfNAV="" fifoPnlUnrealized="5.55356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250708C00622000" description="SPY 08JUL25 622 C" conid="794667193" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="622" expiry="20250708" putCall="C" position="-1" positionValue="0" costBasisPrice="0.2449356" costBasisMoney="-24.49356" percentOfNAV="" fifoPnlUnrealized="24.49356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250709" toDate="20250709" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250709P00620000" description="SPY 09JUL25 620 P" conid="794671929" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="620" expiry="20250709" putCall="P" position="-1" positionValue="0" costBasisPrice="0.2613356" costBasisMoney="-26.13356" percentOfNAV="" fifoPnlUnrealized="26.13356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250709C00624000" description="SPY 09JUL25 624 C" conid="795084017" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="624" expiry="20250709" putCall="C" position="-1" positionValue="-6" costBasisPrice="0.1813356" costBasisMoney="-18.13356" percentOfNAV="100.00" fifoPnlUnrealized="12.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250710" toDate="20250710" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250710P00625000" description="SPY 10JUL25 625 P" conid="795087104" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="625" expiry="20250710" putCall="P" position="-1" positionValue="0" costBasisPrice="0.2513356" costBasisMoney="-25.13356" percentOfNAV="" fifoPnlUnrealized="25.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250711" toDate="20250711" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250711P00621000" description="SPY 11JUL25 621 P" conid="793843916" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="621" expiry="20250711" putCall="P" position="-1" positionValue="0" costBasisPrice="0.2896356" costBasisMoney="-28.96356" percentOfNAV="" fifoPnlUnrealized="28.96356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250711C00625000" description="SPY 11JUL25 625 C" conid="788538049" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="625" expiry="20250711" putCall="C" position="-1" positionValue="0" costBasisPrice="0.3013356" costBasisMoney="-30.13356" percentOfNAV="" fifoPnlUnrealized="30.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250714" toDate="20250714" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250714P00624000" description="SPY 14JUL25 624 P" conid="796121731" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="624" expiry="20250714" putCall="P" position="-1" positionValue="0" costBasisPrice="0.3413356" costBasisMoney="-34.13356" percentOfNAV="" fifoPnlUnrealized="34.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250715" toDate="20250715" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250715P00622000" description="SPY 15JUL25 622 P" conid="796596156" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="622" expiry="20250715" putCall="P" position="-1" positionValue="0" costBasisPrice="0.3213356" costBasisMoney="-32.13356" percentOfNAV="" fifoPnlUnrealized="32.13356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250715C00625000" description="SPY 15JUL25 625 C" conid="796123236" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="625" expiry="20250715" putCall="C" position="-1" positionValue="0" costBasisPrice="0.2113356" costBasisMoney="-21.13356" percentOfNAV="" fifoPnlUnrealized="21.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250716" toDate="20250716" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250716P00620000" description="SPY 16JUL25 620 P" conid="796597086" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="620" expiry="20250716" putCall="P" position="-1" positionValue="0" costBasisPrice="0.2084356" costBasisMoney="-20.84356" percentOfNAV="" fifoPnlUnrealized="20.84356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250717" toDate="20250717" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250717P00626000" description="SPY 17JUL25 626 P" conid="797885963" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="626" expiry="20250717" putCall="P" position="-1" positionValue="0" costBasisPrice="0.3549356" costBasisMoney="-35.49356" percentOfNAV="" fifoPnlUnrealized="35.49356" serialNumber="" deliveryType="" />
+<OpenPosition accountId="U19860056" acctAlias="" currency="USD" assetCategory="OPT" symbol="SPY   250717C00628000" description="SPY 17JUL25 628 C" conid="797884652" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="628" expiry="20250717" putCall="C" position="-1" positionValue="-4" costBasisPrice="0.1813356" costBasisMoney="-18.13356" percentOfNAV="99.99" fifoPnlUnrealized="14.13356" serialNumber="" deliveryType="" />
+</OpenPositions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="MonthToDate" whenGenerated="20250720;085844">
+<OpenPositions>
+</OpenPositions>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

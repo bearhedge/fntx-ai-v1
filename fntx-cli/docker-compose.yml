@@ -1,0 +1,224 @@
+version: '3.8'
+
+services:
+  # Message broker for event streaming
+  pulsar:
+    image: apachepulsar/pulsar:3.0.0
+    container_name: fntx-pulsar
+    ports:
+      - "6650:6650"
+      - "8080:8080"
+    command: bin/pulsar standalone
+    volumes:
+      - pulsar-data:/pulsar/data
+    networks:
+      - fntx-network
+
+  # Time-series database for market data
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    container_name: fntx-timescaledb
+    environment:
+      POSTGRES_USER: fntx
+      POSTGRES_PASSWORD: fntx_secure_pass
+      POSTGRES_DB: fntx_market
+    ports:
+      - "5432:5432"
+    volumes:
+      - timescale-data:/var/lib/postgresql/data
+    networks:
+      - fntx-network
+
+  # Redis for real-time state management
+  redis:
+    image: redis:7-alpine
+    container_name: fntx-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+    networks:
+      - fntx-network
+
+  # Ray head node for distributed computing
+  ray-head:
+    image: rayproject/ray:2.5.0-gpu
+    container_name: fntx-ray-head
+    shm_size: 4g
+    ports:
+      - "8265:8265"  # Ray dashboard
+      - "10001:10001"
+    environment:
+      - RAY_HEAD_SERVICE_HOST=ray-head
+    command: ray start --head --dashboard-host=0.0.0.0
+    volumes:
+      - ./services:/app/services
+      - ray-data:/tmp/ray
+    networks:
+      - fntx-network
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+  # Agent Factory Service
+  agent-factory:
+    build:
+      context: ./services/agent-factory
+      dockerfile: Dockerfile
+    container_name: fntx-agent-factory
+    depends_on:
+      - ray-head
+      - pulsar
+      - redis
+    environment:
+      - RAY_ADDRESS=ray://ray-head:10001
+      - PULSAR_URL=pulsar://pulsar:6650
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./services/agent-factory:/app
+      - agent-models:/models
+    networks:
+      - fntx-network
+
+  # Trading Orchestrator Service
+  trading-orchestrator:
+    build:
+      context: ./services/trading-orchestrator
+      dockerfile: Dockerfile
+    container_name: fntx-trading-orchestrator
+    depends_on:
+      - pulsar
+      - redis
+      - timescaledb
+    environment:
+      - PULSAR_URL=pulsar://pulsar:6650
+      - REDIS_URL=redis://redis:6379
+      - DB_URL=postgresql://fntx:fntx_secure_pass@timescaledb:5432/fntx_market
+      - IBKR_GATEWAY_HOST=${IBKR_GATEWAY_HOST:-localhost}
+      - IBKR_GATEWAY_PORT=${IBKR_GATEWAY_PORT:-7497}
+    volumes:
+      - ./services/trading-orchestrator:/app
+    networks:
+      - fntx-network
+
+  # Risk Engine Service
+  risk-engine:
+    build:
+      context: ./services/risk-engine
+      dockerfile: Dockerfile
+    container_name: fntx-risk-engine
+    depends_on:
+      - pulsar
+      - redis
+    environment:
+      - PULSAR_URL=pulsar://pulsar:6650
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./services/risk-engine:/app
+    networks:
+      - fntx-network
+
+  # Federated Learning Coordinator
+  federated-learning:
+    build:
+      context: ./services/federated-learning
+      dockerfile: Dockerfile
+    container_name: fntx-federated-learning
+    depends_on:
+      - ray-head
+      - pulsar
+    environment:
+      - RAY_ADDRESS=ray://ray-head:10001
+      - PULSAR_URL=pulsar://pulsar:6650
+      - FL_SERVICE_PORT=8003
+    ports:
+      - "8003:8003"
+    volumes:
+      - ./services/federated-learning:/app
+      - federated-models:/models
+    networks:
+      - fntx-network
+
+  # Identity Service (Humanity Protocol)
+  identity-service:
+    build:
+      context: ./services/identity-service
+      dockerfile: Dockerfile
+    container_name: fntx-identity-service
+    depends_on:
+      - redis
+    environment:
+      - REDIS_URL=redis://redis:6379
+      - HUMANITY_API_URL=${HUMANITY_API_URL}
+      - HUMANITY_API_KEY=${HUMANITY_API_KEY}
+    volumes:
+      - ./services/identity-service:/app
+    networks:
+      - fntx-network
+
+  # Token Service (Blockchain)
+  token-service:
+    build:
+      context: ./services/token-service
+      dockerfile: Dockerfile
+    container_name: fntx-token-service
+    environment:
+      - POLYGON_RPC_URL=${POLYGON_RPC_URL:-https://polygon-rpc.com}
+      - CONTRACT_ADDRESS=${FNTX_CONTRACT_ADDRESS}
+      - PRIVATE_KEY=${DEPLOYER_PRIVATE_KEY}
+    volumes:
+      - ./services/token-service:/app
+    networks:
+      - fntx-network
+
+  # Pool Manager Service
+  pool-manager:
+    build:
+      context: ./services/pool-manager
+      dockerfile: Dockerfile
+    container_name: fntx-pool-manager
+    depends_on:
+      - pulsar
+      - redis
+      - timescaledb
+    environment:
+      - PULSAR_URL=pulsar://pulsar:6650
+      - REDIS_URL=redis://redis:6379
+      - DB_URL=postgresql://fntx:fntx_secure_pass@timescaledb:5432/fntx_market
+    volumes:
+      - ./services/pool-manager:/app
+    networks:
+      - fntx-network
+
+  # Analytics Engine
+  analytics-engine:
+    build:
+      context: ./services/analytics-engine
+      dockerfile: Dockerfile
+    container_name: fntx-analytics-engine
+    depends_on:
+      - timescaledb
+      - redis
+    environment:
+      - DB_URL=postgresql://fntx:fntx_secure_pass@timescaledb:5432/fntx_market
+      - REDIS_URL=redis://redis:6379
+    volumes:
+      - ./services/analytics-engine:/app
+    networks:
+      - fntx-network
+
+volumes:
+  pulsar-data:
+  timescale-data:
+  redis-data:
+  ray-data:
+  agent-models:
+  federated-models:
+
+networks:
+  fntx-network:
+    driver: bridge

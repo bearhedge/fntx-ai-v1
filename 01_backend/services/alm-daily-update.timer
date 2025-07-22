@@ -1,0 +1,12 @@
+[Unit]
+Description=Daily ALM Data Update Timer
+Requires=alm-daily-update.service
+
+[Timer]
+# Run daily at 5:00 PM EDT (after market close)
+OnCalendar=*-*-* 21:00:00 UTC
+# Run on startup if missed
+Persistent=true
+
+[Install]
+WantedBy=timers.target

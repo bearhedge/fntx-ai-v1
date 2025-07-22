@@ -1,0 +1,63 @@
+<FlexQueryResponse queryName="Cash Transactions (1257703) MTD" type="AF">
+<FlexStatements count="14">
+<FlexStatement accountId="U19860056" fromDate="20250701" toDate="20250701" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+<CashTransaction accountId="U19860056" currency="HKD" description="DISBURSEMENT INITIATED BY Tsun Ming Hou" transactionID="3916940009" amount="-1500" type="Deposits/Withdrawals" />
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250702" toDate="20250702" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250703" toDate="20250703" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250704" toDate="20250704" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250707" toDate="20250707" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250708" toDate="20250708" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250709" toDate="20250709" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250710" toDate="20250710" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+<CashTransaction accountId="U19860056" currency="HKD" description="DISBURSEMENT INITIATED BY Tsun Ming Hou" transactionID="3935636566" amount="-1000" type="Deposits/Withdrawals" />
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250711" toDate="20250711" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250714" toDate="20250714" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250715" toDate="20250715" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250716" toDate="20250716" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+<CashTransaction accountId="U19860056" currency="HKD" description="DISBURSEMENT INITIATED BY Tsun Ming Hou" transactionID="3945592808" amount="-1230" type="Deposits/Withdrawals" />
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250717" toDate="20250717" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="MonthToDate" whenGenerated="20250720;085257">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

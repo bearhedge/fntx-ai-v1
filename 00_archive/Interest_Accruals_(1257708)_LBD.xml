@@ -1,0 +1,12 @@
+<FlexQueryResponse queryName="Interest Accruals (1257708) LBD" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="LastBusinessDay" whenGenerated="20250719;104616 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250718" toDate="20250718" startingAccrualBalance="-82.729514" interestAccrued="0" accrualReversal="0" fxTranslation="0.020026" endingAccrualBalance="-82.709488" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250718" toDate="20250718" startingAccrualBalance="-10.54" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-10.54" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

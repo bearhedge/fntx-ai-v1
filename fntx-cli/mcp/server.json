@@ -1,0 +1,71 @@
+{
+  "name": "fntx-agent",
+  "description": "FNTX Trading Intelligence MCP Server",
+  "version": "0.1.0",
+  "tools": [
+    {
+      "name": "analyze_market",
+      "description": "Analyze current market conditions for trading opportunities",
+      "parameters": {
+        "symbol": {
+          "type": "string",
+          "description": "Trading symbol (e.g., SPY, BTC-USD)"
+        },
+        "timeframe": {
+          "type": "string",
+          "description": "Analysis timeframe",
+          "enum": ["1m", "5m", "1h", "1d"]
+        }
+      }
+    },
+    {
+      "name": "execute_trade",
+      "description": "Execute a trade with risk management",
+      "parameters": {
+        "action": {
+          "type": "string",
+          "enum": ["buy", "sell", "close"]
+        },
+        "symbol": {
+          "type": "string"
+        },
+        "size": {
+          "type": "number",
+          "description": "Position size"
+        },
+        "mode": {
+          "type": "string",
+          "enum": ["individual", "enterprise"],
+          "default": "individual"
+        }
+      }
+    },
+    {
+      "name": "get_enterprise_stats",
+      "description": "Get enterprise pool performance statistics",
+      "parameters": {}
+    },
+    {
+      "name": "verify_identity",
+      "description": "Check Humanity Protocol verification status",
+      "parameters": {}
+    }
+  ],
+  "resources": [
+    {
+      "uri": "fntx://portfolio",
+      "name": "Portfolio Status",
+      "description": "Current portfolio positions and P&L"
+    },
+    {
+      "uri": "fntx://enterprise",
+      "name": "Enterprise Pool",
+      "description": "Enterprise pool statistics and member contributions"
+    },
+    {
+      "uri": "fntx://signals",
+      "name": "Trading Signals",
+      "description": "Real-time trading signals from the RL model"
+    }
+  ]
+}

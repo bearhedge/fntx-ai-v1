@@ -1,0 +1,52 @@
+<FlexQueryResponse queryName="NAV (1257542) LBD" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="LastBusinessDay" whenGenerated="20250719;102051 EDT">
+<EquitySummaryInBase>
+<EquitySummaryByReportDateInBase accountId="U19860056" acctAlias="" currency="HKD" reportDate="20250717" cash="79868.936613235" cashLong="79913.407701716" cashShort="-44.471088481" brokerCashComponent="79868.936613235" brokerCashComponentLong="79913.407701716" brokerCashComponentShort="-44.471088481" options="-31.3964" optionsLong="0" optionsShort="-31.3964" interestAccruals="-82.729514" interestAccrualsLong="0" interestAccrualsShort="-82.729514" />
+<EquitySummaryByReportDateInBase accountId="U19860056" acctAlias="" currency="HKD" reportDate="20250718" cash="79313.740871276" cashLong="79913.407701716" cashShort="-599.66683044" brokerCashComponent="79313.740871276" brokerCashComponentLong="79913.407701716" brokerCashComponentShort="-599.66683044" options="0" optionsLong="0" optionsShort="0" interestAccruals="-82.709488" interestAccrualsLong="0" interestAccrualsShort="-82.709488" />
+</EquitySummaryInBase>
+<ChangeInNAV accountId="U19860056" acctAlias="" currency="HKD" fromDate="20250718" toDate="20250718" startingValue="79754.810699235" mtm="-502.20243506" realized="0" changeInUnrealized="0" costAdjustments="0" transferredPnlAdjustments="0" depositsWithdrawals="0" interest="0" changeInInterestAccruals="0" brokerFees="0" commissions="-21.596906896" endingValue="79231.031383276" twr="-0.656736956" />
+<ConversionRates>
+<ConversionRate reportDate="20250718" fromCurrency="CHF" toCurrency="HKD" rate="9.7887" />
+<ConversionRate reportDate="20250718" fromCurrency="MXN" toCurrency="HKD" rate="0.41867" />
+<ConversionRate reportDate="20250718" fromCurrency="QAR" toCurrency="HKD" rate="2.1526" />
+<ConversionRate reportDate="20250718" fromCurrency="SAR" toCurrency="HKD" rate="2.092" />
+<ConversionRate reportDate="20250718" fromCurrency="ZAR" toCurrency="HKD" rate="0.44305" />
+<ConversionRate reportDate="20250718" fromCurrency="INR" toCurrency="HKD" rate="0.091088" />
+<ConversionRate reportDate="20250718" fromCurrency="THB" toCurrency="HKD" rate="0.24235" />
+<ConversionRate reportDate="20250718" fromCurrency="CNY" toCurrency="HKD" rate="1.0933" />
+<ConversionRate reportDate="20250718" fromCurrency="AUD" toCurrency="HKD" rate="5.1086" />
+<ConversionRate reportDate="20250718" fromCurrency="KRW" toCurrency="HKD" rate="0.0056406" />
+<ConversionRate reportDate="20250718" fromCurrency="ILS" toCurrency="HKD" rate="2.3329" />
+<ConversionRate reportDate="20250718" fromCurrency="JPY" toCurrency="HKD" rate="0.052725" />
+<ConversionRate reportDate="20250718" fromCurrency="PLN" toCurrency="HKD" rate="2.1488" />
+<ConversionRate reportDate="20250718" fromCurrency="GBP" toCurrency="HKD" rate="10.522" />
+<ConversionRate reportDate="20250718" fromCurrency="IDR" toCurrency="HKD" rate="0.00048172" />
+<ConversionRate reportDate="20250718" fromCurrency="HUF" toCurrency="HKD" rate="0.02287" />
+<ConversionRate reportDate="20250718" fromCurrency="KWD" toCurrency="HKD" rate="25.674" />
+<ConversionRate reportDate="20250718" fromCurrency="PHP" toCurrency="HKD" rate="0.13765" />
+<ConversionRate reportDate="20250718" fromCurrency="TRY" toCurrency="HKD" rate="0.19427" />
+<ConversionRate reportDate="20250718" fromCurrency="RUB" toCurrency="HKD" rate="0.099698" />
+<ConversionRate reportDate="20250718" fromCurrency="AED" toCurrency="HKD" rate="2.1364" />
+<ConversionRate reportDate="20250718" fromCurrency="TWD" toCurrency="HKD" rate="0.2668" />
+<ConversionRate reportDate="20250718" fromCurrency="EUR" toCurrency="HKD" rate="9.1232" />
+<ConversionRate reportDate="20250718" fromCurrency="DKK" toCurrency="HKD" rate="1.2221" />
+<ConversionRate reportDate="20250718" fromCurrency="USD" toCurrency="HKD" rate="7.8472" />
+<ConversionRate reportDate="20250718" fromCurrency="CAD" toCurrency="HKD" rate="5.718" />
+<ConversionRate reportDate="20250718" fromCurrency="MYR" toCurrency="HKD" rate="1.8482" />
+<ConversionRate reportDate="20250718" fromCurrency="BGN" toCurrency="HKD" rate="4.6752" />
+<ConversionRate reportDate="20250718" fromCurrency="NOK" toCurrency="HKD" rate="0.77069" />
+<ConversionRate reportDate="20250718" fromCurrency="RON" toCurrency="HKD" rate="1.7981" />
+<ConversionRate reportDate="20250718" fromCurrency="RUS" toCurrency="HKD" rate="0.099698" />
+<ConversionRate reportDate="20250718" fromCurrency="SGD" toCurrency="HKD" rate="6.1049" />
+<ConversionRate reportDate="20250718" fromCurrency="OMR" toCurrency="HKD" rate="20.382" />
+<ConversionRate reportDate="20250718" fromCurrency="CZK" toCurrency="HKD" rate="0.37021" />
+<ConversionRate reportDate="20250718" fromCurrency="SEK" toCurrency="HKD" rate="0.81165" />
+<ConversionRate reportDate="20250718" fromCurrency="NZD" toCurrency="HKD" rate="4.6789" />
+<ConversionRate reportDate="20250718" fromCurrency="CNH" toCurrency="HKD" rate="1.0928" />
+<ConversionRate reportDate="20250718" fromCurrency="BRL" toCurrency="HKD" rate="1.4065" />
+<ConversionRate reportDate="20250718" fromCurrency="BHD" toCurrency="HKD" rate="20.814" />
+</ConversionRates>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

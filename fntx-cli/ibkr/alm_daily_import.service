@@ -1,0 +1,21 @@
+[Unit]
+Description=ALM Daily Import Service
+After=network.target postgresql.service
+
+[Service]
+Type=oneshot
+User=info
+WorkingDirectory=/home/info/fntx-ai-v1/fntx-cli/ibkr
+Environment="DATABASE_URL=postgresql://username:password@localhost/dbname"
+Environment="IBKR_FLEX_TOKEN=YOUR_TOKEN_HERE"
+ExecStart=/usr/bin/python3 /home/info/fntx-ai-v1/fntx-cli/ibkr/alm_daily_import.py
+StandardOutput=append:/home/info/fntx-ai-v1/08_logs/alm_daily_import.log
+StandardError=append:/home/info/fntx-ai-v1/08_logs/alm_daily_import_error.log
+
+# Restart policy
+Restart=on-failure
+RestartSec=300
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true

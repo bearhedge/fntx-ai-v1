@@ -1,0 +1,9 @@
+{
+    "model_name": "ppo_gpu_test_20250706_074954.zip",
+    "training_completed": "Sun Jul  6 08:38:17 UTC 2025",
+    "total_timesteps": 2000000,
+    "dataset": "SPY 0DTE Options 2022-2025",
+    "episodes": 633,
+    "gpu": "Tesla T4",
+    "framework": "stable-baselines3 PPO"
+}

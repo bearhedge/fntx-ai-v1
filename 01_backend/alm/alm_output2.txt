@@ -1,0 +1,478 @@
+### **US Trading Day: Tuesday, July 01, 2025**
+
+* **Previous Close (2025-07-01 04:00:00 HKT):**
+    * **Starting NAV:** 81,426.89 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):** The day begins.
+    * **Opening NAV:** 81,426.89 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:14 HKT (12:14 EDT):** Sell 1 SPY   250701P00615000 (Open Short) (Sell to Open)
+        * **Premium Received:** 129.43 HKD
+        * **NAV becomes:** 81,556.32 HKD
+
+* **Market Close (2025-07-02 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,048.64 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 141.27 HKD
+    * **Net Cash Flow:** -1,500.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,068.16 HKD, showing a discrepancy of 19.52 HKD.
+
+================================================================================
+
+### **US Trading Day: Wednesday, July 02, 2025**
+
+* **Previous Close (2025-07-02 04:00:00 HKT):**
+    * **Starting NAV:** 80,048.64 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250701P00615000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 129.43 HKD
+        * **NAV becomes:** 80,178.07 HKD
+
+    * **08:00 HKT (20:00 EDT):** DISBURSEMENT INITIATED BY Tsun Ming Hou
+        * **NAV becomes:** 78,678.07 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,048.64 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:08 HKT (12:08 EDT):** Sell 1 SPY   250702P00615000 (Open Short) (Sell to Open)
+        * **Premium Received:** 79.52 HKD
+        * **NAV becomes:** 78,757.59 HKD
+
+* **Market Close (2025-07-03 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,128.24 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 86.40 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,135.04 HKD, showing a discrepancy of 6.80 HKD.
+
+================================================================================
+
+### **US Trading Day: Thursday, July 03, 2025**
+
+* **Previous Close (2025-07-03 04:00:00 HKT):**
+    * **Starting NAV:** 80,128.24 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250702P00615000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 79.52 HKD
+        * **NAV becomes:** 80,207.76 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,128.24 HKD
+
+* **Intraday Trading Period:**
+
+    * **22:30 HKT (10:30 EDT):** Sell 1 SPY   250703P00622000 (Open Short) (Sell to Open)
+        * **Premium Received:** 114.68 HKD
+        * **NAV becomes:** 80,322.44 HKD
+
+* **Market Close (2025-07-04 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,242.93 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 125.57 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,253.82 HKD, showing a discrepancy of 10.88 HKD.
+
+================================================================================
+
+### **US Trading Day: Friday, July 04, 2025**
+
+* **Previous Close (2025-07-04 04:00:00 HKT):**
+    * **Starting NAV:** 80,242.93 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250703P00622000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 114.68 HKD
+        * **NAV becomes:** 80,357.61 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,242.93 HKD
+
+* **Market Close (2025-07-05 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,242.96 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 0.02 HKD
+    * **Net Cash Flow:** 0.00 HKD
+
+================================================================================
+
+### **US Trading Day: Monday, July 07, 2025**
+
+* **Previous Close (2025-07-07 04:00:00 HKT):**
+    * **Starting NAV:** 80,242.96 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):** The day begins.
+    * **Opening NAV:** 80,242.96 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:44 - 00:47 HKT (12:44 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250707P00615000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250707C00627000 (Open Short) (Sell to Open)
+        * **Net Premium:** 72.72 HKD
+        * **NAV becomes:** 80,315.68 HKD
+
+* **Market Close (2025-07-08 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,315.75 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 86.39 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,329.35 HKD, showing a discrepancy of 13.60 HKD.
+
+================================================================================
+
+### **US Trading Day: Tuesday, July 08, 2025**
+
+* **Previous Close (2025-07-08 04:00:00 HKT):**
+    * **Starting NAV:** 80,315.75 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250707C00627000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 1.05 HKD
+        * **NAV becomes:** 80,316.80 HKD
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250707P00615000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 71.67 HKD
+        * **NAV becomes:** 80,388.47 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,315.75 HKD
+
+* **Intraday Trading Period:**
+
+    * **01:58 - 01:58 HKT (13:58 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250708P00618000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250708C00622000 (Open Short) (Sell to Open)
+        * **Net Premium:** 235.79 HKD
+        * **NAV becomes:** 80,624.26 HKD
+
+* **Market Close (2025-07-09 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,551.52 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 258.96 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,574.70 HKD, showing a discrepancy of 23.18 HKD.
+
+================================================================================
+
+### **US Trading Day: Wednesday, July 09, 2025**
+
+* **Previous Close (2025-07-09 04:00:00 HKT):**
+    * **Starting NAV:** 80,551.52 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250708C00622000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 192.21 HKD
+        * **NAV becomes:** 80,743.73 HKD
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250708P00618000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 43.58 HKD
+        * **NAV becomes:** 80,787.31 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,551.52 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:09 - 00:09 HKT (12:09 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250709P00620000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250709C00624000 (Open Short) (Sell to Open)
+        * **Net Premium:** 347.37 HKD
+        * **NAV becomes:** 81,134.68 HKD
+
+* **Market Close (2025-07-10 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,851.94 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 314.02 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,865.54 HKD, showing a discrepancy of 13.60 HKD.
+
+================================================================================
+
+### **US Trading Day: Thursday, July 10, 2025**
+
+* **Previous Close (2025-07-10 04:00:00 HKT):**
+    * **Starting NAV:** 80,851.94 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250709C00624000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 142.30 HKD
+        * **NAV becomes:** 80,994.24 HKD
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250709P00620000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 205.08 HKD
+        * **NAV becomes:** 81,199.31 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,851.94 HKD
+
+* **Intraday Trading Period:**
+
+    * **01:11 HKT (13:11 EDT):** Sell 1 SPY   250710P00625000 (Open Short) (Sell to Open)
+        * **Premium Received:** 197.23 HKD
+        * **NAV becomes:** 81,396.54 HKD
+
+* **Market Close (2025-07-11 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,088.32 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 251.18 HKD
+    * **Net Cash Flow:** -1,000.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,103.12 HKD, showing a discrepancy of 14.80 HKD.
+
+================================================================================
+
+### **US Trading Day: Friday, July 11, 2025**
+
+* **Previous Close (2025-07-11 04:00:00 HKT):**
+    * **Starting NAV:** 80,088.32 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250710P00625000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 197.23 HKD
+        * **NAV becomes:** 80,285.55 HKD
+
+    * **08:00 HKT (20:00 EDT):** DISBURSEMENT INITIATED BY Tsun Ming Hou
+        * **NAV becomes:** 79,285.55 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,088.32 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:11 - 00:11 HKT (12:11 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250711P00621000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250711C00625000 (Open Short) (Sell to Open)
+        * **Net Premium:** 463.75 HKD
+        * **NAV becomes:** 79,749.30 HKD
+
+* **Market Close (2025-07-12 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,552.25 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 478.86 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,567.18 HKD, showing a discrepancy of 14.94 HKD.
+
+================================================================================
+
+### **US Trading Day: Monday, July 14, 2025**
+
+* **Previous Close (2025-07-14 04:00:00 HKT):**
+    * **Starting NAV:** 80,552.25 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):** The day begins.
+    * **Opening NAV:** 80,552.25 HKD
+
+* **Intraday Trading Period:**
+
+    * **01:12 HKT (13:12 EDT):** Sell 1 SPY   250714P00624000 (Open Short) (Sell to Open)
+        * **Premium Received:** 267.85 HKD
+        * **NAV becomes:** 80,820.10 HKD
+
+* **Market Close (2025-07-15 04:00:00 HKT):**
+    * **Official Closing NAV:** 80,820.18 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 274.73 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 80,826.98 HKD, showing a discrepancy of 6.80 HKD.
+
+================================================================================
+
+### **US Trading Day: Tuesday, July 15, 2025**
+
+* **Previous Close (2025-07-15 04:00:00 HKT):**
+    * **Starting NAV:** 80,820.18 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250714P00624000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 267.85 HKD
+        * **NAV becomes:** 81,088.03 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 80,820.18 HKD
+
+* **Intraday Trading Period:**
+
+    * **01:02 - 01:02 HKT (13:02 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250715P00622000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250715C00625000 (Open Short) (Sell to Open)
+        * **Net Premium:** 418.00 HKD
+        * **NAV becomes:** 81,506.03 HKD
+
+* **Market Close (2025-07-16 04:00:00 HKT):**
+    * **Official Closing NAV:** 81,238.33 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 431.75 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 81,251.93 HKD, showing a discrepancy of 13.60 HKD.
+
+================================================================================
+
+### **US Trading Day: Wednesday, July 16, 2025**
+
+* **Previous Close (2025-07-16 04:00:00 HKT):**
+    * **Starting NAV:** 81,238.33 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** SPY 622 Put assigned (100 shares long at $622.00)
+        * **Premium Paid:** 0.00 HKD
+        * **NAV becomes:** 81,238.33 HKD
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250715C00625000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 165.84 HKD
+        * **NAV becomes:** 81,404.17 HKD
+
+    * **04:20 HKT (16:20 EDT):** Assigned 100 shares of SPY
+        * **NAV becomes:** 81,404.17 HKD
+
+    * **17:27 HKT (05:27 EDT):** Sell 100 shares of SPY
+        * **P&L Impact:** -69.72 HKD
+        * **NAV becomes:** 81,334.44 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 81,238.33 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:40 - 00:40 HKT (12:40 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250716P00620000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250716C00624000 (Open Short) (Sell to Open)
+        * **Net Premium:** 282.32 HKD
+        * **NAV becomes:** 81,616.76 HKD
+
+    * **01:12 HKT (13:12 EDT):** Buy 1 SPY   250716C00624000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 461.91 HKD
+        * **P&L Impact:** -343.16 HKD
+        * **NAV becomes:** 80,811.69 HKD
+
+* **Market Close (2025-07-17 04:00:00 HKT):**
+    * **Official Closing NAV:** 79,498.68 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** -470.99 HKD
+    * **Net Cash Flow:** -1,230.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 79,537.34 HKD, showing a discrepancy of 38.66 HKD.
+
+================================================================================
+
+### **US Trading Day: Thursday, July 17, 2025**
+
+* **Previous Close (2025-07-17 04:00:00 HKT):**
+    * **Starting NAV:** 79,498.68 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250716P00620000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 163.56 HKD
+        * **NAV becomes:** 79,662.25 HKD
+
+    * **08:00 HKT (20:00 EDT):** DISBURSEMENT INITIATED BY Tsun Ming Hou
+        * **NAV becomes:** 78,432.25 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 79,498.68 HKD
+
+* **Intraday Trading Period:**
+
+    * **00:46 - 00:50 HKT (12:46 EDT):** Series of 6 trades:
+        - Sell 1 SPY   250717P00623000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250717C00628000 (Open Short) (Sell to Open)
+        - Buy 1 SPY   250717C00628000 (Cover Short) (Buy to Close)
+        - Buy 1 SPY   250717P00623000 (Cover Short) (Buy to Close)
+        - Sell 1 SPY   250717P00626000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250717C00628000 (Open Short) (Sell to Open)
+        * **Net Premium:** 370.13 HKD
+        * **Net P&L Impact:** -50.69 HKD
+        * **NAV becomes:** 78,751.68 HKD
+
+* **Market Close (2025-07-18 04:00:00 HKT):**
+    * **Official Closing NAV:** 79,754.81 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** 384.64 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 79,883.32 HKD, showing a discrepancy of 128.51 HKD.
+
+================================================================================
+
+### **US Trading Day: Friday, July 18, 2025**
+
+* **Previous Close (2025-07-18 04:00:00 HKT):**
+    * **Starting NAV:** 79,754.81 HKD
+
+* **Overnight / Pre-Market Period:**
+
+    * **04:20 HKT (16:20 EDT):** Assigned 100 shares of SPY
+        * **NAV becomes:** 79,754.81 HKD
+
+    * **04:20 HKT (16:20 EDT):** SPY 628 Call assigned (100 shares short at $628.00)
+        * **Premium Paid:** 0.00 HKD
+        * **NAV becomes:** 79,754.81 HKD
+
+    * **04:20 HKT (16:20 EDT):** Buy 1 SPY   250717P00626000 (Cover Short) (Buy to Close)
+        * **Premium Paid:** 0.00 HKD
+        * **P&L Impact:** 278.53 HKD
+        * **NAV becomes:** 80,033.34 HKD
+
+    * **13:15 HKT (01:15 EDT):** Buy 100 shares of SPY (Covering Assignment)
+        * **P&L Impact:** -1,003.54 HKD
+        * **NAV becomes:** 79,029.79 HKD
+
+* **Market Open (21:30 HKT / 09:30 EDT):**
+    * **Opening NAV:** 79,754.81 HKD
+
+* **Intraday Trading Period:**
+
+    * **22:32 - 22:32 HKT (10:32 EDT):** Series of 2 trades:
+        - Sell 1 SPY   250718P00626000 (Open Short) (Sell to Open)
+        - Sell 1 SPY   250718C00629000 (Open Short) (Sell to Open)
+        * **Net Premium:** 590.64 HKD
+        * **NAV becomes:** 79,620.43 HKD
+
+* **Market Close (2025-07-19 04:00:00 HKT):**
+    * **Official Closing NAV:** 79,231.03 HKD
+
+* **Daily Summary:**
+    * **Total P&L:** -502.20 HKD
+    * **Net Cash Flow:** 0.00 HKD
+    * **Reconciliation Note:** The calculated closing NAV based on daily components is 79,252.61 HKD, showing a discrepancy of 21.58 HKD.
+
+================================================================================
+

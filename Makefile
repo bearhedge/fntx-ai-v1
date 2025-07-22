@@ -15,11 +15,11 @@ help:
 
 start:
 	@echo "Starting FNTX AI development environment..."
-	./scripts/start-dev.sh
+	./06_scripts/dev/start-dev.sh
 
 stop:
 	@echo "Stopping FNTX AI development environment..."
-	./scripts/stop-dev.sh
+	./06_scripts/dev/stop-dev.sh
 
 dev: start
 
@@ -29,27 +29,27 @@ test:
 
 clean:
 	@echo "Cleaning up..."
-	rm -rf logs/*.log logs/*.pid
-	rm -rf backend/__pycache__ backend/*/__pycache__
-	rm -rf frontend/dist frontend/node_modules/.cache
+	rm -rf 08_logs/*.log 10_runtime/pids/*.pid
+	rm -rf 01_backend/__pycache__ 01_backend/*/__pycache__
+	rm -rf 02_frontend/dist 02_frontend/node_modules/.cache
 
 install:
 	@echo "Installing dependencies..."
-	pip3 install -r backend/requirements.txt
-	cd frontend && npm install
+	pip3 install -r 01_backend/requirements.txt
+	cd 02_frontend && npm install
 
 build:
 	@echo "Building frontend..."
-	cd frontend && npm run build
+	cd 02_frontend && npm run build
 
 # Development shortcuts
 api:
 	@echo "Starting API server only..."
-	PYTHONPATH=. python3 -m uvicorn backend.api.main:app --host 0.0.0.0 --port 8002 --reload
+	PYTHONPATH=. python3 -m uvicorn 01_backend.api.main:app --host 0.0.0.0 --port 8000 --reload
 
 frontend:
 	@echo "Starting frontend only..."
-	cd frontend && npm run dev
+	cd 02_frontend && npm run dev
 
 # Trading environment management
 setup-theta:
@@ -79,8 +79,8 @@ stop-trading:
 # VNC Trading Environment
 vnc-setup:
 	@echo "Setting up VNC trading desktop..."
-	@chmod +x ./scripts/setup-vnc-trading.sh
-	./scripts/setup-vnc-trading.sh
+	@chmod +x ./06_scripts/setup/setup-vnc-trading.sh
+	./06_scripts/setup/setup-vnc-trading.sh
 
 vnc-status:
 	@echo "VNC server status:"
@@ -95,13 +95,13 @@ vnc-logs:
 
 # Trading Commands (using proper module system)
 trade-sell:
-	@bash -c "source venv/bin/activate && cd backend/trading && python3 trade_cli.py sell --symbol $(SYMBOL) --strike $(STRIKE) --right $(RIGHT) --stop $(STOP)"
+	@bash -c "source 11_venv/bin/activate && cd 01_backend/trading && python3 trade_cli.py sell --symbol $(SYMBOL) --strike $(STRIKE) --right $(RIGHT) --stop $(STOP)"
 
 trade-strangle:
-	@bash -c "source venv/bin/activate && cd backend/trading && python3 trade_cli.py strangle --symbol $(SYMBOL) --put-strike $(PUT) --call-strike $(CALL) --stop $(STOP)"
+	@bash -c "source 11_venv/bin/activate && cd 01_backend/trading && python3 trade_cli.py strangle --symbol $(SYMBOL) --put-strike $(PUT) --call-strike $(CALL) --stop $(STOP)"
 
 trade-positions:
-	@bash -c "source venv/bin/activate && cd backend/trading && python3 trade_cli.py positions"
+	@bash -c "source 11_venv/bin/activate && cd 01_backend/trading && python3 trade_cli.py positions"
 
 trade-price:
-	@bash -c "source venv/bin/activate && cd backend/trading && python3 trade_cli.py price --symbol $(SYMBOL) --strike $(STRIKE) --right $(RIGHT)"
+	@bash -c "source 11_venv/bin/activate && cd 01_backend/trading && python3 trade_cli.py price --symbol $(SYMBOL) --strike $(STRIKE) --right $(RIGHT)"

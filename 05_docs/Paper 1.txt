@@ -1,0 +1,1009 @@
+Deep Reinforcement Learning for Automated Stock Trading:
+An Ensemble Strategy
+Hongyang Yang
+
+Xiao-Yang Liu∗†
+
+hy2500@columbia.edu
+AI4Finance LLC. & Columbia University
+New York City, New York
+
+xl2427@columbia.edu
+Electrical Engineering, Columbia University
+New York City, New York
+
+Shan Zhong
+
+Anwar Walid
+
+sz2495@columbia.edu
+Wormpex AI Research
+Bellevue, Washington
+
+anwar.walid@nokia-bell-labs.com
+Nokia-Bell Labs
+Murray Hill, New Jersey
+
+ABSTRACT
+
+KEYWORDS
+
+Stock trading strategies play a critical role in investment. However,
+it is challenging to design a profitable strategy in a complex and dynamic stock market. In this paper, we propose an ensemble strategy
+that employs deep reinforcement schemes to learn a stock trading
+strategy by maximizing investment return. We train a deep reinforcement learning agent and obtain an ensemble trading strategy
+using three actor-critic based algorithms: Proximal Policy Optimization (PPO), Advantage Actor Critic (A2C), and Deep Deterministic
+Policy Gradient (DDPG). The ensemble strategy inherits and integrates the best features of the three algorithms, thereby robustly
+adjusting to different market situations. In order to avoid the large
+memory consumption in training networks with continuous action
+space, we employ a load-on-demand technique for processing very
+large data. We test our algorithms on the 30 Dow Jones stocks that
+have adequate liquidity. The performance of the trading agent with
+different reinforcement learning algorithms is evaluated and compared with both the Dow Jones Industrial Average index and the
+traditional min-variance portfolio allocation strategy. The proposed
+deep ensemble strategy is shown to outperform the three individual
+algorithms and two baselines in terms of the risk-adjusted return
+measured by the Sharpe ratio.
+
+Deep reinforcement learning, Markov Decision Process, automated
+stock trading, ensemble strategy, actor-critic framework
+
+CCS CONCEPTS
+• Computing methodologies → Machine learning; Neural networks; Markov decision processes; Reinforcement learning;
+Policy iteration; Value iteration.
+∗ Co-primary author with equal contribution.
+† Corresponding author.
+
+Permission to make digital or hard copies of all or part of this work for personal or
+classroom use is granted without fee provided that copies are not made or distributed
+for profit or commercial advantage and that copies bear this notice and the full citation
+on the first page. Copyrights for components of this work owned by others than ACM
+must be honored. Abstracting with credit is permitted. To copy otherwise, or republish,
+to post on servers or to redistribute to lists, requires prior specific permission and/or a
+fee. Request permissions from permissions@acm.org.
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+© 2020 Association for Computing Machinery.
+ACM ISBN 978-1-4503-7584-9/20/10. . . $15.00
+https://doi.org/10.1145/3383455.3422540
+
+ACM Reference Format:
+Hongyang Yang, Xiao-Yang Liu, Shan Zhong, and Anwar Walid. 2020. Deep
+Reinforcement Learning for Automated Stock Trading: An Ensemble Strategy. In ACM International Conference on AI in Finance (ICAIF ’20), October 15–16, 2020, New York, NY, USA. ACM, New York, NY, USA, 8 pages.
+https://doi.org/10.1145/3383455.3422540
+
+1
+
+INTRODUCTION
+
+Profitable automated stock trading strategy is vital to investment
+companies and hedge funds. It is applied to optimize capital allocation and maximize investment performance, such as expected
+return. Return maximization can be based on the estimates of potential return and risk. However, it is challenging for analysts to
+consider all relevant factors in a complex and dynamic stock market
+[3, 23, 47].
+Existing works are not satisfactory. A traditional approach that
+employed two steps was described in [31]. First, the expected stock
+return and the covariance matrix of stock prices are computed.
+Then, the best portfolio allocation strategy can be obtained by
+either maximizing the return for a given risk ratio or minimizing the
+risk for a pre-specified return. This approach, however, is complex
+and costly to implement since the portfolio managers may want
+to revise the decisions at each time step, and take other factors
+into account, such as transaction cost. Another approach for stock
+trading is to model it as a Markov Decision Process (MDP) and use
+dynamic programming to derive the optimal strategy [4, 5, 34, 35].
+However, the scalability of this model is limited due to the large
+state spaces when dealing with the stock market.
+In recent years, machine learning and deep learning algorithms
+have been widely applied to build prediction and classification models for the financial market. Fundamentals data (earnings report)
+and alternative data (market news, academic graph data, credit
+card transactions, and GPS traffic, etc.) are combined with machine
+learning algorithms to extract new investment alphas or predict
+a company’s future performance [10, 16, 45, 46]. Thus, a predictive alpha signal is generated to perform stock selection. However,
+these approaches are only focused on picking high performance
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+Figure 1: Overview of reinforcement learning-based stock
+trading strategy.
+
+stocks rather than allocating trade positions or shares between the
+selected stocks. In other words, the machine learning models are
+not trained to model positions.
+In this paper, we propose a novel ensemble strategy that combines three deep reinforcement learning algorithms and finds the
+optimal trading strategy in a complex and dynamic stock market.
+The three actor-critic algorithms [24] are Proximal Policy Optimization (PPO) [28, 37], Advantage Actor Critic (A2C) [32, 48], and Deep
+Deterministic Policy Gradient (DDPG) [28, 29, 44]. Our deep reinforcement learning approach is described in Figure 1. By applying
+the ensemble strategy, we make the trading strategy more robust
+and reliable. Our strategy can adjust to different market situations
+and maximize return subject to risk constraint. First, we build an
+environment and define action space, state space, and reward function. Second, we train the three algorithms that take actions in the
+environment. Third, we ensemble the three agents together using
+the Sharpe ratio that measures the risk-adjusted return. The effectiveness of the ensemble strategy is verified by its higher Sharpe
+ratio than both the min-variance portfolio allocation strategy and
+the Dow Jones Industrial Average 1 (DJIA).
+The remainder of this paper is organized as follows. Section 2
+introduces related works. Section 3 provides a description of our
+stock trading problem. In Section 4, we set up our stock trading
+environment. In Section 5, we drive and specify the three actor-critic
+based algorithms and our ensemble strategy. Section 6 describes the
+stock data preprocessing and our experimental setup, and presents
+the performance evaluation of the proposed ensemble strategy. We
+conclude this paper in Section 7.
+
+2
+
+RELATED WORKS
+
+Recent applications of deep reinforcement learning in financial
+markets consider discrete or continuous state and action spaces,
+and employ one of these learning approaches: critic-only approach,
+actor-only approach, or actor-critic approach [17]. Learning models
+with continuous action space provide finer control capabilities than
+those with discrete action space.
+1 The Dow Jones Industrial Average is a stock market index that shows how 30 large,
+
+publicly owned companies based in the United States have traded during a standard
+trading session in the stock market.
+
+Trovato and Tobin, et al.
+
+The critic-only learning approach, which is the most common,
+solves a discrete action space problem using, for example, Deep
+Q-learning (DQN) and its improvements, and trains an agent on a
+single stock or asset [9, 12, 21]. The idea of the critic-only approach
+is to use a Q-value function to learn the optimal action-selection
+policy that maximizes the expected future reward given the current state. Instead of calculating a state-action value table, DQN
+minimizes the error between estimated Q-value and target Q-value
+over a transition, and uses a neural network to perform function
+approximation. The major limitation of the critic-only approach is
+that it only works with discrete and finite state and action spaces,
+which is not practical for a large portfolio of stocks, since the prices
+are of course continuous.
+The actor-only approach has been used in [13, 22, 33]. The idea
+here is that the agent directly learns the optimal policy itself. Instead
+of having a neural network to learn the Q-value, the neural network
+learns the policy. The policy is a probability distribution that is
+essentially a strategy for a given state, namely the likelihood to take
+an allowed action. Recurrent reinforcement learning is introduced
+to avoid the curse of dimensionality and improves trading efficiency
+in [33]. The actor-only approach can handle the continuous action
+space environments.
+The actor-critic approach has been recently applied in finance [2,
+26, 44, 48]. The idea is to simultaneously update the actor network
+that represents the policy, and the critic network that represents the
+value function. The critic estimates the value function, while the
+actor updates the policy probability distribution guided by the critic
+with policy gradients. Over time, the actor learns to take better
+actions and the critic gets better at evaluating those actions. The
+actor-critic approach has proven to be able to learn and adapt to
+large and complex environments, and has been used to play popular
+video games, such as Doom [43]. Thus, the actor-critic approach is
+promising in trading with a large stock portfolio.
+
+3
+
+PROBLEM DESCRIPTION
+
+We model stock trading as a Markov Decision Process (MDP), and
+formulate our trading objective as a maximization of expected
+return [20].
+
+3.1
+
+MDP Model for Stock Trading
+
+To model the stochastic nature of the dynamic stock market, we
+employ a Markov Decision Process (MDP) as follows:
+• State 𝒔 = [𝒑, 𝒉, 𝑏]: a vector that includes stock prices 𝒑 ∈ R𝐷
++,
+the stock shares 𝒉 ∈ Z𝐷
++ , and the remaining balance 𝑏 ∈ R+ ,
+where 𝐷 denotes the number of stocks and Z+ denotes nonnegative integers.
+• Action 𝒂: a vector of actions over 𝐷 stocks. The allowed
+actions on each stock include selling, buying, or holding,
+which result in decreasing, increasing, and no change of the
+stock shares 𝒉, respectively.
+• Reward 𝑟 (𝑠, 𝑎, 𝑠 ′ ): the direct reward of taking action 𝑎 at state
+𝑠 and arriving at the new state 𝑠 ′ .
+• Policy 𝜋 (𝑠): the trading strategy at state 𝑠, which is the probability distribution of actions at state 𝑠.
+• Q-value 𝑄 𝜋 (𝑠, 𝑎): the expected reward of taking action 𝑎 at
+state 𝑠 following policy 𝜋.
+
+Deep Reinforcement Learning for Automated Stock Trading:
+An Ensemble Strategy
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+• Risk-aversion for market crash: there are sudden events that
+may cause stock market crash, such as wars, collapse of stock
+market bubbles, sovereign debt default, and financial crisis.
+To control the risk in a worst-case scenario like 2008 global
+financial crisis, we employ the financial turbulence index
+𝑡𝑢𝑟𝑏𝑢𝑙𝑒𝑛𝑐𝑒𝑡 that measures extreme asset price movements
+[25]:
+𝑡𝑢𝑟𝑏𝑢𝑙𝑒𝑛𝑐𝑒𝑡 = (𝒚 𝒕 − 𝝁) 𝚺−1 (𝒚 𝒕 − 𝝁) ′ ∈ R,
+
+(3)
+
+∈ R𝐷 denotes the stock returns for current pe-
+
+where 𝒚 𝒕
+riod t, 𝝁 ∈ R𝐷 denotes the average of historical returns,
+and 𝚺 ∈ R𝐷×𝐷 denotes the covariance of historical returns.
+When 𝑡𝑢𝑟𝑏𝑢𝑙𝑒𝑛𝑐𝑒𝑡 is higher than a threshold, which indicates extreme market conditions, we simply halt buying and
+the trading agent sells all shares. We resume trading once
+the turbulence index returns under the threshold.
+
+Figure 2: A starting portfolio value with three actions result
+in three possible portfolios. Note that "hold" may lead to different portfolio values due to the changing stock prices.
+
+3.3
+The state transition of a stock trading process is shown in Figure
+2. At each state, one of three possible actions is taken on stock
+𝑑 (𝑑 = 1, ..., 𝐷) in the portfolio.
+• Selling 𝒌 [𝑑] ∈ [1, 𝒉[𝑑]] shares results in 𝒉 𝒕+1 [𝑑] = 𝒉 𝒕 [𝑑] −
+𝒌 [𝑑], where 𝒌 [𝑑] ∈ Z+ and 𝑑 = 1, ..., 𝐷.
+• Holding, 𝒉 𝒕+1 [𝑑] = 𝒉 𝒕 [𝑑].
+• Buying 𝒌 [𝑑] shares results in 𝒉 𝒕+1 [𝑑] = 𝒉 𝒕 [𝑑] + 𝒌 [𝑑].
+At time 𝑡 an action is taken and the stock prices update at 𝑡+1,
+accordingly the portfolio values may change from "portfolio value
+0" to "portfolio value 1", "portfolio value 2", or "portfolio value 3",
+respectively, as illustrated in Figure 2. Note that the portfolio value
+is 𝒑 𝑻 𝒉 + 𝑏.
+
+3.2
+
+𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) = (𝑏𝑡 +1 + 𝒑𝑇𝒕+1 𝒉 𝒕+1 ) − (𝑏𝑡 + 𝒑𝑇𝒕 𝒉 𝒕 ) − 𝑐𝑡 ,
+
+𝑏𝑡 +1 = 𝑏𝑡 + (𝒑𝑡𝑆 )𝑇 𝒌𝑡𝑆 − (𝒑𝑡𝐵 )𝑇 𝒌𝑡𝐵 ≥ 0.
+
+(1)
+
+• Transaction cost: transaction costs are incurred for each
+trade. There are many types of transaction costs such as exchange fees, execution fees, and SEC fees. Different brokers
+have different commission fees. Despite these variations in
+fees, we assume our transaction costs to be 0.1% of the value
+of each trade (either buy or sell) as in [45]:
+𝑐𝑡 = 𝒑𝑇 𝒌𝑡 × 0.1%.
+
+(2)
+
+(4)
+
+where the first and second terms denote the portfolio value at 𝑡 + 1
+and 𝑡, respectively. To further decompose the return, we define the
+transition of the shares 𝒉 𝒕 is defined as
+𝒉𝑡 +1 = 𝒉𝑡 − 𝒌𝑡𝑆 + 𝒌𝑡𝐵 ,
+
+(5)
+
+and the transition of the balance 𝑏𝑡 is defined in (1). Then (4) can
+be rewritten as
+
+Incorporating Stock Trading Constraints
+
+The following assumption and constraints reflect concerns for practice: transaction costs, market liquidity, risk-aversion, etc.
+• Market liquidity: the orders can be rapidly executed at the
+close price. We assume that stock market will not be affected
+by our reinforcement trading agent.
+• Nonnegative balance 𝑏 ≥ 0: the allowed actions should not
+result in a negative balance. Based on the action at time 𝑡,
+the stocks are divided into sets for sell S, buying B, and
+holding H , where S ∪ B ∪ H = {1, · · · , 𝐷 } and they are
+nonoverlapping. Let 𝒑𝑡𝐵 = [𝑝𝑡𝑖 : 𝑖 ∈ B] and 𝒌𝑡𝐵 = [𝑘𝑡𝑖 : 𝑖 ∈ B]
+be the vectors of price and number of buying shares for the
+stocks in the buying set. We can similarly define 𝒑𝑡𝑆 and
+𝒌𝑡𝑆 for the selling stocks, and 𝒑𝑡𝐻 and 𝒌𝑡𝐻 for the holding
+stocks. Hence, the constraint for non-negative balance can
+be expressed as
+
+Return Maximization as Trading Goal
+
+We define our reward function as the change of the portfolio value
+when action 𝑎 is taken at state 𝑠 and arriving at new state 𝑠 ′ . The
+goal is to design a trading strategy that maximizes the change of
+the portfolio value:
+
+𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) = 𝑟 𝐻 − 𝑟 𝑆 + 𝑟 𝐵 − 𝑐𝑡 ,
+
+(6)
+
+𝑟 𝐻 = (𝒑𝑡𝐻+1 − 𝒑𝑡𝐻 )𝑇 𝒉𝐻
+𝑡 ,
+
+(7)
+
+𝑟 𝑆 = (𝒑𝑡𝑆+1 − 𝒑𝑡𝑆 )𝑇 𝒉𝑆𝑡 ,
+
+(8)
+
+𝑟 𝐵 = (𝒑𝑡𝐵+1 − 𝒑𝑡𝐵 )𝑇 𝒉𝐵𝑡 ,
+
+(9)
+
+where
+
+where 𝑟 𝐻 , 𝑟 𝑆 , and 𝑟 𝐵 denote the change of the portfolio value comes
+from holding, selling, and buying shares moving from time 𝑡 to 𝑡 + 1,
+respectively. Equation (6) indicates that we need to maximize the
+positive change of the portfolio value by buying and holding the
+stocks whose price will increase at next time step and minimize the
+negative change of the portfolio value by selling the stocks whose
+price will decrease at next time step.
+Turbulence index 𝑡𝑢𝑟𝑏𝑢𝑙𝑒𝑛𝑐𝑒𝑡 is incorporated with the reward
+function to address our risk-aversion for market crash. When the
+index in (3) goes above a threshold, Equation (8) becomes
+𝑟𝑠𝑒𝑙𝑙 = (𝒑 𝒕+1 − 𝒑 𝒕 )𝑇 𝒌 𝒕 ,
+
+(10)
+
+which indicates that we want to minimize the negative change of
+the portfolio value by selling all held stocks, because all stock prices
+will fall.
+The model is initialized as follows. 𝑝 0 is set to the stock prices
+at time 0 and 𝑏 0 is the amount of initial fund. The ℎ and 𝑄 𝜋 (𝑠, 𝑎)
+are 0, and 𝜋 (𝑠) is uniformly distributed among all actions for each
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+Trovato and Tobin, et al.
+
+state. Then, 𝑄 𝜋 (𝑠𝑡 , 𝑎𝑡 ) is updated through interacting with the
+stock market environment. The optimal strategy is given by the
+Bellman Equation, such that the expected reward of taking action
+𝑎𝑡 at state 𝑠𝑡 is the expectation of the summation of the direct
+reward 𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) and the future reward in the next state 𝑠𝑡 +1 .
+Let the future rewards be discounted by a factor of 0 < 𝛾 < 1 for
+convergence purpose, then we have
+𝑄 𝜋 (𝑠𝑡 , 𝑎𝑡 ) = E𝑠𝑡 +1 [𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) + 𝛾E𝑎𝑡 +1 ∼𝜋 (𝑠𝑡 +1 ) [𝑄 𝜋 (𝑠𝑡 +1, 𝑎𝑡 +1 )]].
+(11)
+The goal is to design a trading strategy that maximizes the positive cumulative change of the portfolio value 𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) in the
+dynamic environment, and we employ the deep reinforcement
+learning method to solve this problem.
+
+4
+
+STOCK MARKET ENVIRONMENT
+
+Before training a deep reinforcement trading agent, we carefully
+build the environment to simulate real world trading which allows
+the agent to perform interaction and learning. In practical trading,
+various information needs to be taken into account, for example the
+historical stock prices, current holding shares, technical indicators,
+etc. Our trading agent needs to obtain such information through
+the environment, and take actions defined in the previous section.
+We employ OpenAI gym to implement our environment and train
+the agent [6, 14, 19].
+
+4.1
+
+Environment for Multiple Stocks
+
+We use a continuous action space to model the trading of multiple
+stocks. We assume that our portfolio has 30 stocks in total.
+4.1.1 State Space. We use a 181-dimensional vector consists of
+seven parts of information to represent the state space of multiple stocks trading environment: [𝑏𝑡 , 𝒑𝑡 , 𝒉𝑡 , 𝑴𝑡 , 𝑹 𝒕 , 𝑪 𝒕 , 𝑿 𝒕 ]. Each
+component is defined as follows:
+• 𝑏𝑡 ∈ R+ : available balance at current time step 𝑡.
+• 𝒑𝑡 ∈ R30
++ : adjusted close price of each stock.
+• 𝒉𝑡 ∈ Z30
++ : shares owned of each stock.
+• 𝑴𝑡 ∈ R30 : Moving Average Convergence Divergence (MACD)
+is calculated using close price. MACD is one of the most
+commonly used momentum indicator that identifies moving
+averages [11].
+• 𝑹𝑡 ∈ R30
++ : Relative Strength Index (RSI) is calculated using
+close price. RSI quantifies the extent of recent price changes.
+If price moves around the support line, it indicates the stock
+is oversold, and we can perform the buy action. If price moves
+around the resistance, it indicates the stock is overbought,
+and we can perform the selling action. [11].
+• 𝑪 𝒕 ∈ R30
++ : Commodity Channel Index (CCI) is calculated
+using high, low and close price. CCI compares current price
+to average price over a time window to indicate a buying or
+selling action [30].
+• 𝑿 𝒕 ∈ R30 : Average Directional Index (ADX) is calculated
+using high, low and close price. ADX identifies trend strength
+by quantifying the amount of price movement [18].
+4.1.2 Action Space. For a single stock, the action space is defined
+as {−𝑘, ..., −1, 0, 1, ..., 𝑘 }, where 𝑘 and −𝑘 presents the number of
+shares we can buy and sell, and 𝑘 ≤ ℎ𝑚𝑎𝑥 while ℎ𝑚𝑎𝑥 is a predefined
+
+Figure 3: Overview of the load-on-demand technique.
+parameter that sets as the maximum amount of shares for each
+buying action. Therefore the size of the entire action space is (2𝑘 +
+1) 30 . The action space is then normalized to [−1, 1], since the RL
+algorithms A2C and PPO define the policy directly on a Gaussian
+distribution, which needs to be normalized and symmetric [19].
+
+4.2
+
+Memory Management
+
+The memory consumption for training could grow exponentially
+with the number of stocks, data types, features of the state space,
+number of layers and neurons in the neural networks, and batch
+size. To tackle the problem of memory requirements, we employ a
+load-on-demand technique for efficient use of memory. As shown
+in Figure 3, the load-on-demand technique does not store all results
+in memory, rather, it generates them on demand. The memory is
+only used when the result is requested, hence the memory usage is
+reduced.
+
+5
+
+TRADING AGENT BASED ON DEEP
+REINFORCEMENT LEARNING
+
+We use three actor-critic based algorithms to implement our trading
+agent. The three algorithms are A2C, DDPG, and PPO, respectively.
+An ensemble strategy is proposed to combine the three agents
+together to build a robust trading strategy.
+
+5.1
+
+Advantage Actor Critic (A2C)
+
+A2C [32] is a typical actor-critic algorithm and we use it a component in the ensemble strategy. A2C is introduced to improve
+the policy gradient updates. A2C utilizes an advantage function to
+reduce the variance of the policy gradient. Instead of only estimates
+the value function, the critic network estimates the advantage function. Thus, the evaluation of an action not only depends on how
+good the action is, but also considers how much better it can be. So
+that it reduces the high variance of the policy network and makes
+the model more robust.
+A2C uses copies of the same agent to update gradients with
+different data samples. Each agent works independently to interact
+
+Deep Reinforcement Learning for Automated Stock Trading:
+An Ensemble Strategy
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+with the same environment. In each iteration, after all agents finish
+calculating their gradients, A2C uses a coordinator to pass the
+average gradients over all the agents to a global network. So that
+the global network can update the actor and the critic network. The
+presence of a global network increases the diversity of training data.
+The synchronized gradient update is more cost-effective, faster and
+works better with large batch sizes. A2C is a great model for stock
+trading because of its stability.
+The objective function for A2C is:
+∇𝐽𝜃 (𝜃 ) = E[
+
+𝑇
+Õ
+
+∇𝜃 log 𝜋𝜃 (𝑎𝑡 |𝑠𝑡 )𝐴(𝑠𝑡 , 𝑎𝑡 )],
+
+(12)
+
+𝑡 =1
+
+where 𝜋𝜃 (𝑎𝑡 |𝑠𝑡 ) is the policy network, 𝐴(𝑠𝑡 , 𝑎𝑡 ) is the Advantage
+function can be written as:
+𝐴(𝑠𝑡 , 𝑎𝑡 ) = 𝑄 (𝑠𝑡 , 𝑎𝑡 ) − 𝑉 (𝑠𝑡 ),
+
+(13)
+
+𝐴(𝑠𝑡 , 𝑎𝑡 ) = 𝑟 (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1 ) + 𝛾𝑉 (𝑠𝑡 +1 ) − 𝑉 (𝑠𝑡 ).
+
+(14)
+
+or
+
+5.2
+
+Deep Deterministic Policy Gradient (DDPG)
+
+DDPG [29] is used to encourage maximum investment return.
+DDPG combines the frameworks of both Q-learning [40] and policy
+gradient [41], and uses neural networks as function approximators.
+In contrast with DQN that learns indirectly through Q-values tables and suffers the curse of dimensionality problem [8], DDPG
+learns directly from the observations through policy gradient. It is
+proposed to deterministically map states to actions to better fit the
+continuous action space environment.
+At each time step, the DDPG agent performs an action 𝑎𝑡 at 𝑠𝑡 , receives a reward 𝑟𝑡 and arrives at 𝑠𝑡 +1 . The transitions (𝑠𝑡 , 𝑎𝑡 , 𝑠𝑡 +1, 𝑟𝑡 )
+are stored in the replay buffer 𝑅. A batch of 𝑁 transitions are drawn
+from 𝑅 and the Q-value 𝑦𝑖 is updated as:
+′
+
+′
+
+𝑦𝑖 = 𝑟𝑖 + 𝛾𝑄 ′ (𝑠𝑖+1, 𝜇 ′ (𝑠𝑖+1 |𝜃 𝜇 , 𝜃 𝑄 )), 𝑖 = 1, · · · , 𝑁 .
+
+(15)
+
+The critic network is then updated by minimizing the loss function
+𝐿(𝜃 𝑄 ) which is the expected difference between outputs of the
+target critic network 𝑄 ′ and the critic network 𝑄, i.e,
+𝐿(𝜃 𝑄 ) = E𝑠𝑡 ,𝑎𝑡 ,𝑟𝑡 ,𝑠𝑡 +1 ∼buffer [(𝑦𝑖 − 𝑄 (𝑠𝑡 , 𝑎𝑡 |𝜃 𝑄 )) 2 ].
+
+(16)
+
+DDPG is effective at handling continuous action space, and so it is
+appropriate for stock trading.
+
+5.3
+
+Proximal Policy Optimization (PPO)
+
+We explore and use PPO as a component in the ensemble method.
+PPO [37] is introduced to control the policy gradient update and ensure that the new policy will not be too different from the previous
+one. PPO tries to simplify the objective of Trust Region Policy Optimization (TRPO) by introducing a clipping term to the objective
+function [36, 37].
+Let us assume the probability ratio between old and new policies
+is expressed as:
+𝜋 (𝑎𝑡 |𝑠𝑡 )
+𝑟𝑡 (𝜃 ) = 𝜃
+.
+(17)
+𝜋𝜃𝑜𝑙𝑑 (𝑎𝑡 |𝑠𝑡 )
+The clipped surrogate objective function of PPO is:
+ˆ 𝑡 , 𝑎𝑡 ),
+𝐽 CLIP (𝜃 ) =Ê𝑡 [min(𝑟𝑡 (𝜃 )𝐴(𝑠
+ˆ 𝑡 , 𝑎𝑡 ))],
+clip(𝑟𝑡 (𝜃 ), 1 − 𝜖, 1 + 𝜖)𝐴(𝑠
+
+(18)
+
+ˆ 𝑡 , 𝑎𝑡 ) is the normal policy gradient objective, and
+where 𝑟𝑡 (𝜃 )𝐴(𝑠
+ˆ 𝑡 , 𝑎𝑡 ) is the estimated advantage function. The function 𝑐𝑙𝑖𝑝 (𝑟𝑡 (𝜃 ), 1−
+𝐴(𝑠
+𝜖, 1 + 𝜖) clips the ratio 𝑟𝑡 (𝜃 ) to be within [1 − 𝜖, 1 + 𝜖]. The objective
+function of PPO takes the minimum of the clipped and normal
+objective. PPO discourages large policy change move outside of
+the clipped interval. Therefore, PPO improves the stability of the
+policy networks training by restricting the policy update at each
+training step. We select PPO for stock trading because it is stable,
+fast, and simpler to implement and tune.
+
+5.4
+
+Ensemble Strategy
+
+Our purpose is to create a highly robust trading strategy. So we use
+an ensemble strategy to automatically select the best performing
+agent among PPO, A2C, and DDPG to trade based on the Sharpe
+ratio. The ensemble process is described as follows:
+Step 1. We use a growing window of 𝑛 months to retrain our
+three agents concurrently. In this paper we retrain our three agents
+at every three months.
+Step 2. We validate all three agents by using a 3-month validation rolling window after training window to pick the best performing agent with the highest Sharpe ratio [39]. The Sharpe ratio is
+calculated as:
+𝑟¯𝑝 − 𝑟 𝑓
+𝑆ℎ𝑎𝑟𝑝𝑒 𝑟𝑎𝑡𝑖𝑜 =
+,
+(19)
+𝜎𝑝
+where 𝑟¯𝑝 is the expected portfolio return, 𝑟 𝑓 is the risk free rate, and
+𝜎𝑝 is the portfolio standard deviation. We also adjust risk-aversion
+by using turbulence index in our validation stage.
+Step 3. After the best agent is picked, we use it to predict and
+trade for the next quarter.
+The reason behind this choice is that each trading agent is sensitive to different type of trends. One agent performs well in a bullish
+trend but acts bad in a bearish trend. Another agent is more adjusted
+to a volatile market. The higher an agent’s Sharpe ratio, the better
+its returns have been relative to the amount of investment risk it
+has taken. Therefore, we pick the trading agent that can maximize
+the returns adjusted to the increasing risk.
+
+6
+
+PERFORMANCE EVALUATIONS
+
+In this section, we present the performance evaluation of our proposed scheme. We perform backtesting for the three individual
+agents and our ensemble strategy. The result in Table 2 demonstrates that our ensemble strategy achieves higher Sharpe ratio
+than the three agents, Dow Jones Industrial Average and the traditional min-variance portfolio allocation strategy.
+Our codes are available on Github 2 .
+
+6.1
+
+Stock Data Preprocessing
+
+We select the Dow Jones 30 constituent stocks (at 01/01/2016) as our
+trading stock pool. Our backtestings use historical daily data from
+01/01/2009 to 05/08/2020 for performance evaluation. The stock
+data can be downloaded from the Compustat database through the
+Wharton Research Data Services (WRDS) [38]. Our dataset consists of two periods: in-sample period and out-of-sample period.
+In-sample period contains data for training and validation stages.
+2 Link:
+https://github.com/AI4Finance-LLC/Deep-Reinforcement-Learning-forAutomated-Stock-Trading-Ensemble-Strategy-ICAIF-2020
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+Trovato and Tobin, et al.
+
+Table 1: Sharpe Ratios over time.
+
+Figure 4: Stock data splitting.
+
+Out-of-sample period contains data for trading stage. In the training
+stage, we train three agents using PPO, A2C, and DDPG, respectively. Then, a validation stage is then carried out for validating
+the 3 agents by Sharpe ratio, and adjusting key parameters, such as
+learning rate, number of episodes, etc. Finally, in the trading stage,
+we evaluate the profitability of each of the algorithms.
+The whole dataset is split as shown in Figure 4. Data from
+01/01/2009 to 09/30/2015 is used for training, and the data from
+10/01/2015 to 12/31/2015 is used for validation and tuning of parameters. Finally, we test our agent’s performance on trading data, which
+is the unseen out-of-sample data from 01/01/2016 to 05/08/2020.
+To better exploit the trading data, we continue training our agent
+while in the trading stage, since this will help the agent to better
+adapt to the market dynamics.
+
+6.2
+
+Performance Comparisons
+
+6.2.1 Agent Selection. From Table 1, we can see that PPO has the
+best validation Sharpe ratio of 0.06 from 2015/10 to 2015/12, so
+we use PPO to trade for the next quarter from 2016/01 to 2016/03.
+DDPG has the best validation Sharpe ratio of 0.61 from 2016/01 to
+2016/03, so we use DDPG to trade for the next quarter from 2016/04
+to 2016/06. A2C has the best validation Sharpe ratio of -0.15 from
+2020/01 to 2020/03, so we use A2C to trade for the next quarter from
+2020/04 to 2020/05. Five metrics are used to evaluate our results:
+• Cumulative return: is calculated by subtracting the portfolio’s final value from its initial value, and then dividing by
+the initial value.
+• Annualized return: is the geometric average amount of money
+earned by the agent each year over the time period.
+• Annualized volatility: is the annualized standard deviation
+of portfolio return.
+• Sharpe ratio: is calculated by subtracting the annualized risk
+free rate from the annualized return, and the dividing by the
+annualized volatility.
+• Max drawdown: is the maximum percentage loss during the
+trading period.
+Cumulative return reflects returns at the end of trading stage. Annualized return is the return of the portfolio at the end of each year.
+Annualized volatility and max drawdown measure the robustness
+of a model. The Sharpe ratio is a widely used metric that combines
+the return and risk together.
+6.2.2 Analysis of Agent Performance. From both Table 2 and Figure
+5, we can observe that the A2C agent is more adaptive to risk. It
+has the lowest annual volatility 10.4% and max drawdown −10.2%
+
+Trading Quarter
+2016/01-2016/03
+2016/04-2016/06
+2016/07-2016/09
+2016/10-2016/12
+2017/01-2017/03
+2017/04-2017/06
+2017/07-2017/09
+2017/10-2017/12
+2018/01-2018/03
+2018/04-2018/06
+2018/07-2018/09
+2018/10-2018/12
+2019/01-2019/03
+2019/04-2019/06
+2019/07-2019/09
+2019/10-2019/12
+2020/01-2020/03
+2020/04-2020/05
+
+PPO
+0.06
+0.31
+-0.02
+0.11
+0.53
+0.29
+0.4
+-0.05
+0.71
+-0.08
+-0.17
+0.30
+-0.26
+0.38
+0.53
+-0.22
+-0.36
+-0.42
+
+A2C
+0.03
+0.53
+0.01
+0.01
+0.44
+0.44
+0.32
+-0.04
+0.63
+-0.02
+0.21
+0.48
+-0.25
+0.29
+0.47
+0.11
+-0.13
+-0.15
+
+DDPG
+0.05
+0.61
+0.05
+0.09
+0.13
+0.12
+0.15
+0.12
+0.62
+-0.01
+-0.03
+0.39
+-0.18
+0.25
+0.52
+-0.22
+-0.22
+-0.58
+
+Picked Model
+PPO
+DDPG
+DDPG
+PPO
+PPO
+A2C
+PPO
+DDPG
+PPO
+DDPG
+A2C
+A2C
+DDPG
+PPO
+PPO
+A2C
+A2C
+A2C
+
+among the three agents. So A2C is good at handling a bearish market. PPO agent is good at following trend and acts well in generating
+more returns, it has the highest annual return 15.0% and cumulative
+return 83.0% among the three agents. So PPO is preferred when
+facing a bullish market. DDPG performs similar but not as good as
+PPO, it can be used as a complementary strategy to PPO in a bullish
+market. All three agents’ performance outperform the two benchmarks, Dow Jones Industrial Average and min-variance portfolio
+allocation of DJIA, respectively.
+6.2.3 Performance under Market Crash. In Figure 6, we can see
+that our ensemble strategy and the three agents perform well in
+the 2020 stock market crash event. When the turbulence index
+reaches a threshold, it indicates an extreme market situation. Then
+our agents will sell off all currently held shares and wait for the
+market to return to normal to resume trading. By incorporating the
+turbulence index, the agents are able to cut losses and successfully
+survive the stock market crash in March 2020. We can tune the
+turbulence index threshold lower for higher risk aversion.
+6.2.4 Benchmark Comparison. Figure 5 demonstrates that our ensemble strategy significantly outperforms the DJIA and the minvariance portfolio allocation [45]. As can be seen from Table 2,
+the ensemble strategy achieves a Sharpe ratio 1.30, which is much
+higher than the Sharpe ratio of 0.47 for DJIA, and 0.45 for the
+min-variance portfolio allocation. The annualized return of the ensemble strategy is also much higher, the annual volatility is much
+lower, indicating that the ensemble strategy beats both the DJIA
+and min-variance portfolio allocation in balancing risk and return.
+The ensemble strategy also outperforms A2C with a Sharpe ratio
+of 1.12, PPO with a Sharpe ratio of 1.10, and DDPG with a Sharpe
+ratio of 0.87, respectively. Therefore, our findings demonstrate that
+the proposed ensemble strategy can effectively develop a trading
+
+Deep Reinforcement Learning for Automated Stock Trading:
+An Ensemble Strategy
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+Figure 5: Cumulative return curves of our ensemble strategy and three actor-critic based algorithms, the min-variance portfolio allocation strategy, and the Dow Jones Industrial Average. (Initial portfolio value $1, 000, 000, from 2016/01/04 to 2020/05/08).
+Table 2: Performance evaluation comparison.
+(2016/01/04-2020/05/08)
+Cumulative Return
+Annual Return
+Annual Volatility
+Sharpe Ratio
+Max Drawdown
+
+Ensemble (Ours)
+70.4%
+13.0%
+9.7%
+1.30
+-9.7%
+
+PPO
+83.0%
+15.0%
+13.6%
+1.10
+-23.7%
+
+A2C
+60.0%
+11.4%
+10.4%
+1.12
+-10.2%
+
+DDPG
+54.8%
+10.5%
+12.3%
+0.87
+-14.8%
+
+Min-Variance
+31.7%
+6.5%
+17.8%
+0.45
+-34.3%
+
+DJIA
+38.6%
+7.8%
+20.1%
+0.47
+-37.1%
+
+Figure 6: Performance during the stock market crash in the first quarter of 2020.
+strategy that outperforms the three individual algorithms and the
+two baselines.
+
+7
+
+CONCLUSION
+
+In this paper, we have explored the potential of using actor-critic
+based algorithms which are Proximal Policy Optimization (PPO),
+
+Advantage Actor Critic (A2C), and Deep Deterministic Policy Gradient (DDPG) agents to learn stock trading strategy. In order to
+adjust to different market situations, we use an ensemble strategy to
+automatically select the best performing agent to trade based on the
+Sharpe ratio. Results show that our ensemble strategy outperforms
+the three individual algorithms, the Dow Jones Industrial Average
+
+ICAIF ’20, October 15–16, 2020, New York, NY, USA
+
+and min-variance portfolio allocation method in terms of Sharpe
+ratio by balancing risk and return under transaction costs.
+For future work, it will be interesting to explore more sophisticated model [42], solve empirical challenges [15], deal with largescale data [7] such as S&P 500 constituent stocks. We can also
+explore more features for the state space such as adding advanced
+transaction cost and liquidity model [1], incorporating fundamental
+analysis indicators [45], natural language processing analysis of
+financial market news [27], and ESG features [10] to our observations. We are interested in directly using Sharpe ratio as the reward
+function, but the agents need to observe a lot more historical data,
+the state space will increase exponentially.
+
+REFERENCES
+[1] Wenhang Bao and Xiao-Yang Liu. 2019. Multi-agent deep reinforcement learning
+for liquidation strategy analysis. ICML Workshop on Applications and Infrastructure for Multi-Agent Learning, 2019 (06 2019).
+[2] Stelios Bekiros. 2010. Heterogeneous trading strategies with adaptive fuzzy
+Actor-Critic reinforcement learning: A behavioral approach. Journal of Economic
+Dynamics and Control 34 (06 2010), 1153–1170.
+[3] Stelios D. Bekiros. 2010. Fuzzy adaptive decision-making for boundedly rational
+traders in speculative stock markets. European Journal of Operational Research
+202, 1 (April 2010), 285–293.
+[4] Francesco Bertoluzzo and Marco Corazza. 2012. Testing different reinforcement learning configurations for financial trading: introduction and applications.
+Procedia Economics and Finance 3 (12 2012), 68–77.
+[5] Dimitri Bertsekas. 1995. Dynamic programming and optimal control. Vol. 1.
+[6] Greg Brockman, Vicki Cheung, Ludwig Pettersson, Jonas Schneider, John
+Schulman, Jie Tang, and Wojciech Zaremba. 2016.
+OpenAI Gym.
+arXiv:arXiv:1606.01540
+[7] Yuri Burda, Harrison Edwards, Deepak Pathak, Amos Storkey, Trevor Darrell,
+and Alexei Efros. 2018. Large-scale study of curiosity-driven learning. In 2019
+Seventh International Conference on Learning Representations (ICLR) Poster.
+[8] Lucian Busoniu, Tim de Bruin, Domagoj Tolić, Jens Kober, and Ivana Palunko.
+2018. Reinforcement learning for control: Performance, stability, and deep approximators. Annual Reviews in Control (10 2018).
+[9] Lin Chen and Qiang Gao. 2019. Application of deep reinforcement learning on
+automated stock trading. In 2019 IEEE 10th International Conference on Software
+Engineering and Service Science (ICSESS). 29–33.
+[10] Qian Chen and Xiao-Yang Liu. 2020. Quantifying ESG alpha using scholar big
+data: An automated machine learning approach. ACM International Conference
+on AI in Finance, ICAIF 2020 (2020).
+[11] Terence Chong, Wing-Kam Ng, and Venus Liew. 2014. Revisiting the performance
+of MACD and RSI oscillators. Journal of Risk and Financial Management 7 (03
+2014), 1–12.
+[12] Quang-Vinh Dang. 2020. Reinforcement learning in stock trading. In Advanced
+Computational Methods for Knowledge Engineering. ICCSAMA 2019. Advances in
+Intelligent Systems and Computing, vol 1121. Springer, Cham.
+[13] Yue Deng, Feng Bao, Youyong Kong, Zhiquan Ren, and Qionghai Dai. 2016. Deep
+direct reinforcement learning for financial signal representation and trading.
+IEEE Transactions on Neural Networks and Learning Systems 28 (02 2016), 1–12.
+[14] Prafulla Dhariwal, Christopher Hesse, Oleg Klimov, Alex Nichol, Matthias Plappert, Alec Radford, John Schulman, Szymon Sidor, Yuhuai Wu, and Peter Zhokhov.
+2017. OpenAI Baselines. https://github.com/openai/baselines.
+[15] Gabriel Dulac-Arnold, N. Levine, Daniel J. Mankowitz, J. Li, Cosmin Paduraru,
+Sven Gowal, and T. Hester. 2020. An empirical investigation of the challenges of
+real-world reinforcement learning. ArXiv abs/2003.11881 (2020).
+[16] Yunzhe Fang, Xiao-Yang Liu, and Hongyang Yang. 2019. Practical machine
+learning approach to capture the scholar data driven alpha in AI industry. In 2019
+IEEE International Conference on Big Data (Big Data) Special Session on Intelligent
+Data Mining. 2230–2239.
+[17] Thomas G. Fischer. 2018. Reinforcement learning in financial markets - a survey.
+FAU Discussion Papers in Economics 12/2018. Friedrich-Alexander University
+Erlangen-Nuremberg, Institute for Economics.
+[18] Ikhlaas Gurrib. 2018. Performance of the average directional index as a market
+timing tool for the most actively traded USD based currency pairs. Banks and
+Bank Systems 13 (08 2018), 58–70.
+[19] Ashley Hill, Antonin Raffin, Maximilian Ernestus, Adam Gleave, Anssi Kanervisto,
+Rene Traore, Prafulla Dhariwal, Christopher Hesse, Oleg Klimov, Alex Nichol,
+Matthias Plappert, Alec Radford, John Schulman, Szymon Sidor, and Yuhuai Wu.
+2018. Stable baselines. https://github.com/hill-a/stable-baselines.
+
+Trovato and Tobin, et al.
+
+[20] A. Ilmanen. 2012. Expected Returns: An Investor’s Guide to Harvesting Market
+Rewards. (05 2012).
+[21] Gyeeun Jeong and Ha Kim. 2018. Improving financial trading decisions using
+deep Q-learning: predicting the number of shares, action strategies, and transfer
+learning. Expert Systems with Applications 117 (09 2018).
+[22] Zhengyao Jiang and Jinjun Liang. 2017. Cryptocurrency portfolio management
+with deep reinforcement learning. In 2017 Intelligent Systems Conference.
+[23] Youngmin Kim, Wonbin Ahn, Kyong Joo Oh, and David Enke. 2017. An intelligent
+hybrid trading system for discovering trading rules for the futures market using
+rough sets and genetic algorithms. Applied Soft Computing 55 (02 2017), 127–140.
+[24] Vijay Konda and John Tsitsiklis. 2001. Actor-critic algorithms. Society for Industrial and Applied Mathematics 42 (04 2001).
+[25] Mark Kritzman and Yuanzhen Li. 2010. Skulls, financial turbulence, and risk
+management. Financial Analysts Journal 66 (10 2010).
+[26] Jinke Li, Ruonan Rao, and Jun Shi. 2018. Learning to Trade with Deep Actor
+Critic Methods. 2018 11th International Symposium on Computational Intelligence
+and Design (ISCID) 02 (2018), 66–71.
+[27] Xinyi Li, Yinchuan Li, Hongyang Yang, Liuqing Yang, and Xiao-Yang Liu. 2019.
+DP-LSTM: Differential privacy-inspired LSTM for stock prediction using financial news. 33rd Conference on Neural Information Processing Systems (NeurIPS
+2019) Workshop on Robust AI in Financial Services: Data, Fairness, Explainability,
+Trustworthiness, and Privacy, December 2019 (12 2019).
+[28] Zhipeng Liang, Kangkang Jiang, Hao Chen, Junhao Zhu, and Yanran Li. 2018.
+Adversarial deep reinforcement learning in portfolio management. arXiv: Portfolio
+Management (2018).
+[29] Timothy Lillicrap, Jonathan Hunt, Alexander Pritzel, Nicolas Heess, Tom Erez,
+Yuval Tassa, David Silver, and Daan Wierstra. 2015. Continuous control with deep
+reinforcement learning. International Conference on Learning Representations
+(ICLR) 2016 (09 2015).
+[30] Mansoor Maitah, Petr Procházka, Michal Čermák, and Karel Šrédl. 2016. Commodity Channel index: evaluation of trading rule of agricultural Commodities.
+International Journal of Economics and Financial Issues 6 (03 2016), 176–178.
+[31] Harry Markowitz. 1952. Portfolio selection. Journal of Finance 7, 1 (1952), 77–91.
+[32] Volodymyr Mnih, Adrià Badia, Mehdi Mirza, Alex Graves, Timothy Lillicrap,
+Tim Harley, David Silver, and Koray Kavukcuoglu. 2016. Asynchronous methods
+for deep reinforcement learning. The 33rd International Conference on Machine
+Learning (02 2016).
+[33] John Moody and Matthew Saffell. 2001. Learning to trade via direct reinforcement.
+IEEE Transactions on Neural Networks 12 (07 2001), 875–89.
+[34] Ralph Neuneier. 1996. Optimal asset allocation using adaptive dynamic programming. Conference on Neural Information Processing Systems, 1995 (05 1996).
+[35] Ralph Neuneier. 1997. Enhancing Q-learning for optimal asset allocation. Conference on Neural Information Processing Systems (NeurIPS), 1997.
+[36] John Schulman, Sergey Levine, Philipp Moritz, Michael Jordan, and Pieter Abbeel.
+2015. Trust region policy optimization. In The 31st International Conference on
+Machine Learning.
+[37] John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, and Oleg Klimov.
+2017. Proximal policy optimization algorithms. arXiv:1707.06347 (07 2017).
+[38] Wharton Research Data Service. 2015. Standard & Poor’s Compustat. Data
+retrieved from Wharton Research Data Service,.
+[39] W.F. Sharpe. 1994. The Sharpe ratio. Journal of Portfolio Management (01 1994).
+[40] Richard Sutton and Andrew Barto. 1998. Reinforcement learning: an introduction.
+IEEE Transactions on Neural Networks 9 (02 1998), 1054.
+[41] Richard Sutton, David Mcallester, Satinder Singh, and Yishay Mansour. 2000.
+Policy gradient methods for reinforcement learning with function approximation.
+Conference on Neural Information Processing Systems (NeurIPS), 1999 (02 2000).
+[42] Lu Wang, Wei Zhang, Xiaofeng He, and Hongyuan Zha. 2018. Supervised reinforcement learning with recurrent neural network for dynamic treatment
+recommendation. In Conference on Knowledge Discovery and Data Mining (KDD),
+2018. 2447–2456.
+[43] Yuxin Wu and Yuandong Tian. 2017. Training agent for first-person shooter game
+with actor-critic curriculum learning. In International Conference on Learning
+Representations (ICLR), 2017.
+[44] Zhuoran Xiong, Xiao-Yang Liu, Shan Zhong, Hongyang Yang, and A. Elwalid.
+2018. Practical deep reinforcement learning approach for stock trading. NeurIPS
+Workshop on Challenges and Opportunities for AI in Financial Services: the Impact
+of Fairness, Explainability, Accuracy, and Privacy, 2018. (2018).
+[45] Hongyang Yang, Xiao-Yang Liu, and Qingwei Wu. 2018. A practical machine learning approach for dynamic stock recommendation. In IEEE TrustCom/BiDataSE,
+2018. 1693–1697.
+[46] Wenbin Zhang and Steven Skiena. 2010. Trading strategies to exploit blog and
+news sentiment.. In Fourth International AAAI Conference on Weblogs and Social
+Media, 2010.
+[47] Yong Zhang and Xingyu Yang. 2016. Online portfolio selection strategy based on
+combining experts’ advice. Computational Economics 50 (05 2016).
+[48] Zihao Zhang. 2019. Deep reinforcement learning for trading. ArXiv 2019 (11
+2019).
+
+

@@ -1,0 +1,12 @@
+[Unit]
+Description=FNTX Exercise Detection and Disposal
+After=network.target
+
+[Service]
+Type=oneshot
+User=info
+WorkingDirectory=/home/info/fntx-ai-v1
+Environment="PATH=/usr/bin:/bin:/usr/local/bin"
+ExecStart=/usr/bin/python3 /home/info/fntx-ai-v1/01_backend/scripts/exercise_detector.py
+StandardOutput=append:/home/info/fntx-ai-v1/logs/exercise_detection.log
+StandardError=append:/home/info/fntx-ai-v1/logs/exercise_detection.log
