@@ -228,12 +228,12 @@ class ALMAutomation:
             with conn.cursor() as cursor:
                 cursor.execute("""
                     INSERT INTO alm_reporting.import_history 
-                    (import_date, status, imported_at)
+                    (import_date, status, completed_at)
                     VALUES (%s, 'SUCCESS', %s)
                     ON CONFLICT (import_date) 
                     DO UPDATE SET 
                         status = 'SUCCESS',
-                        imported_at = EXCLUDED.imported_at
+                        completed_at = EXCLUDED.completed_at
                 """, (process_date, datetime.now()))
                 conn.commit()
         finally:

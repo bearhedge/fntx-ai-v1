@@ -46,6 +46,10 @@ def parse_and_insert_data(db_url: str, append: bool):
         logging.error("One or more required XML files are missing. Aborting.")
         return
 
+    logging.info(f"Processing trade file: {trade_file}")
+    logging.info(f"Processing cash transaction file: {cash_file}")
+    logging.info(f"Processing NAV file: {nav_file}")
+
     # --- Process Trades ---
     trades_tree = ET.parse(trade_file)
     all_trades = trades_tree.findall(".//Trade")
@@ -91,6 +95,8 @@ def parse_and_insert_data(db_url: str, append: bool):
             'source_transaction_id': attribs.get('transactionID')
         }
         events_to_insert.append(event)
+    
+    logging.info(f"Found a total of {len(events_to_insert)} events in the XML files.")
 
     # --- Insert Events into Database ---
     if not events_to_insert:
@@ -109,14 +115,65 @@ def parse_and_insert_data(db_url: str, append: bool):
                 )
                 ON CONFLICT (source_transaction_id) DO NOTHING;
             """)
-            connection.execute(insert_sql, events_to_insert)
-            logging.info(f"Attempted to insert {len(events_to_insert)} events.")
+            result = connection.execute(insert_sql, events_to_insert)
+            logging.info(f"Successfully inserted {result.rowcount} new events into the database.")
 
     # --- Update Daily Summaries ---
-    # This part is complex and would require re-calculating NAV from the start.
-    # For an append-only script, a full recalculation is safer.
-    # A true incremental update is beyond the scope of this quick fix.
-    logging.warning("Daily summaries are not incrementally updated in this version. A full rebuild may be required for perfect accuracy.")
+    logging.info("Calculating and updating daily summaries.")
+    df = pd.DataFrame(events_to_insert)
+    if not df.empty:
+        df['date'] = pd.to_datetime(df['event_timestamp']).dt.date
+        
+        # Log the date range of events found
+        min_date = df['date'].min()
+        max_date = df['date'].max()
+        logging.info(f"Date range of events found in XML: {min_date} to {max_date}")
+
+        # Aggregate financial data from events
+        summary_agg = df.groupby('date').agg(
+            total_pnl_hkd=('realized_pnl_hkd', 'sum'),
+            net_cash_flow_hkd=('cash_impact_hkd', 'sum')
+        ).reset_index()
+
+        # Get NAV data
+        nav_tree = ET.parse(nav_file)
+        nav_summary_node = nav_tree.find(".//ChangeInNAV")
+        start_nav = float(nav_summary_node.get('startingValue', 0))
+        end_nav = float(nav_summary_node.get('endingValue', 0))
+        
+        # For a single day's import, we can approximate
+        if len(summary_agg['date'].unique()) == 1:
+            summary_date = summary_agg['date'].iloc[0]
+            summary_agg['opening_nav_hkd'] = start_nav
+            summary_agg['closing_nav_hkd'] = end_nav
+            summary_agg = summary_agg.rename(columns={'date': 'summary_date'})
+            
+            logging.info(f"Calculated summary data for {summary_date}: {summary_agg.to_dict('records')}")
+
+            # Insert or update the summary table
+            with engine.connect() as connection:
+                with connection.begin():
+                    for _, row in summary_agg.iterrows():
+                        upsert_sql = text("""
+                            INSERT INTO alm_reporting.daily_summary (
+                                summary_date, opening_nav_hkd, closing_nav_hkd, 
+                                total_pnl_hkd, net_cash_flow_hkd
+                            ) VALUES (
+                                :summary_date, :opening_nav_hkd, :closing_nav_hkd, 
+                                :total_pnl_hkd, :net_cash_flow_hkd
+                            )
+                            ON CONFLICT (summary_date) DO UPDATE SET
+                                opening_nav_hkd = EXCLUDED.opening_nav_hkd,
+                                closing_nav_hkd = EXCLUDED.closing_nav_hkd,
+                                total_pnl_hkd = EXCLUDED.total_pnl_hkd,
+                                net_cash_flow_hkd = EXCLUDED.net_cash_flow_hkd,
+                                last_updated = CURRENT_TIMESTAMP;
+                        """)
+                        connection.execute(upsert_sql, row.to_dict())
+                    logging.info(f"Upserted daily summary for: {summary_date}")
+        else:
+            logging.warning(f"Multi-day summary update from a single file is not yet implemented. Found {len(summary_agg['date'].unique())} unique dates.")
+
     logging.info("Append-mode data build process completed.")
 
 if __name__ == '__main__':
