@@ -27,6 +27,33 @@ def get_daily_summary(cursor, summary_date):
     )
     return cursor.fetchone()
 
+def get_interest_accruals(cursor, summary_date):
+    """Get detailed interest accruals data including cumulative balance."""
+    # Get daily interest accrual amount
+    cursor.execute("""
+        SELECT COALESCE(SUM(cash_impact_hkd), 0) as interest_accrual
+        FROM alm_reporting.chronological_events
+        WHERE DATE(event_timestamp AT TIME ZONE 'US/Eastern') = %s
+        AND event_type = 'Interest_Accrual'
+    """, (summary_date,))
+    daily_result = cursor.fetchone()
+    daily_accrual = daily_result[0] if daily_result else Decimal(0)
+    
+    # Get cumulative interest accrual up to this date
+    cursor.execute("""
+        SELECT COALESCE(SUM(cash_impact_hkd), 0) as cumulative_interest
+        FROM alm_reporting.chronological_events
+        WHERE DATE(event_timestamp AT TIME ZONE 'US/Eastern') <= %s
+        AND event_type = 'Interest_Accrual'
+    """, (summary_date,))
+    cumulative_result = cursor.fetchone()
+    cumulative_accrual = cumulative_result[0] if cumulative_result else Decimal(0)
+    
+    return {
+        'daily': daily_accrual,
+        'cumulative': cumulative_accrual
+    }
+
 def get_daily_commission(cursor, summary_date):
     """Fetches total commission for a given date."""
     cursor.execute(
@@ -235,16 +262,63 @@ def group_events(events, time_window_minutes=5):
 
 def is_option_symbol(symbol):
     """Check if a symbol is an option."""
-    return bool(re.search(r'\d{6}[CP]\d{8}', symbol))
+    # Check for either format:
+    # 1. SPY 21JUL25 630 P (trade format)
+    # 2. SPY 250721P00630000 (assignment/expiration format)
+    return bool(re.search(r'SPY.*\d+\s*[PC]', symbol) or re.search(r'\d{6}[CP]\d{8}', symbol))
 
 def parse_option_details(symbol):
     """Parse option symbol to extract type and strike."""
+    # Try format 1: SPY 250721P00630000
     match = re.search(r'(\d{6})([CP])(\d{8})', symbol)
     if match:
         date_str, option_type, strike_str = match.groups()
         strike = float(strike_str) / 1000
         return option_type, strike
+    
+    # Try format 2: SPY 21JUL25 630 P
+    match = re.search(r'SPY\s+\d+[A-Z]+\d+\s+(\d+)\s*([PC])', symbol)
+    if match:
+        strike_str, option_type = match.groups()
+        strike = float(strike_str)
+        return option_type, strike
+    
     return None, None
+
+def track_net_positions(cursor, up_to_date):
+    """Track net option positions up to a given date to determine what's actually held."""
+    cursor.execute("""
+        SELECT 
+            CASE 
+                WHEN description ~ 'SPY\\s+\\d{6}[CP]\\d{8}' THEN 
+                    regexp_match(description, 'SPY\\s+(\\d{6}[CP]\\d{8})')[1]
+                WHEN description ~ 'SPY.*\\d+\\s*[PC]' THEN
+                    description
+                ELSE description
+            END as option_symbol,
+            SUM(CASE 
+                WHEN cash_impact_hkd > 0 THEN -1  -- Sold option (short)
+                WHEN cash_impact_hkd < 0 THEN 1   -- Bought option (long)
+                ELSE 0
+            END) as net_qty
+        FROM alm_reporting.chronological_events
+        WHERE event_type = 'Trade' 
+        AND description ~ 'SPY.*[CP]'
+        AND event_timestamp < %s
+        AND description NOT LIKE '%%Assigned%%'
+        GROUP BY option_symbol
+        HAVING SUM(CASE 
+            WHEN cash_impact_hkd > 0 THEN -1
+            WHEN cash_impact_hkd < 0 THEN 1
+            ELSE 0
+        END) != 0
+    """, (up_to_date,))
+    
+    positions = {}
+    for row in cursor.fetchall():
+        if row[1] != 0:  # Only track non-zero positions
+            positions[row[0]] = row[1]
+    return positions
 
 def generate_daily_narrative(cursor, summary_date):
     """Generates a narrative summary for a single day."""
@@ -273,11 +347,14 @@ def generate_daily_narrative(cursor, summary_date):
         SELECT event_timestamp, event_type, description, cash_impact_hkd, realized_pnl_hkd
         FROM alm_reporting.chronological_events
         WHERE event_timestamp >= %s AND event_timestamp < %s
-        AND event_type IN ('Trade', 'Assignment', 'Expiration')
+        AND event_type IN ('Trade', 'Option_Assignment', 'Option_Expiration')
         ORDER BY event_timestamp
     """, (day_start, day_end))
     
     events = cursor.fetchall()
+    
+    # Get net positions at start of day to track what can expire
+    day_start_positions = track_net_positions(cursor, day_start)
     
     # Count trades and analyze contracts
     trade_count = 0
@@ -285,6 +362,7 @@ def generate_daily_narrative(cursor, summary_date):
     contracts_closed = []
     assignments = []
     expirations = []
+    actual_expirations = []  # Track options that actually expired (were held)
     
     for ts, etype, desc, cash, pnl in events:
         if etype == 'Trade' and is_option_symbol(desc) and 'Assigned' not in desc:
@@ -293,26 +371,50 @@ def generate_daily_narrative(cursor, summary_date):
                 contract_desc = f"{option_type} {strike:.0f}"
                 # Check if this is an expiration (16:20 ET with 0 cash)
                 ts_et = ts.astimezone(est)
-                is_expiration_trade = ('Buy' in desc and ts_et.hour == 16 and ts_et.minute == 20 
+                is_expiration_trade = (ts_et.hour == 16 and ts_et.minute == 20 
                                      and (cash == 0 or cash is None))
                 
-                if 'Sell' in desc and cash and cash > 0:
-                    trade_count += 1  # Count opening trades
+                if cash > 0:
+                    # Opening trade - selling option, receiving premium
+                    trade_count += 1
                     contracts_opened.append((ts, etype, desc, cash, pnl, contract_desc))
-                elif 'Buy' in desc and not is_expiration_trade:
-                    trade_count += 1  # Count real closing trades (not expirations)
-                    # This is a real close/stop-out with premium paid
+                elif cash < 0 and not is_expiration_trade:
+                    # Closing trade - buying back option, paying premium
+                    trade_count += 1
                     contracts_closed.append(contract_desc)
-                elif is_expiration_trade:
-                    # Don't count expiration as a trade
-                    expirations.append(contract_desc)
-        elif etype == 'Assignment' or 'Assigned' in desc:
-            option_match = re.search(r'SPY\s+\d{6}[CP]\d{8}', desc)
-            if option_match:
-                option_type, strike = parse_option_details(option_match.group())
-                if option_type:
-                    assignments.append(f"{option_type} {strike:.0f}")
-        elif etype == 'Expiration':
+                elif is_expiration_trade or cash == 0:
+                    # Check if we actually held this position
+                    # Try to find the option symbol in our positions
+                    held_position = False
+                    for pos_symbol, qty in day_start_positions.items():
+                        if qty < 0:  # Short position
+                            # Check if this matches our expiring option
+                            pos_type, pos_strike = parse_option_details(pos_symbol)
+                            if pos_type and option_type == pos_type and abs(strike - pos_strike) < 0.01:
+                                held_position = True
+                                break
+                    
+                    if held_position:
+                        actual_expirations.append(contract_desc)
+        elif etype == 'Option_Assignment' or (etype == 'Trade' and 'Assigned' in desc):
+            # Handle Option_Assignment event type
+            if etype == 'Option_Assignment':
+                # Extract option symbol from description
+                # Format: "SPY   250721P00630000 Assignment @ $630.0"
+                option_match = re.search(r'(SPY\s+\d{6}[CP]\d{8})', desc)
+                if option_match:
+                    option_symbol = option_match.group(1)
+                    option_type, strike = parse_option_details(option_symbol)
+                    if option_type:
+                        assignments.append(f"{option_type} {strike:.0f}")
+            else:
+                # Handle Trade with 'Assigned' in description
+                option_match = re.search(r'SPY\s+\d{6}[CP]\d{8}', desc)
+                if option_match:
+                    option_type, strike = parse_option_details(option_match.group())
+                    if option_type:
+                        assignments.append(f"{option_type} {strike:.0f}")
+        elif etype == 'Option_Expiration':
             # Handle explicit Expiration events
             option_match = re.search(r'SPY\s+\d{6}[CP]\d{8}', desc)
             if option_match:
@@ -370,9 +472,11 @@ def generate_daily_narrative(cursor, summary_date):
                         print(f"        - Premium received: {format_hdk(cash)}")
                         print(f"        - Execution time: {ts.astimezone(pytz.timezone('US/Eastern')).strftime('%I:%M %p ET')}")
         
-        if expirations:
+        if actual_expirations:
             print(f"\n   **Expired Positions:**")
-            for exp in expirations:
+            # Remove duplicates and sort
+            unique_expirations = list(set(actual_expirations))
+            for exp in sorted(unique_expirations):
                 exp_type = "Put" if "P" in exp else "Call"
                 strike = exp.split()[1]
                 print(f"      • SPY ${strike} {exp_type} expired")
@@ -514,7 +618,7 @@ def generate_professional_narrative(cursor, summary_date, previous_closing_nav):
     pre_market_events = [e for e in all_events if e[0] < market_open_time]
     intraday_events = [e for e in all_events if e[0] >= market_open_time]
 
-    running_nav = previous_closing_nav
+    running_nav = Decimal(str(previous_closing_nav))
     assignment_positions = {}  # Track {symbol: {'strike': price, 'quantity': shares, 'timestamp': datetime}}
     overnight_pnl_total = Decimal(0)  # Track total overnight P&L for adjusted NAV
     print(f"* **Previous Close ({period_start.astimezone(hkt).strftime('%Y-%m-%d %H:%M:%S HKT')}):**")
@@ -609,7 +713,7 @@ def generate_professional_narrative(cursor, summary_date, previous_closing_nav):
         # First day or no overnight events
         print(f"* **Market Open ({market_open_time.astimezone(hkt).strftime('%H:%M HKT')} / 09:30 EDT):** The day begins.")
         print(f"    * **Opening NAV:** {format_hdk(opening_nav)}")
-        running_nav = opening_nav  # Use official opening NAV for first day
+        running_nav = Decimal(str(opening_nav))  # Use official opening NAV for first day
     print()
 
     if intraday_events:

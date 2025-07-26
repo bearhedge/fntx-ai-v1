@@ -23,6 +23,7 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from services.ibkr_flex_query_enhanced import IBKRFlexQueryEnhanced
 from alm.calculation_engine import generate_daily_narrative
+from alm.spy_price_fetcher import get_spy_closing_price
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
@@ -31,7 +32,7 @@ LOG_FORMAT = '%(asctime)s - %(levelname)s - %(message)s'
 logging.basicConfig(level=logging.INFO, format=LOG_FORMAT)
 logger = logging.getLogger(__name__)
 
-DATA_DIR = "/home/info/fntx-ai-v1/04_data"
+DATA_BASE_DIR = "/home/info/fntx-ai-v1/04_data"
 ARCHIVE_DIR = "/home/info/fntx-ai-v1/04_data/archive"
 MAX_FILES_TO_KEEP = 3
 DATABASE_URL = "postgresql://postgres:theta_data_2024@localhost:5432/options_data"
@@ -49,6 +50,14 @@ FLEX_CONFIGS = {
     "Trades": {
         "query_id": "1257686",
         "file_pattern": "Trades_({query_id})_{period}.xml"
+    },
+    "Exercises_and_Expiries": {
+        "query_id": "1257675",
+        "file_pattern": "Exercises_and_Expiries_({query_id})_{period}.xml"
+    },
+    "Interest_Accruals": {
+        "query_id": "1257707",
+        "file_pattern": "Interest_Accruals_({query_id})_{period}.xml"
     }
 }
 
@@ -61,7 +70,7 @@ class ALMAutomation:
         
     def ensure_directories(self):
         """Ensure required directories exist"""
-        Path(DATA_DIR).mkdir(parents=True, exist_ok=True)
+        Path(DATA_BASE_DIR).mkdir(parents=True, exist_ok=True)
         Path(ARCHIVE_DIR).mkdir(parents=True, exist_ok=True)
         
     def get_last_processed_date(self) -> date:
@@ -80,15 +89,20 @@ class ALMAutomation:
         finally:
             conn.close()
             
-    def download_flex_reports(self, report_date: date, period: str = "LBD") -> dict:
+    def download_flex_reports(self, report_date: date, period: str = "MTD") -> dict:
         """Download all required FlexQuery reports for a given date"""
         downloaded_files = {}
+        
+        # Create month-specific directory
+        month_dir = report_date.strftime("%B%Y")  # e.g., "July2025"
+        data_dir = os.path.join(DATA_BASE_DIR, month_dir)
+        Path(data_dir).mkdir(parents=True, exist_ok=True)
         
         for report_type, config in FLEX_CONFIGS.items():
             logger.info(f"Downloading {report_type} report for {report_date}")
             
             # Set the appropriate query ID
-            os.environ["IBKR_FLEX_QUERY_ID"] = config["query_id"]
+            self.flex_service.query_id = config["query_id"]
             
             # Request the report
             reference_code = self.flex_service.request_flex_report()
@@ -110,7 +124,7 @@ class ALMAutomation:
                 query_id=config["query_id"],
                 period=period
             )
-            file_path = os.path.join(DATA_DIR, filename)
+            file_path = os.path.join(data_dir, filename)
             
             # Save to temporary file first
             temp_path = file_path + ".tmp"
@@ -132,19 +146,26 @@ class ALMAutomation:
         
     def manage_file_rotation(self):
         """Keep only the most recent files, delete older ones"""
+        # Get all month directories
+        month_dirs = [d for d in os.listdir(DATA_BASE_DIR) 
+                     if os.path.isdir(os.path.join(DATA_BASE_DIR, d)) 
+                     and d not in ['archive', 'processed', 'raw', 'checkpoints']]
+        
         for report_type, config in FLEX_CONFIGS.items():
-            # Find all files matching this report type
+            # Find all files matching this report type across all month directories
             pattern_prefix = config["file_pattern"].split("{")[0]
             matching_files = []
             
-            for filename in os.listdir(DATA_DIR):
-                if filename.startswith(pattern_prefix) and filename.endswith(".xml"):
-                    file_path = os.path.join(DATA_DIR, filename)
-                    matching_files.append({
-                        'path': file_path,
-                        'mtime': os.path.getmtime(file_path),
-                        'name': filename
-                    })
+            for month_dir in month_dirs:
+                dir_path = os.path.join(DATA_BASE_DIR, month_dir)
+                for filename in os.listdir(dir_path):
+                    if filename.startswith(pattern_prefix) and filename.endswith(".xml"):
+                        file_path = os.path.join(dir_path, filename)
+                        matching_files.append({
+                            'path': file_path,
+                            'mtime': os.path.getmtime(file_path),
+                            'name': filename
+                        })
                     
             # Sort by modification time (newest first)
             matching_files.sort(key=lambda x: x['mtime'], reverse=True)
@@ -159,26 +180,44 @@ class ALMAutomation:
                     shutil.move(file_info['path'], archive_path)
                     logger.info(f"Archived {file_info['name']} to {archive_path}")
                     
+    def prefetch_spy_price(self, target_date: date):
+        """Pre-fetch SPY closing price for the target date"""
+        try:
+            spy_price = get_spy_closing_price(datetime.combine(target_date, datetime.min.time()))
+            if spy_price:
+                logger.info(f"Pre-fetched SPY closing price for {target_date}: ${spy_price:.2f}")
+            else:
+                logger.warning(f"Could not fetch SPY price for {target_date}")
+        except Exception as e:
+            logger.error(f"Error pre-fetching SPY price: {e}")
+
     def process_date_range(self, start_date: date, end_date: date):
-        """Process a range of dates, skipping weekends"""
+        """Process a range of dates, skipping Sundays only"""
         current_date = start_date
         
         while current_date <= end_date:
-            # Skip weekends
-            if current_date.weekday() in [5, 6]:  # Saturday = 5, Sunday = 6
-                logger.info(f"Skipping weekend: {current_date}")
+            # Skip Sundays only (Monday=0, Sunday=6)
+            if current_date.weekday() == 6:  # Sunday = 6
+                logger.info(f"Skipping Sunday: {current_date}")
                 current_date += timedelta(days=1)
                 continue
                 
             logger.info(f"Processing date: {current_date}")
+            
+            # Pre-fetch SPY price for ITM assumption logic
+            self.prefetch_spy_price(current_date)
             
             try:
                 # Download reports for this date
                 downloaded_files = self.download_flex_reports(current_date)
                 
                 if len(downloaded_files) == len(FLEX_CONFIGS):
+                    # Get the data directory for this date
+                    month_dir = current_date.strftime("%B%Y")
+                    data_dir = os.path.join(DATA_BASE_DIR, month_dir)
+                    
                     # Run the ALM data builder in append mode
-                    self.run_alm_data_builder(append_mode=True)
+                    self.run_alm_data_builder(append_mode=True, data_dir=data_dir)
                     
                     # Mark this date as processed
                     self.mark_date_processed(current_date)
@@ -187,10 +226,9 @@ class ALMAutomation:
                     conn = psycopg2.connect(DATABASE_URL)
                     try:
                         with conn.cursor() as cursor:
-                            narrative = generate_daily_narrative(cursor, current_date)
-                            if narrative:
-                                logger.info(f"Generated narrative for {current_date}")
-                                # The narrative function prints itself, so we just log success.
+                            # Generate daily narrative
+                            generate_daily_narrative(cursor, current_date)
+                            logger.info(f"Generated daily narrative for {current_date}")
                     finally:
                         conn.close()
                 else:
@@ -201,7 +239,7 @@ class ALMAutomation:
                 
             current_date += timedelta(days=1)
             
-    def run_alm_data_builder(self, append_mode: bool = True):
+    def run_alm_data_builder(self, append_mode: bool = True, data_dir: str = None):
         """Run the ALM data builder script"""
         import subprocess
         
@@ -211,6 +249,9 @@ class ALMAutomation:
         
         if append_mode:
             cmd.append("--append")
+            
+        if data_dir:
+            cmd.extend(["--data-dir", data_dir])
             
         logger.info(f"Running ALM data builder: {' '.join(cmd)}")
         

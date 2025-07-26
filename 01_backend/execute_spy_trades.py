@@ -2,7 +2,7 @@
 """
 Execute SPY options trades with flexible side selection:
 - Sell PUT, CALL, or BOTH with configurable strikes and stop loss
-- Default: Sell both 630 Put and 632 Call with 3.5x stop loss
+- Default: Sell both 634 Put and 637 Call with 3.5x stop loss
 """
 
 import sys
@@ -34,8 +34,7 @@ Examples:
         """
     )
     
-    parse
-    .add_argument(
+    parser.add_argument(
         '--side', 
         choices=['put', 'call', 'both'], 
         default='both',
@@ -45,14 +44,14 @@ Examples:
     parser.add_argument(
         '--put-strike', 
         type=float, 
-        default=631.0,
+        default=634.0,
         help='Strike price for PUT option (default: 625)'
     )
     
     parser.add_argument(
         '--call-strike', 
         type=float, 
-        default=632.0,
+        default=637.0,
         help='Strike price for CALL option (default: 629)'
     )
     

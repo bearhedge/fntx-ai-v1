@@ -28,13 +28,15 @@ class IBKRFlexQueryEnhanced:
         self.token = os.getenv("IBKR_FLEX_TOKEN")
         self.query_id = os.getenv("IBKR_FLEX_QUERY_ID")
         
-        if not self.token or not self.query_id:
-            logger.warning("IBKR Flex Query credentials not configured. Please set IBKR_FLEX_TOKEN and IBKR_FLEX_QUERY_ID")
+        if not self.token:
+            logger.warning("IBKR Flex Query token not configured. Please set IBKR_FLEX_TOKEN")
     
     def request_flex_report(self) -> Optional[str]:
         """Request a Flex Query report and return the reference code"""
-        if not self.token or not self.query_id:
-            raise ValueError("Flex Query credentials not configured")
+        if not self.token:
+            raise ValueError("Flex Query token not configured")
+        if not self.query_id:
+            raise ValueError("Flex Query ID not set")
         
         url = f"{self.base_url}/FlexStatementService.SendRequest"
         params = {

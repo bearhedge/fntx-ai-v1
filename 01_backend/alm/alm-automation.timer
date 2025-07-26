@@ -1,0 +1,19 @@
+[Unit]
+Description=Run ALM Automation daily at 12:00 PM Hong Kong Time (Tuesday-Saturday)
+Requires=alm-automation.service
+
+[Timer]
+# Run at 12:00 PM Hong Kong Time (UTC+8), which is 04:00 UTC
+# Tuesday through Saturday only
+OnCalendar=Tue-Sat 04:00:00
+Persistent=true
+
+# If the system was powered down when the timer should have triggered,
+# run it when the system starts up
+OnBootSec=5min
+
+# Randomize the start time by up to 5 minutes to avoid exact timing conflicts
+RandomizedDelaySec=300
+
+[Install]
+WantedBy=timers.target

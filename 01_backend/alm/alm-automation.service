@@ -1,0 +1,27 @@
+[Unit]
+Description=ALM Automation Daily Update
+After=network.target postgresql.service
+
+[Service]
+Type=oneshot
+User=info
+WorkingDirectory=/home/info/fntx-ai-v1/01_backend/alm
+Environment="PATH=/usr/local/bin:/usr/bin:/bin"
+Environment="PYTHONPATH=/home/info/fntx-ai-v1/01_backend"
+
+# Load environment variables from .env file
+EnvironmentFile=/home/info/fntx-ai-v1/.env
+
+# Run the ALM automation script
+ExecStart=/usr/bin/python3 /home/info/fntx-ai-v1/01_backend/alm/alm_automation.py
+
+# Restart policy
+Restart=on-failure
+RestartSec=300
+
+# Logging
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target
