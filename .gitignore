@@ -74,3 +74,17 @@ tools/*/checkpoints/
 
 # ClaudPoint checkpoint system
 .checkpoints/
+
+# Large backup files
+*.tar.gz
+*.zip
+*.rar
+*backup*.tar.gz
+*backup*.zip
+
+# Archive directory with large files
+archive/
+backups/
+
+# Virtual environment backups
+*venv*.tar.gz
