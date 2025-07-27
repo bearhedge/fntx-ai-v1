@@ -1,8 +1,0 @@
-<FlexQueryResponse queryName="Cash Transactions (1257704) LBD" type="AF">
-<FlexStatements count="1">
-<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="LastBusinessDay" whenGenerated="20250719;104626 EDT">
-<CashTransactions>
-</CashTransactions>
-</FlexStatement>
-</FlexStatements>
-</FlexQueryResponse>

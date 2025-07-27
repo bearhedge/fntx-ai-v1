@@ -71,3 +71,6 @@ download_checkpoint.json
 tools/*/node_modules/
 tools/*/data/
 tools/*/checkpoints/
+
+# ClaudPoint checkpoint system
+.checkpoints/

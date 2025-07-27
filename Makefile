@@ -15,11 +15,11 @@ help:
 
 start:
 	@echo "Starting FNTX AI development environment..."
-	./06_scripts/dev/start-dev.sh
+	./backend/scripts/dev/start-dev.sh
 
 stop:
 	@echo "Stopping FNTX AI development environment..."
-	./06_scripts/dev/stop-dev.sh
+	./backend/scripts/dev/stop-dev.sh
 
 dev: start
 
@@ -29,7 +29,7 @@ test:
 
 clean:
 	@echo "Cleaning up..."
-	rm -rf 08_logs/*.log 10_runtime/pids/*.pid
+	rm -rf logs/*.log 10_runtime/pids/*.pid
 	rm -rf 01_backend/__pycache__ 01_backend/*/__pycache__
 	rm -rf 02_frontend/dist 02_frontend/node_modules/.cache
 
@@ -79,8 +79,8 @@ stop-trading:
 # VNC Trading Environment
 vnc-setup:
 	@echo "Setting up VNC trading desktop..."
-	@chmod +x ./06_scripts/setup/setup-vnc-trading.sh
-	./06_scripts/setup/setup-vnc-trading.sh
+	@chmod +x ./backend/scripts/setup/setup-vnc-trading.sh
+	./backend/scripts/setup/setup-vnc-trading.sh
 
 vnc-status:
 	@echo "VNC server status:"

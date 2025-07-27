@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Hardhat files
+cache/
+artifacts/
+
+# Environment variables
+.env
+.env.local
+.env.production
+
+# Deployment files (keep example)
+deployments/*.json
+!deployments/.gitkeep
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test coverage
+coverage/
+coverage.json
+
+# Hardhat Ignition
+ignition/
+
+# Logs
+*.log

@@ -1,0 +1,13 @@
+# Core dependencies
+rich>=13.0.0
+plotext>=5.2.0
+web3>=6.0.0
+python-dotenv>=1.0.0
+
+# Testing
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+
+# Additional dependencies
+eth-account>=0.8.0
+hexbytes>=0.3.0

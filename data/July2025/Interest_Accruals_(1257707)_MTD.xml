@@ -1,0 +1,175 @@
+<FlexQueryResponse queryName="Interest Accruals (1257707) MTD" type="AF">
+<FlexStatements count="19">
+<FlexStatement accountId="U19860056" fromDate="20250701" toDate="20250701" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250701" toDate="20250701" startingAccrualBalance="-8.242395" interestAccrued="-7.693" accrualReversal="0" fxTranslation="-0.000105" endingAccrualBalance="-15.9355" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250701" toDate="20250701" startingAccrualBalance="-1.05" interestAccrued="-0.98" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-2.03" />
+</InterestAccruals>
+<TierInterestDetails>
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250616" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-411.71" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250617" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-411.71" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250618" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-411.71" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250619" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-411.71" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250620" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-413.16" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250621" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-413.16" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250622" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-413.16" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250623" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-406.6" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250624" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-410.5" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250625" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.06" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-401.24" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250626" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.06" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-361.74" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250627" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.06" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-350.61" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250628" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.06" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-350.61" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250629" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.06" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-350.61" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-01" valueDate="20250630" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.05" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-336.35" code="Po" />
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250702" toDate="20250702" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250702" toDate="20250702" startingAccrualBalance="-15.9355" interestAccrued="0" accrualReversal="0" fxTranslation="0.000406" endingAccrualBalance="-15.935094" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250702" toDate="20250702" startingAccrualBalance="-2.03" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-2.03" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250703" toDate="20250703" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250703" toDate="20250703" startingAccrualBalance="-15.935094" interestAccrued="0" accrualReversal="15.935297" fxTranslation="-0.000203" endingAccrualBalance="0" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250703" toDate="20250703" startingAccrualBalance="-2.03" interestAccrued="0" accrualReversal="2.03" fxTranslation="0" endingAccrualBalance="0" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250704" toDate="20250704" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250707" toDate="20250707" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250708" toDate="20250708" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250709" toDate="20250709" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250710" toDate="20250710" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250711" toDate="20250711" period="MonthToDate" whenGenerated="20250726;000248 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250714" toDate="20250714" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250715" toDate="20250715" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250716" toDate="20250716" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250717" toDate="20250717" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250717" toDate="20250717" startingAccrualBalance="0" interestAccrued="-82.729514" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-82.729514" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250717" toDate="20250717" startingAccrualBalance="0" interestAccrued="-10.54" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-10.54" />
+</InterestAccruals>
+<TierInterestDetails>
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250701" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.05" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-284.86" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250702" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-267.72" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250703" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-260.14" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250704" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-260.14" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250705" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-260.14" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250706" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-260.14" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250707" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-245.87" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250708" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.04" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-237.83" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250709" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.03" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-206.56" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250710" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.03" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-161.43" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250711" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.02" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-137.33" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250712" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.02" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-137.33" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250713" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.02" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-137.33" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250714" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.01" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-77.19" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250715" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.01" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-43.93" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-17" valueDate="20250716" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-10.07" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-62192.83" code="Po" />
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250718" toDate="20250718" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250718" toDate="20250718" startingAccrualBalance="-82.729514" interestAccrued="0" accrualReversal="0" fxTranslation="0.020026" endingAccrualBalance="-82.709488" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250718" toDate="20250718" startingAccrualBalance="-10.54" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-10.54" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250721" toDate="20250721" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250721" toDate="20250721" startingAccrualBalance="-82.709488" interestAccrued="-10.59723" accrualReversal="0" fxTranslation="-0.027404" endingAccrualBalance="-93.334122" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250721" toDate="20250721" startingAccrualBalance="-10.54" interestAccrued="-1.35" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-11.89" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250722" toDate="20250722" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250722" toDate="20250722" startingAccrualBalance="-93.334122" interestAccrued="0" accrualReversal="0" fxTranslation="-0.001189" endingAccrualBalance="-93.335311" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250722" toDate="20250722" startingAccrualBalance="-11.89" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-11.89" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250723" toDate="20250723" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250723" toDate="20250723" startingAccrualBalance="-93.335311" interestAccrued="-85.249914" accrualReversal="0" fxTranslation="-0" endingAccrualBalance="-178.585225" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250723" toDate="20250723" startingAccrualBalance="-11.89" interestAccrued="-10.86" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-22.75" />
+</InterestAccruals>
+<TierInterestDetails>
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250717" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.01" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-58.68" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250718" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.21" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-1308.42" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250719" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.21" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-1308.42" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250720" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.21" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-1308.42" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250721" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-0.01" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-78.96" code="Po" />
+<TierInterestDetail accountId="U19860056" currency="USD" interestType="Debit Interest" reportDate="2025-07-23" valueDate="20250722" tierBreak="I" balanceThreshold="0" rate="5.83" totalInterest="-10.21" fromAcct="" toAcct="" marginBalance="" totalPrincipal="-63048.98" code="Po" />
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250724" toDate="20250724" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250724" toDate="20250724" startingAccrualBalance="-178.585225" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-178.585225" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250724" toDate="20250724" startingAccrualBalance="-22.75" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-22.75" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+<FlexStatement accountId="U19860056" fromDate="20250725" toDate="20250725" period="MonthToDate" whenGenerated="20250726;000249 EDT">
+<InterestAccruals>
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="BASE_SUMMARY" fromDate="20250725" toDate="20250725" startingAccrualBalance="-178.585225" interestAccrued="0" accrualReversal="0" fxTranslation="0.0091" endingAccrualBalance="-178.576125" />
+<InterestAccrualsCurrency accountId="U19860056" acctAlias="" currency="USD" fromDate="20250725" toDate="20250725" startingAccrualBalance="-22.75" interestAccrued="0" accrualReversal="0" fxTranslation="0" endingAccrualBalance="-22.75" />
+</InterestAccruals>
+<TierInterestDetails>
+</TierInterestDetails>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

@@ -1,9 +1,0 @@
-<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="32" height="32" fill="white"/>
-  <g transform="translate(16, 16)">
-    <!-- F and N on top row -->
-    <text x="-10" y="-4" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#02001E">FN</text>
-    <!-- T and X on bottom row -->
-    <text x="-10" y="8" font-family="Arial, sans-serif" font-size="10" font-weight="bold" fill="#02001E">TX</text>
-  </g>
-</svg>
