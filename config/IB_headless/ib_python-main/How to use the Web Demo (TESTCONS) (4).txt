@@ -1,0 +1,53 @@
+- Using the Web Demo (with TESTCONS) - 
+----------------------------------------------------
+1. Unzip the web.demo & web.demo-source
+2. Once extracted, you will have to rename the .js.txt extensions within the resources to just .js (the relevant file names are below):
+
+  oauth.web.demo
+  [+] Renamed .\dist\index.js  to  index.js.txt
+  [+] Renamed .\dist\vendor.js  to  vendor.js.txt
+
+  oauth.web.demo.source
+  [+] Renamed .\src\js\store.js  to  store.js.txt
+  [+] Renamed .\src\mixins\mx-global.js  to  mx-global.js.txt
+  [+] Renamed .\src\mixins\mx-oauth.js  to  mx-oauth.js.txt
+  [+] Renamed .\src\views\router.js  to  router.js.txt
+  [+] Renamed .\src\main.js  to  main.js.txt
+  [+] Renamed .\src\oauth.functions.js to oauth.functions.js.txt
+  [+] Renamed .\webpack.config.js  to  webpack.config.js.txt
+  
+3. Navigate to oauth.web.demo\dist\index.htm
+
+4. A browser with CORS disabled must be used if running locally. 
+   Firefox - https://addons.mozilla.org/en-US/firefox/addon/cors-everywhere/ | For Chrome, use the --disable-web-security option along with the --user-data-dir option
+
+5. Consumer Key should be left as TESTCONS
+6. Realm should be left as test_realm (when using TESTCONS, as the Consumer Key)
+7. Choose the "GET" Request Token button     ->  that field should populate with the Request Token 
+
+8. Choose the "GET" Authorize IB User button 
+
+9. Left-click: Authorize User (WWW) -> Login using the IBKR paper account's username + password -> sign agreement
+   You should get an error in the browser. Look at the URL & grab just the  oauth_verifier={xXxXxxXxXxXXxXxxxXxx}  xXxXxxXxXxXXxXxxxXxx - this is the "Verifier Token"
+
+10. Paste this Verifier Token in the "Verifier Token" field
+11. Choose the "GET" Access Token button          ->  field should populate with the Access Token
+12. Choose the "GET" Access Token Secret button   ->  field should populate with the Access Token Secret 
+13. Choose the "GET" Live Session Token button    ->  field should populate with the Live Session Token 
+14. Choose "REST API"/ "Portfolio" -> Portfolio -> Accounts (a "200 OK" status should be retreived)
+
+15. To start a brokerage session (and gain access to the /iserver endpoints):
+    Choose "REST API" -> IServer Session -> Start Session -> Ok (a "200 OK" status should be retreived)
+
+16. The /iserver endpoints should now be usable (i.e.):
+    Choose "REST API" -> IServer Session -> Auth Status | Accounts | Search (Symbol) | Market Data | Historical MD | etc. - https://ibkrcampus.com/ibkr-api-page/cpapi/#endpoints
+
+17. To view open positions:
+    Choose: Portfolio -> Get Positions
+
+18. To Logout & end the session:
+    Choose "REST API" -> IServer Session -> Logout 
+
+NOTE:
+Certain browsers (Firefox, for example) will let you right-click -> Inspect -> Network tab -> view the Web API requests made via the Web Demo
+

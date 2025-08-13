@@ -26,8 +26,8 @@ from .reward_model import RewardModelAgent
 load_dotenv()
 
 # Configure logging with dynamic path
-from 01_backend.utils.logging import get_agent_logger
-from 01_backend.utils.config import config
+from backend.core.utils.logging import get_agent_logger
+from backend.core.utils.config import config
 logger = get_agent_logger('Orchestrator')
 
 class TradePhase(Enum):

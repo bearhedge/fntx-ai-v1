@@ -1,0 +1,12 @@
+<FlexQueryResponse queryName="NAV (1244257) MTD" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U19860056" fromDate="20250801" toDate="20250801" period="MonthToDate" whenGenerated="20250803;000005 EDT">
+<EquitySummaryInBase>
+<EquitySummaryByReportDateInBase accountId="U19860056" acctAlias="" model="" currency="HKD" reportDate="20250731" cash="197721.322929911" cashLong="199858.407701716" cashShort="-2137.084771805" brokerCashComponent="197721.322929911" brokerCashComponentLong="199858.407701716" brokerCashComponentShort="-2137.084771805" options="-2166.5724" optionsLong="0" optionsShort="-2166.5724" interestAccruals="-178.585225" interestAccrualsLong="0" interestAccrualsShort="-178.585225" />
+<EquitySummaryByReportDateInBase accountId="U19860056" acctAlias="" model="" currency="HKD" reportDate="20250801" cash="193774.598515008" cashLong="199858.407701716" cashShort="-6083.809186708" brokerCashComponent="193774.598515008" brokerCashComponentLong="199858.407701716" brokerCashComponentShort="-6083.809186708" options="0" optionsLong="0" optionsShort="0" interestAccruals="-185.2482" interestAccrualsLong="0" interestAccrualsShort="-185.2482" />
+</EquitySummaryInBase>
+<ChangeInNAV accountId="U19860056" acctAlias="" model="" currency="HKD" fromDate="20250801" toDate="20250801" startingValue="195376.165304911" mtm="-1742.36970257" realized="0" depositsWithdrawals="0" interest="0" changeInInterestAccruals="-6.672075" brokerFees="0" commissions="-37.78231233" twr="-0.914551162" changeInUnrealized="0" costAdjustments="0" transferredPnlAdjustments="0" endingValue="193589.350315008" />
+
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

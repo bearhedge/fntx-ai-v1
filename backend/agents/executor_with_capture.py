@@ -7,9 +7,9 @@ This version automatically logs all trades to the database
 from typing import Dict, List, Any
 
 # Import the original ExecutorAgent
-from 01_backend.agents.executor import ExecutorAgent
-from 01_backend.services.integrated_trade_capture import create_trade_capture_hook
-from 01_backend.database.trade_db import get_trade_db_config
+from backend.agents.executor import ExecutorAgent
+from backend.services.integrated_trade_capture import create_trade_capture_hook
+from backend.database.trade_db import get_trade_db_config
 import logging
 
 logger = logging.getLogger(__name__)

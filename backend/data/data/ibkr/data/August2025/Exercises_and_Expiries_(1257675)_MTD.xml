@@ -1,0 +1,12 @@
+<FlexQueryResponse queryName="Exercises and Expiries (1257675) MTD" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U19860056" fromDate="20250801" toDate="20250801" period="MonthToDate" whenGenerated="20250803;000036 EDT">
+<OptionEAE>
+<OptionEAE accountId="U19860056" acctAlias="" currency="USD" symbol="SPY   250731P00633000" conid="757340899" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="633" expiry="20250731" putCall="P" date="20250731" transactionType="Assignment" quantity="3" tradePrice="0" markPrice="0" proceeds="0" realizedPnl="0" mtmPnl="276" tradeID="727306827" deliveryType="" />
+<OptionEAE accountId="U19860056" acctAlias="" currency="USD" symbol="SPY" conid="756733" securityID="US78462F1030" listingExchange="ARCA" underlyingConid="" underlyingSymbol="SPY" underlyingSecurityID="" underlyingListingExchange="" multiplier="1" strike="" expiry="" putCall="" date="20250731" transactionType="Buy" quantity="300" tradePrice="633" markPrice="621.72" proceeds="-189900" realizedPnl="0" mtmPnl="-3384" tradeID="727306828" deliveryType="" />
+<OptionEAE accountId="U19860056" acctAlias="" currency="USD" symbol="SPY   250731C00639000" conid="757334999" securityID="" listingExchange="CBOE" underlyingConid="756733" underlyingSymbol="SPY" underlyingSecurityID="US78462F1030" underlyingListingExchange="ARCA" multiplier="100" strike="639" expiry="20250731" putCall="C" date="20250731" transactionType="Expiration" quantity="3" tradePrice="0" markPrice="0" proceeds="0" realizedPnl="0" mtmPnl="0" tradeID="727307795" deliveryType="" />
+</OptionEAE><PendingExcercises>
+</PendingExcercises>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

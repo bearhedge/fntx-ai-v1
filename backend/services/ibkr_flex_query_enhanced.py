@@ -15,7 +15,7 @@ import time
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-from database.trade_db import get_trade_db_connection
+# from backend.data.database.trade_db import get_trade_db_connection
 
 logger = logging.getLogger(__name__)
 

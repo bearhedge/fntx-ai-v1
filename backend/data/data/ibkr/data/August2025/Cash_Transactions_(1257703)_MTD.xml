@@ -1,0 +1,8 @@
+<FlexQueryResponse queryName="Cash Transactions (1257703) MTD" type="AF">
+<FlexStatements count="1">
+<FlexStatement accountId="U19860056" fromDate="20250801" toDate="20250801" period="MonthToDate" whenGenerated="20250803;000015">
+<CashTransactions>
+</CashTransactions>
+</FlexStatement>
+</FlexStatements>
+</FlexQueryResponse>

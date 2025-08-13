@@ -11,7 +11,7 @@ from decimal import Decimal
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-from 01_backend.database.trade_db import get_trade_db_connection
+from backend.data.data.trade_db import get_trade_db_connection
 
 logger = logging.getLogger(__name__)
 

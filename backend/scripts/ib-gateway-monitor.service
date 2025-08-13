@@ -1,0 +1,14 @@
+[Unit]
+Description=IB Gateway Connection Monitor
+After=network.target
+
+[Service]
+Type=simple
+User=info
+WorkingDirectory=/home/info/fntx-ai-v1
+ExecStart=/usr/bin/python3 /home/info/fntx-ai-v1/backend/scripts/monitor_ib_gateway.py
+Restart=always
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

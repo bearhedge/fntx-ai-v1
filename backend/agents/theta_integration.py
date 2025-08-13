@@ -4,7 +4,7 @@ Integration for ThetaTerminal data into fntx.ai chatbot
 """
 import pandas as pd
 from typing import Dict, Any
-from 01_backend.api.theta_options_endpoint import ThetaOptionsProvider
+from backend.api.theta_options_endpoint import ThetaOptionsProvider
 
 class ThetaDataAgent:
     """Agent for handling ThetaTerminal data requests in chat"""

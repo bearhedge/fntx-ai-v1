@@ -1,0 +1,821 @@
+# July 2025 ALM Trading Track Record
+Generated: 2025-07-31 08:53:30
+================================================================================
+
+
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                  DAILY PERFORMANCE SUMMARY                                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────┬─────────────────┬─────────────────┬──────────────┬──────────────┬──────────────┬─────────────────┬────────────┬────────────┐
+│    Date     │   Opening NAV   │  Net Cashflow   │  Gross P&L   │ Commissions  │ Net P&L (%)  │   Closing NAV   │    Plug    │ Assignment │
+├─────────────┼─────────────────┼─────────────────┼──────────────┼──────────────┼──────────────┼─────────────────┼────────────┼────────────┤
+│ 2025-07-01  │       81,426.89 │       -1,500.00 │       121.75 │        11.82 │        0.14% │       80,048.64 │       0.00 │     -     │
+│ 2025-07-02  │       80,048.64 │            0.00 │        79.60 │         6.80 │        0.09% │       80,128.24 │      -0.00 │     -     │
+│ 2025-07-03  │       80,128.24 │            0.00 │       114.69 │        10.88 │        0.13% │       80,242.93 │       0.00 │     -     │
+│ 2025-07-07  │       80,242.96 │            0.00 │        72.79 │        13.60 │        0.07% │       80,315.75 │       0.00 │     -     │
+│ 2025-07-08  │       80,315.75 │            0.00 │       235.78 │        23.17 │        0.26% │       80,551.52 │       0.00 │     -     │
+│ 2025-07-09  │       80,551.52 │            0.00 │       300.41 │        13.60 │        0.36% │       80,851.94 │      -0.00 │     -     │
+│ 2025-07-10  │       80,851.94 │       -1,000.00 │       244.38 │         6.80 │        0.29% │       80,088.32 │       8.00 │     -     │
+│ 2025-07-11  │       80,088.32 │            0.00 │       463.93 │        14.93 │        0.56% │       80,552.25 │       0.00 │     -     │
+│ 2025-07-14  │       80,552.25 │            0.00 │       267.93 │         6.80 │        0.32% │       80,820.18 │       0.00 │     -     │
+│ 2025-07-15  │       80,820.18 │            0.00 │       418.15 │        13.60 │        0.50% │       81,238.33 │       0.00 │     ✓     │
+│ 2025-07-16  │       81,238.33 │       -1,230.00 │      -501.65 │        30.65 │       -0.66% │       79,498.68 │       8.00 │     -     │
+│ 2025-07-17  │       79,498.68 │            0.00 │       256.13 │        45.90 │        0.26% │       79,754.81 │       0.00 │     ✓     │
+│ 2025-07-18  │       79,754.81 │            0.00 │      -523.80 │        21.47 │       -0.68% │       79,231.03 │      -0.02 │     -     │
+│ 2025-07-21  │       79,231.03 │            0.00 │      -745.09 │        19.95 │       -0.97% │       78,485.92 │       0.03 │     ✓     │
+│ 2025-07-22  │       78,485.92 │            0.00 │       295.77 │        15.85 │        0.36% │       78,781.69 │       0.00 │     -     │
+│ 2025-07-23  │       78,781.69 │            0.00 │        66.00 │        13.73 │        0.07% │       78,847.68 │       0.00 │     ✓     │
+│ 2025-07-24  │       78,847.68 │            0.00 │       127.54 │        21.47 │        0.13% │       78,975.23 │       0.00 │     -     │
+│ 2025-07-25  │       78,975.23 │            0.00 │       323.96 │        13.60 │        0.39% │       79,299.20 │      -0.01 │     -     │
+│ 2025-07-28  │       79,299.20 │      119,945.00 │       463.29 │        31.22 │        0.22% │      199,707.48 │       0.01 │     -     │
+│ 2025-07-29  │      199,707.48 │            0.00 │     1,188.97 │        35.62 │        0.58% │      200,896.45 │       0.00 │     -     │
+│ 2025-07-30  │      200,896.45 │            0.00 │    -4,966.61 │        68.19 │       -2.51% │      195,929.84 │       0.00 │     -     │
+└─────────────┴─────────────────┴─────────────────┴──────────────┴──────────────┴──────────────┴─────────────────┴────────────┴────────────┘
+
+
+## **Daily Narratives**
+
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 01, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **81,426.89 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/01/2025 $615 Put
+        - Premium received: 129.43 HKD
+        - Commission: 11.82 HKD
+        - Execution time: 12:14 AM HKT
+
+   **Expired Positions:**
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,048.64 HKD**
+   Daily Return: **+0.14%**
+   Gross P&L: 121.75 HKD
+   Withdrawal: -1,500
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 02, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,048.64 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/02/2025 $615 Put
+        - Premium received: 79.52 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:08 AM HKT
+
+   **Expired Positions:**
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,128.24 HKD**
+   Daily Return: **+0.09%**
+   Gross P&L: 79.60 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 03, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,128.24 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/03/2025 $622 Put
+        - Premium received: 114.68 HKD
+        - Commission: 10.88 HKD
+        - Execution time: 10:30 PM HKT
+
+   **Expired Positions:**
+      • SPY $622 Put expired
+
+**Day Summary**
+   Closing NAV: **80,242.93 HKD**
+   Daily Return: **+0.13%**
+   Gross P&L: 114.69 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 07, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,242.96 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/07/2025 $615 Put
+        - Premium received: 71.67 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:44 AM HKT
+      • Sold 1 SPY 07/07/2025 $627 Call
+        - Premium received: 1.05 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:47 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 72.72 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 59.12 HKD
+
+   **Expired Positions:**
+      • SPY $627 Call expired
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,315.75 HKD**
+   Daily Return: **+0.07%**
+   Gross P&L: 72.79 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 08, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,315.75 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/08/2025 $618 Put
+        - Premium received: 43.58 HKD
+        - Commission: 11.35 HKD
+        - Execution time: 01:58 AM HKT
+      • Sold 1 SPY 07/08/2025 $622 Call
+        - Premium received: 192.21 HKD
+        - Commission: 11.82 HKD
+        - Execution time: 01:58 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 235.79 HKD
+      - Total Commissions: 23.17 HKD
+      - Net Premium: 212.61 HKD
+
+   **Expired Positions:**
+      • SPY $622 Call expired
+      • SPY $618 Put expired
+
+**Day Summary**
+   Closing NAV: **80,551.52 HKD**
+   Daily Return: **+0.26%**
+   Gross P&L: 235.78 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 09, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,551.52 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/09/2025 $620 Put
+        - Premium received: 205.08 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:09 AM HKT
+      • Sold 1 SPY 07/09/2025 $624 Call
+        - Premium received: 142.30 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:09 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 347.37 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 333.77 HKD
+
+   **Expired Positions:**
+      • SPY $624 Call expired
+      • SPY $620 Put expired
+
+**Day Summary**
+   Closing NAV: **80,851.94 HKD**
+   Daily Return: **+0.36%**
+   Gross P&L: 300.41 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 10, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,851.94 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/10/2025 $625 Put
+        - Premium received: 197.23 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 01:11 AM HKT
+
+   **Expired Positions:**
+      • SPY $625 Put expired
+
+**Day Summary**
+   Closing NAV: **80,088.32 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 80,851.94 HKD
+      + Total P&L: 244.38 HKD
+      + Net Cash Flow: -1,000.00 HKD
+      = Expected NAV: 80,096.32 HKD
+      Actual Closing NAV: 80,088.32 HKD
+      Discrepancy: -8.00 HKD
+      *Likely withdrawal fee ($1 USD = ~8 HKD)*
+   Daily Return: **+0.29%**
+   Gross P&L: 244.38 HKD
+   Withdrawal: -1,000
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 11, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,088.32 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/11/2025 $621 Put
+        - Premium received: 227.28 HKD
+        - Commission: 8.13 HKD
+        - Execution time: 12:11 AM HKT
+      • Sold 1 SPY 07/11/2025 $625 Call
+        - Premium received: 236.46 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:11 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 463.75 HKD
+      - Total Commissions: 14.93 HKD
+      - Net Premium: 448.81 HKD
+
+   **Expired Positions:**
+      • SPY $625 Call expired
+      • SPY $621 Put expired
+
+**Day Summary**
+   Closing NAV: **80,552.25 HKD**
+   Daily Return: **+0.56%**
+   Gross P&L: 463.93 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 14, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,552.25 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/14/2025 $624 Put
+        - Premium received: 267.85 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 01:12 AM HKT
+
+   **Expired Positions:**
+      • SPY $624 Put expired
+
+**Day Summary**
+   Closing NAV: **80,820.18 HKD**
+   Daily Return: **+0.32%**
+   Gross P&L: 267.93 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 15, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,820.18 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/15/2025 $622 Put
+        - Premium received: 252.16 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 01:02 AM HKT
+      • Sold 1 SPY 07/15/2025 $625 Call
+        - Premium received: 165.84 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 01:02 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 418.00 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 404.40 HKD
+
+   **Expired Positions:**
+      • SPY $625 Call expired
+
+   **Option Assignments:**
+      • SPY $622 Put assigned
+        - Received 100 shares at $622 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **81,238.33 HKD**
+   Daily Return: **+0.50%**
+   Gross P&L: 418.15 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 16, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **81,238.33 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $622 Put assigned
+     - Long 100 shares created at $622.00/share
+
+   **Share Disposal:**
+   • **05:27 PM HKT:** Sell 100 SPY @ 621.6
+     - Sell 100 shares at $621.59
+     - Overnight P&L: $-41.02 ($621.59 - $622.00) × 100
+
+   **Total P&L from disposal:** -321.88 HKD
+   **Adjusted NAV after disposal:** 80,916.45 HKD
+
+**Trading Activity**
+   Total trades executed: 3
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/16/2025 $620 Put
+        - Premium received: 163.56 HKD
+        - Commission: 9.07 HKD
+        - Execution time: 12:40 AM HKT
+      • Sold 1 SPY 07/16/2025 $624 Call
+        - Premium received: 118.76 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:40 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 282.32 HKD
+      - Total Commissions: 15.87 HKD
+      - Net Premium: 266.45 HKD
+
+   **Expired Positions:**
+      • SPY $620 Put expired
+
+   **Closed Positions (Stop-Loss/Buy-to-Close):**
+      • SPY $624 Call position closed
+        - Position was stopped out to limit losses
+
+**Day Summary**
+   Closing NAV: **79,498.68 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 81,238.33 HKD
+      + Total P&L: -501.65 HKD
+      + Net Cash Flow: -1,230.00 HKD
+      = Expected NAV: 79,506.68 HKD
+      Actual Closing NAV: 79,498.68 HKD
+      Discrepancy: -8.00 HKD
+      *Likely withdrawal fee ($1 USD = ~8 HKD)*
+   Daily Return: **-0.66%**
+   Gross P&L: -501.65 HKD
+   Withdrawal: -1,230
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 17, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,498.68 HKD**
+
+**Trading Activity**
+   Total trades executed: 6
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/17/2025 $623 Put
+        - Premium received: 55.98 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:46 AM HKT
+      • Sold 1 SPY 07/17/2025 $628 Call
+        - Premium received: 118.76 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:46 AM HKT
+      • Sold 1 SPY 07/17/2025 $626 Put
+        - Premium received: 278.53 HKD
+        - Commission: 11.82 HKD
+        - Execution time: 12:50 AM HKT
+      • Sold 1 SPY 07/17/2025 $628 Call
+        - Premium received: 142.30 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:50 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 595.56 HKD
+      - Total Commissions: 32.22 HKD
+      - Net Premium: 563.34 HKD
+
+   **Expired Positions:**
+      • SPY $626 Put expired
+
+   **Option Assignments:**
+      • SPY $628 Call assigned
+        - Delivered 100 shares at $628 per share
+        - NAV impact: None (asset exchange only)
+
+   **Closed Positions (Stop-Loss/Buy-to-Close):**
+      • SPY $628 Call position closed
+        - Position was stopped out to limit losses
+      • SPY $623 Put position closed
+        - Position was stopped out to limit losses
+
+**Day Summary**
+   Closing NAV: **79,754.81 HKD**
+   Daily Return: **+0.26%**
+   Gross P&L: 256.13 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 18, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,754.81 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $628 Call assigned
+     - Short 100 shares created at $628.00/share
+
+   **Share Disposal:**
+   • **01:15 PM HKT:** Buy 100 SPY @ 629.45
+     - Buy 100 shares at $629.46
+     - Overnight P&L: $-146.00 ($628.00 - $629.46) × 100
+
+   **Total P&L from disposal:** -1,145.71 HKD
+   **Adjusted NAV after disposal:** 78,609.10 HKD
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/18/2025 $626 Put
+        - Premium received: 307.09 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 10:32 PM HKT
+      • Sold 1 SPY 07/18/2025 $629 Call
+        - Premium received: 283.55 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 10:32 PM HKT
+
+   **Trade Totals:**
+      - Total Premium: 590.64 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 577.04 HKD
+
+   **Expired Positions:**
+      • SPY $629 Call expired
+      • SPY $626 Put expired
+
+**Day Summary**
+   Closing NAV: **79,231.03 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 79,754.81 HKD
+      + Total P&L: -523.80 HKD
+      + Net Cash Flow: 0.00 HKD
+      = Expected NAV: 79,231.01 HKD
+      Actual Closing NAV: 79,231.03 HKD
+   Daily Return: **-0.68%**
+   Gross P&L: -523.80 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 21, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,231.03 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/21/2025 $630 Put
+        - Premium received: 156.66 HKD
+        - Commission: 8.13 HKD
+        - Execution time: 11:50 PM HKT
+      • Sold 1 SPY 07/21/2025 $632 Call
+        - Premium received: 74.50 HKD
+        - Commission: 11.82 HKD
+        - Execution time: 02:02 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 231.16 HKD
+      - Total Commissions: 19.95 HKD
+      - Net Premium: 211.20 HKD
+
+   **Expired Positions:**
+      • SPY $632 Call expired
+
+   **Option Assignments:**
+      • SPY $630 Put assigned
+        - Received 100 shares at $630 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **78,485.92 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 79,231.03 HKD
+      + Total P&L: -745.09 HKD
+      + Net Cash Flow: 0.00 HKD
+      = Expected NAV: 78,485.94 HKD
+      Actual Closing NAV: 78,485.92 HKD
+   Daily Return: **-0.97%**
+   Gross P&L: -745.09 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 22, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,485.92 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $630 Put assigned
+     - Long 100 shares created at $630.00/share
+
+   **Share Disposal:**
+   • **03:04 AM HKT (next day):** Sell 50 SPY @ 629.162
+     - Sell 50 shares at $629.14
+     - Overnight P&L: $-42.91 ($629.14 - $630.00) × 50
+   • **03:05 AM HKT (next day):** Sell 50 SPY @ 629.172
+     - Sell 50 shares at $629.15
+
+   **Total P&L from disposal:** -336.72 HKD
+   **Adjusted NAV after disposal:** 78,149.19 HKD
+
+**Trading Activity**
+   No trades were executed today
+
+**Day Summary**
+   Closing NAV: **78,781.69 HKD**
+   Daily Return: **+0.36%**
+   Gross P&L: 295.77 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 23, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,781.69 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/23/2025 $630 Put
+        - Premium received: 205.08 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:42 AM HKT
+      • Sold 1 SPY 07/23/2025 $634 Call
+        - Premium received: 110.91 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:42 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 315.98 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 302.39 HKD
+
+   **Expired Positions:**
+      • SPY $630 Put expired
+
+   **Option Assignments:**
+      • SPY $634 Call assigned
+        - Delivered 100 shares at $634 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **78,847.68 HKD**
+   Daily Return: **+0.07%**
+   Gross P&L: 66.00 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 24, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,847.68 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $634 Call assigned
+     - Short 100 shares created at $634.00/share
+
+   **Share Disposal:**
+   • **01:27 PM HKT:** Buy 100 SPY @ 634.46
+     - Buy 100 shares at $634.47
+     - Overnight P&L: $-47.00 ($634.00 - $634.47) × 100
+
+   **Total P&L from disposal:** -368.84 HKD
+   **Adjusted NAV after disposal:** 78,478.84 HKD
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/24/2025 $634 Put
+        - Premium received: 189.38 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 11:51 PM HKT
+      • Sold 1 SPY 07/24/2025 $637 Call
+        - Premium received: 142.30 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 11:51 PM HKT
+
+   **Trade Totals:**
+      - Total Premium: 331.68 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 318.08 HKD
+
+   **Expired Positions:**
+      • SPY $637 Call expired
+      • SPY $634 Put expired
+
+**Day Summary**
+   Closing NAV: **78,975.23 HKD**
+   Daily Return: **+0.13%**
+   Gross P&L: 127.54 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 25, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,975.23 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/25/2025 $636 Put
+        - Premium received: 212.92 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:58 AM HKT
+      • Sold 1 SPY 07/25/2025 $638 Call
+        - Premium received: 110.91 HKD
+        - Commission: 6.80 HKD
+        - Execution time: 12:58 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 323.83 HKD
+      - Total Commissions: 13.60 HKD
+      - Net Premium: 310.23 HKD
+
+   **Expired Positions:**
+      • SPY $638 Call expired
+      • SPY $636 Put expired
+
+**Day Summary**
+   Closing NAV: **79,299.20 HKD**
+   Daily Return: **+0.39%**
+   Gross P&L: 323.96 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 28, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   Original NAV: **79,299.20 HKD**
+   Deposit before market open: **+119,945.00 HKD**
+   Adjusted NAV at market open: **199,244.20 HKD**
+
+**Trading Activity**
+   Total trades executed: 3
+
+   **New Positions Opened:**
+      • Sold 3 SPY 07/28/2025 $635 Put
+        - Premium received: 270.34 HKD
+        - Commission: 12.16 HKD
+        - Execution time: 01:32 AM HKT
+      • Sold 1 SPY 07/28/2025 $638 Call
+        - Premium received: 65.47 HKD
+        - Commission: 5.15 HKD
+        - Execution time: 01:32 AM HKT
+      • Sold 2 SPY 07/28/2025 $638 Call
+        - Premium received: 127.34 HKD
+        - Commission: 13.91 HKD
+        - Execution time: 01:32 AM HKT
+
+   **Trade Totals:**
+      - Total Premium: 463.15 HKD
+      - Total Commissions: 31.22 HKD
+      - Net Premium: 431.93 HKD
+
+   **Expired Positions:**
+      • SPY $638 Call expired
+      • SPY $638 Call expired
+      • SPY $635 Put expired
+      • SPY $635 Put expired
+
+**Day Summary**
+   Closing NAV: **199,707.48 HKD**
+   Daily Return: **+0.22%**
+   Gross P&L: 463.29 HKD
+   Deposit: +119,945
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 29, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **199,707.48 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 3 SPY 07/29/2025 $634 Put
+        - Premium received: 736.70 HKD
+        - Commission: 16.63 HKD
+        - Execution time: 11:45 PM HKT
+      • Sold 3 SPY 07/29/2025 $637 Call
+        - Premium received: 451.85 HKD
+        - Commission: 18.98 HKD
+        - Execution time: 11:46 PM HKT
+
+   **Trade Totals:**
+      - Total Premium: 1,188.55 HKD
+      - Total Commissions: 35.62 HKD
+      - Net Premium: 1,152.93 HKD
+
+   **Expired Positions:**
+      • SPY $637 Call expired
+      • SPY $637 Call expired
+      • SPY $634 Put expired
+      • SPY $634 Put expired
+
+**Day Summary**
+   Closing NAV: **200,896.45 HKD**
+   Daily Return: **+0.58%**
+   Gross P&L: 1,188.97 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 30, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **200,896.45 HKD**
+
+**Trading Activity**
+   Total trades executed: 4
+
+   **New Positions Opened:**
+      • Sold 3 SPY 07/30/2025 $635 Put
+        - Premium received: 2,000.18 HKD
+        - Commission: 24.40 HKD
+        - Execution time: 10:48 PM HKT
+      • Sold 3 SPY 07/30/2025 $640 Call
+        - Premium received: 584.86 HKD
+        - Commission: 27.22 HKD
+        - Execution time: 10:48 PM HKT
+
+   **Trade Totals:**
+      - Total Premium: 2,585.04 HKD
+      - Total Commissions: 51.62 HKD
+      - Net Premium: 2,533.41 HKD
+
+   **Expired Positions:**
+      • SPY $640 Call expired
+
+   **Closed Positions (Stop-Loss/Buy-to-Close):**
+      • SPY $635 Put position closed
+        - Position was stopped out to limit losses
+      • SPY $635 Put position closed
+        - Position was stopped out to limit losses
+
+**Day Summary**
+   Closing NAV: **195,929.84 HKD**
+   Daily Return: **-2.51%**
+   Gross P&L: -4,966.61 HKD

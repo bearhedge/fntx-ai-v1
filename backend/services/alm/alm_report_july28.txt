@@ -1,0 +1,791 @@
+
+╔══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╗
+║                                                  DAILY PERFORMANCE SUMMARY                                                    ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────┬─────────────────┬─────────────────┬──────────────┬──────────────┬──────────────┬─────────────────┬────────────┬────────────┐
+│    Date     │   Opening NAV   │  Net Cashflow   │  Gross P&L   │ Commissions  │ Net P&L (%)  │   Closing NAV   │    Plug    │ Assignment │
+├─────────────┼─────────────────┼─────────────────┼──────────────┼──────────────┼──────────────┼─────────────────┼────────────┼────────────┤
+│ 2025-07-01  │       81,426.89 │       -1,500.00 │       121.75 │        11.82 │        0.14% │       80,048.64 │       0.00 │     -     │
+│ 2025-07-02  │       80,048.64 │            0.00 │        79.60 │         6.80 │        0.09% │       80,128.24 │      -0.00 │     -     │
+│ 2025-07-03  │       80,128.24 │            0.00 │       114.69 │        10.88 │        0.13% │       80,242.93 │       0.00 │     -     │
+│ 2025-07-07  │       80,242.96 │            0.00 │        72.79 │        13.60 │        0.07% │       80,315.75 │       0.00 │     -     │
+│ 2025-07-08  │       80,315.75 │            0.00 │       235.78 │        23.17 │        0.26% │       80,551.52 │       0.00 │     -     │
+│ 2025-07-09  │       80,551.52 │            0.00 │       300.41 │        13.60 │        0.36% │       80,851.94 │      -0.00 │     -     │
+│ 2025-07-10  │       80,851.94 │       -1,000.00 │       244.38 │         6.80 │        0.29% │       80,088.32 │       8.00 │     -     │
+│ 2025-07-11  │       80,088.32 │            0.00 │       463.93 │        14.93 │        0.56% │       80,552.25 │       0.00 │     -     │
+│ 2025-07-14  │       80,552.25 │            0.00 │       267.93 │         6.80 │        0.32% │       80,820.18 │       0.00 │     -     │
+│ 2025-07-15  │       80,820.18 │            0.00 │       418.15 │        13.60 │        0.50% │       81,238.33 │       0.00 │     ✓     │
+│ 2025-07-16  │       81,238.33 │       -1,230.00 │      -501.65 │        30.65 │       -0.66% │       79,498.68 │       8.00 │     -     │
+│ 2025-07-17  │       79,498.68 │            0.00 │       256.13 │        45.90 │        0.26% │       79,754.81 │       0.00 │     ✓     │
+│ 2025-07-18  │       79,754.81 │            0.00 │      -523.80 │        21.47 │       -0.68% │       79,231.03 │      -0.02 │     -     │
+│ 2025-07-21  │       79,231.03 │            0.00 │      -745.09 │        19.95 │       -0.97% │       78,485.92 │       0.03 │     ✓     │
+│ 2025-07-22  │       78,485.92 │            0.00 │       295.77 │        15.85 │        0.36% │       78,781.69 │       0.00 │     -     │
+│ 2025-07-23  │       78,781.69 │            0.00 │        66.00 │        13.73 │        0.07% │       78,847.68 │       0.00 │     ✓     │
+│ 2025-07-24  │       78,847.68 │            0.00 │       127.54 │        21.47 │        0.13% │       78,975.23 │       0.00 │     -     │
+│ 2025-07-25  │       78,975.23 │            0.00 │       323.96 │        13.60 │        0.39% │       79,299.20 │      -0.01 │     -     │
+└─────────────┴─────────────────┴─────────────────┴──────────────┴──────────────┴──────────────┴─────────────────┴────────────┴────────────┘
+
+
+│ 2025-07-28  │     79,299.20 │            0.00 │   119,969.00 │        31.03 │      +151.20% │      199,268.20 │       0.00 │     -     │
+└─────────────┴─────────────────┴─────────────────┴──────────────┴──────────────┴──────────────┴─────────────────┴────────────┴────────────┘
+
+
+## **Daily Narratives**
+
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 01, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **81,426.89 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/01/2025 $615 Put
+        - Premium received: 129.43 HKD
+        - Execution time: 12:14 AM HKT
+
+   **Expired Positions:**
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,048.64 HKD**
+   Daily Return: **+0.15%**
+   Gross P&L: 121.75 HKD
+   Total Commissions: 11.82 HKD
+   Net P&L: 109.93 HKD
+   Withdrawal: -1,500
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 02, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,048.64 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/02/2025 $615 Put
+        - Premium received: 79.52 HKD
+        - Execution time: 12:08 AM HKT
+
+   **Expired Positions:**
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,128.24 HKD**
+   Daily Return: **+0.10%**
+   Gross P&L: 79.60 HKD
+   Total Commissions: 6.80 HKD
+   Net P&L: 72.80 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 03, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,128.24 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/03/2025 $622 Put
+        - Premium received: 114.68 HKD
+        - Execution time: 10:30 PM HKT
+
+   **Expired Positions:**
+      • SPY $622 Put expired
+
+**Day Summary**
+   Closing NAV: **80,242.93 HKD**
+   Daily Return: **+0.14%**
+   Gross P&L: 114.69 HKD
+   Total Commissions: 10.88 HKD
+   Net P&L: 103.81 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 07, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,242.96 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/07/2025 $615 Put
+        - Premium received: 71.67 HKD
+        - Execution time: 12:44 AM HKT
+      • Sold 1 SPY 07/07/2025 $627 Call
+        - Premium received: 1.05 HKD
+        - Execution time: 12:47 AM HKT
+
+   **Expired Positions:**
+      • SPY $627 Call expired
+      • SPY $615 Put expired
+
+**Day Summary**
+   Closing NAV: **80,315.75 HKD**
+   Daily Return: **+0.09%**
+   Gross P&L: 72.79 HKD
+   Total Commissions: 13.60 HKD
+   Net P&L: 59.19 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 08, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,315.75 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/08/2025 $618 Put
+        - Premium received: 43.58 HKD
+        - Execution time: 01:58 AM HKT
+      • Sold 1 SPY 07/08/2025 $622 Call
+        - Premium received: 192.21 HKD
+        - Execution time: 01:58 AM HKT
+
+   **Expired Positions:**
+      • SPY $622 Call expired
+      • SPY $618 Put expired
+
+**Day Summary**
+   Closing NAV: **80,551.52 HKD**
+   Daily Return: **+0.29%**
+   Gross P&L: 235.78 HKD
+   Total Commissions: 23.17 HKD
+   Net P&L: 212.60 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 09, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,551.52 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/09/2025 $620 Put
+        - Premium received: 205.08 HKD
+        - Execution time: 12:09 AM HKT
+      • Sold 1 SPY 07/09/2025 $624 Call
+        - Premium received: 142.30 HKD
+        - Execution time: 12:09 AM HKT
+
+   **Expired Positions:**
+      • SPY $624 Call expired
+      • SPY $620 Put expired
+
+**Day Summary**
+   Closing NAV: **80,851.94 HKD**
+   Daily Return: **+0.37%**
+   Gross P&L: 300.41 HKD
+   Total Commissions: 13.60 HKD
+   Net P&L: 286.82 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 10, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,851.94 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/10/2025 $625 Put
+        - Premium received: 197.23 HKD
+        - Execution time: 01:11 AM HKT
+
+   **Expired Positions:**
+      • SPY $625 Put expired
+
+**Day Summary**
+   Closing NAV: **80,088.32 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 80,851.94 HKD
+      + Total P&L: 244.38 HKD
+      + Net Cash Flow: -1,000.00 HKD
+      = Expected NAV: 80,096.32 HKD
+      Actual Closing NAV: 80,088.32 HKD
+      Discrepancy: -8.00 HKD
+      *Likely withdrawal fee ($1 USD = ~8 HKD)*
+   Daily Return: **+0.29%**
+   Gross P&L: 244.38 HKD
+   Total Commissions: 6.80 HKD
+   Net P&L: 237.58 HKD
+   Withdrawal: -1,000
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 11, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,088.32 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/11/2025 $621 Put
+        - Premium received: 227.28 HKD
+        - Execution time: 12:11 AM HKT
+      • Sold 1 SPY 07/11/2025 $625 Call
+        - Premium received: 236.46 HKD
+        - Execution time: 12:11 AM HKT
+
+   **Expired Positions:**
+      • SPY $625 Call expired
+      • SPY $621 Put expired
+
+**Day Summary**
+   Closing NAV: **80,552.25 HKD**
+   Daily Return: **+0.58%**
+   Gross P&L: 463.93 HKD
+   Total Commissions: 14.93 HKD
+   Net P&L: 449.00 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 14, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,552.25 HKD**
+
+**Trading Activity**
+   Total trades executed: 1
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/14/2025 $624 Put
+        - Premium received: 267.85 HKD
+        - Execution time: 01:12 AM HKT
+
+   **Expired Positions:**
+      • SPY $624 Put expired
+
+**Day Summary**
+   Closing NAV: **80,820.18 HKD**
+   Daily Return: **+0.33%**
+   Gross P&L: 267.93 HKD
+   Total Commissions: 6.80 HKD
+   Net P&L: 261.13 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 15, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **80,820.18 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/15/2025 $622 Put
+        - Premium received: 252.16 HKD
+        - Execution time: 01:02 AM HKT
+      • Sold 1 SPY 07/15/2025 $625 Call
+        - Premium received: 165.84 HKD
+        - Execution time: 01:02 AM HKT
+
+   **Expired Positions:**
+      • SPY $625 Call expired
+
+   **Option Assignments:**
+      • SPY $622 Put assigned
+        - Received 100 shares at $622 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **81,238.33 HKD**
+   Daily Return: **+0.52%**
+   Gross P&L: 418.15 HKD
+   Total Commissions: 13.60 HKD
+   Net P&L: 404.55 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 16, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **81,238.33 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $622 Put assigned
+     - Long 100 shares created at $622.00/share
+
+   **Share Disposal:**
+   • **05:27 PM HKT:** Sell 100 SPY @ 621.6
+     - Sell 100 shares at $621.59
+     - Overnight P&L: $-41.02 ($621.59 - $622.00) × 100
+
+   **Total P&L from disposal:** -321.88 HKD
+   **Adjusted NAV after disposal:** 80,916.45 HKD
+
+**Trading Activity**
+   Total trades executed: 3
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/16/2025 $620 Put
+        - Premium received: 163.56 HKD
+        - Execution time: 12:40 AM HKT
+      • Sold 1 SPY 07/16/2025 $624 Call
+        - Premium received: 118.76 HKD
+        - Execution time: 12:40 AM HKT
+
+   **Expired Positions:**
+      • SPY $620 Put expired
+
+   **Closed Positions (Stop-Loss/Buy-to-Close):**
+      • SPY $624 Call position closed
+        - Position was stopped out to limit losses
+
+**Day Summary**
+   Closing NAV: **79,498.68 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 81,238.33 HKD
+      + Total P&L: -501.65 HKD
+      + Net Cash Flow: -1,230.00 HKD
+      = Expected NAV: 79,506.68 HKD
+      Actual Closing NAV: 79,498.68 HKD
+      Discrepancy: -8.00 HKD
+      *Likely withdrawal fee ($1 USD = ~8 HKD)*
+   Daily Return: **-0.63%**
+   Gross P&L: -501.65 HKD
+   Total Commissions: 30.65 HKD
+   Net P&L: -532.29 HKD
+   Withdrawal: -1,230
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 17, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,498.68 HKD**
+
+**Trading Activity**
+   Total trades executed: 6
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/17/2025 $623 Put
+        - Premium received: 55.98 HKD
+        - Execution time: 12:46 AM HKT
+      • Sold 1 SPY 07/17/2025 $628 Call
+        - Premium received: 118.76 HKD
+        - Execution time: 12:46 AM HKT
+      • Sold 1 SPY 07/17/2025 $626 Put
+        - Premium received: 278.53 HKD
+        - Execution time: 12:50 AM HKT
+      • Sold 1 SPY 07/17/2025 $628 Call
+        - Premium received: 142.30 HKD
+        - Execution time: 12:50 AM HKT
+
+   **Expired Positions:**
+      • SPY $626 Put expired
+
+   **Option Assignments:**
+      • SPY $628 Call assigned
+        - Delivered 100 shares at $628 per share
+        - NAV impact: None (asset exchange only)
+
+   **Closed Positions (Stop-Loss/Buy-to-Close):**
+      • SPY $628 Call position closed
+        - Position was stopped out to limit losses
+      • SPY $623 Put position closed
+        - Position was stopped out to limit losses
+
+**Day Summary**
+   Closing NAV: **79,754.81 HKD**
+   Daily Return: **+0.32%**
+   Gross P&L: 256.13 HKD
+   Total Commissions: 45.90 HKD
+   Net P&L: 210.23 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 18, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,754.81 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $628 Call assigned
+     - Short 100 shares created at $628.00/share
+
+   **Share Disposal:**
+   • **01:15 PM HKT:** Buy 100 SPY @ 629.45
+     - Buy 100 shares at $629.46
+     - Overnight P&L: $-146.00 ($628.00 - $629.46) × 100
+
+   **Total P&L from disposal:** -1,145.71 HKD
+   **Adjusted NAV after disposal:** 78,609.10 HKD
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/18/2025 $626 Put
+        - Premium received: 307.09 HKD
+        - Execution time: 10:32 PM HKT
+      • Sold 1 SPY 07/18/2025 $629 Call
+        - Premium received: 283.55 HKD
+        - Execution time: 10:32 PM HKT
+
+   **Expired Positions:**
+      • SPY $629 Call expired
+      • SPY $626 Put expired
+
+**Day Summary**
+   Closing NAV: **79,231.03 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 79,754.81 HKD
+      + Total P&L: -523.80 HKD
+      + Net Cash Flow: 0.00 HKD
+      = Expected NAV: 79,231.01 HKD
+      Actual Closing NAV: 79,231.03 HKD
+   Daily Return: **-0.66%**
+   Gross P&L: -523.80 HKD
+   Total Commissions: 21.47 HKD
+   Net P&L: -545.27 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Monday, July 21, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **79,231.03 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/21/2025 $630 Put
+        - Premium received: 156.66 HKD
+        - Execution time: 11:50 PM HKT
+      • Sold 1 SPY 07/21/2025 $632 Call
+        - Premium received: 74.50 HKD
+        - Execution time: 02:02 AM HKT
+
+   **Expired Positions:**
+      • SPY $632 Call expired
+
+   **Option Assignments:**
+      • SPY $630 Put assigned
+        - Received 100 shares at $630 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **78,485.92 HKD**
+
+   **NAV Reconciliation:**
+      Opening NAV: 79,231.03 HKD
+      + Total P&L: -745.09 HKD
+      + Net Cash Flow: 0.00 HKD
+      = Expected NAV: 78,485.94 HKD
+      Actual Closing NAV: 78,485.92 HKD
+   Daily Return: **-0.94%**
+   Gross P&L: -745.09 HKD
+   Total Commissions: 19.95 HKD
+   Net P&L: -765.04 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Tuesday, July 22, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,485.92 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $630 Put assigned
+     - Long 100 shares created at $630.00/share
+
+   **Share Disposal:**
+   • **03:04 AM HKT (next day):** Sell 50 SPY @ 629.162INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 42, 48, 689346, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 1 failed: 
+INFO:root:Retrying in 2 seconds...
+INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 43, 30, 744324, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 2 failed: 
+INFO:root:Retrying in 4 seconds...
+INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 44, 14, 842304, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 3 failed: 
+ERROR:services.realtime_alm_service:Failed to connect to IB Gateway
+INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 44, 54, 950793, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 1 failed: 
+INFO:root:Retrying in 2 seconds...
+INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 45, 37, 63257, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 2 failed: 
+INFO:root:Retrying in 4 seconds...
+INFO:ib_insync.client:Connecting to 127.0.0.1:4002 with clientId 10...
+INFO:ib_insync.client:Connected
+INFO:ib_insync.client:Logged on to server version 176
+INFO:ib_insync.wrapper:openOrder: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=0.0, avgFillPrice=0.0, permId=0, parentId=0, lastFillPrice=0.0, clientId=0, whyHeld='', mktCapPrice=0.0), fills=[], log=[], advancedError='')
+INFO:ib_insync.wrapper:orderStatus: Trade(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', exchange='SMART', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), order=Order(orderId=20, clientId=10, permId=1626885397, action='BUY', totalQuantity=3.0, orderType='STP', lmtPrice=0.0, auxPrice=0.42, tif='DAY', ocaType=3, displaySize=2147483647, trailStopPrice=0.42, volatilityType=0, deltaNeutralOrderType='None', referencePriceType=0, account='U19860056', clearingIntent='IB', adjustedOrderType='None', cashQty=0.0, dontUseAutoPriceForHedge=True, minCompeteSize=1, competeAgainstBestOffset=0.02), orderStatus=OrderStatus(orderId=20, status='PreSubmitted', filled=0.0, remaining=3.0, avgFillPrice=0.0, permId=1626885397, parentId=0, lastFillPrice=0.0, clientId=10, whyHeld='trigger', mktCapPrice=0.0), fills=[], log=[TradeLogEntry(time=datetime.datetime(2025, 7, 29, 3, 46, 21, 129565, tzinfo=datetime.timezone.utc), status='PreSubmitted', message='', errorCode=0)], advancedError='')
+INFO:ib_insync.wrapper:Warning 2110, reqId -1: Connectivity between Trader Workstation and server is broken. It will be restored automatically.
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:hfarm
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usopt
+INFO:ib_insync.wrapper:Warning 2103, reqId -1: Market data farm connection is broken:usfarm
+INFO:ib_insync.wrapper:Warning 2107, reqId -1: HMDS data farm connection is inactive but should be available upon demand.apachmds
+INFO:ib_insync.wrapper:Warning 2157, reqId -1: Sec-def data farm connection is broken:secdefhk
+INFO:ib_insync.client:API connection ready
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, avgCost=11.48356)
+INFO:ib_insync.wrapper:position: Position(account='U19860056', contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, avgCost=8.19022665)
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890564, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=636.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725P00636000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=797890504, symbol='SPY', lastTradeDateOrContractMonth='20250725', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250725C00638000', tradingClass='SPY'), position=0.0, marketPrice=0.0, marketValue=0.0, averageCost=0.0, unrealizedPNL=0.0, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=798882273, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=635.0, right='P', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728P00635000', tradingClass='SPY'), position=-3.0, marketPrice=0.20290075, marketValue=-60.87, averageCost=11.48356, unrealizedPNL=-26.42, realizedPNL=0.0, account='U19860056')
+INFO:ib_insync.wrapper:updatePortfolio: PortfolioItem(contract=Option(conId=799190622, symbol='SPY', lastTradeDateOrContractMonth='20250728', strike=638.0, right='C', multiplier='100', primaryExchange='AMEX', currency='USD', localSymbol='SPY   250728C00638000', tradingClass='SPY'), position=-3.0, marketPrice=0.05652905, marketValue=-16.96, averageCost=8.19022665, unrealizedPNL=7.61, realizedPNL=0.0, account='U19860056')
+ERROR:ib_insync.ib:open orders request timed out
+ERROR:ib_insync.ib:completed orders request timed out
+INFO:ib_insync.ib:Disconnecting from 127.0.0.1:4002, 120 B sent in 8 messages, 15.8 kB received in 311 messages, session time 40.1 s.
+INFO:ib_insync.client:Disconnecting
+INFO:ib_insync.client:Disconnected.
+ERROR:root:Connection attempt 3 failed: 
+
+     - Sell 50 shares at $629.14
+     - Overnight P&L: $-42.91 ($629.14 - $630.00) × 50
+   • **03:05 AM HKT (next day):** Sell 50 SPY @ 629.172
+     - Sell 50 shares at $629.15
+
+   **Total P&L from disposal:** -336.72 HKD
+   **Adjusted NAV after disposal:** 78,149.19 HKD
+
+**Trading Activity**
+   No trades were executed today
+
+**Day Summary**
+   Closing NAV: **78,781.69 HKD**
+   Daily Return: **+0.38%**
+   Gross P&L: 295.77 HKD
+   Total Commissions: 15.85 HKD
+   Net P&L: 279.93 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Wednesday, July 23, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,781.69 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/23/2025 $630 Put
+        - Premium received: 205.08 HKD
+        - Execution time: 12:42 AM HKT
+      • Sold 1 SPY 07/23/2025 $634 Call
+        - Premium received: 110.91 HKD
+        - Execution time: 12:42 AM HKT
+
+   **Expired Positions:**
+      • SPY $630 Put expired
+
+   **Option Assignments:**
+      • SPY $634 Call assigned
+        - Delivered 100 shares at $634 per share
+        - NAV impact: None (asset exchange only)
+
+**Day Summary**
+   Closing NAV: **78,847.68 HKD**
+   Daily Return: **+0.08%**
+   Gross P&L: 66.00 HKD
+   Total Commissions: 13.73 HKD
+   Net P&L: 52.27 HKD
+   Assignments Today: 1
+
+────────────────────────────────────────────────────────────────────────────────
+**Thursday, July 24, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,847.68 HKD**
+
+**Assignment Workflow from Previous Trading Day**
+   • **04:30 AM HKT (Assignment):** SPY $634 Call assigned
+     - Short 100 shares created at $634.00/share
+
+   **Share Disposal:**
+   • **01:27 PM HKT:** Buy 100 SPY @ 634.46
+     - Buy 100 shares at $634.47
+     - Overnight P&L: $-47.00 ($634.00 - $634.47) × 100
+
+   **Total P&L from disposal:** -368.84 HKD
+   **Adjusted NAV after disposal:** 78,478.84 HKD
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/24/2025 $634 Put
+        - Premium received: 189.38 HKD
+        - Execution time: 11:51 PM HKT
+      • Sold 1 SPY 07/24/2025 $637 Call
+        - Premium received: 142.30 HKD
+        - Execution time: 11:51 PM HKT
+
+   **Expired Positions:**
+      • SPY $637 Call expired
+      • SPY $634 Put expired
+
+**Day Summary**
+   Closing NAV: **78,975.23 HKD**
+   Daily Return: **+0.16%**
+   Gross P&L: 127.54 HKD
+   Total Commissions: 21.47 HKD
+   Net P&L: 106.08 HKD
+
+────────────────────────────────────────────────────────────────────────────────
+**Friday, July 25, 2025**
+────────────────────────────────────────────────────────────────────────────────
+
+**Opening Position**
+   NAV at market open: **78,975.23 HKD**
+
+**Trading Activity**
+   Total trades executed: 2
+
+   **New Positions Opened:**
+      • Sold 1 SPY 07/25/2025 $636 Put
+        - Premium received: 212.92 HKD
+        - Execution time: 12:58 AM HKT
+      • Sold 1 SPY 07/25/2025 $638 Call
+        - Premium received: 110.91 HKD
+        - Execution time: 12:58 AM HKT
+
+**Day Summary**
+   Closing NAV: **79,299.20 HKD**
+   Daily Return: **+0.41%**
+   Gross P&L: 323.96 HKD
+   Total Commissions: 13.60 HKD
+   Net P&L: 310.37 HKD
+ERROR: Could not get current NAV data

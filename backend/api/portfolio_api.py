@@ -13,8 +13,8 @@ from pydantic import BaseModel, Field
 import psycopg2
 from psycopg2.extras import RealDictCursor
 
-from 01_backend.database.trade_db import get_trade_db_connection
-from 01_backend.services.nav_reconciliation_service import nav_reconciliation_service
+from backend.data.data.trade_db import get_trade_db_connection
+from backend.services.nav_reconciliation_service import nav_reconciliation_service
 
 logger = logging.getLogger(__name__)
 

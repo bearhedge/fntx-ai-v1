@@ -66,7 +66,7 @@ def check_database():
     """Check database connectivity and schema"""
     def _check():
         try:
-            from database.trade_db import get_trade_db_connection
+            from backend.data.database.trade_db import get_trade_db_connection
             conn = get_trade_db_connection()
             if not conn:
                 return False, "Cannot connect to database"

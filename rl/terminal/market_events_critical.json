@@ -1,0 +1,182 @@
+[
+    {
+        "date": "2025-08-01",
+        "time": "08:30",
+        "type": "NFP",
+        "description": "Jobs Report (NFP)",
+        "risk_level": "EXTREME",
+        "avg_volatility": 0.9,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-08-12",
+        "time": "08:30",
+        "type": "CPI",
+        "description": "Consumer Price Index",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.7,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-08-28",
+        "time": "08:30",
+        "type": "GDP",
+        "description": "GDP Q2 Final",
+        "risk_level": "MEDIUM",
+        "avg_volatility": 0.4,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-09-05",
+        "time": "08:30",
+        "type": "NFP",
+        "description": "Jobs Report (NFP)",
+        "risk_level": "EXTREME",
+        "avg_volatility": 0.9,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-09-10",
+        "time": "08:30",
+        "type": "CPI",
+        "description": "Consumer Price Index",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.7,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-09-17",
+        "time": "14:00",
+        "type": "FOMC",
+        "description": "FOMC Rate Decision",
+        "risk_level": "EXTREME",
+        "avg_volatility": 1.2,
+        "blackout_start": "12:00",
+        "blackout_end": "16:00"
+    },
+    {
+        "date": "2025-09-26",
+        "time": "08:30",
+        "type": "GDP",
+        "description": "GDP Q3 Advance",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.6,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-10-03",
+        "time": "08:30",
+        "type": "NFP",
+        "description": "Jobs Report (NFP)",
+        "risk_level": "EXTREME",
+        "avg_volatility": 0.9,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-10-14",
+        "time": "08:30",
+        "type": "CPI",
+        "description": "Consumer Price Index",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.7,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-10-30",
+        "time": "08:30",
+        "type": "GDP",
+        "description": "GDP Q3 Second",
+        "risk_level": "MEDIUM",
+        "avg_volatility": 0.4,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-11-05",
+        "time": "14:00",
+        "type": "FOMC",
+        "description": "FOMC Rate Decision",
+        "risk_level": "EXTREME",
+        "avg_volatility": 1.2,
+        "blackout_start": "12:00",
+        "blackout_end": "16:00"
+    },
+    {
+        "date": "2025-11-07",
+        "time": "08:30",
+        "type": "NFP",
+        "description": "Jobs Report (NFP)",
+        "risk_level": "EXTREME",
+        "avg_volatility": 0.9,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-11-12",
+        "time": "08:30",
+        "type": "CPI",
+        "description": "Consumer Price Index",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.7,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-11-26",
+        "time": "08:30",
+        "type": "GDP",
+        "description": "GDP Q3 Final",
+        "risk_level": "MEDIUM",
+        "avg_volatility": 0.4,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-12-05",
+        "time": "08:30",
+        "type": "NFP",
+        "description": "Jobs Report (NFP)",
+        "risk_level": "EXTREME",
+        "avg_volatility": 0.9,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-12-09",
+        "time": "08:30",
+        "type": "CPI",
+        "description": "Consumer Price Index",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.7,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    },
+    {
+        "date": "2025-12-17",
+        "time": "14:00",
+        "type": "FOMC",
+        "description": "FOMC Rate Decision",
+        "risk_level": "EXTREME",
+        "avg_volatility": 1.2,
+        "blackout_start": "12:00",
+        "blackout_end": "16:00"
+    },
+    {
+        "date": "2025-12-19",
+        "time": "08:30",
+        "type": "GDP",
+        "description": "GDP Q4 Advance",
+        "risk_level": "HIGH",
+        "avg_volatility": 0.6,
+        "blackout_start": "08:25",
+        "blackout_end": "09:00"
+    }
+]

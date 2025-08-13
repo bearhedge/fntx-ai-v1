@@ -12,10 +12,10 @@ from typing import Optional, List
 from fastapi import APIRouter, HTTPException, UploadFile, File, BackgroundTasks
 from pydantic import BaseModel
 
-from 01_backend.services.ibkr_flex_query_enhanced import flex_query_enhanced as flex_query_service
-from 01_backend.database.trade_db import get_trade_db_connection
-# from 01_backend.scripts.import_flex_trades import import_matched_trades
-# from 01_backend.scripts.import_trades_csv import IBKRCSVImporter
+from backend.services.ibkr_flex_query_enhanced import flex_query_enhanced as flex_query_service
+from backend.data.data.trade_db import get_trade_db_connection
+# from backend.scripts.import_flex_trades import import_matched_trades
+# from backend.scripts.import_trades_csv import IBKRCSVImporter
 from psycopg2.extras import RealDictCursor
 
 logger = logging.getLogger(__name__)
@@ -55,7 +55,7 @@ async def get_trade_history(
     limit: int = 100,
     offset: int = 0
 ):
-    """Get automated trade history from database"""
+    """Get automated trade history from backend.data.database"""
     try:
         with get_trade_db_connection() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:

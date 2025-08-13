@@ -18,8 +18,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Configure logging with dynamic path
-from backend.utils.logging import get_agent_logger
-from backend.utils.config import config
+from backend.core.utils.logging import get_agent_logger
+from backend.core.utils.config import config
 logger = get_agent_logger('EnvironmentWatcherAgent')
 
 class EnvironmentWatcherAgent:
@@ -39,7 +39,7 @@ class EnvironmentWatcherAgent:
         self.volume_spike_threshold = float(os.getenv("VOLUME_SPIKE_THRESHOLD", "1.5"))
         
         # Use unified IBKR service
-        from 01_backend.services.ibkr_unified_service import ibkr_unified_service
+        from backend.services.ibkr_unified_service import ibkr_unified_service
         self.ibkr_service = ibkr_unified_service
         
         logger.info("EnvironmentWatcherAgent initialized for market monitoring")

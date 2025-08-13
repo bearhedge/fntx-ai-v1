@@ -1,0 +1,185 @@
+2025-08-06 09:15:14,625 - [0mINFO[0m - Running TEST download (1 month each)
+2025-08-06 09:15:14,666 - [0mINFO[0m - ✅ Connected to PostgreSQL successfully
+2025-08-06 09:15:14,667 - [0mINFO[0m - 🧪 Starting test download (1 week each)
+2025-08-06 09:15:14,667 - [0mINFO[0m - 
+==================================================
+2025-08-06 09:15:14,667 - [0mINFO[0m - Downloading SPY for test period: 2022-12-05 to 2022-12-09
+2025-08-06 09:15:14,667 - [0mINFO[0m - ==================================================
+2025-08-06 09:15:14,667 - [0mINFO[0m - 🚀 Starting download for SPY from 2022-12-05 to 2022-12-09
+2025-08-06 09:15:15,051 - [0mINFO[0m - 
+2025-08-06 09:15:15,051 - [0mINFO[0m - ============================================================
+2025-08-06 09:15:15,051 - [0mINFO[0m - === SPY Progress: [████░░░░░░░░░░░░░░░░] 20% - Day 1/5 ===
+2025-08-06 09:15:15,051 - [0mINFO[0m - Date: 2022-12-05 | Contracts: 32 (16C/16P) | Strikes: $394-$409
+2025-08-06 09:15:15,051 - [0mINFO[0m - Downloaded: 0 | Skipped: 0 | Speed: 0 contracts/hr
+2025-08-06 09:15:15,051 - [0mINFO[0m - ETA: 0m remaining
+2025-08-06 09:15:15,051 - [0mINFO[0m - ============================================================
+2025-08-06 09:15:25,703 - [33mWARNING[0m - SPY $396C: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:15:38,891 - [33mWARNING[0m - SPY $399C: ⚠️  IV gaps (389/391) | ⚠️  Sentinel IVs: 2
+2025-08-06 09:15:43,306 - [33mWARNING[0m - SPY $400C: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:16:11,791 - [33mWARNING[0m - SPY $406P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:16:24,547 - [0mINFO[0m - 
+2025-08-06 09:16:24,547 - [0mINFO[0m - 📊 Daily Summary - SPY 2022-12-05:
+2025-08-06 09:16:24,547 - [0mINFO[0m -   Total contracts: 32
+2025-08-06 09:16:24,547 - [0mINFO[0m -   Downloaded: 32
+2025-08-06 09:16:24,548 - [0mINFO[0m -   Skipped (no volume): 0
+2025-08-06 09:16:24,548 - [0mINFO[0m -   Complete data: 28 (87.5%)
+2025-08-06 09:16:24,548 - [0mINFO[0m -   ⚠️  IV gaps detected: 4 contracts
+2025-08-06 09:16:24,548 - [0mINFO[0m -   ⚠️  Sentinel IVs: 5 occurrences
+2025-08-06 09:16:24,548 - [0mINFO[0m - 
+2025-08-06 09:16:24,920 - [0mINFO[0m - 
+2025-08-06 09:16:24,921 - [0mINFO[0m - ============================================================
+2025-08-06 09:16:24,921 - [0mINFO[0m - === SPY Progress: [████████░░░░░░░░░░░░] 40% - Day 2/5 ===
+2025-08-06 09:16:24,921 - [0mINFO[0m - Date: 2022-12-06 | Contracts: 36 (18C/18P) | Strikes: $387-$404
+2025-08-06 09:16:24,921 - [0mINFO[0m - Downloaded: 32 | Skipped: 0 | Speed: 1639 contracts/hr
+2025-08-06 09:16:24,921 - [0mINFO[0m - ETA: 1m remaining
+2025-08-06 09:16:24,921 - [0mINFO[0m - ============================================================
+2025-08-06 09:16:27,218 - [33mWARNING[0m - SPY $387C: ⚠️  IV gaps (382/391) | ⚠️  Sentinel IVs: 9
+2025-08-06 09:16:31,933 - [33mWARNING[0m - SPY $388C: ⚠️  IV gaps (362/391) | ⚠️  Sentinel IVs: 29
+2025-08-06 09:16:36,743 - [33mWARNING[0m - SPY $389C: ⚠️  IV gaps (353/391) | ⚠️  Sentinel IVs: 38
+2025-08-06 09:16:41,706 - [33mWARNING[0m - SPY $390C: ⚠️  IV gaps (362/391) | ⚠️  Sentinel IVs: 29
+2025-08-06 09:16:46,552 - [33mWARNING[0m - SPY $391C: ⚠️  IV gaps (385/391) | ⚠️  Sentinel IVs: 6
+2025-08-06 09:16:51,405 - [33mWARNING[0m - SPY $392C: ⚠️  IV gaps (388/391) | ⚠️  Sentinel IVs: 3
+2025-08-06 09:16:56,316 - [33mWARNING[0m - SPY $393C: ⚠️  IV gaps (387/391) | ⚠️  Sentinel IVs: 4
+2025-08-06 09:16:58,816 - [33mWARNING[0m - SPY $393P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:17:25,659 - [33mWARNING[0m - SPY $399C: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:17:32,883 - [33mWARNING[0m - SPY $400P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:17:52,525 - [0mINFO[0m - 
+2025-08-06 09:17:52,526 - [0mINFO[0m - 📊 Daily Summary - SPY 2022-12-06:
+2025-08-06 09:17:52,526 - [0mINFO[0m -   Total contracts: 36
+2025-08-06 09:17:52,526 - [0mINFO[0m -   Downloaded: 36
+2025-08-06 09:17:52,526 - [0mINFO[0m -   Skipped (no volume): 0
+2025-08-06 09:17:52,526 - [0mINFO[0m -   Complete data: 54 (150.0%)
+2025-08-06 09:17:52,526 - [0mINFO[0m -   ⚠️  IV gaps detected: 14 contracts
+2025-08-06 09:17:52,526 - [0mINFO[0m -   ⚠️  Sentinel IVs: 126 occurrences
+2025-08-06 09:17:52,527 - [0mINFO[0m - 
+2025-08-06 09:17:52,899 - [0mINFO[0m - 
+2025-08-06 09:17:52,899 - [0mINFO[0m - ============================================================
+2025-08-06 09:17:52,900 - [0mINFO[0m - === SPY Progress: [████████████░░░░░░░░] 60% - Day 3/5 ===
+2025-08-06 09:17:52,900 - [0mINFO[0m - Date: 2022-12-07 | Contracts: 26 (13C/13P) | Strikes: $388-$400
+2025-08-06 09:17:52,900 - [0mINFO[0m - Downloaded: 68 | Skipped: 0 | Speed: 1547 contracts/hr
+2025-08-06 09:17:52,900 - [0mINFO[0m - ETA: 1m remaining
+2025-08-06 09:17:52,900 - [0mINFO[0m - ============================================================
+2025-08-06 09:17:55,500 - [33mWARNING[0m - SPY $388C: ⚠️  IV gaps (381/391) | ⚠️  Sentinel IVs: 10
+2025-08-06 09:18:00,662 - [33mWARNING[0m - SPY $389C: ⚠️  IV gaps (372/391) | ⚠️  Sentinel IVs: 19
+2025-08-06 09:18:05,962 - [33mWARNING[0m - SPY $390C: ⚠️  IV gaps (373/391) | ⚠️  Sentinel IVs: 18
+2025-08-06 09:18:11,214 - [33mWARNING[0m - SPY $391C: ⚠️  IV gaps (388/391) | ⚠️  Sentinel IVs: 3
+2025-08-06 09:18:16,535 - [33mWARNING[0m - SPY $392C: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:18:30,055 - [33mWARNING[0m - SPY $394P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:18:35,314 - [33mWARNING[0m - SPY $395P: ⚠️  IV gaps (389/391) | ⚠️  Sentinel IVs: 2
+2025-08-06 09:18:51,008 - [33mWARNING[0m - SPY $398P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:19:01,424 - [0mINFO[0m - 
+2025-08-06 09:19:01,425 - [0mINFO[0m - 📊 Daily Summary - SPY 2022-12-07:
+2025-08-06 09:19:01,425 - [0mINFO[0m -   Total contracts: 26
+2025-08-06 09:19:01,425 - [0mINFO[0m -   Downloaded: 26
+2025-08-06 09:19:01,425 - [0mINFO[0m -   Skipped (no volume): 0
+2025-08-06 09:19:01,425 - [0mINFO[0m -   Complete data: 72 (276.9%)
+2025-08-06 09:19:01,425 - [0mINFO[0m -   ⚠️  IV gaps detected: 22 contracts
+2025-08-06 09:19:01,425 - [0mINFO[0m -   ⚠️  Sentinel IVs: 181 occurrences
+2025-08-06 09:19:01,425 - [0mINFO[0m - 
+2025-08-06 09:19:01,798 - [0mINFO[0m - 
+2025-08-06 09:19:01,798 - [0mINFO[0m - ============================================================
+2025-08-06 09:19:01,798 - [0mINFO[0m - === SPY Progress: [████████████████░░░░] 80% - Day 4/5 ===
+2025-08-06 09:19:01,798 - [0mINFO[0m - Date: 2022-12-08 | Contracts: 28 (14C/14P) | Strikes: $389-$402
+2025-08-06 09:19:01,798 - [0mINFO[0m - Downloaded: 94 | Skipped: 0 | Speed: 1489 contracts/hr
+2025-08-06 09:19:01,798 - [0mINFO[0m - ETA: 0m remaining
+2025-08-06 09:19:01,798 - [0mINFO[0m - ============================================================
+2025-08-06 09:19:04,172 - [33mWARNING[0m - SPY $389C: ⚠️  IV gaps (363/391) | ⚠️  Sentinel IVs: 28
+2025-08-06 09:19:09,111 - [33mWARNING[0m - SPY $390C: ⚠️  IV gaps (368/391) | ⚠️  Sentinel IVs: 23
+2025-08-06 09:19:14,067 - [33mWARNING[0m - SPY $391C: ⚠️  IV gaps (384/391) | ⚠️  Sentinel IVs: 7
+2025-08-06 09:19:18,963 - [33mWARNING[0m - SPY $392C: ⚠️  IV gaps (378/391) | ⚠️  Sentinel IVs: 13
+2025-08-06 09:19:23,942 - [33mWARNING[0m - SPY $393C: ⚠️  IV gaps (376/391) | ⚠️  Sentinel IVs: 15
+2025-08-06 09:19:28,895 - [33mWARNING[0m - SPY $394C: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:19:51,640 - [33mWARNING[0m - SPY $398P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:20:01,552 - [33mWARNING[0m - SPY $400P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:20:11,318 - [0mINFO[0m - 
+2025-08-06 09:20:11,318 - [0mINFO[0m - 📊 Daily Summary - SPY 2022-12-08:
+2025-08-06 09:20:11,319 - [0mINFO[0m -   Total contracts: 28
+2025-08-06 09:20:11,319 - [0mINFO[0m -   Downloaded: 28
+2025-08-06 09:20:11,319 - [0mINFO[0m -   Skipped (no volume): 0
+2025-08-06 09:20:11,319 - [0mINFO[0m -   Complete data: 92 (328.6%)
+2025-08-06 09:20:11,319 - [0mINFO[0m -   ⚠️  IV gaps detected: 30 contracts
+2025-08-06 09:20:11,319 - [0mINFO[0m -   ⚠️  Sentinel IVs: 270 occurrences
+2025-08-06 09:20:11,319 - [0mINFO[0m - 
+2025-08-06 09:20:11,692 - [0mINFO[0m - 
+2025-08-06 09:20:11,692 - [0mINFO[0m - ============================================================
+2025-08-06 09:20:11,692 - [0mINFO[0m - === SPY Progress: [████████████████████] 100% - Day 5/5 ===
+2025-08-06 09:20:11,692 - [0mINFO[0m - Date: 2022-12-09 | Contracts: 28 (14C/14P) | Strikes: $389-$402
+2025-08-06 09:20:11,692 - [0mINFO[0m - Downloaded: 122 | Skipped: 0 | Speed: 1478 contracts/hr
+2025-08-06 09:20:11,692 - [0mINFO[0m - ETA: completing...
+2025-08-06 09:20:11,693 - [0mINFO[0m - ============================================================
+2025-08-06 09:20:14,225 - [33mWARNING[0m - SPY $389C: ⚠️  IV gaps (382/391) | ⚠️  Sentinel IVs: 9
+2025-08-06 09:20:19,352 - [33mWARNING[0m - SPY $390C: ⚠️  IV gaps (378/391) | ⚠️  Sentinel IVs: 13
+2025-08-06 09:20:24,004 - [33mWARNING[0m - SPY $391C: ⚠️  IV gaps (363/391) | ⚠️  Sentinel IVs: 28
+2025-08-06 09:20:28,686 - [33mWARNING[0m - SPY $392C: ⚠️  IV gaps (344/391) | ⚠️  Sentinel IVs: 47
+2025-08-06 09:20:33,456 - [33mWARNING[0m - SPY $393C: ⚠️  IV gaps (379/391) | ⚠️  Sentinel IVs: 12
+2025-08-06 09:20:50,195 - [33mWARNING[0m - SPY $396P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:21:04,684 - [33mWARNING[0m - SPY $399P: ⚠️  IV gaps (390/391) | ⚠️  Sentinel IVs: 1
+2025-08-06 09:21:18,731 - [0mINFO[0m - 
+2025-08-06 09:21:18,731 - [0mINFO[0m - 📊 Daily Summary - SPY 2022-12-09:
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Total contracts: 28
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Downloaded: 28
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Skipped (no volume): 0
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Complete data: 113 (403.6%)
+2025-08-06 09:21:18,732 - [0mINFO[0m -   ⚠️  IV gaps detected: 37 contracts
+2025-08-06 09:21:18,732 - [0mINFO[0m -   ⚠️  Sentinel IVs: 381 occurrences
+2025-08-06 09:21:18,732 - [0mINFO[0m - 
+2025-08-06 09:21:18,732 - [0mINFO[0m - 
+============================================================
+2025-08-06 09:21:18,732 - [0mINFO[0m - ✅ Download complete for SPY:
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Total days processed: 5
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Contracts checked: 150
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Contracts downloaded: 150
+2025-08-06 09:21:18,732 - [0mINFO[0m -   Contracts skipped (no volume): 0
+2025-08-06 09:21:18,733 - [0mINFO[0m -   Total records: 104,194
+2025-08-06 09:21:18,733 - [0mINFO[0m - 
+  Data Quality Summary:
+2025-08-06 09:21:18,733 - [0mINFO[0m -   Complete contracts: 113
+2025-08-06 09:21:18,733 - [0mINFO[0m -   Missing Greeks: 0
+2025-08-06 09:21:18,733 - [0mINFO[0m -   Missing IV: 0
+2025-08-06 09:21:18,733 - [0mINFO[0m -   IV gaps: 37
+2025-08-06 09:21:18,733 - [0mINFO[0m -   Sentinel IV occurrences: 381
+2025-08-06 09:21:18,733 - [0mINFO[0m - ============================================================
+
+2025-08-06 09:21:18,747 - [0mINFO[0m - 
+📊 Summary for SPY:
+2025-08-06 09:21:18,747 - [0mINFO[0m -   Total records: 45,544
+2025-08-06 09:21:18,747 - [0mINFO[0m -   Unique contracts: 150
+2025-08-06 09:21:18,747 - [0mINFO[0m -   Date range: 2022-12-05 09:31:00 to 2022-12-09 15:59:00
+2025-08-06 09:21:18,747 - [0mINFO[0m - 
+==================================================
+2025-08-06 09:21:18,747 - [0mINFO[0m - Downloading QQQ for test period: 2023-01-09 to 2023-01-13
+2025-08-06 09:21:18,747 - [0mINFO[0m - ==================================================
+2025-08-06 09:21:18,747 - [0mINFO[0m - 🚀 Starting download for QQQ from 2023-01-09 to 2023-01-13
+2025-08-06 09:21:18,934 - [33mWARNING[0m - No QQQ price data for 2023-01-09, skipping
+2025-08-06 09:21:18,934 - [33mWARNING[0m - No contracts found for QQQ on 2023-01-09
+2025-08-06 09:21:19,121 - [33mWARNING[0m - No QQQ price data for 2023-01-10, skipping
+2025-08-06 09:21:19,121 - [33mWARNING[0m - No contracts found for QQQ on 2023-01-10
+2025-08-06 09:21:19,308 - [33mWARNING[0m - No QQQ price data for 2023-01-11, skipping
+2025-08-06 09:21:19,308 - [33mWARNING[0m - No contracts found for QQQ on 2023-01-11
+2025-08-06 09:21:19,495 - [33mWARNING[0m - No QQQ price data for 2023-01-12, skipping
+2025-08-06 09:21:19,496 - [33mWARNING[0m - No contracts found for QQQ on 2023-01-12
+2025-08-06 09:21:19,682 - [33mWARNING[0m - No QQQ price data for 2023-01-13, skipping
+2025-08-06 09:21:19,682 - [33mWARNING[0m - No contracts found for QQQ on 2023-01-13
+2025-08-06 09:21:19,683 - [0mINFO[0m - 
+============================================================
+2025-08-06 09:21:19,683 - [0mINFO[0m - ✅ Download complete for QQQ:
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Total days processed: 5
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Contracts checked: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Contracts downloaded: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Contracts skipped (no volume): 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Total records: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m - 
+  Data Quality Summary:
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Complete contracts: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Missing Greeks: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   Missing IV: 0
+2025-08-06 09:21:19,683 - [0mINFO[0m -   IV gaps: 0
+2025-08-06 09:21:19,684 - [0mINFO[0m -   Sentinel IV occurrences: 0
+2025-08-06 09:21:19,684 - [0mINFO[0m - ============================================================
+
+2025-08-06 09:21:19,685 - [0mINFO[0m - 
+📊 Summary for QQQ:
+2025-08-06 09:21:19,685 - [0mINFO[0m -   Total records: 1
+2025-08-06 09:21:19,685 - [0mINFO[0m -   Unique contracts: 1
+2025-08-06 09:21:19,685 - [0mINFO[0m -   Date range: 2023-01-13 10:01:00 to 2023-01-13 10:01:00
+2025-08-06 09:21:19,686 - [0mINFO[0m - Database connection closed

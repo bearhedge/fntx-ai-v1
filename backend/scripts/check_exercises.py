@@ -11,7 +11,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 sys.path.insert(0, os.path.join(project_root, '01_backend'))
 
-from database.trade_db import get_trade_db_connection
+from backend.data.database.trade_db import get_trade_db_connection
 
 
 def check_exercises():

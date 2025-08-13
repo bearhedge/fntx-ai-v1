@@ -19,7 +19,7 @@ def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
 
 def test_trade_history():
-    """Test fetching trade history from database"""
+    """Test fetching trade history from backend.data.database"""
     try:
         with get_db_connection() as conn:
             with conn.cursor(cursor_factory=RealDictCursor) as cur:
