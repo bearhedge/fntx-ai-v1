@@ -1,0 +1,229 @@
+# FNTX Trading Terminal - Theme Configuration
+# Cyberpunk theme settings with Hong Kong aesthetic influence
+
+theme_settings:
+  # Current active theme
+  active_theme: "matrix"  # baseline, matrix, neon, glitch, cyber, vintage
+  
+  # Global theme settings
+  global:
+    animation_enabled: true
+    animation_speed: "medium"  # slow, medium, fast
+    effects_intensity: 0.7  # 0.0 to 1.0
+    accessibility_mode: false
+    colorblind_mode: false
+    reduce_motion: false
+    high_contrast: false
+    
+  # Performance settings
+  performance:
+    max_fps: 60
+    effect_quality: "high"  # low, medium, high
+    cache_effects: true
+    background_animations: true
+    lazy_rendering: true
+    max_cpu_usage: 5  # percentage
+    
+  # Theme-specific configurations
+  themes:
+    matrix:
+      rain_enabled: true
+      rain_density: "medium"  # light, medium, heavy
+      rain_speed: 500  # milliseconds between updates
+      rain_characters: "katakana"  # katakana, binary, mixed
+      phosphor_glow: true
+      glow_intensity: 0.8
+      cascade_effect: true
+      wake_effect: true  # rain parts around active windows
+      
+    neon:
+      pulse_enabled: true
+      pulse_speed: 1000  # milliseconds
+      neon_brightness: 0.9
+      cjk_decorators: true
+      holographic_panels: true
+      skyline_background: false  # can impact performance
+      glow_radius: 2  # pixels
+      color_cycling: false
+      
+    glitch:
+      glitch_frequency: "low"  # low, medium, high, chaos
+      glitch_duration: 50  # milliseconds
+      corruption_level: 0.1  # 0.0 to 1.0
+      rgb_shift: true
+      scanlines: true
+      datamosh_transitions: true
+      static_noise: false
+      distortion_zones: ["borders", "decorative"]  # never "data"
+      
+    cyber:
+      circuit_animations: true
+      node_pulse: true
+      grid_overlay: false
+      data_flow_indicators: true
+      connection_traces: true
+      minimalist_mode: true
+      accent_animations: "subtle"  # off, subtle, prominent
+      
+    vintage:
+      phosphor_color: "amber"  # amber, green
+      scanline_density: 0.3
+      crt_curvature: true
+      screen_flicker: true
+      flicker_probability: 0.01
+      burn_in_effect: false  # can be distracting
+      phosphor_persistence: true
+      retro_fonts: true
+      
+# Color overrides (for custom themes)
+custom_colors:
+  enabled: false
+  palette:
+    background: "#000000"
+    foreground: "#FFFFFF"
+    primary: "#00FF00"
+    secondary: "#FF00FF"
+    accent: "#00FFFF"
+    profit: "#00FF00"
+    loss: "#FF0000"
+    warning: "#FFFF00"
+    info: "#0080FF"
+    
+# Keyboard shortcuts for theme control
+keybindings:
+  theme_cycle: "Ctrl+T"
+  theme_menu: "Ctrl+Shift+T"
+  toggle_animations: "Ctrl+A"
+  toggle_effects: "Ctrl+E"
+  increase_intensity: "Ctrl+Plus"
+  decrease_intensity: "Ctrl+Minus"
+  reset_theme: "Ctrl+0"
+  
+# Theme scheduling (optional)
+scheduling:
+  enabled: false
+  schedule:
+    - time: "09:30"  # Market open
+      theme: "cyber"
+      reason: "Clean interface for active trading"
+    - time: "12:00"  # Midday
+      theme: "matrix"
+      reason: "Engaging visuals for lunch session"
+    - time: "16:00"  # Market close
+      theme: "neon"
+      reason: "Relaxed atmosphere for after-hours"
+    - time: "20:00"  # Evening
+      theme: "vintage"
+      reason: "Easy on eyes for night trading"
+      
+# Theme profiles for different trading scenarios
+profiles:
+  high_volatility:
+    theme: "glitch"
+    settings:
+      glitch_frequency: "high"
+      effects_intensity: 0.9
+      animation_speed: "fast"
+      
+  focused_trading:
+    theme: "cyber"
+    settings:
+      animation_enabled: false
+      effects_intensity: 0.2
+      high_contrast: true
+      
+  relaxed_monitoring:
+    theme: "matrix"
+    settings:
+      rain_density: "light"
+      animation_speed: "slow"
+      effects_intensity: 0.5
+      
+  presentation_mode:
+    theme: "neon"
+    settings:
+      neon_brightness: 1.0
+      pulse_enabled: true
+      cjk_decorators: true
+      
+# Accessibility profiles
+accessibility_profiles:
+  high_contrast:
+    force_theme: "cyber"
+    settings:
+      high_contrast: true
+      animation_enabled: false
+      effects_intensity: 0
+      
+  reduced_motion:
+    settings:
+      animation_enabled: false
+      rain_enabled: false
+      pulse_enabled: false
+      glitch_frequency: "off"
+      
+  colorblind_deuteranopia:
+    custom_colors:
+      profit: "#0080FF"  # Blue instead of green
+      loss: "#FF8000"   # Orange instead of red
+      
+  colorblind_protanopia:
+    custom_colors:
+      profit: "#0080FF"  # Blue instead of green
+      loss: "#FFD700"   # Gold instead of red
+      
+# Terminal compatibility settings
+terminal_compatibility:
+  auto_detect: true
+  force_256_colors: false
+  unicode_support: true
+  true_color: true
+  
+  # Terminal-specific overrides
+  terminals:
+    iterm2:
+      true_color: true
+      blur_background: true
+      
+    windows_terminal:
+      true_color: true
+      acrylic_background: true
+      
+    alacritty:
+      true_color: true
+      gpu_acceleration: true
+      
+    kitty:
+      true_color: true
+      gpu_acceleration: true
+      
+    putty:
+      force_256_colors: true
+      unicode_support: false
+      
+# Performance monitoring
+monitoring:
+  track_fps: true
+  track_cpu: true
+  track_memory: true
+  log_performance: false
+  alert_threshold:
+    fps_min: 30
+    cpu_max: 10  # percentage
+    memory_max: 100  # MB
+    
+# Theme backup and sync
+backup:
+  auto_backup: true
+  backup_location: "~/.fntx/themes/backups/"
+  sync_enabled: false
+  sync_service: "none"  # none, dropbox, github, custom
+  
+# Developer settings
+developer:
+  debug_mode: false
+  show_fps_counter: false
+  show_performance_stats: false
+  enable_profiling: false
+  log_theme_switches: false
+  experimental_features: false

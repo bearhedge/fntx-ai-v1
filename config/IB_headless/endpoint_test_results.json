@@ -1,0 +1,54 @@
+{
+  "/portfolio/accounts": {
+    "status": "no_response",
+    "description": "List all accounts"
+  },
+  "/portfolio/U19860056/meta": {
+    "status": "no_response",
+    "description": "Account metadata"
+  },
+  "/portfolio/U19860056/summary": {
+    "status": "no_response",
+    "description": "Account summary"
+  },
+  "/portfolio/U19860056/ledger": {
+    "status": "no_response",
+    "description": "Account ledger"
+  },
+  "/portfolio/U19860056/positions/0": {
+    "status": "no_response",
+    "description": "Current positions"
+  },
+  "/portfolio/U19860056/allocation": {
+    "status": "no_response",
+    "description": "Account allocation"
+  },
+  "/md/snapshot?conids=756733&fields=31,84,85,86,87,88": {
+    "status": "no_response",
+    "description": "Market snapshot for SPY"
+  },
+  "/trsrv/secdef/search?symbol=SPY": {
+    "status": "no_response",
+    "description": "Search for SPY contract"
+  },
+  "/iserver/accounts": {
+    "status": "no_response",
+    "description": "IServer accounts"
+  },
+  "/iserver/marketdata/history?conid=756733&period=1d&bar=1min": {
+    "status": "no_response",
+    "description": "Historical data"
+  },
+  "/iserver/scanner/params": {
+    "status": "no_response",
+    "description": "Scanner parameters"
+  },
+  "/iserver/account/orders": {
+    "status": "no_response",
+    "description": "Open orders"
+  },
+  "/iserver/account/trades": {
+    "status": "no_response",
+    "description": "Today's trades"
+  }
+}
