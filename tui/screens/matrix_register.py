@@ -13,7 +13,6 @@ import re
 from .matrix_login_final import ProperMatrixRainWidget
 from ..components.glow_input import GlowInput, PsychedelicButton
 from ..services.auth_service import get_auth_service
-from ..services.api_client import APIError
 
 
 class PasswordStrengthIndicator(Label):
@@ -325,15 +324,27 @@ class MatrixRegisterScreen(Screen):
             # Post success message
             self.post_message(self.RegistrationSuccess(user_data))
             
-        except APIError as e:
-            self.hide_loading()
-            if e.status_code == 400:
-                self.show_error(e.detail)
-            else:
-                self.show_error(f"Registration failed: {e.detail}")
         except Exception as e:
             self.hide_loading()
-            self.show_error("Connection error: Please check your internet connection")
+            error_msg = str(e)
+            
+            # Parse common Supabase error messages
+            if "real email" in error_msg.lower() or "@example.com" in email.lower() or "@test.com" in email.lower():
+                self.show_error("Please use a real email address. Test emails are not allowed.")
+            elif "already registered" in error_msg.lower() or "email exists" in error_msg.lower():
+                self.show_error("Email already registered. Please use a different email or login.")
+            elif "invalid" in error_msg.lower() and "email" in error_msg.lower():
+                self.show_error("Invalid email format. Please check your email address.")
+            elif "password" in error_msg.lower() and "weak" in error_msg.lower():
+                self.show_error("Password is too weak. Please use a stronger password.")
+            elif "network" in error_msg.lower() or "connection" in error_msg.lower():
+                self.show_error("Connection error: Please check your internet connection")
+            else:
+                # Show the actual error message from Supabase
+                if "Registration failed:" in error_msg:
+                    self.show_error(error_msg.replace("Registration failed: ", ""))
+                else:
+                    self.show_error(f"Registration failed: {error_msg}")
 
 
 # CSS for the registration screen

@@ -16,7 +16,6 @@ import asyncio
 
 from ..components.glow_input import GlowInput, PsychedelicButton
 from ..services.auth_service import get_auth_service
-from ..services.api_client import APIError
 
 
 class ProperMatrixRainWidget(Static):
@@ -305,15 +304,23 @@ class MatrixLoginScreen(Screen):
             # Post success message
             self.post_message(self.LoginSuccess(user_data))
             
-        except APIError as e:
-            self.hide_loading()
-            if e.status_code == 401:
-                self.show_error("Invalid username or password")
-            else:
-                self.show_error(f"Login failed: {e.detail}")
         except Exception as e:
             self.hide_loading()
-            self.show_error(f"Connection error: Please check your internet connection")
+            error_msg = str(e)
+            
+            # Parse common Supabase error messages
+            if "invalid" in error_msg.lower() and ("credentials" in error_msg.lower() or "password" in error_msg.lower()):
+                self.show_error("Invalid email or password")
+            elif "not confirmed" in error_msg.lower():
+                self.show_error("Please confirm your email before logging in")
+            elif "network" in error_msg.lower() or "connection" in error_msg.lower():
+                self.show_error("Connection error: Please check your internet connection")
+            else:
+                # Show the actual error message from Supabase
+                if "Login failed:" in error_msg:
+                    self.show_error(error_msg.replace("Login failed: ", ""))
+                else:
+                    self.show_error(f"Login failed: {error_msg}")
     
     LOGO = """
 ███████╗███╗   ██╗████████╗██╗  ██╗

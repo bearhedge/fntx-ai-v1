@@ -106,7 +106,18 @@ class SupabaseClient:
                 else:
                     logger.error(f"Registration failed: {response.status} - {response_text}")
                     error_data = json.loads(response_text) if response_text else {}
-                    raise Exception(f"Registration failed: {error_data.get('msg', 'Unknown error')}")
+                    error_msg = error_data.get('msg', 'Unknown error')
+                    
+                    # Provide more helpful error messages
+                    if "email_address_invalid" in error_data.get('error_code', ''):
+                        if "@example.com" in email or "@test.com" in email:
+                            error_msg = "Please use a real email address. Test emails are not allowed."
+                        else:
+                            error_msg = "Email address is invalid. Please check the format."
+                    elif "email_exists" in error_data.get('error_code', ''):
+                        error_msg = "This email is already registered. Please login or use a different email."
+                    
+                    raise Exception(f"Registration failed: {error_msg}")
                     
         except Exception as e:
             logger.error(f"Registration error: {str(e)}")

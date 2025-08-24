@@ -10,7 +10,7 @@ from typing import Optional, Dict, Any
 from datetime import datetime, timedelta
 import logging
 
-from .api_client import get_api_client, APIError
+from .supabase_client import get_supabase_client
 
 logger = logging.getLogger(__name__)
 
@@ -19,7 +19,7 @@ class AuthService:
     
     def __init__(self):
         """Initialize auth service"""
-        self.api_client = get_api_client()
+        self.supabase_client = get_supabase_client()
         self.current_user: Optional[Dict[str, Any]] = None
         self.session_file = Path.home() / ".fntx" / "session.json"
         self.session_file.parent.mkdir(parents=True, exist_ok=True)
@@ -49,30 +49,25 @@ class AuthService:
                 await self.clear_session()
                 return False
                 
-            # Set tokens in API client
-            self.api_client.set_auth_tokens(
-                session_data["access_token"],
-                session_data["refresh_token"]
-            )
+            # Set tokens in Supabase client
+            self.supabase_client.access_token = session_data["access_token"]
+            self.supabase_client.refresh_token = session_data["refresh_token"]
             
-            # Try to get profile to verify session is still valid
+            # Try to get user to verify session is still valid
             try:
-                self.current_user = await self.api_client.get_profile()
-                logger.info(f"Session restored for user: {self.current_user['username']}")
-                return True
-            except APIError as e:
-                if e.status_code == 401:
-                    # Token might be expired, try to refresh
-                    try:
-                        await self.refresh_token()
-                        self.current_user = await self.api_client.get_profile()
-                        return True
-                    except:
-                        logger.info("Failed to refresh token")
-                        await self.clear_session()
-                        return False
+                self.current_user = await self.supabase_client.get_user()
+                if self.current_user:
+                    username = self.supabase_client.get_username() or self.current_user.get("email")
+                    logger.info(f"Session restored for user: {username}")
+                    return True
                 else:
-                    raise
+                    logger.info("Session invalid or expired")
+                    await self.clear_session()
+                    return False
+            except Exception as e:
+                logger.info(f"Failed to verify session: {e}")
+                await self.clear_session()
+                return False
                     
         except Exception as e:
             logger.error(f"Failed to load session: {e}")
@@ -104,7 +99,8 @@ class AuthService:
     async def clear_session(self):
         """Clear session from disk and memory"""
         self.current_user = None
-        self.api_client.clear_auth_tokens()
+        self.supabase_client.access_token = None
+        self.supabase_client.refresh_token = None
         
         if self.session_file.exists():
             try:
@@ -117,32 +113,32 @@ class AuthService:
         Login user
         
         Args:
-            username_or_email: Username or email
+            username_or_email: Username or email (Supabase requires email)
             password: Password
             
         Returns:
             User data
             
         Raises:
-            APIError: If login fails
+            Exception: If login fails
         """
         try:
-            # Call login API
-            response = await self.api_client.login(username_or_email, password)
+            # Call Supabase login (requires email, not username)
+            response = await self.supabase_client.login(username_or_email, password)
             
             # Save session
             await self.save_session(
-                response["access_token"],
-                response["refresh_token"],
-                response["expires_in"]
+                response.get("access_token"),
+                response.get("refresh_token"),
+                response.get("expires_in", 3600)  # Default to 1 hour if not provided
             )
             
-            # Get user profile
-            self.current_user = await self.api_client.get_profile()
+            # Get user data
+            self.current_user = response.get("user")
             
             return self.current_user
             
-        except APIError as e:
+        except Exception as e:
             logger.error(f"Login failed: {e}")
             raise
             
@@ -161,48 +157,43 @@ class AuthService:
             User data
             
         Raises:
-            APIError: If registration fails
+            Exception: If registration fails
         """
         try:
-            # Call register API
-            user_data = await self.api_client.register(username, email, password, full_name)
+            # Call Supabase register
+            response = await self.supabase_client.register(email, password, username, full_name)
             
-            # Auto-login after registration
-            await self.login(username, password)
+            # Save session if tokens are returned (Supabase auto-logs in after registration)
+            if response.get("access_token"):
+                await self.save_session(
+                    response.get("access_token"),
+                    response.get("refresh_token"),
+                    response.get("expires_in", 3600)
+                )
+                self.current_user = response.get("user")
+            else:
+                # If no auto-login, try to login
+                await self.login(email, password)
             
-            return user_data
+            return self.current_user or response.get("user")
             
-        except APIError as e:
+        except Exception as e:
             logger.error(f"Registration failed: {e}")
             raise
             
     async def logout(self):
         """Logout current user"""
         try:
-            # Call logout API if we have a token
-            if self.api_client.auth_token:
-                await self.api_client.logout()
+            # Call Supabase logout if we have a token
+            if self.supabase_client.access_token:
+                await self.supabase_client.logout()
         except Exception as e:
             logger.error(f"Logout API call failed: {e}")
             
         # Clear local session regardless
         await self.clear_session()
         
-    async def refresh_token(self):
-        """Refresh access token"""
-        try:
-            response = await self.api_client.refresh_access_token()
-            
-            # Update saved session
-            await self.save_session(
-                response["access_token"],
-                response["refresh_token"],
-                response["expires_in"]
-            )
-            
-        except Exception as e:
-            logger.error(f"Token refresh failed: {e}")
-            raise
+    # Token refresh is handled by Supabase automatically
             
     def is_authenticated(self) -> bool:
         """Check if user is authenticated"""
@@ -211,7 +202,13 @@ class AuthService:
     def get_username(self) -> Optional[str]:
         """Get current username"""
         if self.current_user:
-            return self.current_user.get("username")
+            # Try to get username from user metadata first
+            if "user_metadata" in self.current_user:
+                username = self.current_user["user_metadata"].get("username")
+                if username:
+                    return username
+            # Fall back to email
+            return self.current_user.get("email")
         return None
         
     def get_user_data(self) -> Optional[Dict[str, Any]]:
