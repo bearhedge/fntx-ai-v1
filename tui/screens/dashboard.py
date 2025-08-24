@@ -4,6 +4,7 @@ Dashboard Screen - Main overview of trading status
 from textual.app import ComposeResult
 from textual.containers import Container, Horizontal, Vertical, Grid
 from textual.widgets import Static, DataTable, Label
+from textual.screen import Screen
 from textual.widget import Widget
 from rich.panel import Panel
 from rich.table import Table
@@ -33,7 +34,7 @@ def style_pnl(value):
     return f"${value:.2f}"
 
 
-class DashboardScreen(Widget):
+class DashboardScreen(Screen):
     """Main dashboard screen showing overview"""
     
     def compose(self) -> ComposeResult:
