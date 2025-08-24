@@ -22,7 +22,9 @@ class APIClient:
         Args:
             base_url: Base URL for API (defaults to environment variable or localhost)
         """
-        self.base_url = base_url or os.getenv("API_BASE_URL", "http://localhost:8080")
+        # Use Supabase URL
+        self.base_url = base_url or os.getenv("API_BASE_URL", "https://xzfjhhnmnlsgbrmwojyi.supabase.co")
+        self.anon_key = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inh6ZmpoaG5tbmxzZ2JybXdvanlpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYwMDc1MjcsImV4cCI6MjA3MTU4MzUyN30.uVNx-RAB9ZnI4T-Vh5ZEaTSMR9JWYkkrG4xjLhP-1vE"
         self.session: Optional[aiohttp.ClientSession] = None
         self.auth_token: Optional[str] = None
         self.refresh_token: Optional[str] = None
@@ -76,7 +78,10 @@ class APIClient:
             await self.start()
             
         url = f"{self.base_url}{endpoint}"
-        headers = {"Content-Type": "application/json"}
+        headers = {
+            "Content-Type": "application/json",
+            "apikey": self.anon_key  # Add Supabase API key
+        }
         
         if authenticated and self.auth_token:
             headers["Authorization"] = f"Bearer {self.auth_token}"
@@ -111,16 +116,28 @@ class APIClient:
         if full_name:
             data["full_name"] = full_name
             
-        return await self._request("POST", "/api/auth/register", data)
+        # Use Supabase signup endpoint
+        supabase_data = {
+            "email": email,
+            "password": password,
+            "data": {  # Store extra data in user metadata
+                "username": username,
+                "full_name": full_name
+            }
+        }
+        return await self._request("POST", "/auth/v1/signup", supabase_data)
         
     async def login(self, username_or_email: str, password: str) -> Dict[str, Any]:
         """Login user and get tokens"""
+        # Supabase only accepts email for login, not username
+        # For now, assume username_or_email is an email
         data = {
-            "username_or_email": username_or_email,
-            "password": password
+            "email": username_or_email,
+            "password": password,
+            "grant_type": "password"
         }
         
-        response = await self._request("POST", "/api/auth/login", data)
+        response = await self._request("POST", "/auth/v1/token?grant_type=password", data)
         
         # Store tokens
         self.set_auth_tokens(
@@ -132,7 +149,7 @@ class APIClient:
         
     async def logout(self) -> Dict[str, Any]:
         """Logout current user"""
-        response = await self._request("POST", "/api/auth/logout", 
+        response = await self._request("POST", "/auth/v1/logout", 
                                      authenticated=True)
         self.clear_auth_tokens()
         return response
