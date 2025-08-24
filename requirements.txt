@@ -1,0 +1,6 @@
+click
+rich
+textual>=0.47.0
+aiohttp>=3.9.0
+bcrypt>=4.0.0
+python-dotenv>=1.0.0

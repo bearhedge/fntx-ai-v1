@@ -3,8 +3,8 @@ Welcome Screen - Simple landing page after successful login
 """
 from textual.app import ComposeResult
 from textual.screen import Screen
-from textual.widgets import Static, Label
-from textual.containers import Container, Vertical, Center, Middle
+from textual.widgets import Static, Label, Button
+from textual.containers import Container, Vertical, Horizontal, Center, Middle
 from textual.binding import Binding
 from rich.text import Text
 from rich.panel import Panel
@@ -17,8 +17,9 @@ class WelcomeScreen(Screen):
     """Simple welcome screen after login"""
     
     BINDINGS = [
-        Binding("escape", "logout", "Logout"),
-        Binding("q", "quit", "Quit"),
+        Binding("escape", "logout", "Logout (ESC)"),
+        Binding("q", "quit", "Quit (Q)"),
+        Binding("l", "logout", "Logout (L)"),
     ]
     
     def __init__(self):
@@ -33,9 +34,17 @@ class WelcomeScreen(Screen):
             with Center():
                 with Middle():
                     with Vertical(id="welcome-content"):
+                        # ASCII Art Header
+                        yield Static(
+                            "[bold cyan]╔════════════════════════════════════════╗[/bold cyan]\n"
+                            "[bold cyan]║[/bold cyan]      [bold green]FNTX TRADING TERMINAL[/bold green]        [bold cyan]║[/bold cyan]\n"
+                            "[bold cyan]╚════════════════════════════════════════╝[/bold cyan]",
+                            id="header-art"
+                        )
+                        
                         # Welcome message
                         yield Label(
-                            f"[bold green]Welcome, {username}![/bold green]",
+                            f"\n[bold green]Welcome, {username}![/bold green]",
                             id="welcome-message"
                         )
                         
@@ -45,29 +54,41 @@ class WelcomeScreen(Screen):
                             id="connection-status"
                         )
                         
-                        # Instructions
-                        yield Label(
-                            "\n[dim]Press ESC to logout | Press Q to quit[/dim]",
-                            id="instructions"
-                        )
-                        
-                        # Simple status panel
-                        status_text = Text()
-                        status_text.append("System Status\n", style="bold cyan")
-                        status_text.append("─" * 30 + "\n", style="dim")
-                        status_text.append("Authentication: ", style="white")
-                        status_text.append("Active\n", style="green")
-                        status_text.append("User: ", style="white")
-                        status_text.append(f"{username}\n", style="yellow")
-                        status_text.append("Session: ", style="white")
-                        status_text.append("Valid\n", style="green")
+                        # Instructions Panel
+                        instructions_text = Text()
+                        instructions_text.append("Navigation Keys\n", style="bold yellow")
+                        instructions_text.append("─" * 20 + "\n", style="dim cyan")
+                        instructions_text.append("ESC or L", style="bold white")
+                        instructions_text.append(" - Logout\n", style="cyan")
+                        instructions_text.append("Q       ", style="bold white")
+                        instructions_text.append(" - Quit App\n", style="cyan")
                         
                         panel = Panel(
-                            Align.center(status_text),
-                            border_style="green",
-                            width=40
+                            instructions_text,
+                            border_style="cyan",
+                            title="[bold]Controls[/bold]",
+                            width=30
                         )
-                        yield Static(panel, id="status-panel")
+                        yield Static(panel, id="instructions-panel")
+                        
+                        # Buttons for mouse users
+                        with Horizontal(id="button-container"):
+                            yield Button("Logout", variant="warning", id="logout-btn")
+                            yield Button("Quit", variant="error", id="quit-btn")
+                        
+                        # Status footer
+                        yield Label(
+                            "\n[dim cyan]Session Active | Ready for Trading Functions[/dim cyan]",
+                            id="status-footer"
+                        )
+    
+    def on_button_pressed(self, event):
+        """Handle button clicks"""
+        button_id = event.button.id
+        if button_id == "logout-btn":
+            self.action_logout()
+        elif button_id == "quit-btn":
+            self.action_quit()
     
     def action_logout(self):
         """Logout and return to login screen"""
@@ -88,13 +109,13 @@ class WelcomeScreen(Screen):
 # CSS for the welcome screen
 WELCOME_CSS = """
 WelcomeScreen {
-    background: black;
+    background: #0a0a0a;
 }
 
 #welcome-container {
     width: 100%;
     height: 100%;
-    background: black;
+    background: #0a0a0a;
 }
 
 #welcome-content {
@@ -104,10 +125,16 @@ WelcomeScreen {
     padding: 2;
 }
 
+#header-art {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 2;
+}
+
 #welcome-message {
     text-align: center;
     width: 100%;
-    height: 3;
+    height: 2;
     content-align: center middle;
     margin-bottom: 1;
 }
@@ -117,19 +144,35 @@ WelcomeScreen {
     width: 100%;
     height: 2;
     content-align: center middle;
-    margin-bottom: 1;
-}
-
-#instructions {
-    text-align: center;
-    width: 100%;
-    height: 3;
-    content-align: center middle;
     margin-bottom: 2;
 }
 
-#status-panel {
+#instructions-panel {
     align: center middle;
+    margin-bottom: 2;
+}
+
+#button-container {
+    align: center middle;
+    width: auto;
+    height: 3;
+    margin-top: 1;
+}
+
+#logout-btn {
+    margin-right: 2;
+    width: 12;
+    background: #ff6b00;
+}
+
+#quit-btn {
+    width: 12;
+    background: #ff0000;
+}
+
+#status-footer {
+    text-align: center;
+    width: 100%;
     margin-top: 2;
 }
 """
